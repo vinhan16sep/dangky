@@ -15,10 +15,10 @@ class User extends MY_Controller {
     }
 
     public function login() {
-        if ($this->ion_auth->logged_in() || $this->ion_auth->in_group('clients'))
-        {
-            redirect('client/dashboard', 'refresh');
-        }
+//        if ($this->ion_auth->logged_in() || $this->ion_auth->in_group('clients'))
+//        {
+//            redirect('client/dashboard', 'refresh');
+//        }
         $this->data['page_title'] = 'Login';
         if ($this->input->post()) {
             $this->load->library('form_validation');

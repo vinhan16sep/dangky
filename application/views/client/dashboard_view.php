@@ -77,7 +77,9 @@
                                 <?php if(!$submitted): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                     <span>
-                                        <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                                        <a data-target="#myModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
+                                           href="#myModal">HELP</a>
+                                        <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>
                                     </span>
                                 <?php else: ?>
                                     <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>
@@ -145,4 +147,27 @@
 
     </section>
 </div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="identity" class="form-control"/>
+            </div>
+            <div class="modal-footer">
+                <a onclick="this.href='updateItem?codice=${item.key.codice}&quantita='+document.getElementById('qta_field').value" href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<acript>
+
+</acript>
 
