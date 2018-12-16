@@ -18,29 +18,32 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Vốn điều lệ ( triệu VND)', 'equity_2015');
+                            echo form_label('Năm', 'year');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'equity_2015');
-                            echo form_error('equity_2015');
-                            echo form_input('equity_2015', set_value('equity_2015', $company['equity_2015']), 'class="form-control"');
+                            echo form_error('year');
+                            echo form_dropdown('year', $year, $company['year'], 'class="form-control"');
                             ?>
                             </div>
-                            <div class="row">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Năm 2016', 'equity_2015');
-                            echo form_error('equity_2016');
-                            echo form_input('equity_2016', set_value('equity_2016', $company['equity_2016']), 'class="form-control"');
+                            echo form_label('Vốn điều lệ ( triệu VND)', 'equity');
                             ?>
-                            </div>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2017', 'equity_2015');
-                            echo form_error('equity_2017');
-                            echo form_input('equity_2017', set_value('equity_2017', $company['equity_2017']), 'class="form-control"');
+                            echo form_error('equity');
+                            echo form_input('equity', set_value('equity', $company['equity']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -57,23 +60,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'owner_equity_2015');
-                            echo form_error('owner_equity_2015');
-                            echo form_input('owner_equity_2015', set_value('owner_equity_2015', $company['owner_equity_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'owner_equity_2016');
-                            echo form_error('owner_equity_2016');
-                            echo form_input('owner_equity_2016', set_value('owner_equity_2016', $company['owner_equity_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'owner_equity_2017');
-                            echo form_error('owner_equity_2017');
-                            echo form_input('owner_equity_2017', set_value('owner_equity_2017', $company['owner_equity_2017']), 'class="form-control"');
+                            echo form_error('owner_equity');
+                            echo form_input('owner_equity', set_value('owner_equity', $company['owner_equity']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -89,23 +77,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'total_income_2015');
-                            echo form_error('total_income_2015');
-                            echo form_input('total_income_2015', set_value('total_income_2015', $company['total_income_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'total_income_2016');
-                            echo form_error('total_income_2016');
-                            echo form_input('total_income_2016', set_value('total_income_2016', $company['total_income_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'total_income_2017');
-                            echo form_error('total_income_2017');
-                            echo form_input('total_income_2017', set_value('total_income_2017', $company['total_income_2017']), 'class="form-control"');
+                            echo form_error('total_income');
+                            echo form_input('total_income', set_value('total_income', $company['total_income']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -121,23 +94,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'software_income_2015');
-                            echo form_error('software_income_2015');
-                            echo form_input('software_income_2015', set_value('software_income_2015', $company['software_income_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'software_income_2016');
-                            echo form_error('software_income_2016');
-                            echo form_input('software_income_2016', set_value('software_income_2016', $company['software_income_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'software_income_2017');
-                            echo form_error('software_income_2017');
-                            echo form_input('software_income_2017', set_value('software_income_2017', $company['software_income_2017']), 'class="form-control"');
+                            echo form_error('software_income');
+                            echo form_input('software_income', set_value('software_income', $company['software_income']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -153,23 +111,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'it_income_2015');
-                            echo form_error('it_income_2015');
-                            echo form_input('it_income_2015', set_value('it_income_2015', $company['it_income_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'it_income_2016');
-                            echo form_error('it_income_2016');
-                            echo form_input('it_income_2016', set_value('it_income_2016', $company['it_income_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'it_income_2017');
-                            echo form_error('it_income_2017');
-                            echo form_input('it_income_2017', set_value('it_income_2017', $company['it_income_2017']), 'class="form-control"');
+                            echo form_error('it_income');
+                            echo form_input('it_income', set_value('it_income', $company['it_income']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -185,23 +128,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'export_income_2015');
-                            echo form_error('export_income_2015');
-                            echo form_input('export_income_2015', set_value('export_income_2015', $company['export_income_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'export_income_2016');
-                            echo form_error('export_income_2016');
-                            echo form_input('export_income_2016', set_value('export_income_2016', $company['export_income_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'export_income_2017');
-                            echo form_error('export_income_2017');
-                            echo form_input('export_income_2017', set_value('export_income_2017', $company['export_income_2017']), 'class="form-control"');
+                            echo form_error('export_income');
+                            echo form_input('export_income', set_value('export_income', $company['export_income']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -217,23 +145,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'total_labor_2015');
-                            echo form_error('total_labor_2015');
-                            echo form_input('total_labor_2015', set_value('total_labor_2015', $company['total_labor_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'total_labor_2016');
-                            echo form_error('total_labor_2016');
-                            echo form_input('total_labor_2016', set_value('total_labor_2016', $company['total_labor_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'total_labor_2017');
-                            echo form_error('total_labor_2017');
-                            echo form_input('total_labor_2017', set_value('total_labor_2017', $company['total_labor_2017']), 'class="form-control"');
+                            echo form_error('total_labor');
+                            echo form_input('total_labor', set_value('total_labor', $company['total_labor']), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -249,23 +162,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'total_ltv_2015');
-                            echo form_error('total_ltv_2015');
-                            echo form_input('total_ltv_2015', set_value('total_ltv_2015', $company['total_ltv_2015']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'total_ltv_2016');
-                            echo form_error('total_ltv_2016');
-                            echo form_input('total_ltv_2016', set_value('total_ltv_2016', $company['total_ltv_2016']), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'total_ltv_2017');
-                            echo form_error('total_ltv_2017');
-                            echo form_input('total_ltv_2017', set_value('total_ltv_2017', $company['total_ltv_2017']), 'class="form-control"');
+                            echo form_error('total_ltv');
+                            echo form_input('total_ltv', set_value('total_ltv', $company['total_ltv']), 'class="form-control"');
                             ?>
                             </div>
                         </div>

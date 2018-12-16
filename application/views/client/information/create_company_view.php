@@ -18,29 +18,32 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Vốn điều lệ ( triệu VND)', 'equity_2015');
+                            echo form_label('Năm', 'year');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'equity_2015');
-                            echo form_error('equity_2015');
-                            echo form_input('equity_2015', set_value('equity_2015'), 'class="form-control"');
+                            echo form_error('year');
+                            echo form_dropdown('year', $year, date('Y'), 'class="form-control"');
                             ?>
                             </div>
-                            <div class="row">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Năm 2016', 'equity_2015');
-                            echo form_error('equity_2016');
-                            echo form_input('equity_2016', set_value('equity_2016'), 'class="form-control"');
+                            echo form_label('Vốn điều lệ ( triệu VND)', 'equity');
                             ?>
-                            </div>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2017', 'equity_2015');
-                            echo form_error('equity_2017');
-                            echo form_input('equity_2017', set_value('equity_2017'), 'class="form-control"');
+                            echo form_error('equity');
+                            echo form_input('equity', set_value('equity'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -57,23 +60,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'owner_equity_2015');
-                            echo form_error('owner_equity_2015');
-                            echo form_input('owner_equity_2015', set_value('owner_equity_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'owner_equity_2016');
-                            echo form_error('owner_equity_2016');
-                            echo form_input('owner_equity_2016', set_value('owner_equity_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'owner_equity_2017');
-                            echo form_error('owner_equity_2017');
-                            echo form_input('owner_equity_2017', set_value('owner_equity_2017'), 'class="form-control"');
+                            echo form_error('owner_equity');
+                            echo form_input('owner_equity', set_value('owner_equity'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -89,23 +77,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'total_income_2015');
-                            echo form_error('total_income_2015');
-                            echo form_input('total_income_2015', set_value('total_income_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'total_income_2016');
-                            echo form_error('total_income_2016');
-                            echo form_input('total_income_2016', set_value('total_income_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'total_income_2017');
-                            echo form_error('total_income_2017');
-                            echo form_input('total_income_2017', set_value('total_income_2017'), 'class="form-control"');
+                            echo form_error('total_income');
+                            echo form_input('total_income', set_value('total_income'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -121,23 +94,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'software_income_2015');
-                            echo form_error('software_income_2015');
-                            echo form_input('software_income_2015', set_value('software_income_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'software_income_2016');
-                            echo form_error('software_income_2016');
-                            echo form_input('software_income_2016', set_value('software_income_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'software_income_2017');
-                            echo form_error('software_income_2017');
-                            echo form_input('software_income_2017', set_value('software_income_2017'), 'class="form-control"');
+                            echo form_error('software_income');
+                            echo form_input('software_income', set_value('software_income'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -153,23 +111,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'it_income_2015');
-                            echo form_error('it_income_2015');
-                            echo form_input('it_income_2015', set_value('it_income_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'it_income_2016');
-                            echo form_error('it_income_2016');
-                            echo form_input('it_income_2016', set_value('it_income_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'it_income_2017');
-                            echo form_error('it_income_2017');
-                            echo form_input('it_income_2017', set_value('it_income_2017'), 'class="form-control"');
+                            echo form_error('it_income');
+                            echo form_input('it_income', set_value('it_income'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -185,23 +128,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'export_income_2015');
-                            echo form_error('export_income_2015');
-                            echo form_input('export_income_2015', set_value('export_income_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'export_income_2016');
-                            echo form_error('export_income_2016');
-                            echo form_input('export_income_2016', set_value('export_income_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'export_income_2017');
-                            echo form_error('export_income_2017');
-                            echo form_input('export_income_2017', set_value('export_income_2017'), 'class="form-control"');
+                            echo form_error('export_income');
+                            echo form_input('export_income', set_value('export_income'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -217,23 +145,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'total_labor_2015');
-                            echo form_error('total_labor_2015');
-                            echo form_input('total_labor_2015', set_value('total_labor_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'total_labor_2016');
-                            echo form_error('total_labor_2016');
-                            echo form_input('total_labor_2016', set_value('total_labor_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'total_labor_2017');
-                            echo form_error('total_labor_2017');
-                            echo form_input('total_labor_2017', set_value('total_labor_2017'), 'class="form-control"');
+                            echo form_error('total_labor');
+                            echo form_input('total_labor', set_value('total_labor'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -249,23 +162,8 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                             <?php
-                            echo form_label('Năm 2015', 'total_ltv_2015');
-                            echo form_error('total_ltv_2015');
-                            echo form_input('total_ltv_2015', set_value('total_ltv_2015'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2016', 'total_ltv_2016');
-                            echo form_error('total_ltv_2016');
-                            echo form_input('total_ltv_2016', set_value('total_ltv_2016'), 'class="form-control"');
-                            ?>
-                            </div>
-                            <div class="row">
-                            <?php
-                            echo form_label('Năm 2017', 'total_ltv_2017');
-                            echo form_error('total_ltv_2017');
-                            echo form_input('total_ltv_2017', set_value('total_ltv_2017'), 'class="form-control"');
+                            echo form_error('total_ltv');
+                            echo form_input('total_ltv', set_value('total_ltv'), 'class="form-control"');
                             ?>
                             </div>
                         </div>
@@ -424,174 +322,174 @@
 //        }
 //    }
 
-    $('#company-form').validate({
-        rules: {
-            equity_2015: {
-                required: true
-            },
-            equity_2016: {
-                required: true
-            },
-            equity_2017: {
-                required: true
-            },
-            owner_equity_2015: {
-                required: true
-            },
-            owner_equity_2016: {
-                required: true
-            },
-            owner_equity_2017: {
-                required: true
-            },
-            total_income_2015: {
-                required: true
-            },
-            total_income_2017: {
-                required: true
-            },
-            total_income_2016: {
-                required: true
-            },
-            software_income_2015: {
-                required: true
-            },
-            software_income_2016: {
-                required: true
-            },
-            software_income_2017: {
-                required: true
-            },
-            it_income_2015: {
-                required: true
-            },
-            it_income_2016: {
-                required: true
-            },
-            it_income_2017: {
-                required: true
-            },
-            export_income_2015: {
-                required: true
-            },
-            export_income_2016: {
-                required: true
-            },
-            export_income_2017: {
-                required: true
-            },
-            total_labor_2015: {
-                required: true
-            },
-            total_labor_2016: {
-                required: true
-            },
-            total_labor_2017: {
-                required: true
-            },
-            total_ltv_2015: {
-                required: true
-            },
-            total_ltv_2016: {
-                required: true
-            },
-            total_ltv_2017: {
-                required: true
-            },
-            description: {
-                required: true
-            },
-            main_market: {
-                required: true
-            },
-            main_service: {
-                required: true
-            }
-        },
-        messages :{
-            equity_2015: {
-                required : 'Cần nhập Vốn điều lệ 2015'
-            },
-            equity_2016: {
-                required: 'Cần nhập Vốn điều lệ 2016'
-            },
-            equity_2017: {
-                required: 'Cần nhập Vốn điều lệ 2017'
-            },
-            owner_equity_2015: {
-                required: 'Cần nhập Vốn chủ sở hữu'
-            },
-            owner_equity_2016: {
-                required: 'Cần nhập Vốn chủ sở hữu'
-            },
-            owner_equity_2017: {
-                required: 'Cần nhập Vốn chủ sở hữu'
-            },
-            total_income_2015: {
-                required: 'Cần nhập Tổng doanh thu DN'
-            },
-            total_income_2016: {
-                required: 'Cần nhập Tổng doanh thu DN'
-            },
-            total_income_2017: {
-                required: 'Cần nhập Tổng doanh thu DN'
-            },
-            software_income_2015: {
-                required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
-            },
-            software_income_2016: {
-                required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
-            },
-            software_income_2017: {
-                required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
-            },
-            it_income_2015: {
-                required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
-            },
-            it_income_2016: {
-                required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
-            },
-            it_income_2017: {
-                required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
-            },
-            export_income_2015: {
-                required: 'Cần nhập Tổng DT xuất khẩu'
-            },
-            export_income_2016: {
-                required: 'Cần nhập Tổng DT xuất khẩu'
-            },
-            export_income_2017: {
-                required: 'Cần nhập Tổng DT xuất khẩu'
-            },
-            total_labor_2015: {
-                required: 'Cần nhập Tổng số lao động của DN'
-            },
-            total_labor_2016: {
-                required: 'Cần nhập Tổng số lao động của DN'
-            },
-            total_labor_2017: {
-                required: 'Cần nhập Tổng số lao động của DN'
-            },
-            total_ltv_2015: {
-                required: 'Cần nhập Tổng số LTV'
-            },
-            total_ltv_2016: {
-                required: 'Cần nhập Tổng số LTV'
-            },
-            total_ltv_2017: {
-                required: 'Cần nhập Tổng số LTV'
-            },
-            description: {
-                required: 'Cần nhập Giới thiệu chung'
-            },
-            main_market: {
-                required: 'Cần nhập Thị trường chính'
-            },
-            main_service: {
-                required: 'Cần nhập SP dịch vụ chính của DN'
-            }
-        }
-    });
+    // $('#company-form').validate({
+    //     rules: {
+    //         equity_2015: {
+    //             required: true
+    //         },
+    //         equity_2016: {
+    //             required: true
+    //         },
+    //         equity_2017: {
+    //             required: true
+    //         },
+    //         owner_equity_2015: {
+    //             required: true
+    //         },
+    //         owner_equity_2016: {
+    //             required: true
+    //         },
+    //         owner_equity_2017: {
+    //             required: true
+    //         },
+    //         total_income_2015: {
+    //             required: true
+    //         },
+    //         total_income_2017: {
+    //             required: true
+    //         },
+    //         total_income_2016: {
+    //             required: true
+    //         },
+    //         software_income_2015: {
+    //             required: true
+    //         },
+    //         software_income_2016: {
+    //             required: true
+    //         },
+    //         software_income_2017: {
+    //             required: true
+    //         },
+    //         it_income_2015: {
+    //             required: true
+    //         },
+    //         it_income_2016: {
+    //             required: true
+    //         },
+    //         it_income_2017: {
+    //             required: true
+    //         },
+    //         export_income_2015: {
+    //             required: true
+    //         },
+    //         export_income_2016: {
+    //             required: true
+    //         },
+    //         export_income_2017: {
+    //             required: true
+    //         },
+    //         total_labor_2015: {
+    //             required: true
+    //         },
+    //         total_labor_2016: {
+    //             required: true
+    //         },
+    //         total_labor_2017: {
+    //             required: true
+    //         },
+    //         total_ltv_2015: {
+    //             required: true
+    //         },
+    //         total_ltv_2016: {
+    //             required: true
+    //         },
+    //         total_ltv_2017: {
+    //             required: true
+    //         },
+    //         description: {
+    //             required: true
+    //         },
+    //         main_market: {
+    //             required: true
+    //         },
+    //         main_service: {
+    //             required: true
+    //         }
+    //     },
+    //     messages :{
+    //         equity_2015: {
+    //             required : 'Cần nhập Vốn điều lệ 2015'
+    //         },
+    //         equity_2016: {
+    //             required: 'Cần nhập Vốn điều lệ 2016'
+    //         },
+    //         equity_2017: {
+    //             required: 'Cần nhập Vốn điều lệ 2017'
+    //         },
+    //         owner_equity_2015: {
+    //             required: 'Cần nhập Vốn chủ sở hữu'
+    //         },
+    //         owner_equity_2016: {
+    //             required: 'Cần nhập Vốn chủ sở hữu'
+    //         },
+    //         owner_equity_2017: {
+    //             required: 'Cần nhập Vốn chủ sở hữu'
+    //         },
+    //         total_income_2015: {
+    //             required: 'Cần nhập Tổng doanh thu DN'
+    //         },
+    //         total_income_2016: {
+    //             required: 'Cần nhập Tổng doanh thu DN'
+    //         },
+    //         total_income_2017: {
+    //             required: 'Cần nhập Tổng doanh thu DN'
+    //         },
+    //         software_income_2015: {
+    //             required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
+    //         },
+    //         software_income_2016: {
+    //             required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
+    //         },
+    //         software_income_2017: {
+    //             required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
+    //         },
+    //         it_income_2015: {
+    //             required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
+    //         },
+    //         it_income_2016: {
+    //             required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
+    //         },
+    //         it_income_2017: {
+    //             required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
+    //         },
+    //         export_income_2015: {
+    //             required: 'Cần nhập Tổng DT xuất khẩu'
+    //         },
+    //         export_income_2016: {
+    //             required: 'Cần nhập Tổng DT xuất khẩu'
+    //         },
+    //         export_income_2017: {
+    //             required: 'Cần nhập Tổng DT xuất khẩu'
+    //         },
+    //         total_labor_2015: {
+    //             required: 'Cần nhập Tổng số lao động của DN'
+    //         },
+    //         total_labor_2016: {
+    //             required: 'Cần nhập Tổng số lao động của DN'
+    //         },
+    //         total_labor_2017: {
+    //             required: 'Cần nhập Tổng số lao động của DN'
+    //         },
+    //         total_ltv_2015: {
+    //             required: 'Cần nhập Tổng số LTV'
+    //         },
+    //         total_ltv_2016: {
+    //             required: 'Cần nhập Tổng số LTV'
+    //         },
+    //         total_ltv_2017: {
+    //             required: 'Cần nhập Tổng số LTV'
+    //         },
+    //         description: {
+    //             required: 'Cần nhập Giới thiệu chung'
+    //         },
+    //         main_market: {
+    //             required: 'Cần nhập Thị trường chính'
+    //         },
+    //         main_service: {
+    //             required: 'Cần nhập SP dịch vụ chính của DN'
+    //         }
+    //     }
+    // });
 
     $('#anonymous').click(function(){
         if($(this).prop("checked") == true){
