@@ -162,7 +162,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <p>Doanh nghiệp download mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu, scan, upload và chèn link dưới đây.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('THONG_TIN_DOANH_NGHIEP.docx') ?>" target="_blank">Download mẫu PĐK</a>
+                            <a class="btn btn-warning" href="<?php echo site_url('Phieu-dang-ky.docx') ?>" target="_blank">Download mẫu PĐK</a>
                             <br>
                             <br>
                             <?php
@@ -193,7 +193,7 @@
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
                         <?php
-                        echo form_submit('submit', 'OK', 'class="btn btn-primary pull-left" style="width:40%"');
+                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
                         echo form_close();
                         ?>
                     </div>

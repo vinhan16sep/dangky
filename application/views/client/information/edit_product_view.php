@@ -74,8 +74,13 @@
                             echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 18 lĩnh vực ứng dụng chuyên ngành</span><br>';
                             echo "<div class='row group-1' style='display:none; margin-left: 20px'>";
                             foreach ($options_1 as $key => $value) {
-                                echo form_checkbox('service[]', $value, (in_array($value, $service, '')? true : false), 'class="btn-checkbox-group-1"');
-                                echo $key.'<br>';
+                                if(!is_null($service) && $service != null){
+                                    echo form_checkbox('service[]', $value, (in_array($value, $service, '')? true : false), 'class="btn-checkbox-group-1"');
+                                    echo $key.'<br>';
+                                }else{
+                                    echo form_checkbox('service[]', $value, false, 'class="btn-checkbox-group-1"');
+                                    echo $key.'<br>';
+                                }
                             }
                             echo "</div>";
                             echo form_checkbox('service[]', 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0', ($service && in_array('Các sản phẩm, giải pháp ứng dụng công nghệ 4.0', $service, '') ? true : false), 'class="btn-checkbox"');
@@ -86,8 +91,13 @@
                             echo '<span style="color:blue">Các dịch vụ CNTT</span><br>';
                             echo "<div class='row group-4' style='display:none; margin-left: 20px'>";
                             foreach ($options_4 as $key => $value) {
-                                echo form_checkbox('service[]', $value, (in_array($value, $service, '')? true : false), 'class="btn-checkbox-group-4"');
-                                echo $key.'<br>';
+                                if(!is_null($service) && $service != null){
+                                    echo form_checkbox('service[]', $value, (in_array($value, $service, '')? true : false), 'class="btn-checkbox-group-4"');
+                                    echo $key.'<br>';
+                                }else{
+                                    echo form_checkbox('service[]', $value, false, 'class="btn-checkbox-group-4"');
+                                    echo $key.'<br>';
+                                }
                             }
                             echo "</div>";
                             ?>
@@ -388,7 +398,7 @@
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
                         <?php
-                        echo form_submit('submit', 'OK', 'class="btn btn-primary pull-left" style="width:40%"');
+                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
                         echo form_close();
                         ?>
                     </div>

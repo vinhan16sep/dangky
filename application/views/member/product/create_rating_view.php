@@ -169,7 +169,7 @@
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
                         <?php
-                        echo form_submit('submit', 'OK', 'class="btn btn-primary pull-left" style="width:40%"');
+                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
                         echo form_close();
                         ?>
                     </div>

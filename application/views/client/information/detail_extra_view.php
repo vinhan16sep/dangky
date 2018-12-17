@@ -64,15 +64,15 @@
                                     <a><i class="fa fa-link margin-r-5"></i> Link download PĐK của DN</a> <p class="pull-right"><?php echo $submitted['link']; ?></p>
                                 </li>
                             </ul>
-                            <?php if($reg_status['is_final'] == 0): ?>
-                                <?php if(!$submitted): ?>
-                                <a href="<?php echo base_url('client/information/create_extra'); ?>" class="btn btn-primary btn-block"><b>Nhập thông tin</b></a>
-                                <?php else: ?>
-                                <a href="<?php echo base_url('client/information/edit_extra'); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
-                                <?php endif; ?>
-                            <?php else: ?>
-                            <h4 style="color:red">Thông tin đã được gửi</h4>
-                            <?php endif; ?>
+<!--                            --><?php //if($reg_status['is_final'] == 0): ?>
+<!--                                --><?php //if(!$submitted): ?>
+<!--                                <a href="--><?php //echo base_url('client/information/create_extra'); ?><!--" class="btn btn-primary btn-block"><b>Nhập thông tin</b></a>-->
+<!--                                --><?php //else: ?>
+<!--                                <a href="--><?php //echo base_url('client/information/edit_extra'); ?><!--" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>-->
+<!--                                --><?php //endif; ?>
+<!--                            --><?php //else: ?>
+<!--                            <h4 style="color:red">Thông tin đã được gửi</h4>-->
+<!--                            --><?php //endif; ?>
                         </div>
                     </div>
                     <!-- /.tab-content -->

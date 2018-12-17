@@ -465,4 +465,22 @@ class Information_model extends CI_Model {
 
         return false;
     }
+
+    public function checkExist($type, $information_id){
+        if($type == 'information'){
+            $query = $this->db->select('*')
+                ->from($type)
+                ->where('id', $information_id)
+                ->get();
+
+            return $query->num_rows();
+        }else{
+            $query = $this->db->select('*')
+                ->from($type)
+                ->where('information_id', $information_id)
+                ->get();
+
+            return $query->num_rows();
+        }
+    }
 }
