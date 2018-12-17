@@ -108,4 +108,16 @@ class Users_model extends CI_Model{
 
         return false;
     }
+
+    public function update($type, $id, $information){
+        $this->db->set($information)
+            ->where('id', $id)
+            ->update($type);
+
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+
+        return false;
+    }
 }

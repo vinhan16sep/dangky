@@ -13,6 +13,7 @@
                 </div>
                 <?php
                 echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'extra-form'));
+                echo form_hidden('identity', set_value('identity', $extra['identity']));
                 ?>
                 <div class="form-group">
                     <div class="row">
@@ -161,7 +162,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <p>Doanh nghiệp download mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu, scan, upload và chèn link dưới đây.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('PDK-Sao-Khue-2018.docx') ?>" target="_blank">Download mẫu PĐK</a>
+                            <a class="btn btn-warning" href="<?php echo site_url('THONG_TIN_DOANH_NGHIEP.docx') ?>" target="_blank">Download mẫu PĐK</a>
                             <br>
                             <br>
                             <?php

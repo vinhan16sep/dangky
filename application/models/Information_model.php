@@ -152,6 +152,45 @@ class Information_model extends CI_Model {
         return false;
     }
 
+    public function fetch_by_user_information_id($type, $information){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('id', $information)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
+        return false;
+    }
+
+    public function fetch_by_user_information_id_and_year($type, $information, $year){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('information_id', $information)
+            ->where('year', $year)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
+        return false;
+    }
+
+    public function fetch_by_identity($type, $identity){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('information_id', $identity)
+            ->order_by("year", "desc")
+            ->get()->result_array();
+
+        return $query;
+    }
+
     public function fetch_product_by_user_and_id($type, $user_id, $id){
         $query = $this->db->select('*')
             ->from($type)
@@ -217,6 +256,31 @@ class Information_model extends CI_Model {
     public function update($type, $id, $information){
         $this->db->set($information)
             ->where('client_id', $id)
+            ->update($type);
+
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function update_by_identity($type, $identity, $information){
+        $this->db->set($information)
+            ->where('identity', $identity)
+            ->update($type);
+
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function update_by_information_and_year($type, $information_id, $year, $data){
+        $this->db->set($data)
+            ->where('information_id', $information_id)
+            ->where('year', $year)
             ->update($type);
 
         if($this->db->affected_rows() == 1){
@@ -370,6 +434,35 @@ class Information_model extends CI_Model {
         if($this->db->affected_rows() == 1){
             return true;
         }
+        return false;
+    }
+
+    public function check_exist_information($identity){
+        $query = $this->db->select('*')
+            ->from('information')
+            ->where('identity', $identity)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
+        return false;
+    }
+
+    public function check_exist_company_by_year($identity, $year){
+        $query = $this->db->select('*')
+            ->from('company')
+            ->where('information_id', $identity)
+            ->where('year', $year)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
         return false;
     }
 }

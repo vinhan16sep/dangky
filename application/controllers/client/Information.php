@@ -15,6 +15,7 @@ class Information extends Client_Controller {
         $this->load->helper('url');
         $this->load->model('information_model');
         $this->load->model('status_model');
+        $this->load->model('users_model');
         $this->load->library('session');
 
         $this->data['user'] = $this->ion_auth->user()->row();
@@ -53,6 +54,11 @@ class Information extends Client_Controller {
             if($this->data['reg_status'] == 1){
                 redirect('client/information', 'refresh');
             }
+            $this->data['identity'] = $this->input->get('identity');
+            $exist = $this->information_model->check_exist_information($this->input->get('identity'));
+            if(!empty($exist)){
+                $this->data['exist'] = $exist;
+            }
             $this->render('client/information/create_extra_view');
         } else {
             if ($this->input->post()) {
@@ -68,6 +74,7 @@ class Information extends Client_Controller {
                     'c_email' => $this->input->post('c_email'),
                     'c_phone' => $this->input->post('c_phone'),
                     'link' => $this->input->post('link'),
+                    'identity' => $this->input->post('identity'),
 //                    'is_submit' => 1,
                     'created_at' => $this->author_info['created_at'],
                     'created_by' => $this->author_info['created_by'],
@@ -75,13 +82,23 @@ class Information extends Client_Controller {
                     'modified_by' => $this->author_info['modified_by']
                 );
 
-                $insert = $this->information_model->insert('information', $data);
-                if (!$insert) {
-                    $this->session->set_flashdata('message', 'There was an error inserting item');
+                $exist = $this->information_model->check_exist_information($this->input->post('identity'));
+                if(!empty($exist)){
+                    unset($data['created_at']);
+                    unset($data['created_by']);
+                    $update = $this->information_model->update_by_identity('information', $this->input->post('identity'), $data);
+                    $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1));
+                    $this->users_model->update('users', $this->data['user']->id, array('information_id' => $exist['id']));
+                }else{
+                    $insert = $this->information_model->insert('information', $data);
+                    if (!$insert) {
+                        $this->session->set_flashdata('message', 'There was an error inserting item');
+                    }
+                    $this->load->model('status_model');
+                    $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1));
+                    $this->users_model->update('users', $this->data['user']->id, array('information_id' => $insert));
+                    $this->session->set_flashdata('message', 'Item added successfully');
                 }
-                $this->load->model('status_model');
-                $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1));
-                $this->session->set_flashdata('message', 'Item added successfully');
 
                 redirect('client/information', 'refresh');
             }
@@ -105,7 +122,7 @@ class Information extends Client_Controller {
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
         if ($this->form_validation->run() == FALSE) {
-            $this->data['extra'] = $this->information_model->fetch_by_user_id('information', $this->data['user']->id);
+            $this->data['extra'] = $this->information_model->fetch_by_user_information_id('information', $this->data['user']->information_id);
 
             if (!$this->data['extra']) {
                 redirect('client/information', 'refresh');
@@ -129,12 +146,13 @@ class Information extends Client_Controller {
                     'c_email' => $this->input->post('c_email'),
                     'c_phone' => $this->input->post('c_phone'),
                     'link' => $this->input->post('link'),
+                    'identity' => $this->input->post('identity'),
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
 
                 try {
-                    $this->information_model->update('information', $this->data['user']->id, $data);
+                    $this->information_model->update_by_identity('information', $this->input->post('identity'), $data);
                     $this->session->set_flashdata('message', 'Item updated successfully');
                 } catch (Exception $e) {
                     $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
@@ -146,7 +164,7 @@ class Information extends Client_Controller {
     }
 
     public function company(){
-        $this->data['submitted'] = $this->information_model->fetch_by_user_id('company', $this->data['user']->id);
+        $this->data['submitted'] = $this->information_model->fetch_by_user_information_id_and_year('company', $this->data['user']->information_id, $this->input->get('year'));
 
         $this->render('client/information/detail_company_view');
     }
@@ -155,37 +173,25 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_2015', 'Vốn điều lệ 2015', 'trim|required');
-        $this->form_validation->set_rules('equity_2015', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('equity_2015', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('owner_equity_2015', 'Vốn chủ sở hữu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_2016', 'Vốn chủ sở hữu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_2017', 'Vốn chủ sở hữu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2015', 'Tổng doanh thu DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2016', 'Tổng doanh thu DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2017', 'Tổng doanh thu DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2015', 'Tổng DT lĩnh vực sx phần mềm 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2016', 'Tổng DT lĩnh vực sx phần mềm 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2017', 'Tổng DT lĩnh vực sx phần mềm 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2015', 'Tổng doanh thu dịch vụ CNTT 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2016', 'Tổng doanh thu dịch vụ CNTT 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2017', 'Tổng doanh thu dịch vụ CNTT 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2015', 'Tổng DT xuất khẩu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2016', 'Tổng DT xuất khẩu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2017', 'Tổng DT xuất khẩu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2015', 'Tổng số lao động của DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2016', 'Tổng số lao động của DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2017', 'Tổng số lao động của DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2015', 'Tổng số LTV 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2016', 'Tổng số LTV 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2017', 'Tổng số LTV 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('description', 'Data', 'trim|required');
+        $this->form_validation->set_rules('equity', 'Vốn điều lệ', 'trim|required');
+        $this->form_validation->set_rules('owner_equity', 'Vốn chủ sở hữu', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income', 'Tổng doanh thu DN', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income', 'Tổng DT lĩnh vực sx phần mềm', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income', 'Tổng doanh thu dịch vụ CNTT', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income', 'Tổng DT xuất khẩu', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor', 'Tổng số lao động của DN', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv', 'Tổng số LTV', 'trim|required|numeric');
         // $this->form_validation->set_rules('main_service', 'Data', 'required');
         // $this->form_validation->set_rules('main_market', 'Data', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             if($this->data['reg_status'] == 1){
                 redirect('client/information', 'refresh');
+            }
+            $this->data['year'] = $this->input->get('year');
+            $exist = $this->information_model->check_exist_company_by_year($this->data['user_identity'], $this->input->get('year'));
+            if(!empty($exist)){
+                $this->data['exist'] = $exist;
             }
             $this->render('client/information/create_company_view');
         } else {
@@ -194,31 +200,17 @@ class Information extends Client_Controller {
                 $main_market = json_encode($this->input->post('main_market'));
                 $data = array(
                     'client_id' => $this->data['user']->id,
-                    'equity_2015' => $this->input->post('equity_2015'),
-                    'equity_2016' => $this->input->post('equity_2016'),
-                    'equity_2017' => $this->input->post('equity_2017'),
-                    'owner_equity_2015' => $this->input->post('owner_equity_2015'),
-                    'owner_equity_2016' => $this->input->post('owner_equity_2016'),
-                    'owner_equity_2017' => $this->input->post('owner_equity_2017'),
-                    'total_income_2015' => $this->input->post('total_income_2015'),
-                    'total_income_2016' => $this->input->post('total_income_2016'),
-                    'total_income_2017' => $this->input->post('total_income_2017'),
-                    'software_income_2015' => $this->input->post('software_income_2015'),
-                    'software_income_2016' => $this->input->post('software_income_2016'),
-                    'software_income_2017' => $this->input->post('software_income_2017'),
-                    'it_income_2015' => $this->input->post('it_income_2015'),
-                    'it_income_2016' => $this->input->post('it_income_2016'),
-                    'it_income_2017' => $this->input->post('it_income_2017'),
-                    'export_income_2015' => $this->input->post('export_income_2015'),
-                    'export_income_2016' => $this->input->post('export_income_2016'),
-                    'export_income_2017' => $this->input->post('export_income_2017'),
-                    'total_labor_2015' => $this->input->post('total_labor_2015'),
-                    'total_labor_2016' => $this->input->post('total_labor_2016'),
-                    'total_labor_2017' => $this->input->post('total_labor_2017'),
-                    'total_ltv_2015' => $this->input->post('total_ltv_2015'),
-                    'total_ltv_2016' => $this->input->post('total_ltv_2016'),
-                    'total_ltv_2017' => $this->input->post('total_ltv_2017'),
+                    'equity' => $this->input->post('equity'),
+                    'owner_equity' => $this->input->post('owner_equity'),
+                    'total_income' => $this->input->post('total_income'),
+                    'software_income' => $this->input->post('software_income'),
+                    'it_income' => $this->input->post('it_income'),
+                    'export_income' => $this->input->post('export_income'),
+                    'total_labor' => $this->input->post('total_labor'),
+                    'total_ltv' => $this->input->post('total_ltv'),
                     'description' => $this->input->post('description'),
+                    'information_id' => $this->input->post('information_id'),
+                    'year' => $this->input->post('year'),
                     'main_service' => $main_service,
                     'main_market' => $main_market,
 //                    'is_submit' => 1,
@@ -228,15 +220,22 @@ class Information extends Client_Controller {
                     'modified_by' => $this->author_info['modified_by']
                 );
 
-                $insert = $this->information_model->insert_company('company', $data);
-                if (!$insert) {
-                    $this->session->set_flashdata('message', 'There was an error inserting item');
+                $exist = $this->information_model->check_exist_company_by_year($this->data['user_identity'], $this->input->post('year'));
+                if(!empty($exist)) {
+                    unset($data['created_at']);
+                    unset($data['created_by']);
+                    $this->information_model->update_by_information_and_year('company', $this->input->post('user_identity'), $this->input->post('year'), $data);
+                }else{
+                    $insert = $this->information_model->insert_company('company', $data);
+                    if (!$insert) {
+                        $this->session->set_flashdata('message', 'There was an error inserting item');
+                    }
+                    $this->load->model('status_model');
+                    $this->status_model->update('status', $this->data['user']->id, array('is_company' => 1));
+                    $this->session->set_flashdata('message', 'Item added successfully');
                 }
-                $this->load->model('status_model');
-                $this->status_model->update('status', $this->data['user']->id, array('is_company' => 1));
-                $this->session->set_flashdata('message', 'Item added successfully');
 
-                redirect('client/information/company', 'refresh');
+                redirect('client/information/company?year=' . $this->input->post('year'), 'refresh');
             }
         }
     }
@@ -245,41 +244,28 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_2015', 'Vốn điều lệ 2015', 'trim|required');
-        $this->form_validation->set_rules('equity_2015', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('equity_2015', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('owner_equity_2015', 'Vốn chủ sở hữu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_2016', 'Vốn chủ sở hữu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_2017', 'Vốn chủ sở hữu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2015', 'Tổng doanh thu DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2016', 'Tổng doanh thu DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2017', 'Tổng doanh thu DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2015', 'Tổng DT lĩnh vực sx phần mềm 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2016', 'Tổng DT lĩnh vực sx phần mềm 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2017', 'Tổng DT lĩnh vực sx phần mềm 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2015', 'Tổng doanh thu dịch vụ CNTT 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2016', 'Tổng doanh thu dịch vụ CNTT 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2017', 'Tổng doanh thu dịch vụ CNTT 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2015', 'Tổng DT xuất khẩu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2016', 'Tổng DT xuất khẩu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2017', 'Tổng DT xuất khẩu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2015', 'Tổng số lao động của DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2016', 'Tổng số lao động của DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2017', 'Tổng số lao động của DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2015', 'Tổng số LTV 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2016', 'Tổng số LTV 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2017', 'Tổng số LTV 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('description', 'Data', 'trim|required');
+        $this->form_validation->set_rules('equity', 'Vốn điều lệ', 'trim|required');
+        $this->form_validation->set_rules('owner_equity', 'Vốn chủ sở hữu', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income', 'Tổng doanh thu DN', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income', 'Tổng DT lĩnh vực sx phần mềm', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income', 'Tổng doanh thu dịch vụ CNTT', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income', 'Tổng DT xuất khẩu', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor', 'Tổng số lao động của DN', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv', 'Tổng số LTV', 'trim|required|numeric');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
         if ($this->form_validation->run() == FALSE) {
-            $this->data['company'] = $this->information_model->fetch_by_user_id('company', $this->data['user']->id);
+            $this->data['company'] = $this->information_model->fetch_by_user_information_id_and_year('company', $this->data['user']->information_id, $this->input->get('year'));
             if (!$this->data['company']) {
                 redirect('client/information/company', 'refresh');
             }
             
             if($this->data['reg_status'] == 1){
                 redirect('client/information', 'refresh');
+            }
+
+            if(date('Y') != $this->input->get('year')){
+                redirect('client/dashboard', 'refresh');
             }
 
             $this->render('client/information/edit_company_view');
@@ -289,30 +275,14 @@ class Information extends Client_Controller {
                 $main_market = json_encode($this->input->post('main_market'));
 
                 $data = array(
-                    'equity_2015' => $this->input->post('equity_2015'),
-                    'equity_2016' => $this->input->post('equity_2016'),
-                    'equity_2017' => $this->input->post('equity_2017'),
-                    'owner_equity_2015' => $this->input->post('owner_equity_2015'),
-                    'owner_equity_2016' => $this->input->post('owner_equity_2016'),
-                    'owner_equity_2017' => $this->input->post('owner_equity_2017'),
-                    'total_income_2015' => $this->input->post('total_income_2015'),
-                    'total_income_2016' => $this->input->post('total_income_2016'),
-                    'total_income_2017' => $this->input->post('total_income_2017'),
-                    'software_income_2015' => $this->input->post('software_income_2015'),
-                    'software_income_2016' => $this->input->post('software_income_2016'),
-                    'software_income_2017' => $this->input->post('software_income_2017'),
-                    'it_income_2015' => $this->input->post('it_income_2015'),
-                    'it_income_2016' => $this->input->post('it_income_2016'),
-                    'it_income_2017' => $this->input->post('it_income_2017'),
-                    'export_income_2015' => $this->input->post('export_income_2015'),
-                    'export_income_2016' => $this->input->post('export_income_2016'),
-                    'export_income_2017' => $this->input->post('export_income_2017'),
-                    'total_labor_2015' => $this->input->post('total_labor_2015'),
-                    'total_labor_2016' => $this->input->post('total_labor_2016'),
-                    'total_labor_2017' => $this->input->post('total_labor_2017'),
-                    'total_ltv_2015' => $this->input->post('total_ltv_2015'),
-                    'total_ltv_2016' => $this->input->post('total_ltv_2016'),
-                    'total_ltv_2017' => $this->input->post('total_ltv_2017'),
+                    'equity' => $this->input->post('equity'),
+                    'owner_equity' => $this->input->post('owner_equity'),
+                    'total_income' => $this->input->post('total_income'),
+                    'software_income' => $this->input->post('software_income'),
+                    'it_income' => $this->input->post('it_income'),
+                    'export_income' => $this->input->post('export_income'),
+                    'total_labor' => $this->input->post('total_labor'),
+                    'total_ltv' => $this->input->post('total_ltv'),
                     'description' => $this->input->post('description'),
                     'main_service' => $main_service,
                     'main_market' => $main_market,
@@ -321,13 +291,13 @@ class Information extends Client_Controller {
                 );
 
                 try {
-                    $this->information_model->update('company', $this->data['user']->id, $data);
+                    $this->information_model->update_by_information_and_year('company', $this->data['user']->information_id, $this->input->post('year'), $data);
                     $this->session->set_flashdata('message', 'Item updated successfully');
                 } catch (Exception $e) {
                     $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                 }
 
-                redirect('client/information/company', 'refresh');
+                redirect('client/information/company?year=' . $this->input->post('year'), 'refresh');
             }
         }
     }
