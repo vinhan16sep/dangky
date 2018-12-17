@@ -55,7 +55,6 @@ $lang['deactivate_validation_user_id_label'] = 'user ID';
 // Create User
 $lang['create_user_heading']                           = 'Create User';
 $lang['create_user_subheading']                        = 'Please enter the user\'s information below.';
-$lang['create_user_username_label']                       = 'Username:';
 $lang['create_user_fname_label']                       = 'First Name:';
 $lang['create_user_lname_label']                       = 'Last Name:';
 $lang['create_user_company_label']                     = 'Company Name:';
@@ -65,7 +64,6 @@ $lang['create_user_phone_label']                       = 'Phone:';
 $lang['create_user_password_label']                    = 'Password:';
 $lang['create_user_password_confirm_label']            = 'Confirm Password:';
 $lang['create_user_submit_btn']                        = 'Create User';
-$lang['create_user_validation_username_label']            = 'Username';
 $lang['create_user_validation_fname_label']            = 'First Name';
 $lang['create_user_validation_lname_label']            = 'Last Name';
 $lang['create_user_validation_identity_label']         = 'Identity';
@@ -136,6 +134,7 @@ $lang['forgot_password_validation_email_label']  = 'Email Address';
 $lang['forgot_password_identity_label'] = 'Identity';
 $lang['forgot_password_email_identity_label']    = 'Email';
 $lang['forgot_password_email_not_found']         = 'No record of that email address.';
+$lang['forgot_password_identity_not_found']         = 'No record of that username.';
 
 // Reset Password
 $lang['reset_password_heading']                               = 'Change Password';
