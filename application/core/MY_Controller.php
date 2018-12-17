@@ -308,7 +308,11 @@ class Client_Controller extends MY_Controller {
         }
         $this->data['user_info'] = $this->ion_auth->user()->row();
         $this->data['user_email'] = $this->ion_auth->user()->row()->username;
+        $this->data['user_identity'] = $this->ion_auth->user()->row()->information_id;
         $this->data['page_title'] = 'Administrator area';
+
+        $this->load->model('information_model');
+        $this->data['company_submitted'] = $this->information_model->fetch_by_identity('company', $this->data['user_identity']);
 
         // Get current class
         //$class = $this->router->fetch_class();

@@ -13,6 +13,7 @@
                 </div>
                 <?php
                 echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'extra-form'));
+                echo form_hidden('identity', set_value('identity', (isset($exist) ? $exist['identity'] : $identity)));
                 ?>
                 <div class="form-group">
                     <div class="row">
@@ -24,7 +25,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('website');
-                            echo form_input('website', set_value('website'), 'class="form-control"');
+                            echo form_input('website', set_value('website', (isset($exist) ? $exist['website'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -40,7 +41,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('legal_representative');
-                            echo form_input('legal_representative', set_value('legal_representative'), 'class="form-control"');
+                            echo form_input('legal_representative', set_value('legal_representative', (isset($exist) ? $exist['website'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -55,7 +56,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('lp_position');
-                            echo form_input('lp_position', set_value('lp_position'), 'class="form-control"');
+                            echo form_input('lp_position', set_value('lp_position', (isset($exist) ? $exist['website'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -70,7 +71,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('lp_email');
-                            echo form_input('lp_email', set_value('lp_email'), 'class="form-control"');
+                            echo form_input('lp_email', set_value('lp_email', (isset($exist) ? $exist['website'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -85,7 +86,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('lp_phone');
-                            echo form_input('lp_phone', set_value('lp_phone'), 'class="form-control"');
+                            echo form_input('lp_phone', set_value('lp_phone', (isset($exist) ? $exist['lp_phone'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('connector');
-                            echo form_input('connector', set_value('connector'), 'class="form-control"');
+                            echo form_input('connector', set_value('connector', (isset($exist) ? $exist['connector'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -116,7 +117,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('c_position');
-                            echo form_input('c_position', set_value('c_position'), 'class="form-control"');
+                            echo form_input('c_position', set_value('c_position', (isset($exist) ? $exist['c_position'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -131,7 +132,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('c_email');
-                            echo form_input('c_email', set_value('c_email'), 'class="form-control"');
+                            echo form_input('c_email', set_value('c_email', (isset($exist) ? $exist['c_email'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -146,7 +147,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('c_phone');
-                            echo form_input('c_phone', set_value('c_phone'), 'class="form-control"');
+                            echo form_input('c_phone', set_value('c_phone', (isset($exist) ? $exist['c_phone'] : '')), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -161,12 +162,12 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <p>Doanh nghiệp download mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu, scan, upload và chèn link dưới đây.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('PDK-Sao-Khue-2018.docx') ?>" target="_blank">Download mẫu PĐK</a>
+                            <a class="btn btn-warning" href="<?php echo site_url('THONG_TIN_DOANH_NGHIEP.docx') ?>" target="_blank">Download mẫu PĐK</a>
                             <br>
                             <br>
                             <?php
                             echo form_error('link');
-                            echo form_input('link', set_value('link'), 'class="form-control"');
+                            echo form_input('link', set_value('link', (isset($exist) ? $exist['link'] : '')), 'class="form-control"');
                             ?>
                             
                         </div>

@@ -18,7 +18,7 @@ class Dashboard extends Client_Controller {
 
         $this->load->model('information_model');
         $this->data['submitted'] = $this->information_model->fetch_by_user_id('information', $this->data['user']->id);
-        $this->data['company_submitted'] = $this->information_model->fetch_by_user_id('company', $this->data['user']->id);
+//        $this->data['company_submitted'] = $this->information_model->fetch_by_identity('company', $this->data['user']->information_id);
         $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id);
 
         $this->render('client/dashboard_view');

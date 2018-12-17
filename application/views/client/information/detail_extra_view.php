@@ -30,7 +30,8 @@
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <div class="post">
-                            <h4>Thông tin khác</h4>
+                            <h4>Thông tin doanh nghiệp</h4>
+                            <h3>Mã số đăng ký kinh doanh: <span style="color: red"><?php echo $submitted['identity']; ?></span></h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Tên đơn vị</a> <p class="pull-right"><?php echo $submitted['website']; ?></p>

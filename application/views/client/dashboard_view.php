@@ -72,14 +72,14 @@
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <div class="post">
-                            <h4>Thông tin đăng ký</h4>
+                            <h4 style="font-weight: bold">Thông tin đăng ký</h4>
                             <?php if($reg_status['is_final'] == 0): ?>
                                 <?php if(!$submitted): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                     <span>
-                                        <a data-target="#myModal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
-                                           href="#myModal">HELP</a>
-                                        <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>
+                                        <a data-target="#myModal" data-toggle="modal" id="MainNavHelp"
+                                           href="#myModal" class="btn btn-warning btn-block">Nhập thông tin</a>
+<!--                                        <a href="--><?php //echo base_url('client/information/create_extra') ?><!--" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>-->
                                     </span>
                                 <?php else: ?>
                                     <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>
@@ -94,50 +94,77 @@
                             <?php endif; ?>
                         </div>
                         <div class="post">
-                            <h4>Thông tin doanh nghiệp</h4>
-                            <?php if($reg_status['is_final'] == 0): ?>
-                                <?php if(!$company_submitted): ?>
-                                    <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
-                                    <span>
-                                        <a href="<?php echo base_url('client/information/create_company') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
-                                    </span>
+                            <h4 style="font-weight: bold">Thông tin doanh nghiệp theo từng năm</h4>
+                            <?php if($user_identity != ''){ ?>
+                                <?php if($reg_status['is_final'] == 0): ?>
+                                    <?php if(!$company_submitted): ?>
+                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
+                                        <span>
+                                            <a data-target="#myModal1" data-toggle="modal" id="MainNavHelp1"
+                                               href="#myModal1" class="btn btn-warning btn-block">Nhập thông tin</a>
+                                        </span>
+                                    <?php else: ?>
+                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
+                                        <span>
+                                            <a data-target="#myModal1" data-toggle="modal" id="MainNavHelp1"
+                                               href="#myModal1" class="btn btn-warning btn-block">Nhập thông tin</a>
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <?php foreach ($company_submitted as $value){ ?>
+                                            <div>
+                                                <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
+                                                <?php if(date('Y') == $value['year']){ ?>
+                                                    <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
+                                                <?php } ?>
+                                            </div>
+                                            <hr style="width: 70%;">
+                                        <?php } ?>
+                                    <?php endif; ?>
                                 <?php else: ?>
-                                    <a href="<?php echo base_url('client/information/company') ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>
-                                    <a href="<?php echo base_url('client/information/edit_company'); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
-    <!--                                <p style="color:green;">Doanh nghiệp đã gửi thông tin đăng ký</p>-->
-    <!--                                <span>-->
-    <!--                                    <a href="--><?php //echo base_url('client/information/company') ?><!--" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>-->
-    <!--                                </span>-->
+                                    <br>
+                                    <?php foreach ($company_submitted as $value){ ?>
+                                        <div>
+                                            <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
+                                        </div>
+                                        <hr>
+                                    <?php } ?>
                                 <?php endif; ?>
-                            <?php else: ?>
-                                <a href="<?php echo base_url('client/information/company') ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>
-                            <?php endif; ?>
+                            <?php }else{
+                                echo '<p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký phía trên</p>';
+                            } ?>
                         </div>
                         <div class="post">
-                            <h4>Thông tin sản phẩm/dịch vụ đề cử</h4>
-                            <?php if(!$count_product || $count_product < 1): ?>
-                                <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin về sản phẩm / dịch vụ</p>
-                                <span>
-                                    <a href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary btn-block"><b>Nhập thông tin</b></a>
-                                </span>
-                            <?php else: ?>
-                                <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
-                                <span>
-                                    <a href="<?php echo base_url('client/information/products') ?>" class="btn btn-success btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
-                                </span>
-                            <?php endif; ?>
+                            <h4 style="font-weight: bold">Thông tin sản phẩm/dịch vụ đề cử</h4>
+                            <?php if($user_identity != ''){ ?>
+                                <?php if(!$count_product || $count_product < 1): ?>
+                                    <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin về sản phẩm / dịch vụ</p>
+                                    <span>
+                                        <a href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary btn-block"><b>Nhập thông tin</b></a>
+                                    </span>
+                                <?php else: ?>
+                                    <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
+                                    <span>
+                                        <a href="<?php echo base_url('client/information/products') ?>" class="btn btn-success btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
+                                    </span>
+                                <?php endif; ?>
+                            <?php }else{
+                                echo '<p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký phía trên</p>';
+                            } ?>
                         </div>
                     </div>
                     <!-- /.tab-content -->
                 </div>
-                <?php if($reg_status['is_final'] == 0): ?>
-                <br>
-                <br>
-                <a href="<?php echo base_url('client/information/set_final') ?>" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
-                <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
-                <?php else: ?>
-                <h4 style="color:red">Thông tin đã được gửi</h4>
-                <?php endif; ?>
+                <?php if($user_identity != ''){ ?>
+                    <?php if($reg_status['is_final'] == 0): ?>
+                    <br>
+                    <br>
+                    <a onclick="return confirm('Bạn vẫn muốn gửi?')" href="<?php echo base_url('client/information/set_final') ?>" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
+                    <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
+                    <?php else: ?>
+                    <h4 style="color:red">Thông tin đã được gửi</h4>
+                    <?php endif; ?>
+                <?php } ?>
                 
                 <!-- /.nav-tabs-custom -->
             </div>
@@ -154,14 +181,36 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Nhập mã số kinh doanh</h4>
             </div>
             <div class="modal-body">
-                <input type="text" name="identity" class="form-control"/>
+                <input id="identity" type="text" name="identity" class="form-control"/>
             </div>
             <div class="modal-footer">
-                <a onclick="this.href='updateItem?codice=${item.key.codice}&quantita='+document.getElementById('qta_field').value" href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a onclick="this.href='<?php echo base_url("client/information/create_extra") ?>?identity='+document.getElementById('identity').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Chọn năm</h4>
+            </div>
+            <div class="modal-body">
+                <select class="form-control" id="selected_year">
+                    <?php for(($i = date('Y') - 3); ($i <= date('Y')); $i++){ ?>
+                        <option value="<?php echo $i; ?>" <?php echo ($i == date('Y')) ? 'selected="selected"' : ''; ?>"><?php echo $i; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <a onclick="this.href='<?php echo base_url("client/information/create_company") ?>?year='+document.getElementById('selected_year').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
             </div>
         </div>
 
