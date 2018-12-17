@@ -192,7 +192,7 @@
                                 'Tư vấn' => 'Tư vấn'
                             );
                             foreach ($options as $key => $value) {
-                                if(!is_null($main_service) || $main_service != null){
+                                if(!is_null($main_service) && $main_service != null){
                                     echo form_checkbox('main_service[]', $value, (in_array($value, $main_service, '')? true : false), 'class="btn-checkbox"');
                                     echo $key.'<br>';
                                 }else{
@@ -237,7 +237,7 @@
                                 'Xuất khẩu nhân lực CNTT' => 'Xuất khẩu nhân lực CNTT'
                             );
                             $check = false;
-                            if(!is_null($main_market) || $main_market != null){
+                            if(!is_null($main_market) && $main_market != null){
 
                                 $check = array_diff($main_market, $root);
                                 if($check){
@@ -255,7 +255,7 @@
                             <div class="row" style="margin-left: 20px">
                                 <?php
                                 foreach ($domestic as $key => $value) {
-                                    if(!is_null($main_market) || $main_market != null){
+                                    if(!is_null($main_market) && $main_market != null){
                                         echo form_checkbox('main_market[]', $value, (in_array($value, $main_market, '')? true : false), 'class="btn-checkbox"');
                                         echo $key.'<br>';
                                     }else{
@@ -269,7 +269,7 @@
                             <strong style="margin-left: -15px">Quốc tế</strong>
                             <div class="row" style="margin-left: 20px">
                                 <?php
-                                if(!is_null($main_market) || $main_market != null){
+                                if(!is_null($main_market) && $main_market != null){
                                     echo form_checkbox('main_market[]', 'Gia công xuất khẩu', (in_array('Gia công xuất khẩu', $main_market, '')? true : false), 'class="btn-checkbox"');
                                     echo 'Gia công xuất khẩu';
                                 }else{
@@ -279,7 +279,7 @@
                                 ?>
                                 &nbsp;&nbsp;&nbsp;
                                 <?php
-                                if(!is_null($main_market) || $main_market != null){
+                                if(!is_null($main_market) && $main_market != null){
                                     echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', (in_array('Xuất khẩu SP/Giải pháp', $main_market, '')? true : false), 'class="btn-checkbox"');
                                     echo 'Xuất khẩu SP/Giải pháp';
                                 }else{
@@ -289,7 +289,7 @@
                                 ?>
                                 &nbsp;&nbsp;&nbsp;
                                 <?php
-                                if(!is_null($main_market) || $main_market != null){
+                                if(!is_null($main_market) && $main_market != null){
                                     echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', (in_array('Xuất khẩu nhân lực CNTT', $main_market, '')? true : false), 'class="btn-checkbox"');
                                     echo 'Xuất khẩu nhân lực CNTT';
                                 }else{
@@ -302,7 +302,7 @@
                                 <strong>Xuất khẩu mục tiêu</strong><br>
                                 <?php
                                 foreach ($target as $key => $value) {
-                                    if(!is_null($main_market) || $main_market != null){
+                                    if(!is_null($main_market) && $main_market != null){
                                         echo form_checkbox('main_market[]', $value, (in_array($value, $main_market, '')? true : false), 'class="btn-checkbox"');
                                         echo $key.'<br>';
                                     }else{
@@ -354,7 +354,7 @@
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
                         <?php
-                        echo form_submit('submit', 'OK', 'class="btn btn-primary pull-left" style="width:40%"');
+                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
                         echo form_close();
                         ?>
                     </div>

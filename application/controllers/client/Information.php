@@ -264,7 +264,7 @@ class Information extends Client_Controller {
                 redirect('client/information', 'refresh');
             }
 
-            if(date('Y') != $this->input->get('year')){
+            if(date('Y') > $this->input->get('year')){
                 redirect('client/dashboard', 'refresh');
             }
 
@@ -377,6 +377,7 @@ class Information extends Client_Controller {
                     'team' => $this->input->post('team'),
                     'award' => $this->input->post('award'),
                     'certificate' => $this->input->post('certificate'),
+                    'information_id' => $this->data['user']->information_id,
                     // 'certificate' => $image,
                     // 'is_submit' => 1,
                     'created_at' => $this->author_info['created_at'],

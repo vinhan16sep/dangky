@@ -93,7 +93,7 @@
                     <div class="form-group col-sm-12 text-right">
                         <input type="hidden" name="url" value="<?php echo $this->uri->segment(4); ?>">
                         <?php
-                        echo form_submit('submit', 'OK', 'class="btn btn-primary"');
+                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary"');
                         echo form_close();
                         ?>
                         <a class="btn btn-default cancel" href="javascript:window.history.go(-1);">Quay lại</a>

@@ -101,20 +101,20 @@
                                         <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                         <span>
                                             <a data-target="#myModal1" data-toggle="modal" id="MainNavHelp1"
-                                               href="#myModal1" class="btn btn-warning btn-block">Nhập thông tin</a>
+                                               href="#myModal1" class="btn btn-warning btn-block">Chọn năm</a>
                                         </span>
                                     <?php else: ?>
                                         <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                         <span>
                                             <a data-target="#myModal1" data-toggle="modal" id="MainNavHelp1"
-                                               href="#myModal1" class="btn btn-warning btn-block">Nhập thông tin</a>
+                                               href="#myModal1" class="btn btn-warning btn-block">Chọn năm</a>
                                         </span>
                                         <br>
                                         <br>
                                         <?php foreach ($company_submitted as $value){ ?>
                                             <div>
                                                 <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
-                                                <?php if(date('Y') == $value['year']){ ?>
+                                                <?php if(date('Y') <= $value['year']){ ?>
                                                     <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
                                                 <?php } ?>
                                             </div>
@@ -155,16 +155,28 @@
                     </div>
                     <!-- /.tab-content -->
                 </div>
-                <?php if($user_identity != ''){ ?>
-                    <?php if($reg_status['is_final'] == 0): ?>
-                    <br>
-                    <br>
-                    <a onclick="return confirm('Bạn vẫn muốn gửi?')" href="<?php echo base_url('client/information/set_final') ?>" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
-                    <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
-                    <?php else: ?>
-                    <h4 style="color:red">Thông tin đã được gửi</h4>
-                    <?php endif; ?>
-                <?php } ?>
+                <?php if($complete == 1): ?>
+                    <?php if($user_identity != ''){ ?>
+                        <?php if($reg_status['is_final'] == 0): ?>
+                        <br>
+                        <br>
+                        <a onclick="return confirm('Bạn vẫn muốn gửi?')" href="<?php echo base_url('client/information/set_final') ?>" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
+                        <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
+                        <?php else: ?>
+                        <h4 style="color:red">Thông tin đã được gửi</h4>
+                        <?php endif; ?>
+                    <?php } ?>
+                <?php else: ?>
+                    <?php if($user_identity != ''){ ?>
+                        <?php if($reg_status['is_final'] == 0): ?>
+                            <br>
+                            <br>
+                            <a disabled="disabled" class="btn btn-warning btn-block"><b>Cần nhập đủ thông tin Đăng ký / Doanh nghiệp / Sản phẩm</b></a>
+                        <?php else: ?>
+                            <h4 style="color:red">Thông tin đã được gửi</h4>
+                        <?php endif; ?>
+                    <?php } ?>
+                <?php endif; ?>
                 
                 <!-- /.nav-tabs-custom -->
             </div>
@@ -181,13 +193,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Nhập mã số kinh doanh</h4>
+                <h4 class="modal-title">Nhập mã số thuế</h4>
+                <p>Chú ý: Mã số thuế không thể thay đổi sau khi bấm Đồng ý</p>
             </div>
             <div class="modal-body">
                 <input id="identity" type="text" name="identity" class="form-control"/>
             </div>
             <div class="modal-footer">
-                <a onclick="this.href='<?php echo base_url("client/information/create_extra") ?>?identity='+document.getElementById('identity').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+                <a onclick="confirmation();" class="btn btn-warning btn-block"><b>Đồng ý</b></a>
             </div>
         </div>
 
@@ -204,7 +217,7 @@
             </div>
             <div class="modal-body">
                 <select class="form-control" id="selected_year">
-                    <?php for(($i = date('Y') - 3); ($i <= date('Y')); $i++){ ?>
+                    <?php for(($i = date('Y') - 3); ($i <= date('Y') + 1); $i++){ ?>
                         <option value="<?php echo $i; ?>" <?php echo ($i == date('Y')) ? 'selected="selected"' : ''; ?>"><?php echo $i; ?></option>
                     <?php } ?>
                 </select>
@@ -216,7 +229,17 @@
 
     </div>
 </div>
-<acript>
+<script>
+    function confirmation() {
+        if(document.getElementById('identity').value === null || document.getElementById('identity').value === ''){
+            alert("Yêu cầu nhập mã số thuế");
+        }else{
+            if(confirm("CHẮC CHẮN MÃ SỐ THUẾ: " + document.getElementById('identity').value + " ?")){
+                window.location.href = '<?php echo base_url("client/information/create_extra") ?>?identity='+document.getElementById('identity').value;
+            } else{
 
-</acript>
+            }
+        }
+    }
+</script>
 
