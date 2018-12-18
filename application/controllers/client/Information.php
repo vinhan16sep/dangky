@@ -333,20 +333,51 @@ class Information extends Client_Controller {
 
         $this->form_validation->set_rules('name', 'Data', 'trim|required');
         // $this->form_validation->set_rules('service', 'Data', 'trim|required');
-        $this->form_validation->set_rules('functional', 'Data', 'trim|required');
-        $this->form_validation->set_rules('process', 'Data', 'trim|required');
-        $this->form_validation->set_rules('security', 'Data', 'trim|required');
-        $this->form_validation->set_rules('positive', 'Data', 'trim|required');
-        $this->form_validation->set_rules('compare', 'Data', 'trim|required');
-        $this->form_validation->set_rules('income_2016', 'Data', 'trim|required|numeric');
-        $this->form_validation->set_rules('income_2017', 'Data', 'trim|required|numeric');
-        $this->form_validation->set_rules('area', 'Data', 'trim|required');
-        $this->form_validation->set_rules('open_date', 'Data', 'trim|required');
-        $this->form_validation->set_rules('price', 'Data', 'trim|required');
-        $this->form_validation->set_rules('customer', 'Data', 'trim|required');
-        $this->form_validation->set_rules('after_sale', 'Data', 'trim|required');
-        $this->form_validation->set_rules('team', 'Data', 'trim|required');
-        $this->form_validation->set_rules('award', 'Data', 'trim|required');
+        $this->form_validation->set_rules('functional', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('process', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('security', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('positive', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('compare', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('income_2016', 'Data', 'trim|required|numeric', array(
+                'required' => '%s không được trống.',
+                'numeric' => '%s phải là số.',
+            ));
+        $this->form_validation->set_rules('income_2017', 'Data', 'trim|required|numeric', array(
+                'required' => '%s không được trống.',
+                'numeric' => '%s phải là số.',
+            ));
+        $this->form_validation->set_rules('area', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('open_date', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('price', 'Data', 'trim|required|numeric', array(
+                'required' => '%s không được trống.',
+                'numeric' => '%s phải là số.',
+            ));
+        $this->form_validation->set_rules('customer', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('after_sale', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('team', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('award', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
         // $this->form_validation->set_rules('certificate', 'Image', 'callback_check_file_selected');
 
         if ($this->form_validation->run() == FALSE) {

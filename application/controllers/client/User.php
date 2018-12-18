@@ -16,22 +16,26 @@ class User extends MY_Controller {
     }
 
     public function login() {
-        if ($this->ion_auth->logged_in() || $this->ion_auth->in_group('clients'))
-        {
-            redirect('client/dashboard', 'refresh');
-        }
+        // if ($this->ion_auth->logged_in() || $this->ion_auth->in_group('clients'))
+        // {
+        //     redirect('client/dashboard', 'refresh');
+        // }
         $this->data['page_title'] = 'Login';
         if ($this->input->post()) {
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('identity', 'Identity', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('identity', 'Identity', 'required', array(
+                'required' => '%s không được trống.',
+            ));
+            $this->form_validation->set_rules('password', 'Password', 'required', array(
+                'required' => '%s không được trống.',
+            ));
             $this->form_validation->set_rules('remember', 'Remember me', 'integer');
             if ($this->form_validation->run() === TRUE) {
                 $remember = (bool) $this->input->post('remember');
                 if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
                     redirect('client', 'refresh');
                 } else {
-                    $this->session->set_flashdata('login_message', $this->ion_auth->errors());
+                    $this->session->set_flashdata('login_message_error', $this->ion_auth->errors());
                     redirect('client/user/login', 'refresh');
                 }
             }
@@ -50,10 +54,19 @@ class User extends MY_Controller {
         $this->data['page_title'] = 'Tạo mới user';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('companyname','Company','trim');
-        $this->form_validation->set_rules('username','Username','trim|required|is_unique[users.username]');
-        $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('register_password','Password','required');
-        $this->form_validation->set_rules('password_confirm','Password confirmation','required|matches[register_password]');
+        $this->form_validation->set_rules('username','Mã số thuế','trim|required|is_unique[users.username]', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('register_password','Mật khẩu','required', array(
+                'required' => '%s không được trống.',
+            ));
+        $this->form_validation->set_rules('password_confirm','Xác nhận mật khẩu','required|matches[register_password]', array(
+                'required' => '%s không được trống.',
+                'matches' => 'Xác nhận mật khẩu không đúng.',
+            ));
 
         if($this->form_validation->run()===FALSE) {
             $this->load->helper('form');
@@ -170,37 +183,33 @@ class User extends MY_Controller {
                     return redirect('client/user/forgot_password');
                 }
                 $forgotten = $this->ion_auth->forgotten_password($email);
-                $config = [
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://smtp.googlemail.com',
-                    'smtp_port' => 465,
-                    'smtp_user' => 'nghemalao@gmail.com',
-                    'smtp_pass' => 'Huongdan1',
-                    'smtp_port' => '465',
-                    'mailtype' => 'html'
-                ];
-                $data = array(
-                    'identity'=>$forgotten['identity'],
-                    'forgotten_password_code' => $forgotten['forgotten_password_code'],
-                );
-                $this->load->library('email');
-                $this->email->initialize($config);
-                $this->load->helpers('url');
-                $this->email->set_newline("\r\n");
+                // $config = [
+                //     'protocol' => 'smtp',
+                //     'smtp_host' => 'ssl://smtp.googlemail.com',
+                //     'smtp_port' => 465,
+                //     'smtp_user' => 'nghemalao@gmail.com',
+                //     'smtp_pass' => 'Huongdan1',
+                //     'smtp_port' => '465',
+                //     'mailtype' => 'html'
+                // ];
+                // $data = array(
+                //     'identity'=>$forgotten['identity'],
+                //     'forgotten_password_code' => $forgotten['forgotten_password_code'],
+                // );
+                // $this->load->library('email');
+                // $this->email->initialize($config);
+                // $this->load->helpers('url');
+                // $this->email->set_newline("\r\n");
 
-                $this->email->from('nghemalao@gmail.com');
-                $this->email->to($email);
-                $this->email->subject("forgot password");
-                $body = $this->load->view('auth/email/forgot_password.tpl.php',$data,TRUE);
-                $this->email->message($body);
+                // // $this->email->from('nghemalao@gmail.com');
+                // // $this->email->to($email);
+                // // $this->email->subject("forgot password");
+                // $body = $this->load->view('auth/email/forgot_password.tpl.php',$data,TRUE);
+                // $this->email->message($body);
 
-                if ($this->email->send()) {
+                if ($forgotten) {
                     $this->session->set_flashdata('auth_message','Đã gửi Email thành công. Vui lòng kiểm tra Email!');
                     return redirect('client/user/login');
-                } 
-                else {
-                    echo "Email not send .....";
-                    show_error($this->email->print_debugger());
                 }
             }
         }

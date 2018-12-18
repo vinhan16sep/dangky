@@ -454,6 +454,17 @@
     //         $('.submit-extra-form').hide();
     //     }
     // }
+    $.validator.addMethod(
+        "dateFormat",
+        function ( value, element ) {
+            var bits = value.match( /([0-9]+)/gi ), str;
+            if ( ! bits )
+                return this.optional(element) || false;
+            str = bits[ 1 ] + '/' + bits[ 0 ] + '/' + bits[ 2 ];
+            return this.optional(element) || !/Invalid|NaN/.test(new Date( str ));
+        },
+        "Nhập định dạng ngày tháng dd/mm/yyyy"
+    );
     $('#product-form').validate({
         rules: {
             name: {
@@ -478,16 +489,19 @@
                 required: true
             },
             income_2016: {
-                required: true
+                required: true,
+                number: true,
             },
             income_2017: {
-                required: true
+                required: true,
+                number: true,
             },
             area: {
                 required: true
             },
             open_date: {
-                required: true
+                required: true,
+                dateFormat : true
             },
             price: {
                 required: true
@@ -515,6 +529,9 @@
             service: {
                 required: 'Cần nhập lĩnh vực'
             },
+            functional: {
+                required: 'Cần nhập Mô tả các công năng của sản phẩm'
+            },
             certificate: {
                 required: 'Cần nhập công năng của sản phẩm'
             },
@@ -531,16 +548,18 @@
                 required: 'Cần nhập phần So sánh'
             },
             income_2016: {
-                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016'
+                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
+                number: 'Doanh thu của SP/GP/DV năm 2016 phải là số'
             },
             income_2017: {
-                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017'
+                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
+                number: 'Doanh thu của SP/GP/DV năm 2017 phải là số'
             },
             area: {
                 required: 'Thị phần của SP/giải pháp/DV'
             },
             open_date: {
-                required: 'Ngày thương mại hoá/ra mắt dịch vụ'
+                required: 'Ngày thương mại hoá/ra mắt dịch vụ',
             },
             price: {
                 required: 'Cần nhập Giá SP/GP/DV'
