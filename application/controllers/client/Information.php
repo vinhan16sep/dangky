@@ -151,14 +151,31 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity', 'Vốn điều lệ', 'trim|required');
-        $this->form_validation->set_rules('owner_equity', 'Vốn chủ sở hữu', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income', 'Tổng doanh thu DN', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income', 'Tổng DT lĩnh vực sx phần mềm', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income', 'Tổng doanh thu dịch vụ CNTT', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income', 'Tổng DT xuất khẩu', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor', 'Tổng số lao động của DN', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv', 'Tổng số LTV', 'trim|required|numeric');
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ 2015', 'trim|required');
+        $this->form_validation->set_rules('equity_2', 'Vốn điều lệ 2016', 'trim|required');
+        $this->form_validation->set_rules('equity_3', 'Vốn điều lệ 2016', 'trim|required');
+        $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('description', 'Data', 'trim|required');
         // $this->form_validation->set_rules('main_service', 'Data', 'required');
         // $this->form_validation->set_rules('main_market', 'Data', 'trim|required');
 
@@ -178,17 +195,31 @@ class Information extends Client_Controller {
                 $main_market = json_encode($this->input->post('main_market'));
                 $data = array(
                     'client_id' => $this->data['user']->id,
-                    'equity' => $this->input->post('equity'),
-                    'owner_equity' => $this->input->post('owner_equity'),
-                    'total_income' => $this->input->post('total_income'),
-                    'software_income' => $this->input->post('software_income'),
-                    'it_income' => $this->input->post('it_income'),
-                    'export_income' => $this->input->post('export_income'),
-                    'total_labor' => $this->input->post('total_labor'),
-                    'total_ltv' => $this->input->post('total_ltv'),
+                    'equity_1' => $this->input->post('equity_1'),
+                    'equity_2' => $this->input->post('equity_2'),
+                    'equity_3' => $this->input->post('equity_3'),
+                    'owner_equity_1' => $this->input->post('owner_equity_1'),
+                    'owner_equity_2' => $this->input->post('owner_equity_2'),
+                    'owner_equity_3' => $this->input->post('owner_equity_3'),
+                    'total_income_1' => $this->input->post('total_income_1'),
+                    'total_income_2' => $this->input->post('total_income_2'),
+                    'total_income_3' => $this->input->post('total_income_3'),
+                    'software_income_1' => $this->input->post('software_income_1'),
+                    'software_income_2' => $this->input->post('software_income_2'),
+                    'software_income_3' => $this->input->post('software_income_3'),
+                    'it_income_1' => $this->input->post('it_income_1'),
+                    'it_income_2' => $this->input->post('it_income_2'),
+                    'it_income_3' => $this->input->post('it_income_3'),
+                    'export_income_1' => $this->input->post('export_income_1'),
+                    'export_income_2' => $this->input->post('export_income_2'),
+                    'export_income_3' => $this->input->post('export_income_3'),
+                    'total_labor_1' => $this->input->post('total_labor_1'),
+                    'total_labor_2' => $this->input->post('total_labor_2'),
+                    'total_labor_3' => $this->input->post('total_labor_3'),
+                    'total_ltv_1' => $this->input->post('total_ltv_1'),
+                    'total_ltv_2' => $this->input->post('total_ltv_2'),
+                    'total_ltv_2' => $this->input->post('total_ltv_3'),
                     'description' => $this->input->post('description'),
-                    'information_id' => $this->input->post('information_id'),
-                    'year' => $this->input->post('year'),
                     'main_service' => $main_service,
                     'main_market' => $main_market,
 //                    'is_submit' => 1,
@@ -222,14 +253,31 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity', 'Vốn điều lệ', 'trim|required');
-        $this->form_validation->set_rules('owner_equity', 'Vốn chủ sở hữu', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income', 'Tổng doanh thu DN', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income', 'Tổng DT lĩnh vực sx phần mềm', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income', 'Tổng doanh thu dịch vụ CNTT', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income', 'Tổng DT xuất khẩu', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor', 'Tổng số lao động của DN', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv', 'Tổng số LTV', 'trim|required|numeric');
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ 2015', 'trim|required');
+        $this->form_validation->set_rules('equity_2', 'Vốn điều lệ 2016', 'trim|required');
+        $this->form_validation->set_rules('equity_3', 'Vốn điều lệ 2016', 'trim|required');
+        $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV 2015', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV 2016', 'trim|required|numeric');
+        $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV 2017', 'trim|required|numeric');
+        $this->form_validation->set_rules('description', 'Data', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
         if ($this->form_validation->run() == FALSE) {
@@ -253,14 +301,31 @@ class Information extends Client_Controller {
                 $main_market = json_encode($this->input->post('main_market'));
 
                 $data = array(
-                    'equity' => $this->input->post('equity'),
-                    'owner_equity' => $this->input->post('owner_equity'),
-                    'total_income' => $this->input->post('total_income'),
-                    'software_income' => $this->input->post('software_income'),
-                    'it_income' => $this->input->post('it_income'),
-                    'export_income' => $this->input->post('export_income'),
-                    'total_labor' => $this->input->post('total_labor'),
-                    'total_ltv' => $this->input->post('total_ltv'),
+                    'client_id' => $this->data['user']->id,
+                    'equity_1' => $this->input->post('equity_1'),
+                    'equity_2' => $this->input->post('equity_2'),
+                    'equity_3' => $this->input->post('equity_3'),
+                    'owner_equity_1' => $this->input->post('owner_equity_1'),
+                    'owner_equity_2' => $this->input->post('owner_equity_2'),
+                    'owner_equity_3' => $this->input->post('owner_equity_3'),
+                    'total_income_1' => $this->input->post('total_income_1'),
+                    'total_income_2' => $this->input->post('total_income_2'),
+                    'total_income_3' => $this->input->post('total_income_3'),
+                    'software_income_1' => $this->input->post('software_income_1'),
+                    'software_income_2' => $this->input->post('software_income_2'),
+                    'software_income_3' => $this->input->post('software_income_3'),
+                    'it_income_1' => $this->input->post('it_income_1'),
+                    'it_income_2' => $this->input->post('it_income_2'),
+                    'it_income_3' => $this->input->post('it_income_3'),
+                    'export_income_1' => $this->input->post('export_income_1'),
+                    'export_income_2' => $this->input->post('export_income_2'),
+                    'export_income_3' => $this->input->post('export_income_3'),
+                    'total_labor_1' => $this->input->post('total_labor_1'),
+                    'total_labor_2' => $this->input->post('total_labor_2'),
+                    'total_labor_3' => $this->input->post('total_labor_3'),
+                    'total_ltv_1' => $this->input->post('total_ltv_1'),
+                    'total_ltv_2' => $this->input->post('total_ltv_2'),
+                    'total_ltv_2' => $this->input->post('total_ltv_3'),
                     'description' => $this->input->post('description'),
                     'main_service' => $main_service,
                     'main_market' => $main_market,
