@@ -30,7 +30,7 @@ class Information extends Client_Controller {
     }
 
     public function extra() {
-        $this->data['submitted'] = $this->information_model->fetch_by_user_id('information', $this->data['user']->id);
+        $this->data['submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
 
         $this->render('client/information/detail_extra_view');
     }
@@ -39,15 +39,10 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('website', 'Website', 'trim|required');
         $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required');
         $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required');
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|numeric');
-        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required');
-        $this->form_validation->set_rules('c_position', 'Chức danh', 'trim|required');
-        $this->form_validation->set_rules('c_email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('c_phone', 'Di động', 'trim|required|numeric');
         $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -64,17 +59,12 @@ class Information extends Client_Controller {
             if ($this->input->post()) {
                 $data = array(
                     'client_id' => $this->data['user']->id,
-                    'website' => $this->input->post('website'),
                     'legal_representative' => $this->input->post('legal_representative'),
                     'lp_position' => $this->input->post('lp_position'),
                     'lp_email' => $this->input->post('lp_email'),
                     'lp_phone' => $this->input->post('lp_phone'),
-                    'connector' => $this->input->post('connector'),
-                    'c_position' => $this->input->post('c_position'),
-                    'c_email' => $this->input->post('c_email'),
-                    'c_phone' => $this->input->post('c_phone'),
                     'link' => $this->input->post('link'),
-                    'identity' => $this->input->post('identity'),
+                    'identity' => $this->data['user']->username,
 //                    'is_submit' => 1,
                     'created_at' => $this->author_info['created_at'],
                     'created_by' => $this->author_info['created_by'],
@@ -109,21 +99,15 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('website', 'Website', 'trim|required');
         $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required');
         $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required');
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|numeric');
-        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required');
-        $this->form_validation->set_rules('c_position', 'Chức danh', 'trim|required');
-        $this->form_validation->set_rules('c_email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('c_phone', 'Di động', 'trim|required|numeric');
         $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
         if ($this->form_validation->run() == FALSE) {
-            $this->data['extra'] = $this->information_model->fetch_by_user_information_id('information', $this->data['user']->information_id);
-
+            $this->data['extra'] = $this->information_model->fetch_by_user_identity('information', $this->data['user']->username);
             if (!$this->data['extra']) {
                 redirect('client/information', 'refresh');
             }
@@ -136,23 +120,17 @@ class Information extends Client_Controller {
         } else {
             if ($this->input->post()) {
                 $data = array(
-                    'website' => $this->input->post('website'),
                     'legal_representative' => $this->input->post('legal_representative'),
                     'lp_position' => $this->input->post('lp_position'),
                     'lp_email' => $this->input->post('lp_email'),
                     'lp_phone' => $this->input->post('lp_phone'),
-                    'connector' => $this->input->post('connector'),
-                    'c_position' => $this->input->post('c_position'),
-                    'c_email' => $this->input->post('c_email'),
-                    'c_phone' => $this->input->post('c_phone'),
                     'link' => $this->input->post('link'),
-                    'identity' => $this->input->post('identity'),
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
 
                 try {
-                    $this->information_model->update_by_identity('information', $this->input->post('identity'), $data);
+                    $this->information_model->update_by_identity('information', $this->data['user']->username, $data);
                     $this->session->set_flashdata('message', 'Item updated successfully');
                 } catch (Exception $e) {
                     $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());

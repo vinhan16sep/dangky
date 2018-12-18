@@ -152,10 +152,24 @@ class Information_model extends CI_Model {
         return false;
     }
 
-    public function fetch_by_user_information_id($type, $information){
+    public function fetch_extra_by_identity($type, $identity){
         $query = $this->db->select('*')
             ->from($type)
-            ->where('id', $information)
+            ->where('identity', $identity)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
+        return false;
+    }
+
+    public function fetch_by_user_identity($type, $identity){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('identity', $identity)
             ->limit(1)
             ->get();
 

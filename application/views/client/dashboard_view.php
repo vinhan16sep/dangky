@@ -21,14 +21,14 @@
                             <li class="list-group-item" style="height: 80px !important;">
                                 <b style="height: 80px !important;"><i class="fa fa-building-o margin-r-5"></i> Doanh nghiệp</b> <a class="pull-right"><?php echo $user->company; ?></a>
                             </li>
+                            <li class="list-group-item" style="height: 80px !important;">
+                                <b style="height: 80px !important;"><i class="fa fa-map-marker margin-r-5"></i> Mã số thuế</b> <a class="pull-right"><?php echo $user->username; ?></a>
+                            </li>
                             <li class="list-group-item">
                                 <b><i class="fa fa-envelope margin-r-5"></i> Email</b> <a class="pull-right"><?php echo $user->email; ?></a>
                             </li>
                             <li class="list-group-item">
                                 <b><i class="fa fa-phone margin-r-5"></i> Điện thoại</b> <a class="pull-right"><?php echo $user->phone; ?></a>
-                            </li>
-                            <li class="list-group-item" style="height: 80px !important;">
-                                <b style="height: 80px !important;"><i class="fa fa-map-marker margin-r-5"></i> Địa chỉ</b> <a class="pull-right"><?php echo $user->address; ?></a>
                             </li>
                         </ul>
                     </div>
@@ -77,9 +77,7 @@
                                 <?php if(!$submitted): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                     <span>
-                                        <a data-target="#myModal" data-toggle="modal" id="MainNavHelp"
-                                           href="#myModal" class="btn btn-warning btn-block">Nhập thông tin</a>
-<!--                                        <a href="--><?php //echo base_url('client/information/create_extra') ?><!--" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>-->
+                                        <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>
                                     </span>
                                 <?php else: ?>
                                     <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>

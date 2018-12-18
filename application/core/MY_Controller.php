@@ -84,7 +84,7 @@ class Admin_Controller extends MY_Controller {
             //redirect them to the login page
             redirect('admin/user/login', 'refresh');
         }
-        $this->data['user_email'] = $this->ion_auth->user()->row()->username;
+        $this->data['user_email'] = $this->ion_auth->user()->row()->email;
         $this->data['page_title'] = 'Administrator area';
 
         // Get current class
@@ -95,9 +95,9 @@ class Admin_Controller extends MY_Controller {
         // Insert author informations to database when insert, update or delete
         $this->author_info = array(
             'created_at' => date('Y-m-d H:i:s', now()),
-            'created_by' => $this->ion_auth->user()->row()->username,
+            'created_by' => $this->ion_auth->user()->row()->email,
             'modified_at' => date('Y-m-d H:i:s', now()),
-            'modified_by' => $this->ion_auth->user()->row()->username
+            'modified_by' => $this->ion_auth->user()->row()->email
         );
     }
 
@@ -195,7 +195,7 @@ class Member_Controller extends MY_Controller {
             //redirect them to the login page
             redirect('member/user/login', 'refresh');
         }
-        $this->data['user_email'] = $this->ion_auth->user()->row()->username;
+        $this->data['user_email'] = $this->ion_auth->user()->row()->email;
         $this->data['page_title'] = 'Member area';
 
         // Get current class
@@ -206,9 +206,9 @@ class Member_Controller extends MY_Controller {
         // Insert author informations to database when insert, update or delete
         $this->author_info = array(
             'created_at' => date('Y-m-d H:i:s', now()),
-            'created_by' => $this->ion_auth->user()->row()->username,
+            'created_by' => $this->ion_auth->user()->row()->email,
             'modified_at' => date('Y-m-d H:i:s', now()),
-            'modified_by' => $this->ion_auth->user()->row()->username
+            'modified_by' => $this->ion_auth->user()->row()->email
         );
     }
 
@@ -312,7 +312,7 @@ class Client_Controller extends MY_Controller {
             redirect('client/user/login');
         }
         $this->data['user_info'] = $this->ion_auth->user()->row();
-        $this->data['user_email'] = $this->ion_auth->user()->row()->username;
+        $this->data['user_email'] = $this->ion_auth->user()->row()->email;
         $this->data['user_identity'] = $this->ion_auth->user()->row()->information_id;
         $this->data['page_title'] = 'Administrator area';
 
@@ -327,9 +327,9 @@ class Client_Controller extends MY_Controller {
         // Insert author informations to database when insert, update or delete
         $this->author_info = array(
             'created_at' => date('Y-m-d H:i:s', now()),
-            'created_by' => $this->ion_auth->user()->row()->username,
+            'created_by' => $this->ion_auth->user()->row()->email,
             'modified_at' => date('Y-m-d H:i:s', now()),
-            'modified_by' => $this->ion_auth->user()->row()->username
+            'modified_by' => $this->ion_auth->user()->row()->email
         );
     }
 

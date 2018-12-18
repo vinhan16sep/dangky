@@ -9,27 +9,15 @@
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
-                    <h1 style="text-align:center;">THÔNG TIN ĐĂNG KÝ</h1>
+                    <h2 style="text-align:center;">THÔNG TIN CƠ BẢN DOANH NGHIỆP</h2>
+                </div>
+                <div class="form-group">
+                    <h3 style="text-align:center;">Tên công ty: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
+                    <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc;"><?php echo $user->username; ?></span></h3>
                 </div>
                 <?php
                 echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'extra-form'));
-                echo form_hidden('identity', set_value('identity', $extra['identity']));
                 ?>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tên đơn vị', 'website');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('website');
-                            echo form_input('website', set_value('website', $extra['website']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
                 <hr>
                 <div class="form-group">
                     <div class="row">
@@ -87,67 +75,6 @@
                             <?php
                             echo form_error('lp_phone');
                             echo form_input('lp_phone', set_value('lp_phone', $extra['lp_phone']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Tên người liên hệ với BTC', 'connector');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('connector');
-                            echo form_input('connector', set_value('connector', $extra['connector']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Chức danh', 'c_position');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('c_position');
-                            echo form_input('c_position', set_value('c_position', $extra['c_position']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Email', 'c_email');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('c_email');
-                            echo form_input('c_email', set_value('c_email', $extra['c_email']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Di động', 'c_phone');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('c_phone');
-                            echo form_input('c_phone', set_value('c_phone', $extra['c_phone']), 'class="form-control"');
                             ?>
                         </div>
                     </div>
@@ -236,20 +163,6 @@
                 required: true,
                 digits: true
             },
-            connector: {
-                required: true
-            },
-            c_position: {
-                required: true
-            },
-            c_email: {
-                required: true,
-                email: true
-            },
-            c_phone: {
-                required: true,
-                digits: true
-            },
             link: {
                 required: true
             }
@@ -269,20 +182,6 @@
                 email: 'Email không hợp lệ'
             },
             lp_phone: {
-                required: 'Cần nhập số điện thoại di động',
-                digits: 'Số điện thoại di động chỉ chứa ký tự số'
-            },
-            connector: {
-                required: 'Cần nhập Tên người liên hệ với BTC'
-            },
-            c_position: {
-                required: 'Cần nhập Chức danh'
-            },
-            c_email: {
-                required: 'Cần nhập Email',
-                email: 'Email không hợp lệ'
-            },
-            c_phone: {
                 required: 'Cần nhập số điện thoại di động',
                 digits: 'Số điện thoại di động chỉ chứa ký tự số'
             },
