@@ -304,11 +304,13 @@ class Client_Controller extends MY_Controller {
         parent::__construct();
         if (!$this->ion_auth->logged_in()) {
             //redirect them to the login page
-            $this->session->set_flashdata('login_message', $this->ion_auth->errors());
+            $this->ion_auth->logout();
+            $this->session->set_flashdata('login_message_error', $this->ion_auth->errors());
             redirect('client/user/login');
         }
         if (!$this->ion_auth->in_group('clients')) {
-            $this->session->set_flashdata('login_message', 'Tài khoản không có quyền truy cập');
+            $this->ion_auth->logout();
+            $this->session->set_flashdata('login_message_error', 'Tài khoản không có quyền truy cập');
             redirect('client/user/login');
         }
         $this->data['user_info'] = $this->ion_auth->user()->row();

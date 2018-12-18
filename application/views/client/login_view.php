@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<?php echo site_url('assets/admin/bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo site_url('assets/public/css/homepage.css'); ?>">
+    <link rel="stylesheet" href="<?php echo site_url('assets/admin/css/user.css'); ?>">
     <title>Document</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -12,35 +13,60 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="content-wrapper main_content" style="min-height: 916px; margin-left: 0px !important;">
+            <?php if ($this->session->flashdata('login_message_error')): ?>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Thông báo!</strong> <?php echo $this->session->flashdata('login_message_error'); ?>
+                </div>
+            <?php endif ?>
+            <?php if ($this->session->flashdata('register_success')): ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Thông báo!</strong> <?php echo $this->session->flashdata('register_success'); ?>
+                </div>
+            <?php endif ?>
+            <?php if ($this->session->flashdata('auth_message')): ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Thông báo!</strong> <?php echo $this->session->flashdata('auth_message'); ?>
+                </div>
+            <?php endif ?>
+            
             <section class="content row">
                 <div class="col-sm-6 col-md-6 col-xs-12">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <?php echo $this->session->flashdata('login_message'); ?>
+                        
                         <?php echo form_open('client/user/login', array('class' => 'form-horizontal')); ?>
                         <div class="form-group">
                             <h1>Đăng nhập</h1>
                             <h5>Dành cho doanh nghiệp</h5>
                         </div>
+                        
                         <div class="form-group">
                             <?php echo form_label('Tài khoản', 'identity'); ?>
-                            <?php echo form_error('identity'); ?>
-                            <?php echo form_input('identity', '', 'class="form-control"'); ?>
+                            <?php echo form_error('identity', '<div class="error">', '</div>'); ?>
+                            <?php echo form_input('identity', '', 'class="form-control" placeholder="Username hoặc E-Mail" '); ?>
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Mật khẩu', 'password'); ?>
-                            <?php echo form_error('password'); ?>
+                            <?php echo form_error('password', '<div class="error">', '</div>'); ?>
                             <?php echo form_password('password', '', 'class="form-control"'); ?>
                         </div>
                         <div class="form-group">
-                            <?php echo form_submit('login', 'Đăng nhập', 'class="btn btn-primary btn-lg btn-block"'); ?>
-                            <a href="<?= base_url('client/user/forgot_password') ?>">Quên mật khẩu</a>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-8">
+                                    <?php echo form_submit('login', 'Đăng nhập', 'class="btn btn-primary btn-lg" style="width:100%;"'); ?>
+                                </div>
+                                <div class="col-xs-12 col-md-4">
+                                    <a href="<?= base_url('client/user/forgot_password') ?>" class="btn btn-warning btn-lg pull-right" >Quên mật khẩu</a>
+                                </div>
+                            </div>
                         </div>
                         <?php echo form_close(); ?>
                     </div>
                 </div>
 
                 <div class="col-sm-6 col-md-6 col-xs-12">
-                    <h4 style="color:red;"><?php echo $this->session->flashdata('register_success'); ?></h4>
                     <div class="col-lg-8 col-lg-offset-2">
                         <?php echo $this->session->flashdata('message'); ?>
                         <?php echo form_open('client/user/register', array('class' => 'form-horizontal')); ?>
@@ -50,27 +76,27 @@
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Công ty: ', 'companyname'); ?>
-                            <?php echo form_error('companyname'); ?>
-                            <?php echo form_input('companyname', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
+                            <?php echo form_error('companyname', '<div class="error">', '</div>'); ?>
+                            <?php echo form_input('companyname', set_value('companyname'), 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Mã số thuế: ', 'username'); ?>
-                            <?php echo form_error('username'); ?>
-                            <?php echo form_input('username', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
+                            <?php echo form_error('username', '<div class="error">', '</div>'); ?>
+                            <?php echo form_input('username', set_value('username'), 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Email: ', 'email'); ?>
-                            <?php echo form_error('email'); ?>
-                            <?php echo form_input('email', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
+                            <?php echo form_error('email', '<div class="error">', '</div>'); ?>
+                            <?php echo form_input('email', set_value('email'), 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Mật khẩu: ', 'register_password'); ?>
-                            <?php echo form_error('register_password'); ?>
+                            <?php echo form_error('register_password', '<div class="error">', '</div>'); ?>
                             <?php echo form_password('register_password', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Xác nhận mật khẩu: ', 'password_confirm'); ?>
-                            <?php echo form_error('password_confirm'); ?>
+                            <?php echo form_error('password_confirm', '<div class="error">', '</div>'); ?>
                             <?php echo form_password('password_confirm', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
@@ -83,7 +109,8 @@
         </div>
     </section>
 </section>
-<script src="http://localhost/dangky/assets/admin/js/admin/main.js"></script>
+<script src="<?= base_url('assets/admin/bower_components/jquery/dist/jquery.min.js') ?>"></script>
+<script src="<?= base_url('assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 
 </body>
 </html>
