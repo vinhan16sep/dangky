@@ -134,7 +134,7 @@ class Ion_auth
 	 * @return array|bool
 	 * @author Mathew
 	 */
-	public function forgotten_password($identity)
+	public function forgotten_password($identity, $role = null)
 	{
 		if ($this->ion_auth_model->forgotten_password($identity))
 		{
@@ -156,7 +156,14 @@ class Ion_auth
 				}
 				else
 				{
-					$message = $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE);
+					if ($role == 'member') {
+						$message = $this->load->view($this->config->item('email_templates_member', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE);
+					}elseif($role == 'admin'){
+						$message = $this->load->view($this->config->item('email_templates_admin', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE);
+					}else{
+						$message = $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE);
+					}
+					
 					$this->email->clear();
 					$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
 					$this->email->to($user->email);

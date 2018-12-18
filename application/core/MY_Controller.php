@@ -191,9 +191,16 @@ class Member_Controller extends MY_Controller {
 
     function __construct() {
         parent::__construct();
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->in_group('members')) {
+        if (!$this->ion_auth->logged_in() ) {
             //redirect them to the login page
+            $this->ion_auth->logout();
+            $this->session->set_flashdata('login_message_error', $this->ion_auth->errors());
             redirect('member/user/login', 'refresh');
+        }
+        if (!$this->ion_auth->in_group('members')) {
+            $this->ion_auth->logout();
+            $this->session->set_flashdata('login_message_error', 'Tài khoản không có quyền truy cập');
+            redirect('member/user/login');
         }
         $this->data['user_email'] = $this->ion_auth->user()->row()->email;
         $this->data['page_title'] = 'Member area';

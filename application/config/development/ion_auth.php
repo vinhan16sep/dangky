@@ -131,6 +131,8 @@ $config['email_config'] = array(
  | Default: auth/
  */
 $config['email_templates'] = 'auth/email/';
+$config['email_templates_member'] = 'auth/email_member/';
+$config['email_templates_admin'] = 'auth/email_admin/';
 
 /*
  | -------------------------------------------------------------------------
