@@ -49,11 +49,7 @@ class User extends MY_Controller {
     public function register(){
         $this->data['page_title'] = 'Tạo mới user';
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('first_name','First name','trim');
-        $this->form_validation->set_rules('last_name','Last name','trim');
-        $this->form_validation->set_rules('position','Position','trim');
         $this->form_validation->set_rules('companyname','Company','trim');
-        $this->form_validation->set_rules('phone','Phone','trim|integer');
         $this->form_validation->set_rules('username','Username','trim|required|is_unique[users.username]');
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('register_password','Password','required');
@@ -70,11 +66,7 @@ class User extends MY_Controller {
             $group_ids = array(3);
 
             $additional_data = array(
-                'first_name' => $this->input->post('first_name'),
-                'last_name' => $this->input->post('last_name'),
-                'position' => $this->input->post('position'),
                 'company' => $this->input->post('companyname'),
-                'phone' => $this->input->post('phone')
             );
             $result = $this->ion_auth->register($username, $password, $email, $additional_data, $group_ids);
             if($result){

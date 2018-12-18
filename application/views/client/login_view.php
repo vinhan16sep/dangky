@@ -49,27 +49,12 @@
                             <h1>Đăng ký mới</h1>
                         </div>
                         <div class="form-group">
-                            <?php echo form_label('Họ: ', 'last_name'); ?>
-                            <?php echo form_error('last_name'); ?>
-                            <?php echo form_input('last_name', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
-                        </div>
-                        <div class="form-group">
-                            <?php echo form_label('Tên: ', 'first_name'); ?>
-                            <?php echo form_error('first_name'); ?>
-                            <?php echo form_input('first_name', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
-                        </div>
-                        <div class="form-group">
-                            <?php echo form_label('Chức danh: ', 'position'); ?>
-                            <?php echo form_error('position'); ?>
-                            <?php echo form_input('position', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
-                        </div>
-                        <div class="form-group">
                             <?php echo form_label('Công ty: ', 'companyname'); ?>
                             <?php echo form_error('companyname'); ?>
                             <?php echo form_input('companyname', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
-                            <?php echo form_label('Tên đăng nhập: ', 'username'); ?>
+                            <?php echo form_label('Mã số thuế: ', 'username'); ?>
                             <?php echo form_error('username'); ?>
                             <?php echo form_input('username', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
@@ -77,11 +62,6 @@
                             <?php echo form_label('Email: ', 'email'); ?>
                             <?php echo form_error('email'); ?>
                             <?php echo form_input('email', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
-                        </div>
-                        <div class="form-group">
-                            <?php echo form_label('Điện thoại: ', 'phone'); ?>
-                            <?php echo form_error('phone'); ?>
-                            <?php echo form_input('phone', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo form_label('Mật khẩu: ', 'register_password'); ?>
