@@ -27,15 +27,16 @@ $lang['account_creation_invalid_default_group'] = 'Invalid default group name se
 $lang['password_change_successful']          = 'Password Successfully Changed';
 $lang['password_change_unsuccessful']        = 'Unable to Change Password';
 $lang['forgot_password_successful']          = 'Password Reset Email Sent';
-$lang['forgot_password_unsuccessful']        = 'Unable to Reset Password';
+$lang['forgot_password_unsuccessful']        = 'Unable to email the Reset Password link';
 
 // Activation
 $lang['activate_successful']                 = 'Account Activated';
 $lang['activate_unsuccessful']               = 'Unable to Activate Account';
 $lang['deactivate_successful']               = 'Account De-Activated';
 $lang['deactivate_unsuccessful']             = 'Unable to De-Activate Account';
-$lang['activation_email_successful']         = 'Activation Email Sent';
+$lang['activation_email_successful']         = 'Activation Email Sent. Please check your inbox or spam';
 $lang['activation_email_unsuccessful']       = 'Unable to Send Activation Email';
+$lang['deactivate_current_user_unsuccessful']= 'You cannot De-Activate your self.';
 
 // Login / Logout
 $lang['login_successful']                    = 'Logged In Successfully';
@@ -61,10 +62,10 @@ $lang['group_name_required']                 = 'Group name is a required field';
 $lang['group_name_admin_not_alter']          = 'Admin group name can not be changed';
 
 // Activation Email
-$lang['email_activation_subject']            = 'Kích hoạt tài khoản từ congdangky.danhhieusaokhue.vn';
-$lang['email_activate_heading']              = 'Kích hoạt tài khoản %s';
-$lang['email_activate_subheading']           = 'Vui lòng click vào link bên cạnh để %s.';
-$lang['email_activate_link']                 = 'Kích hoạt tài khoản';
+$lang['email_activation_subject']            = 'Account Activation';
+$lang['email_activate_heading']              = 'Activate account for %s';
+$lang['email_activate_subheading']           = 'Please click this link to %s.';
+$lang['email_activate_link']                 = 'Activate Your Account';
 
 // Forgot Password Email
 $lang['email_forgotten_password_subject']    = 'Forgotten Password Verification';
