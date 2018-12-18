@@ -112,6 +112,11 @@ class User extends MY_Controller {
         if (!$this->ion_auth->logged_in()){
             redirect('client/user/login', 'refresh');
         }
+        if (!$this->ion_auth->in_group('clients')) {
+            $this->ion_auth->logout();
+            $this->session->set_flashdata('login_message_error', 'Tài khoản không có quyền truy cập');
+            redirect('client/user/login');
+        }
         $user = $this->ion_auth->user()->row();
         $this->data['user_id'] = $user->id;
 
