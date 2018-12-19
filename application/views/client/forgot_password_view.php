@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
+    <title>Quên mật khẩu</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -48,6 +48,7 @@
                         <?php echo form_open('', array('class' => 'form-horizontal')); ?>
                         <div class="form-group">
                             <?php echo form_label('Email', 'email'); ?>
+                            <p>Mật khẩu mới sẽ được gửi vào email nhập bên dưới</p>
                             <?php echo form_error('email'); ?>
                             <?php echo form_input('email', '', 'class="form-control"'); ?>
                         </div>

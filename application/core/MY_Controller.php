@@ -322,11 +322,17 @@ class Client_Controller extends MY_Controller {
         }
         $this->data['user_info'] = $this->ion_auth->user()->row();
         $this->data['user_email'] = $this->ion_auth->user()->row()->email;
-        $this->data['user_identity'] = $this->ion_auth->user()->row()->information_id;
+        $this->data['identity'] = $this->ion_auth->user()->row()->username;
         $this->data['page_title'] = 'Administrator area';
+        $this->data['eventYear'] = (date('m') == 12) ? (date('Y') + 1) : date('Y');
+        $this->data['rule3Year'] = array(
+            $this->data['eventYear'] - 3,
+            $this->data['eventYear'] - 2,
+            $this->data['eventYear'] - 1
+        );
 
         $this->load->model('information_model');
-        $this->data['company_submitted'] = $this->information_model->fetch_by_identity('company', $this->data['user_identity']);
+        $this->data['company_submitted'] = $this->information_model->fetch_by_identity('company', $this->data['identity']);
 
         // Get current class
         //$class = $this->router->fetch_class();

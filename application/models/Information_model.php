@@ -195,10 +195,25 @@ class Information_model extends CI_Model {
         return false;
     }
 
+    public function fetch_company_by_identity_and_year($type, $identity, $year){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('identity', $identity)
+            ->where('year', $year)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
+        return false;
+    }
+
     public function fetch_by_identity($type, $identity){
         $query = $this->db->select('*')
             ->from($type)
-            ->where('information_id', $identity)
+            ->where('identity', $identity)
             ->order_by("year", "desc")
             ->get()->result_array();
 
@@ -291,9 +306,9 @@ class Information_model extends CI_Model {
         return false;
     }
 
-    public function update_by_information_and_year($type, $information_id, $year, $data){
+    public function update_by_information_and_year($type, $identity, $year, $data){
         $this->db->set($data)
-            ->where('information_id', $information_id)
+            ->where('identity', $identity)
             ->where('year', $year)
             ->update($type);
 
@@ -496,5 +511,37 @@ class Information_model extends CI_Model {
 
             return $query->num_rows();
         }
+    }
+
+    public function fetch_list_company_by_identity($identity){
+        $query = $this->db->select('*')
+            ->from('company')
+            ->where('identity', $identity)
+            ->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }
+
+        return false;
+    }
+
+    public function count_companies($identity) {
+        $query = $this->db->select('*')
+            ->from('company')
+            ->where('identity', $identity)
+            ->get();
+
+        return $query->num_rows();
+    }
+
+    public function getCurrentYearCompany($identity, $eventYear){
+        $query = $this->db->select('*')
+            ->from('company')
+            ->where('identity', $identity)
+            ->where('year', $eventYear)
+            ->get();
+
+        return $query->num_rows();
     }
 }

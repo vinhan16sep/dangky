@@ -20,7 +20,7 @@ class Information extends Client_Controller {
 
         $this->data['user'] = $this->ion_auth->user()->row();
         $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id);
-        
+
     }
 
     public function index() {
@@ -31,7 +31,7 @@ class Information extends Client_Controller {
 
     public function extra() {
         $this->data['submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
-
+        $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCompany($this->data['user']->username, $this->data['eventYear']);
         $this->render('client/information/detail_extra_view');
     }
 
@@ -77,7 +77,7 @@ class Information extends Client_Controller {
                     unset($data['created_at']);
                     unset($data['created_by']);
                     $update = $this->information_model->update_by_identity('information', $this->input->post('identity'), $data);
-                    $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1));
+                    $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1, 'year' => $this->data['eventYear']));
                     $this->users_model->update('users', $this->data['user']->id, array('information_id' => $exist['id']));
                 }else{
                     $insert = $this->information_model->insert('information', $data);
@@ -90,7 +90,7 @@ class Information extends Client_Controller {
                     $this->session->set_flashdata('message', 'Item added successfully');
                 }
 
-                redirect('client/information', 'refresh');
+                redirect('client/information/extra', 'refresh');
             }
         }
     }
@@ -111,7 +111,7 @@ class Information extends Client_Controller {
             if (!$this->data['extra']) {
                 redirect('client/information', 'refresh');
             }
-            
+
             if($this->data['reg_status'] == 1){
                 redirect('client/information', 'refresh');
             }
@@ -136,58 +136,155 @@ class Information extends Client_Controller {
                     $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                 }
 
-                redirect('client/information', 'refresh');
+                redirect('client/information/extra', 'refresh');
             }
         }
     }
 
     public function company(){
-        $this->data['submitted'] = $this->information_model->fetch_by_user_information_id_and_year('company', $this->data['user']->information_id, $this->input->get('year'));
+        if($this->input->get('year')){
+            $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
+            $this->render('client/information/detail_company_view');
+        }else{
+            $this->load->library('pagination');
+            $config = array();
+            $base_url = base_url() . 'client/information/company';
+            $total_rows = $this->information_model->count_companies($this->data['user']->username);
+            $per_page = 10;
+            $uri_segment = 4;
+            foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
+                $config[$key] = $value;
+            }
+            $this->pagination->initialize($config);
 
-        $this->render('client/information/detail_company_view');
+            $this->data['page_links'] = $this->pagination->create_links();
+            $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $this->data['companies'] =  $this->information_model->fetch_list_company_by_identity($this->data['user']->username);
+            $this->data['hasCurrentYearCompanyData'] = $this->information_model->getCurrentYearCompany($this->data['user']->username, $this->data['eventYear']);
+            $this->render('client/information/list_company_view');
+        }
     }
 
     public function create_company() {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ 2015', 'trim|required');
-        $this->form_validation->set_rules('equity_2', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('equity_3', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('description', 'Data', 'trim|required');
-        // $this->form_validation->set_rules('main_service', 'Data', 'required');
-        // $this->form_validation->set_rules('main_market', 'Data', 'trim|required');
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+//        $this->form_validation->set_rules('description', 'Data', 'trim|required', array(
+//            'required' => '%s không được trống.',
+//            'numeric' => '%s phải là số.',
+//        ));
+//         $this->form_validation->set_rules('main_service', 'Data', 'required');
+//         $this->form_validation->set_rules('main_market', 'Data', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
-            if($this->data['reg_status'] == 1){
-                redirect('client/information', 'refresh');
+            if($this->data['reg_status']['is_information'] == 0){
+                $this->session->set_flashdata('need_input_information_first', 'Cần nhập thông tin cơ bản của doanh nghiệp trước (tại đây)');
+                redirect('client/information/create_extra', 'refresh');
+            }
+            if($this->data['eventYear'] != $this->input->get('year')){
+                redirect('client/information/company', 'refresh');
             }
             $this->data['year'] = $this->input->get('year');
-            $exist = $this->information_model->check_exist_company_by_year($this->data['user_identity'], $this->input->get('year'));
-            if(!empty($exist)){
-                $this->data['exist'] = $exist;
-            }
+//            $exist = $this->information_model->check_exist_company_by_year($this->data['identity'], $this->input->get('year'));
+//            if(!empty($exist)){
+//                $this->data['exist'] = $exist;
+//            }
             $this->render('client/information/create_company_view');
         } else {
             if ($this->input->post()) {
@@ -218,8 +315,10 @@ class Information extends Client_Controller {
                     'total_labor_3' => $this->input->post('total_labor_3'),
                     'total_ltv_1' => $this->input->post('total_ltv_1'),
                     'total_ltv_2' => $this->input->post('total_ltv_2'),
-                    'total_ltv_2' => $this->input->post('total_ltv_3'),
+                    'total_ltv_3' => $this->input->post('total_ltv_3'),
                     'description' => $this->input->post('description'),
+                    'identity' => $this->data['user']->username,
+                    'year' => $this->data['eventYear'],
                     'main_service' => $main_service,
                     'main_market' => $main_market,
 //                    'is_submit' => 1,
@@ -229,22 +328,15 @@ class Information extends Client_Controller {
                     'modified_by' => $this->author_info['modified_by']
                 );
 
-                $exist = $this->information_model->check_exist_company_by_year($this->data['user_identity'], $this->input->post('year'));
-                if(!empty($exist)) {
-                    unset($data['created_at']);
-                    unset($data['created_by']);
-                    $this->information_model->update_by_information_and_year('company', $this->input->post('user_identity'), $this->input->post('year'), $data);
-                }else{
-                    $insert = $this->information_model->insert_company('company', $data);
-                    if (!$insert) {
-                        $this->session->set_flashdata('message', 'There was an error inserting item');
-                    }
-                    $this->load->model('status_model');
-                    $this->status_model->update('status', $this->data['user']->id, array('is_company' => 1));
-                    $this->session->set_flashdata('message', 'Item added successfully');
+                $insert = $this->information_model->insert_company('company', $data);
+                if (!$insert) {
+                    $this->session->set_flashdata('message', 'There was an error inserting item');
                 }
+                $this->load->model('status_model');
+                $this->status_model->update('status', $this->data['user']->id, array('is_company' => 1));
+                $this->session->set_flashdata('message', 'Item added successfully');
 
-                redirect('client/information/company?year=' . $this->input->post('year'), 'refresh');
+                redirect('client/information/company?year=' . $this->data['eventYear'], 'refresh');
             }
         }
     }
@@ -253,45 +345,122 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ 2015', 'trim|required');
-        $this->form_validation->set_rules('equity_2', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('equity_3', 'Vốn điều lệ 2016', 'trim|required');
-        $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV 2015', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV 2016', 'trim|required|numeric');
-        $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV 2017', 'trim|required|numeric');
-        $this->form_validation->set_rules('description', 'Data', 'trim|required');
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+        $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            'required' => '%s không được trống.',
+            'numeric' => '%s phải là số.',
+        ));
+//        $this->form_validation->set_rules('description', 'Data', 'trim|required', array(
+//            'required' => '%s không được trống.',
+//            'numeric' => '%s phải là số.',
+//        ));
+//         $this->form_validation->set_rules('main_service', 'Data', 'required');
+//         $this->form_validation->set_rules('main_market', 'Data', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
         if ($this->form_validation->run() == FALSE) {
-            $this->data['company'] = $this->information_model->fetch_by_user_information_id_and_year('company', $this->data['user']->information_id, $this->input->get('year'));
+            $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
             if (!$this->data['company']) {
                 redirect('client/information/company', 'refresh');
             }
-            
+
             if($this->data['reg_status'] == 1){
                 redirect('client/information', 'refresh');
             }
 
-            if(date('Y') > $this->input->get('year')){
-                redirect('client/dashboard', 'refresh');
+            if($this->data['eventYear'] != $this->input->get('year')){
+                redirect('client/information/company', 'refresh');
             }
 
             $this->render('client/information/edit_company_view');
@@ -325,8 +494,10 @@ class Information extends Client_Controller {
                     'total_labor_3' => $this->input->post('total_labor_3'),
                     'total_ltv_1' => $this->input->post('total_ltv_1'),
                     'total_ltv_2' => $this->input->post('total_ltv_2'),
-                    'total_ltv_2' => $this->input->post('total_ltv_3'),
+                    'total_ltv_3' => $this->input->post('total_ltv_3'),
                     'description' => $this->input->post('description'),
+                    'identity' => $this->data['user']->username,
+                    'year' => $this->data['eventYear'],
                     'main_service' => $main_service,
                     'main_market' => $main_market,
                     'modified_at' => $this->author_info['modified_at'],
@@ -334,13 +505,13 @@ class Information extends Client_Controller {
                 );
 
                 try {
-                    $this->information_model->update_by_information_and_year('company', $this->data['user']->information_id, $this->input->post('year'), $data);
+                    $this->information_model->update_by_information_and_year('company', $this->data['user']->username, $this->data['eventYear'], $data);
                     $this->session->set_flashdata('message', 'Item updated successfully');
                 } catch (Exception $e) {
                     $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
                 }
 
-                redirect('client/information/company?year=' . $this->input->post('year'), 'refresh');
+                redirect('client/information/company?year=' . $this->data['eventYear'], 'refresh');
             }
         }
     }
@@ -472,7 +643,7 @@ class Information extends Client_Controller {
             }
         }
     }
-    
+
     public function edit_product($request_id = NULL) {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -716,7 +887,7 @@ class Information extends Client_Controller {
             return true;
         }
     }
-    
+
     public function set_final(){
         $this->status_model->update('status', $this->data['user']->id, array('is_final' => 1));
         redirect('client/dashboard', 'refresh');

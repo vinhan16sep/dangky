@@ -44,6 +44,7 @@
                         
                         <div class="form-group">
                             <?php echo form_label('Tài khoản', 'identity'); ?>
+                            <p>Có thể sử dụng Email hoặc Mã số thuế</p>
                             <?php echo form_error('identity', '<div class="error">', '</div>'); ?>
                             <?php echo form_input('identity', '', 'class="form-control" placeholder="Username hoặc E-Mail" '); ?>
                         </div>

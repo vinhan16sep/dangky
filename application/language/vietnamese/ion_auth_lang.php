@@ -38,7 +38,7 @@ $lang['deactivate_current_user_unsuccessful']= 'You cannot De-Activate your self
 // Login / Logout
 $lang['login_successful'] 		  	         = 'Đăng nhập thành công';
 $lang['login_unsuccessful'] 		  	     = 'Tài khoản hoặc mật khẩu không đúng';
-$lang['login_unsuccessful_not_active'] 		 = 'Tài khoản này đã bị khoá';
+$lang['login_unsuccessful_not_active'] 		 = 'Tài khoản này chưa thể sử dụng';
 $lang['login_timeout']                       = 'Tài khoản này đã tạm thời bị khoá, vui lòng thử lại sau';
 $lang['logout_successful'] 		 	         = 'Đăng xuất thành công';
 
