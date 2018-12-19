@@ -74,7 +74,7 @@
                         <div class="post">
                             <h4 style="font-weight: bold">Thông tin đăng ký</h4>
                             <?php if($reg_status['is_final'] == 0): ?>
-                                <?php if(!$submitted): ?>
+                                <?php if(!$information_submitted): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                     <span>
                                         <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>
@@ -93,19 +93,17 @@
                         </div>
                         <div class="post">
                             <h4 style="font-weight: bold">Thông tin doanh nghiệp theo từng năm</h4>
-                            <?php if($user_identity != ''){ ?>
+                            <?php if($identity != ''){ ?>
                                 <?php if($reg_status['is_final'] == 0): ?>
                                     <?php if(!$company_submitted): ?>
                                         <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                         <span>
-                                            <a data-target="#myModal1" data-toggle="modal" id="MainNavHelp1"
-                                               href="#myModal1" class="btn btn-warning btn-block">Chọn năm</a>
+                                            <a href="<?php echo base_url('client/information/create_company?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         </span>
                                     <?php else: ?>
                                         <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
                                         <span>
-                                            <a data-target="#myModal1" data-toggle="modal" id="MainNavHelp1"
-                                               href="#myModal1" class="btn btn-warning btn-block">Chọn năm</a>
+                                            <a href="<?php echo base_url('client/information/company'); ?>" style="width:100%" class="btn btn-success btn-block"><b>Xem danh sách qua các năm đã đăng ký<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         </span>
                                         <br>
                                         <br>
@@ -134,7 +132,7 @@
                         </div>
                         <div class="post">
                             <h4 style="font-weight: bold">Thông tin sản phẩm/dịch vụ đề cử</h4>
-                            <?php if($user_identity != ''){ ?>
+                            <?php if($identity != ''){ ?>
                                 <?php if(!$count_product || $count_product < 1): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin về sản phẩm / dịch vụ</p>
                                     <span>
@@ -154,7 +152,7 @@
                     <!-- /.tab-content -->
                 </div>
                 <?php if($complete == 1): ?>
-                    <?php if($user_identity != ''){ ?>
+                    <?php if($identity != ''){ ?>
                         <?php if($reg_status['is_final'] == 0): ?>
                         <br>
                         <br>
@@ -165,7 +163,7 @@
                         <?php endif; ?>
                     <?php } ?>
                 <?php else: ?>
-                    <?php if($user_identity != ''){ ?>
+                    <?php if($identity != ''){ ?>
                         <?php if($reg_status['is_final'] == 0): ?>
                             <br>
                             <br>
@@ -184,60 +182,60 @@
 
     </section>
 </div>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Nhập mã số thuế</h4>
-                <p>Chú ý: Mã số thuế không thể thay đổi sau khi bấm Đồng ý</p>
-            </div>
-            <div class="modal-body">
-                <input id="identity" type="text" name="identity" class="form-control"/>
-            </div>
-            <div class="modal-footer">
-                <a onclick="confirmation();" class="btn btn-warning btn-block"><b>Đồng ý</b></a>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div id="myModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Chọn năm</h4>
-            </div>
-            <div class="modal-body">
-                <select class="form-control" id="selected_year">
-                    <?php for(($i = date('Y') - 3); ($i <= date('Y') + 1); $i++){ ?>
-                        <option value="<?php echo $i; ?>" <?php echo ($i == date('Y')) ? 'selected="selected"' : ''; ?>"><?php echo $i; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <a onclick="this.href='<?php echo base_url("client/information/create_company") ?>?year='+document.getElementById('selected_year').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
-            </div>
-        </div>
-
-    </div>
-</div>
-<script>
-    function confirmation() {
-        if(document.getElementById('identity').value === null || document.getElementById('identity').value === ''){
-            alert("Yêu cầu nhập mã số thuế");
-        }else{
-            if(confirm("CHẮC CHẮN MÃ SỐ THUẾ: " + document.getElementById('identity').value + " ?")){
-                window.location.href = '<?php echo base_url("client/information/create_extra") ?>?identity='+document.getElementById('identity').value;
-            } else{
-
-            }
-        }
-    }
-</script>
+<!--<div id="myModal" class="modal fade" role="dialog">-->
+<!--    <div class="modal-dialog">-->
+<!---->
+<!--        <!-- Modal content-->-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--                <h4 class="modal-title">Nhập mã số thuế</h4>-->
+<!--                <p>Chú ý: Mã số thuế không thể thay đổi sau khi bấm Đồng ý</p>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <input id="identity" type="text" name="identity" class="form-control"/>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <a onclick="confirmation();" class="btn btn-warning btn-block"><b>Đồng ý</b></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+<!--</div>-->
+<!--<div id="myModal1" class="modal fade" role="dialog">-->
+<!--    <div class="modal-dialog">-->
+<!---->
+<!--        <!-- Modal content-->-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--                <h4 class="modal-title">Chọn năm</h4>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <select class="form-control" id="selected_year">-->
+<!--                    --><?php //for(($i = date('Y') - 3); ($i <= date('Y') + 1); $i++){ ?>
+<!--                        <option value="--><?php //echo $i; ?><!--" --><?php //echo ($i == date('Y')) ? 'selected="selected"' : ''; ?><!--">--><?php //echo $i; ?><!--</option>-->
+<!--                    --><?php //} ?>
+<!--                </select>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <a onclick="this.href='--><?php //echo base_url("client/information/create_company") ?>//?year='+document.getElementById('selected_year').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+//            </div>
+//        </div>
+//
+//    </div>
+//</div>
+//<script>
+//    function confirmation() {
+//        if(document.getElementById('identity').value === null || document.getElementById('identity').value === ''){
+//            alert("Yêu cầu nhập mã số thuế");
+//        }else{
+//            if(confirm("CHẮC CHẮN MÃ SỐ THUẾ: " + document.getElementById('identity').value + " ?")){
+//                window.location.href = '<?php //echo base_url("client/information/create_extra") ?>//?identity='+document.getElementById('identity').value;
+//            } else{
+//
+//            }
+//        }
+//    }
+//</script>
 

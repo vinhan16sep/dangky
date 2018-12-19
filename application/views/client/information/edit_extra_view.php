@@ -119,10 +119,10 @@
                     <div class="col-sm-3 col-md-3 col-sx-12">
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
-                        <?php
-                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
-                        echo form_close();
-                        ?>
+                        <div>
+                            <a style="display: inline;" href="<?php echo base_url('client/information/extra'); ?>" class="btn btn-default pull-left"><b>Quay lại</b></a>
+                            <?php echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-right" style="width:40%;display: inline;"'); ?>
+                        </div>
                     </div>
                 </div>
             </div>

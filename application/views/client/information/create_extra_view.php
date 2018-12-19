@@ -6,6 +6,12 @@
 </style>
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content">
+        <?php if ($this->session->flashdata('need_input_information_first')): ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Thông báo!</strong> <?php echo $this->session->flashdata('need_input_information_first'); ?>
+            </div>
+        <?php endif ?>
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">

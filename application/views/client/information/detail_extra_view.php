@@ -57,12 +57,18 @@
                                 <a href="<?php echo base_url('client/information/create_extra'); ?>" class="btn btn-primary btn-block"><b>Nhập thông tin</b></a>
                                 <?php else: ?>
                                 <div class="row">
-                                    <div class="col-xs-12 col-md-6">
+                                    <div class="col-xs-12 col-md-3">
                                         <a href="<?php echo base_url('client/information/edit_extra'); ?>" style="width:100%" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
                                     </div>
-                                    <div class="col-xs-12 col-md-6">
-                                        <a href="<?php echo base_url('client/information/edit_extra'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Sửa thông tin</b></a>
-                                    </div>
+                                    <?php if($hasCurrentYearCompanyData == 0){ ?>
+                                        <div class="col-xs-12 col-md-6 pull-right">
+                                            <a href="<?php echo base_url('client/information/create_company?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Tiếp tục nhập thông tin chi tiết <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                        </div>
+                                    <?php }else{ ?>
+                                        <div class="col-xs-12 col-md-6 pull-right">
+                                            <a href="<?php echo base_url('client/information/company'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Xem thông tin chi tiết đã đăng ký <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                                 <?php endif; ?>
                             <?php else: ?>

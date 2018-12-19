@@ -30,40 +30,88 @@
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <div class="post">
-                            <h4>Thông tin doanh nghiệp</h4>
-                            <h3 style="color:red; text-align:center;">NĂM <?php echo $submitted['year']; ?></h3>
+                            <h2 style="text-align:center;">Thông tin doanh nghiệp</h2>
+                            <h3 style="color:red; text-align:center;">NĂM <?php echo $company['year']; ?></h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Vốn điều lệ (triệu VND)</a> <p class="pull-right"><?php echo $submitted['equity'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Vốn điều lệ (triệu VND) <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['equity_1'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu (triệu VND)</a> <p class="pull-right"><?php echo $submitted['owner_equity'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Vốn điều lệ (triệu VND) <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['equity_2'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu DN</a> <p class="pull-right"><?php echo $submitted['total_income'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Vốn điều lệ (triệu VND) <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['equity_3'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT lĩnh vực sx phần mềm (Triệu VND)</a> <p class="pull-right"><?php echo $submitted['software_income'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu (triệu VND) <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['owner_equity_1'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu dịch vụ CNTT triệu VND)</a> <p class="pull-right"><?php echo $submitted['it_income'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu (triệu VND) <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['owner_equity_2'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT xuất khẩu (USD)</a> <p class="pull-right"><?php echo $submitted['export_income'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu (triệu VND) <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['owner_equity_3'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lao động của DN</a> <p class="pull-right"><?php echo $submitted['total_labor'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu DN <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['total_income_1'] ?> VNĐ</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV</a> <p class="pull-right"><?php echo $submitted['total_ltv'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu DN <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['total_income_2'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu DN <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['total_income_3'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT lĩnh vực sx phần mềm (Triệu VND) <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['software_income_1'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT lĩnh vực sx phần mềm (Triệu VND) <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['software_income_2'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT lĩnh vực sx phần mềm (Triệu VND) <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['software_income_3'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu dịch vụ CNTT triệu VND) <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['it_income_1'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu dịch vụ CNTT triệu VND) <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['it_income_2'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng doanh thu dịch vụ CNTT triệu VND) <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['it_income_3'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT xuất khẩu (USD) <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['export_income_1'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT xuất khẩu (USD) <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['export_income_2'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng DT xuất khẩu (USD) <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['export_income_3'] ?> VNĐ</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lao động của DN <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['total_labor_1'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lao động của DN <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['total_labor_2'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lao động của DN <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['total_labor_3'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_1'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_2'] ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_3'] ?></p>
                                 </li>
                                 <li class="list-group-item" style="min-height:200px;">
-                                    <a><i class="fa fa-file margin-r-5"></i> Giới thiệu chung</a> <p class="" style="padding-left:20px;"><?php echo $submitted['description'] ?></p>
+                                    <a><i class="fa fa-file margin-r-5"></i> Giới thiệu chung</a> <p class="" style="padding-left:20px;"><?php echo $company['description'] ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-circle margin-r-5"></i> SP dịch vụ chính của DN</a>
-                                    <?php if(!empty($submitted['main_service'])): ?>
-                                        <?php $main_service = json_decode($submitted['main_service']) ?>
+                                    <?php if(!empty($company['main_service'])): ?>
+                                        <?php $main_service = json_decode($company['main_service']) ?>
                                         <?php if($main_service): ?>
                                             <?php foreach ($main_service as $key => $value): ?>
                                                 <p class="" style="padding-left:20px;"><?php echo $value ?></p>
@@ -73,8 +121,8 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Thị trường chính</a>
-                                    <?php if(!empty($submitted['main_market'])): ?>
-                                        <?php $main_market = json_decode($submitted['main_market']) ?>
+                                    <?php if(!empty($company['main_market'])): ?>
+                                        <?php $main_market = json_decode($company['main_market']) ?>
                                         <?php if($main_market): ?>
                                             <?php foreach ($main_market as $key => $value): ?>
                                                 <p class="" style="padding-left:20px;"><?php echo $value ?></p>
@@ -83,19 +131,23 @@
                                     <?php endif; ?>
                                 </li>
                             </ul>
+                            <div class="row">
                             <?php if($reg_status['is_final'] == 0): ?>
-    <!--                            <?php if(!$submitted || $submitted['is_submit'] != 1): ?>-->
-    <!--                                <a href="<?php echo base_url('client/information/create_company'); ?>" class="btn btn-primary btn-block"><b>Chỉnh sửa thông tin</b></a>-->
-    <!--                            <?php else: ?>-->
-    <!--                                <a href="<?php echo base_url('client/information/edit_company'); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>-->
-    <!--                                <a href="javascript:void(0);" class="btn btn-danger btn-block" disabled><b>Thông tin đã đăng ký</b></a>-->
-    <!--                            <?php endif; ?>-->
-                                <?php if(date('Y') == $submitted['year']){ ?>
-                                    <a href="<?php echo base_url('client/information/edit_company?year=' . $submitted['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
-                                <?php } ?>
+                                    <div class="col-xs-12 col-md-2 pull-left">
+                                        <a href="<?php echo base_url('client/information/company'); ?>" class="btn btn-default btn-block"><b>Quay lại</b></a>
+                                    </div>
+                                    <?php if($eventYear == $company['year']){ ?>
+                                    <div class="col-xs-12 col-md-4 pull-left">
+                                        <a href="<?php echo base_url('client/information/edit_company?year=' . $eventYear); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin năm sự kiện hiện tại</b></a>
+                                    </div>
+                                    <?php } ?>
+                                    <div class="col-xs-12 col-md-4 pull-right">
+                                        <a href="<?php echo base_url('client/information/company'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                    </div>
                             <?php else: ?>
                             <h4 style="color:red">Thông tin đã được gửi</h4>
                             <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                     <!-- /.tab-content -->

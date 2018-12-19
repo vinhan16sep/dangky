@@ -14,27 +14,40 @@
                 </div>
                 <?php
                 echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'company-form'));
-                echo form_hidden('information_id', set_value('information_id', $company['information_id']));
-                echo form_hidden('year', set_value('year', $company['year']));
                 ?>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Vốn điều lệ ( triệu VND)', 'equity');
+                            echo form_label('Vốn điều lệ ( triệu VND)', 'equity_1');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('equity');
-                                echo form_input('equity', set_value('equity', $company['equity']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'equity_1');
+                                echo form_error('equity_1');
+                                echo form_input('equity_1', set_value('equity_1', $company['equity_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'equity_2');
+                                echo form_error('equity_2');
+                                echo form_input('equity_2', set_value('equity_2', $company['equity_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'equity_3');
+                                echo form_error('equity_3');
+                                echo form_input('equity_3', set_value('equity_3', $company['equity_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -45,13 +58,29 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('owner_equity');
-                                echo form_input('owner_equity', set_value('owner_equity', $company['owner_equity']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'owner_equity_1');
+                                echo form_error('owner_equity_1');
+                                echo form_input('owner_equity_1', set_value('owner_equity_1', $company['owner_equity_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'owner_equity_2');
+                                echo form_error('owner_equity_2');
+                                echo form_input('owner_equity_2', set_value('owner_equity_2', $company['owner_equity_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'owner_equity_3');
+                                echo form_error('owner_equity_3');
+                                echo form_input('owner_equity_3', set_value('owner_equity_3', $company['owner_equity_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -62,13 +91,29 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('total_income');
-                                echo form_input('total_income', set_value('total_income', $company['total_income']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'total_income_1');
+                                echo form_error('total_income_1');
+                                echo form_input('total_income_1', set_value('total_income_1', $company['total_income_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'total_income_2');
+                                echo form_error('total_income_2');
+                                echo form_input('total_income_2', set_value('total_income_2', $company['total_income_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'total_income_3');
+                                echo form_error('total_income_3');
+                                echo form_input('total_income_3', set_value('total_income_3', $company['total_income_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -79,13 +124,29 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('software_income');
-                                echo form_input('software_income', set_value('software_income', $company['software_income']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'software_income_1');
+                                echo form_error('software_income_1');
+                                echo form_input('software_income_1', set_value('software_income_1', $company['software_income_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'software_income_2');
+                                echo form_error('software_income_2');
+                                echo form_input('software_income_2', set_value('software_income_2', $company['software_income_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'software_income_3');
+                                echo form_error('software_income_3');
+                                echo form_input('software_income_3', set_value('software_income_3', $company['software_income_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -96,13 +157,29 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('it_income');
-                                echo form_input('it_income', set_value('it_income', $company['it_income']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'it_income_1');
+                                echo form_error('it_income_1');
+                                echo form_input('it_income_1', set_value('it_income_1', $company['it_income_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'it_income_2');
+                                echo form_error('it_income_2');
+                                echo form_input('it_income_2', set_value('it_income_2', $company['it_income_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'it_income_3');
+                                echo form_error('it_income_3');
+                                echo form_input('it_income_3', set_value('it_income_3', $company['it_income_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -113,13 +190,29 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('export_income');
-                                echo form_input('export_income', set_value('export_income', $company['export_income']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'export_income_1');
+                                echo form_error('export_income_1');
+                                echo form_input('export_income_1', set_value('export_income_1', $company['export_income_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'export_income_2');
+                                echo form_error('export_income_2');
+                                echo form_input('export_income_2', set_value('export_income_2', $company['export_income_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'export_income_3');
+                                echo form_error('export_income_3');
+                                echo form_input('export_income_3', set_value('export_income_3', $company['export_income_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -130,13 +223,29 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('total_labor');
-                                echo form_input('total_labor', set_value('total_labor', $company['total_labor']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'total_labor_1');
+                                echo form_error('total_labor_1');
+                                echo form_input('total_labor_1', set_value('total_labor_1', $company['total_labor_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'total_labor_2');
+                                echo form_error('total_labor_2');
+                                echo form_input('total_labor_2', set_value('total_labor_2', $company['total_labor_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'total_labor_3');
+                                echo form_error('total_labor_3');
+                                echo form_input('total_labor_3', set_value('total_labor_3', $company['total_labor_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr style="border-bottom: 1px solid white;">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
@@ -147,8 +256,23 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('total_ltv');
-                                echo form_input('total_ltv', set_value('total_ltv', $company['total_ltv']), 'class="form-control"');
+                                echo form_label('Năm ' . $rule3Year[0], 'total_ltv_1');
+                                echo form_error('total_ltv_1');
+                                echo form_input('total_ltv_1', set_value('total_ltv_1', $company['total_ltv_1']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[1], 'total_ltv_2');
+                                echo form_error('total_ltv_2');
+                                echo form_input('total_ltv_2', set_value('total_ltv_2', $company['total_ltv_2']), 'class="form-control"');
+                                ?>
+                            </div>
+                            <div class="row">
+                                <?php
+                                echo form_label('Năm ' . $rule3Year[2], 'total_ltv_3');
+                                echo form_error('total_ltv_3');
+                                echo form_input('total_ltv_3', set_value('total_ltv_3', $company['total_ltv_3']), 'class="form-control"');
                                 ?>
                             </div>
                         </div>
@@ -351,10 +475,14 @@
                 <!--                </div>-->
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">
+
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
+                        <div>
+                            <a style="display: inline;" href="<?php echo base_url('client/information/company'); ?>" class="btn btn-default pull-left"><b>Quay lại</b></a>
+                            <?php echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-right" style="width:40%;display: inline;"'); ?>
+                        </div>
                         <?php
-                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
                         echo form_close();
                         ?>
                     </div>
@@ -381,29 +509,101 @@
 
     $('#company-form').validate({
         rules: {
-            equity: {
-                required: true
+            equity_1: {
+                required: true,
+                digits: true
             },
-            owner_equity: {
-                required: true
+            equity_2: {
+                required: true,
+                digits: true
             },
-            total_income: {
-                required: true
+            equity_3: {
+                required: true,
+                digits: true
             },
-            software_income: {
-                required: true
+            owner_equity_1: {
+                required: true,
+                digits: true
             },
-            it_income: {
-                required: true
+            owner_equity_2: {
+                required: true,
+                digits: true
             },
-            export_income: {
-                required: true
+            owner_equity_3: {
+                required: true,
+                digits: true
             },
-            total_labor: {
-                required: true
+            total_income_1: {
+                required: true,
+                digits: true
             },
-            total_ltv: {
-                required: true
+            total_income_2: {
+                required: true,
+                digits: true
+            },
+            total_income_3: {
+                required: true,
+                digits: true
+            },
+            software_income_1: {
+                required: true,
+                digits: true
+            },
+            software_income_2: {
+                required: true,
+                digits: true
+            },
+            software_income_3: {
+                required: true,
+                digits: true
+            },
+            it_income_1: {
+                required: true,
+                digits: true
+            },
+            it_income_2: {
+                required: true,
+                digits: true
+            },
+            it_income_3: {
+                required: true,
+                digits: true
+            },
+            export_income_1: {
+                required: true,
+                digits: true
+            },
+            export_income_2: {
+                required: true,
+                digits: true
+            },
+            export_income_3: {
+                required: true,
+                digits: true
+            },
+            total_labor_1: {
+                required: true,
+                digits: true
+            },
+            total_labor_2: {
+                required: true,
+                digits: true
+            },
+            total_labor_3: {
+                required: true,
+                digits: true
+            },
+            total_ltv_1: {
+                required: true,
+                digits: true
+            },
+            total_ltv_2: {
+                required: true,
+                digits: true
+            },
+            total_ltv_3: {
+                required: true,
+                digits: true
             },
             // description: {
             //     required: true
@@ -416,29 +616,101 @@
             // }
         },
         messages :{
-            equity: {
-                required : 'Cần nhập Vốn điều lệ 2015'
+            equity_1: {
+                required : 'Không được để trống',
+                digits: 'Phải là số'
             },
-            owner_equity: {
-                required: 'Cần nhập Vốn chủ sở hữu'
+            equity_2: {
+                required : 'Không được để trống',
+                digits: 'Phải là số'
             },
-            total_income: {
-                required: 'Cần nhập Tổng doanh thu DN'
+            equity_3: {
+                required : 'Không được để trống',
+                digits: 'Phải là số'
             },
-            software_income: {
-                required: 'Cần nhập Tổng DT lĩnh vực sx phần mềm'
+            owner_equity_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
             },
-            it_income: {
-                required: 'Cần nhập Tổng doanh thu dịch vụ CNTT'
+            owner_equity_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
             },
-            export_income: {
-                required: 'Cần nhập Tổng DT xuất khẩu'
+            owner_equity_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
             },
-            total_labor: {
-                required: 'Cần nhập Tổng số lao động của DN'
+            total_income_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
             },
-            total_ltv: {
-                required: 'Cần nhập Tổng số LTV'
+            total_income_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_income_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            software_income_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            software_income_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            software_income_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            it_income_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            it_income_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            it_income_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            export_income_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            export_income_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            export_income_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_labor_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_labor_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_labor_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_ltv_1: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_ltv_2: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
+            },
+            total_ltv_3: {
+                required: 'Không được để trống',
+                digits: 'Phải là số'
             },
             // description: {
             //     required: 'Cần nhập Giới thiệu chung'
