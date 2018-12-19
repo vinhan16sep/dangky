@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="<?php echo site_url('assets/admin/bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo site_url('assets/public/css/homepage.css'); ?>">
     <link rel="stylesheet" href="<?php echo site_url('assets/admin/css/user.css'); ?>">
-    <title>Document</title>
+    <title>Đăng nhập / Đăng ký</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -31,17 +31,17 @@
                     <strong>Thông báo!</strong> <?php echo $this->session->flashdata('auth_message'); ?>
                 </div>
             <?php endif ?>
-            
+
             <section class="content row">
                 <div class="col-sm-6 col-md-6 col-xs-12">
                     <div class="col-lg-8 col-lg-offset-2">
-                        
+
                         <?php echo form_open('client/user/login', array('class' => 'form-horizontal')); ?>
                         <div class="form-group">
                             <h1>Đăng nhập</h1>
                             <h5>Dành cho doanh nghiệp</h5>
                         </div>
-                        
+
                         <div class="form-group">
                             <?php echo form_label('Tài khoản', 'identity'); ?>
                             <p>Có thể sử dụng Email hoặc Mã số thuế</p>
@@ -70,7 +70,7 @@
                 <div class="col-sm-6 col-md-6 col-xs-12">
                     <div class="col-lg-8 col-lg-offset-2">
                         <?php echo $this->session->flashdata('message'); ?>
-                        <?php echo form_open('client/user/register', array('class' => 'form-horizontal')); ?>
+                        <?php echo form_open('client/user/register', array('class' => 'form-horizontal', 'id' => 'login-form')); ?>
                         <div class="form-group">
                             <h4>Doanh nghiệp chưa có tài khoản?</h4>
                             <h1>Đăng ký mới</h1>
@@ -111,7 +111,63 @@
     </section>
 </section>
 <script src="<?= base_url('assets/admin/bower_components/jquery/dist/jquery.min.js') ?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo site_url('assets/admin/'); ?>bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Jquery validate -->
+<script src="<?php echo site_url('assets/admin/'); ?>bower_components/jquery/src/jquery.validate.js"></script>
 <script src="<?= base_url('assets/admin/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+<script>
+    $('#login-form').validate({
+        rules: {
+            companyname: {
+                required: true
+            },
+            username: {
+                required: true,
+                identityFormat: true,
+                minlength: 10,
+                maxlength: 13
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            register_password: {
+                required: true,
+                minlength: 6,
+            },
+            password_confirm: {
+                required: true,
+                minlength: 6,
+            }
+        },
+        messages :{
+            companyname: {
+                required: 'Không được để trống'
+            },
+            username: {
+                required: 'Không được để trống',
+                minlength: 'Phải lớn hơn 10 ký tự',
+                maxlength: 'Phải nhỏ hơn 13 ký tự'
+            },
+            email: {
+                required : 'Không được để trống',
+                email: 'Sai định dạng email'
+            },
+            register_password: {
+                required: 'Không được để trống',
+                minlength: 'Phải lớn hơn 6 ký tự',
+            },
+            password_confirm: {
+                required: 'Không được để trống',
+                minlength: 'Phải lớn hơn 6 ký tự',
+            }
+        }
+    });
 
+    $.validator.addMethod("identityFormat", function(value, element) {
+        return this.optional(element) || /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/i.test(value);
+    }, "Chỉ chứa số và dấu -");
+</script>
 </body>
 </html>

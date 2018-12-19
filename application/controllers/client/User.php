@@ -95,7 +95,9 @@ class User extends MY_Controller {
             }
             $detail = $this->users_model->fetch_by_id($result);
             if($result){
-                $this->session->set_flashdata('register_success', 'Tài khoản được tạo thành công, Vui lòng xác nhận email.');
+                $this->session->set_flashdata('register_success', 'Cảm ơn Qúy Công ty đã đăng ký tham gia Chương trình Danh hiệu Sao Khuê 2019.
+                                                BTC sẽ gửi thông tin xác nhận Tài khoản qua email chung của công ty và email của người liên hệ. 
+                                                Sau khi nhận được mail xác nhận, Qúy Công ty có thể tiến hành ĐĂNG NHẬP và khai hồ sơ.');
                 redirect('client/user/login', 'refresh');
                 $this->ion_auth->login($username, $password, false);
                 redirect('client', 'refresh');
