@@ -11,7 +11,11 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="<?php echo site_url('assets/public/img/client.jpg'); ?>" alt="User profile picture">
+                        <?php if ( file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
+                            <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" alt="User profile picture">
+                        <?php else: ?>
+                            <img class="profile-user-img img-responsive img-circle" src="<?php echo site_url('assets/public/img/client.jpg'); ?>" alt="User profile picture">
+                        <?php endif ?>
 
                         <h3 class="profile-username text-center"><?php echo $user->last_name . ' ' . $user->first_name; ?></h3>
 

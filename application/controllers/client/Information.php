@@ -57,6 +57,10 @@ class Information extends Client_Controller {
             $this->render('client/information/create_extra_view');
         } else {
             if ($this->input->post()) {
+                if(!empty($_FILES['avatar']['name'])){
+                    $this->check_img($_FILES['avatar']['name'], $_FILES['avatar']['size']);
+                    $avatar = $this->upload_avatar('avatar', 'assets/upload/avatar', $_FILES['avatar']['name']);
+                }
                 $data = array(
                     'client_id' => $this->data['user']->id,
                     'legal_representative' => $this->input->post('legal_representative'),
@@ -71,7 +75,9 @@ class Information extends Client_Controller {
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
-
+                if ($avatar) {
+                    $data = array('avatar' => $avatar,);
+                }
                 $exist = $this->information_model->check_exist_information($this->input->post('identity'));
                 if(!empty($exist)){
                     unset($data['created_at']);
@@ -106,8 +112,9 @@ class Information extends Client_Controller {
         $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
+        $this->data['extra'] = $this->information_model->fetch_by_user_identity('information', $this->data['user']->username);
         if ($this->form_validation->run() == FALSE) {
-            $this->data['extra'] = $this->information_model->fetch_by_user_identity('information', $this->data['user']->username);
+            
             if (!$this->data['extra']) {
                 redirect('client/information', 'refresh');
             }
@@ -119,6 +126,10 @@ class Information extends Client_Controller {
             $this->render('client/information/edit_extra_view');
         } else {
             if ($this->input->post()) {
+                if(!empty($_FILES['avatar']['name'])){
+                    $this->check_img($_FILES['avatar']['name'], $_FILES['avatar']['size']);
+                    $avatar = $this->upload_avatar('avatar', 'assets/upload/avatar', $_FILES['avatar']['name']);
+                }
                 $data = array(
                     'legal_representative' => $this->input->post('legal_representative'),
                     'lp_position' => $this->input->post('lp_position'),
@@ -128,9 +139,14 @@ class Information extends Client_Controller {
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
-
+                if ($avatar) {
+                    $data = array('avatar' => $avatar);
+                }
                 try {
                     $this->information_model->update_by_identity('information', $this->data['user']->username, $data);
+                    if ( file_exists('assets/upload/avatar/' . $this->data['extra']['avatar']) && $avatar !='' ) {
+                        unlink('assets/upload/avatar/' . $this->data['extra']['avatar']);
+                    }
                     $this->session->set_flashdata('message', 'Item updated successfully');
                 } catch (Exception $e) {
                     $this->session->set_flashdata('message', 'There was an error updating the item: ' . $e->getMessage());
@@ -897,6 +913,15 @@ class Information extends Client_Controller {
     public function set_final(){
         $this->status_model->update('status', $this->data['user']->id, array('is_final' => 1));
         redirect('client/dashboard', 'refresh');
+    }
+
+    protected function check_img($filename, $filesize){
+        $map = strripos($filename, '.')+1;
+        $fileextension = substr($filename, $map,(strlen($filename)-$map));
+        if(!($fileextension == 'jpg' || $fileextension == 'jpeg' || $fileextension == 'png' || $fileextension == 'gif'  || $filesize > 1228800)){
+            $this->session->set_flashdata('message_error', 'Định dạng file không đúng hoặc dung lượng ảnh vượt quá 1200Kb');
+            redirect('client/information/create_extra');
+        }
     }
 
 }

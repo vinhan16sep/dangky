@@ -74,6 +74,34 @@ class MY_Controller extends CI_Controller {
         return $config;
     }
 
+    protected function upload_avatar($image_input_id ,$upload_path = '', $image_name = '' ) {
+        $image = '';
+        if (!empty($image_name)) {
+            $config = $this->config_file_avatar($upload_path);
+            $config['file_name'] = $image_name;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload($image_input_id)) {
+                $upload_data = $this->upload->data();
+                $image = $upload_data['file_name'];
+            }
+        }
+
+        return $image;
+    }
+
+    function config_file_avatar($upload_path = '') {
+        $config = array();
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['max_size'] = '1200';
+        $config['encrypt_name'] = TRUE;
+       // $config['max_width']     = '1028';
+       // $config['max_height']    = '1028';
+        return $config;
+    }
+
 }
 
 class Admin_Controller extends MY_Controller {
@@ -333,7 +361,7 @@ class Client_Controller extends MY_Controller {
 
         $this->load->model('information_model');
         $this->data['company_submitted'] = $this->information_model->fetch_by_identity('company', $this->data['identity']);
-
+        $this->data['information_submitted'] = $this->information_model->fetch_by_user_identity('information', $this->data['identity']);
         // Get current class
         //$class = $this->router->fetch_class();
         // Set timezone

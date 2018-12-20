@@ -14,11 +14,36 @@
                 <div class="form-group">
                     <h3 style="text-align:center;">Tên công ty: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
                     <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc;"><?php echo $user->username; ?></span></h3>
+                    <div style="margin: auto; width: 100%; text-align: center;">
+                        <?php if ( file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
+                            <img src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" class="img-circle" alt="user image" width=10%>
+                        <?php else: ?>
+                            <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image" width=10%>
+                        <?php endif ?>
+                        <br>
+                        <strong>Ảnh đại diện</strong>
+                    </div>
+                    
                 </div>
                 <?php
                 echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'extra-form'));
                 ?>
                 <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Ảnh đại diện', 'avatar');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('avatar');
+                            echo form_upload('avatar', set_value('avatar'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
