@@ -126,10 +126,12 @@ class Information extends Client_Controller {
             $this->render('client/information/edit_extra_view');
         } else {
             if ($this->input->post()) {
+                $avatar = '';
                 if(!empty($_FILES['avatar']['name'])){
                     $this->check_img($_FILES['avatar']['name'], $_FILES['avatar']['size']);
                     $avatar = $this->upload_avatar('avatar', 'assets/upload/avatar', $_FILES['avatar']['name']);
                 }
+
                 $data = array(
                     'legal_representative' => $this->input->post('legal_representative'),
                     'lp_position' => $this->input->post('lp_position'),
@@ -139,9 +141,11 @@ class Information extends Client_Controller {
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
+
                 if ($avatar) {
                     $data = array('avatar' => $avatar);
                 }
+
                 try {
                     $this->information_model->update_by_identity('information', $this->data['user']->username, $data);
                     if ( file_exists('assets/upload/avatar/' . $this->data['extra']['avatar']) && $avatar !='' ) {
