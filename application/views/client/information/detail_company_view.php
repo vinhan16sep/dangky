@@ -27,7 +27,7 @@
 <!--                </div>-->
 <!--            </div>-->
             <div class="col-md-10 col-md-offset-1">
-                <div class="nav-tabs-custom">
+                <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <h2 style="text-align:center;">Thông tin doanh nghiệp</h2>

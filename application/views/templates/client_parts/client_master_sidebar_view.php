@@ -21,7 +21,6 @@
 
             <ul class="sidebar-menu tree" data-widget="tree">
 
-                <li class="header">MENU</li>
                 <li class="<?php echo ($active == 'dashboard')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/dashboard'); ?>">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
@@ -29,15 +28,15 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
-                <li class="<?php echo ($active == 'menu')? 'active' : '' ?>">
+                <li class="<?php echo ($active == 'extra')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/extra'); ?>">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                         <span>Thông tin đăng ký</span>
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
-                <li class="<?php echo ($active == 'menu')? 'active' : '' ?>">
-                    <a href="javascript:void(0);">
+                <li class="<?php echo ($active == 'company')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('client/information/company'); ?>">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                         <span>Thông tin doanh nghiệp</span>
                         <span class="pull-right-container"></span>
@@ -58,7 +57,7 @@
                         <?php endif; ?>
                     </ul>
                 </li>
-                <li class="<?php echo ($active == 'menu')? 'active' : '' ?>">
+                <li class="<?php echo ($active == 'products')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/products'); ?>">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                         <span>Thông tin Sản phẩm/Dịch vụ <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;đề cử</span>

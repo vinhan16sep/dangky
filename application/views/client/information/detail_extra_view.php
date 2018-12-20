@@ -27,7 +27,7 @@
 <!--                </div>-->
 <!--            </div>-->
             <div class="col-md-10 col-md-offset-1">
-                <div class="nav-tabs-custom">
+                <div class="nav-tabs-custom box-body" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <h4>Thông tin cơ bản doanh nghiệp</h4>
@@ -48,9 +48,9 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-mobile margin-r-5"></i> Di động</a> <p class="pull-right"><?php echo $submitted['lp_phone']; ?></p>
                                 </li>
-                                <li class="list-group-item">
-                                    <a><i class="fa fa-link margin-r-5"></i> Link download PĐK của DN</a> <p class="pull-right"><?php echo $submitted['link']; ?></p>
-                                </li>
+<!--                                <li class="list-group-item">-->
+<!--                                    <a><i class="fa fa-link margin-r-5"></i> Link download PĐK của DN</a> <p class="pull-right">--><?php //echo $submitted['link']; ?><!--</p>-->
+<!--                                </li>-->
                             </ul>
                             <?php if($reg_status['is_final'] == 0): ?>
                                 <?php if(!$submitted): ?>

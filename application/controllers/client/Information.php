@@ -43,7 +43,7 @@ class Information extends Client_Controller {
         $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required');
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|numeric');
-        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
+//        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             if($this->data['reg_status'] == 1){
@@ -63,7 +63,7 @@ class Information extends Client_Controller {
                     'lp_position' => $this->input->post('lp_position'),
                     'lp_email' => $this->input->post('lp_email'),
                     'lp_phone' => $this->input->post('lp_phone'),
-                    'link' => $this->input->post('link'),
+//                    'link' => $this->input->post('link'),
                     'identity' => $this->data['user']->username,
 //                    'is_submit' => 1,
                     'created_at' => $this->author_info['created_at'],
@@ -103,7 +103,7 @@ class Information extends Client_Controller {
         $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required');
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|numeric');
-        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
+//        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
         if ($this->form_validation->run() == FALSE) {
@@ -124,7 +124,7 @@ class Information extends Client_Controller {
                     'lp_position' => $this->input->post('lp_position'),
                     'lp_email' => $this->input->post('lp_email'),
                     'lp_phone' => $this->input->post('lp_phone'),
-                    'link' => $this->input->post('link'),
+//                    'link' => $this->input->post('link'),
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
                 );
@@ -169,7 +169,7 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',
         ));
@@ -345,9 +345,10 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',
+            'max_length' => '%s tối đa 8 chữ số'
         ));
         $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
             'required' => '%s không được trống.',

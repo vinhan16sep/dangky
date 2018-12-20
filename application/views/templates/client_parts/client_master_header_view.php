@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo $page_title; ?></title>
-  <link rel="shortcut icon" type="image/png" href="<?php echo site_url('assets/public/img/favicon.png'); ?>"/>
+  <link rel="shortcut icon" type="image/png" href="<?php echo site_url('assets/public/img/favicon.gif'); ?>"/>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -18,15 +18,15 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo site_url('assets/admin/'); ?>dist/css/skins/_all-skins.min.css">
   <!-- Date Picker -->
-  <link rel="stylesheet" href="<?php echo site_url('assets/admin/'); ?>bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<!--  <link rel="stylesheet" href="--><?php //echo site_url('assets/admin/'); ?><!--bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">-->
   <!-- Color picker -->
-  <link rel="stylesheet" href="<?php echo site_url('assets/admin/'); ?>bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+<!--  <link rel="stylesheet" href="--><?php //echo site_url('assets/admin/'); ?><!--bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">-->
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?php echo site_url('assets/admin/'); ?>bower_components/bootstrap-daterangepicker/daterangepicker.css">
+<!--  <link rel="stylesheet" href="--><?php //echo site_url('assets/admin/'); ?><!--bower_components/bootstrap-daterangepicker/daterangepicker.css">-->
 
-  <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/admin/'); ?>js/admin/lightbox/dist/css/lightbox.min.css">
+<!--  <link rel="stylesheet" type="text/css" href="--><?php //echo site_url('assets/admin/'); ?><!--js/admin/lightbox/dist/css/lightbox.min.css">-->
   
-  <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/admin/'); ?>js/admin/colorbox/example1/colorbox.css">
+<!--  <link rel="stylesheet" type="text/css" href="--><?php //echo site_url('assets/admin/'); ?><!--js/admin/colorbox/example1/colorbox.css">-->
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -89,10 +89,11 @@
     </a>
     <!-- header navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
+<!--        <img src="--><?php //echo site_url('assets/public/img/2A.gif'); ?><!--" />-->
       <!-- sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">toggle navigation</span>
-      </a>
+<!--      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">-->
+<!--        <span class="sr-only">toggle navigation</span>-->
+<!--      </a>-->
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">

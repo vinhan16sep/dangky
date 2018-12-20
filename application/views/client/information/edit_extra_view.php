@@ -80,41 +80,26 @@
                     </div>
                 </div>
                 <hr>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Link download PĐK của DN', 'link');
-                            ?>
-                        </div>
-                        <div class="col-sm-9 col-md-9 col-sx-12">
-                            <p>Doanh nghiệp download mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu, scan, upload và chèn link dưới đây.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('Phieu-dang-ky.docx') ?>" target="_blank">Download mẫu PĐK</a>
-                            <br>
-                            <br>
-                            <?php
-                            echo form_error('link');
-                            echo form_input('link', set_value('link', $extra['link']), 'class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <br>
-<!--                <div class="form-group make-sure">-->
+<!--                <div class="form-group">-->
 <!--                    <div class="row">-->
 <!--                        <div class="col-sm-3 col-md-3 col-sx-12">-->
+<!--                            --><?php
+//                            echo form_label('Link download PĐK của DN', 'link');
+//                            ?>
 <!--                        </div>-->
 <!--                        <div class="col-sm-9 col-md-9 col-sx-12">-->
-<!--                            <p style="color:red;">Chú ý: thông tin đã nhập ở trên sẽ không thể thay đổi sau khi gửi đi.-->
-<!--                                <a class="btn btn-default cancel pull-right" href="javascript:window.history.go(-1);">Quay lại</a></p>-->
+<!--                            <p>Doanh nghiệp download mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu, scan, upload và chèn link dưới đây.</p>-->
+<!--                            <a class="btn btn-warning" href="--><?php //echo site_url('Phieu-dang-ky.docx') ?><!--" target="_blank">Download mẫu PĐK</a>-->
+<!--                            <br>-->
+<!--                            <br>-->
 <!--                            --><?php
 //                            echo form_error('link');
-//                            $js = 'onClick="make_sure()"';
-//                            echo form_label(form_checkbox('is_submit', '', FALSE, $js) . ' Tôi đã chắc chắn về thông tin bên trên.');
+//                            echo form_input('link', set_value('link', $extra['link']), 'class="form-control"');
 //                            ?>
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
+                <br>
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">
                     </div>

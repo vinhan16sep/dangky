@@ -27,7 +27,7 @@
             <!--    </div>-->
             <!--</div>-->
             <div class="col-md-10 col-md-offset-1">
-                <div class="nav-tabs-custom">
+                <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <h4>Danh sách thông tin chi tiết đã đăng ký qua các năm</h4>
@@ -38,18 +38,21 @@
                                     echo '<tr>';
                                     echo '<td class="col-md-1"><b>STT</b></td>';
                                     echo '<td class="col-md-5"><b>Năm</b></td>';
-                                    echo '<td class="col-md-6"><b style="text-align: center !important;">Thao tác</b></td>';
+                                    echo '<td style="text-align: center !important;width:110px;" colspan="2" class="col-md-3"><b style="text-align: center !important;">Thao tác</b></td>';
                                     echo '</tr>';
                                     if (!empty($companies)) {
                                         foreach ($companies as $key => $value):
                                             echo '<tr>';
                                             echo '<td>' . ($key + 1) . '</td>';
                                             echo '<td><a href="javascript:void(0);">' . $value['year'] . '</a></td>';
-                                            if($eventYear == $value['year']){
-                                                echo '<td style="align-self: center">
-                                                        <a style="display: inline" href="' . base_url('client/information/company?year=' . $value['year']) . '" class="btn btn-success btn-block">Xem thông tin</a>
-                                                        <a style="display: inline" href="' . base_url('client/information/edit_company?year=' . $value['year']) . '" class="btn btn-primary btn-block">Sửa thông tin</a>
-                                                    </td>';
+                                            if($eventYear == $value['year']){ ?>
+                                                <td style="text-align: center;width:110px;">
+                                                    <a style="width:132px;" href="' . base_url('client/information/company?year=' . $value['year']) . '" class="btn btn-success btn-block">Xem thông tin</a>
+                                                </td>
+                                                <td style="text-align: center;width:110px;">
+                                                    <a style="width:132px;" href="' . base_url('client/information/edit_company?year=' . $value['year']) . '" class="btn btn-primary btn-block">Sửa thông tin</a>
+                                                </td>
+                                            <?php
                                             }else{
                                                 echo '<td>Không thể sửa</td>';
                                             }

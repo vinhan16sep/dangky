@@ -27,7 +27,7 @@
             <!--    </div>-->
             <!--</div>-->
             <div class="col-md-10 col-md-offset-1">
-                <div class="nav-tabs-custom">
+                <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <h4>Danh sách đã đăng ký</h4>

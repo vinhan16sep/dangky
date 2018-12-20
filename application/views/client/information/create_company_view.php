@@ -445,7 +445,8 @@
         rules: {
             equity_1: {
                 required: true,
-                digits: true
+                digits: true,
+                max: 8
             },
             equity_2: {
                 required: true,

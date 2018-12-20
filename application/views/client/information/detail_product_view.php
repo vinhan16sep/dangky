@@ -15,7 +15,7 @@
         <?php endif; ?>
         <div class="row">
             <div class="col-md-6">
-                <div class="nav-tabs-custom">
+                <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <h4>Thông tin sản phẩm cơ bản</h4>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="nav-tabs-custom">
+                <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
                             <h4>Thông tin khác</h4>
