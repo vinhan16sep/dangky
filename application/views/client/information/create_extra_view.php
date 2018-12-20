@@ -29,6 +29,21 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            echo form_label('Ảnh đại diện', 'avatar');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('avatar');
+                            echo form_upload('avatar', set_value('avatar'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
                             echo form_label('Tên người đại diện pháp luật', 'legal_representative');
                             ?>
                         </div>

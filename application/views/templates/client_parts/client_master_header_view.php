@@ -133,14 +133,22 @@
           <!-- user account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="user-image" alt="user image">
+              <?php if ( file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
+                <img src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" class="user-image" alt="user image">
+              <?php else: ?>
+                <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="user-image" alt="user image">
+              <?php endif ?>
               <span class="hidden-xs"><?php echo (isset($user_email))? $user_email : '' ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- user image -->
               <li class="user-header">
-                  <h3 style="color:white !important;"><?php echo $user_info->company; ?></h3>
-                <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image">
+                <h3 style="color:white !important;"><?php echo $user_info->company; ?></h3>
+                <?php if ( file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
+                  <img src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" class="img-circle" alt="user image">
+                <?php else: ?>
+                  <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image">
+                <?php endif ?>
               </li>
               <!-- menu body -->
 
