@@ -142,7 +142,7 @@
                                     </div>
                                     <?php } ?>
                                     <div class="col-xs-12 col-md-4 pull-right">
-                                        <a href="<?php echo base_url('client/information/company'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
+                                        <a href="<?php echo base_url('client/information/products'); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin cho sản phẩm / dịch vụ <i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                     </div>
                             <?php else: ?>
                             <h4 style="color:red">Thông tin đã được gửi</h4>

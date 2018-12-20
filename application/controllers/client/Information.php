@@ -595,8 +595,13 @@ class Information extends Client_Controller {
         // $this->form_validation->set_rules('certificate', 'Image', 'callback_check_file_selected');
 
         if ($this->form_validation->run() == FALSE) {
-            if($this->data['reg_status'] == 1){
-                redirect('client/information', 'refresh');
+            if($this->data['reg_status']['is_information'] == 0){
+                $this->session->set_flashdata('need_input_information_first', 'Cần nhập thông tin cơ bản của doanh nghiệp trước (tại đây)');
+                redirect('client/information/create_extra', 'refresh');
+            }
+            if($this->data['reg_status']['is_company'] == 0){
+                $this->session->set_flashdata('need_input_company_second', 'Cần nhập thông tin chi tiết của doanh nghiệp trước (tại đây)');
+                redirect('client/information/create_company?year=' . $this->data['eventYear'], 'refresh');
             }
             $this->render('client/information/create_product_view');
         } else {
@@ -623,6 +628,7 @@ class Information extends Client_Controller {
                     'award' => $this->input->post('award'),
                     'certificate' => $this->input->post('certificate'),
                     'information_id' => $this->data['user']->information_id,
+                    'identity' => $this->data['user']->username,
                     // 'certificate' => $image,
                     // 'is_submit' => 1,
                     'created_at' => $this->author_info['created_at'],

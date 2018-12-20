@@ -495,22 +495,13 @@ class Information_model extends CI_Model {
         return false;
     }
 
-    public function checkExist($type, $information_id){
-        if($type == 'information'){
-            $query = $this->db->select('*')
-                ->from($type)
-                ->where('id', $information_id)
-                ->get();
+    public function checkExist($type, $identity){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where('identity', $identity)
+            ->get();
 
-            return $query->num_rows();
-        }else{
-            $query = $this->db->select('*')
-                ->from($type)
-                ->where('information_id', $information_id)
-                ->get();
-
-            return $query->num_rows();
-        }
+        return $query->num_rows();
     }
 
     public function fetch_list_company_by_identity($identity){

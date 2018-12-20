@@ -21,9 +21,9 @@ class Dashboard extends Client_Controller {
         $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity($this->data['user']->username);
         $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id);
 
-        $checkInformation = $this->information_model->checkExist('information', $this->data['user']->information_id);
-        $checkCompany = $this->information_model->checkExist('company', $this->data['user']->information_id);
-        $checkProduct = $this->information_model->checkExist('product', $this->data['user']->information_id);
+        $checkInformation = $this->information_model->checkExist('information', $this->data['user']->username);
+        $checkCompany = $this->information_model->checkExist('company', $this->data['user']->username);
+        $checkProduct = $this->information_model->checkExist('product', $this->data['user']->username);
         $this->data['complete'] = 0;
         if($checkInformation > 0 && $checkCompany > 0 && $checkProduct > 0){
             $this->data['complete'] = 1;

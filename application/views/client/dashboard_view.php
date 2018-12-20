@@ -28,7 +28,7 @@
                                 <b><i class="fa fa-envelope margin-r-5"></i> Email</b> <a class="pull-right"><?php echo $user->email; ?></a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="fa fa-phone margin-r-5"></i> Điện thoại</b> <a class="pull-right"><?php echo $user->phone; ?></a>
+                                <b><i class="fa fa-phone margin-r-5"></i> Điện thoại</b> <a class="pull-right"><?php echo $information_submitted['lp_phone']; ?></a>
                             </li>
                         </ul>
                     </div>
@@ -136,7 +136,7 @@
                                 <?php if(!$count_product || $count_product < 1): ?>
                                     <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin về sản phẩm / dịch vụ</p>
                                     <span>
-                                        <a href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary btn-block"><b>Nhập thông tin</b></a>
+                                        <a href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
                                     </span>
                                 <?php else: ?>
                                     <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>

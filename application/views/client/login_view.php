@@ -134,11 +134,11 @@
             },
             register_password: {
                 required: true,
-                minlength: 6,
+                minlength: 8,
             },
             password_confirm: {
                 required: true,
-                minlength: 6,
+                minlength: 8,
             }
         },
         messages :{
@@ -156,11 +156,11 @@
             },
             register_password: {
                 required: 'Không được để trống',
-                minlength: 'Phải lớn hơn 6 ký tự',
+                minlength: 'Phải lớn hơn 8 ký tự',
             },
             password_confirm: {
                 required: 'Không được để trống',
-                minlength: 'Phải lớn hơn 6 ký tự',
+                minlength: 'Phải lớn hơn 8 ký tự',
             }
         }
     });

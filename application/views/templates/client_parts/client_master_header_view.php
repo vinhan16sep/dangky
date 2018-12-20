@@ -138,20 +138,8 @@
             <ul class="dropdown-menu">
               <!-- user image -->
               <li class="user-header">
-                <img src="<?php echo site_url('assets/admin/'); ?>dist/img/user2-160x160.jpg" class="img-circle" alt="user image">
-
-                <p>
-                  Thời Gian Hiện Tại
-                  <small><?php echo date('d/m/Y') ?></small>
-                </p>
-                  <p>
-                      Doanh nghiệp
-                      <small><?php echo $user_info->company; ?></small>
-                  </p>
-                  <p>
-                      Email
-                      <small><?php echo $user_info->email; ?></small>
-                  </p>
+                  <h3 style="color:white !important;"><?php echo $user_info->company; ?></h3>
+                <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image">
               </li>
               <!-- menu body -->
 
