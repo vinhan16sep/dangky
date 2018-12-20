@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<?php echo site_url('assets/admin/bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo site_url('assets/public/css/homepage.css'); ?>">
-    <title>Document</title>
+    <title>Đổi mật khẩu</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

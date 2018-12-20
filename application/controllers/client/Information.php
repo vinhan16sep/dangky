@@ -185,7 +185,7 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',
         ));
@@ -361,10 +361,9 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
+        $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
             'required' => '%s không được trống.',
             'numeric' => '%s phải là số.',
-            'max_length' => '%s tối đa 8 chữ số'
         ));
         $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
             'required' => '%s không được trống.',

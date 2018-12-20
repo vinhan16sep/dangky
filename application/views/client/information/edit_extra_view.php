@@ -15,13 +15,12 @@
                     <h3 style="text-align:center;">Tên công ty: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
                     <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc;"><?php echo $user->username; ?></span></h3>
                     <div style="margin: auto; width: 100%; text-align: center;">
-                        <?php if ( file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
-                            <img src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" class="img-circle" alt="user image" width=10%>
+                        <?php if ( $information_submitted['avatar'] && file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
+                            <img src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" class="img-circle" alt="user image" width=30%>
                         <?php else: ?>
-                            <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image" width=10%>
+                            <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image" width=30%>
                         <?php endif ?>
                         <br>
-                        <strong>Ảnh đại diện</strong>
                     </div>
                     
                 </div>
