@@ -461,10 +461,12 @@
             income_2016: {
                 required: true,
                 number: true,
+                minlength: 8,
             },
             income_2017: {
                 required: true,
                 number: true,
+                minlength: 8,
             },
             income: {
                 required: true
@@ -478,7 +480,6 @@
             },
             price: {
                 required: true,
-                number: true
             },
             customer: {
                 required: true
@@ -523,11 +524,13 @@
             },
             income_2016: {
                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
-                number: 'Doanh thu của SP/GP/DV năm 2016 phải là số'
+                number: 'Doanh thu của SP/GP/DV năm 2016 phải là số',
+                minlength: 'Doanh thu của SP/GP/DV năm 2016 phải nhiều hơn 8 số',
             },
             income_2017: {
                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
-                number: 'Doanh thu của SP/GP/DV năm 2017 phải là số'
+                number: 'Doanh thu của SP/GP/DV năm 2017 phải là số',
+                minlength: 'Doanh thu của SP/GP/DV năm 2017 phải nhiều hơn 8 số',
             },
             income: {
                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016, 2017'
@@ -540,7 +543,6 @@
             },
             price: {
                 required: 'Cần nhập Giá SP/GP/DV',
-                number: 'Giá SP/GP/DV phải là số'
             },
             customer: {
                 required: 'Cần nhập 1 số khách hàng tiêu biểu'

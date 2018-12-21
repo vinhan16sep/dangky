@@ -76,13 +76,13 @@ class Information extends Client_Controller {
                     'modified_by' => $this->author_info['modified_by']
                 );
                 if ($avatar) {
-                    $data = array('avatar' => $avatar,);
+                    $data['avatar'] = $avatar;
                 }
-                $exist = $this->information_model->check_exist_information($this->input->post('identity'));
+                $exist = $this->information_model->check_exist_information($this->data['user']->username);
                 if(!empty($exist)){
                     unset($data['created_at']);
                     unset($data['created_by']);
-                    $update = $this->information_model->update_by_identity('information', $this->input->post('identity'), $data);
+                    $update = $this->information_model->update_by_identity('information', $this->data['user']->username, $data);
                     $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1, 'year' => $this->data['eventYear']));
                     $this->users_model->update('users', $this->data['user']->id, array('information_id' => $exist['id']));
                 }else{
@@ -596,9 +596,8 @@ class Information extends Client_Controller {
         $this->form_validation->set_rules('open_date', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
-        $this->form_validation->set_rules('price', 'Data', 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
+        $this->form_validation->set_rules('price', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.'
             ));
         $this->form_validation->set_rules('customer', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',

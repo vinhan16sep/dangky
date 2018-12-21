@@ -281,53 +281,61 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
+                                ?>
+                            </div>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('description');
-                            echo form_textarea('description', set_value('description', $company['description']), 'class="form-control"');
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_error('description');
+                                echo form_textarea('description', set_value('description', $company['description']), 'class="form-control"');
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('SP dịch vụ chính của DN', 'main_service');
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_label('SP dịch vụ chính của DN', 'main_service');
+                                ?>
+                            </div>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            $main_service = json_decode($company['main_service']);
-                            $options = array(
-                                'Chính phủ điện tử' => 'Chính phủ điện tử',
-                                'Ngành y tế' => 'Ngành y tế',
-                                'Ngành giáo dục' => 'Ngành giáo dục',
-                                'Giao thông' => 'Giao thông',
-                                'Xây dựng' => 'Xây dựng',
-                                'Các lĩnh vực sản xuất/dịch vụ cho DN' => 'Các lĩnh vực sản xuất/dịch vụ cho DN',
-                                'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
-                                'Viễn thông' => 'Viễn thông',
-                                'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
-                                'Tư vấn' => 'Tư vấn'
-                            );
-                            foreach ($options as $key => $value) {
-                                if(!is_null($main_service) && $main_service != null){
-                                    echo form_checkbox('main_service[]', $value, (in_array($value, $main_service, '')? true : false), 'class="btn-checkbox"');
-                                    echo $key.'<br>';
-                                }else{
-                                    echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
-                                    echo $key.'<br>';
+                            <div class="row">
+                                <?php
+                                $main_service = json_decode($company['main_service']);
+                                $options = array(
+                                    'Chính phủ điện tử' => 'Chính phủ điện tử',
+                                    'Ngành y tế' => 'Ngành y tế',
+                                    'Ngành giáo dục' => 'Ngành giáo dục',
+                                    'Giao thông' => 'Giao thông',
+                                    'Xây dựng' => 'Xây dựng',
+                                    'Các lĩnh vực sản xuất/dịch vụ cho DN' => 'Các lĩnh vực sản xuất/dịch vụ cho DN',
+                                    'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
+                                    'Viễn thông' => 'Viễn thông',
+                                    'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
+                                    'Tư vấn' => 'Tư vấn'
+                                );
+                                foreach ($options as $key => $value) {
+                                    if(!is_null($main_service) && $main_service != null){
+                                        echo form_checkbox('main_service[]', $value, (in_array($value, $main_service, '')? true : false), 'class="btn-checkbox"');
+                                        echo $key.'<br>';
+                                    }else{
+                                        echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
+                                        echo $key.'<br>';
+                                    }
+
                                 }
+                                // echo form_dropdown('main_service', $options, '', 'class="form-control"');
 
-                            }
-                            // echo form_dropdown('main_service', $options, '', 'class="form-control"');
-
-                            ?>
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -335,6 +343,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            $new_check = array();
                             $main_market = json_decode($company['main_market']);
                             echo form_label('Thị trường chính', 'main_market');
                             $domestic = array(
@@ -368,9 +377,9 @@
                                     foreach ($check as $key => $value) {
                                         $new_check[] = $value;
                                     }
-
                                 }
                             }
+                            // print_r($main_market);die;
 
                             ?>
                         </div>
@@ -442,16 +451,21 @@
                                         echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous"');
                                         echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
                                     }
+                                }else{
+                                    echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous"');
+                                        echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
                                 }
 
                                 ?>
-                                <?php if($check){ ?>
+                                <?php if($check): ?>
                                     <?php if ($new_check[0] != ''): ?>
                                         <input type="text" name="anonymous" class="input-anonymous form-control" style="display: block;" value="<?php echo $new_check[0] ?>">
                                     <?php else: ?>
                                         <input type="text" name="anonymous" class="input-anonymous form-control" style="display: none;">
                                     <?php endif ?>
-                                <?php } ?>
+                                <?php else: ?>
+                                    <input type="text" name="anonymous" class="input-anonymous form-control" style="display: none;">
+                                <?php endif ?>
 
                             </div>
                         </div>
