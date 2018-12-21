@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tên người đại diện pháp luật', 'legal_representative');
+                            echo form_label('Tên người đại diện pháp luật <span style="color: red">(*)</span>', 'legal_representative');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Chức danh', 'lp_position');
+                            echo form_label('Chức danh <span style="color: red">(*)</span>', 'lp_position');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -74,7 +74,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Email', 'lp_email');
+                            echo form_label('Email <span style="color: red">(*)</span>', 'lp_email');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -89,7 +89,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Di động', 'lp_phone');
+                            echo form_label('Di động <span style="color: red">(*)</span>', 'lp_phone');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -98,6 +98,11 @@
                             echo form_input('lp_phone', set_value('lp_phone'), 'class="form-control"');
                             ?>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-sx-12"><strong>Lưu ý:</strong> <span style="color: red">(*)</span> là các trường cần nhập thông tin</div>
                     </div>
                 </div>
                 <hr>

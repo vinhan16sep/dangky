@@ -289,15 +289,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
+                                ?>
+                            </div>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            echo form_error('description');
-                            echo form_textarea('description', set_value('description'), 'class="form-control"');
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_error('description');
+                                echo form_textarea('description', set_value('description'), 'class="form-control"');
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -305,31 +309,35 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('SP dịch vụ chính của DN', 'main_service');
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_label('SP dịch vụ chính của DN', 'main_service');
+                                ?>
+                            </div>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <?php
-                            $options = array(
-                                'Chính phủ điện tử' => 'Chính phủ điện tử',
-                                'Ngành y tế' => 'Ngành y tế',
-                                'Ngành giáo dục' => 'Ngành giáo dục',
-                                'Giao thông' => 'Giao thông',
-                                'Xây dựng' => 'Xây dựng',
-                                'Các lĩnh vực sản xuất/dịch vụ cho DN' => 'Các lĩnh vực sản xuất/dịch vụ cho DN',
-                                'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
-                                'Viễn thông' => 'Viễn thông',
-                                'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
-                                'Tư vấn' => 'Tư vấn'
-                            );
-                            foreach ($options as $key => $value) {
-                                echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
-                                echo $key.'<br>';
-                            }
-                            // echo form_dropdown('main_service', $options, '', 'class="form-control"');
+                            <div class="row">
+                                <?php
+                                $options = array(
+                                    'Chính phủ điện tử' => 'Chính phủ điện tử',
+                                    'Ngành y tế' => 'Ngành y tế',
+                                    'Ngành giáo dục' => 'Ngành giáo dục',
+                                    'Giao thông' => 'Giao thông',
+                                    'Xây dựng' => 'Xây dựng',
+                                    'Các lĩnh vực sản xuất/dịch vụ cho DN' => 'Các lĩnh vực sản xuất/dịch vụ cho DN',
+                                    'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
+                                    'Viễn thông' => 'Viễn thông',
+                                    'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
+                                    'Tư vấn' => 'Tư vấn'
+                                );
+                                foreach ($options as $key => $value) {
+                                    echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
+                                    echo $key.'<br>';
+                                }
+                                // echo form_dropdown('main_service', $options, '', 'class="form-control"');
 
-                            ?>
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -337,60 +345,64 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <?php
-                            echo form_label('Thị trường chính', 'main_market');
-                            $domestic = array(
-                                'Thị trường Chính phủ' => 'Thị trường Chính phủ',
-                                'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
-                                'Thị trường người tiêu dùng (TT mass)' => 'Thị trường người tiêu dùng (TT mass)'
-                            );
-                            $target = array(
-                                'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
-                                'Châu Âu' => 'Châu Âu',
-                                'Nhật Bản' => 'Nhật Bản',
-                                'Các nước trong khu vực' => 'Các nước trong khu vực'
-                            );
-                            ?>
+                            <div class="row">
+                                <?php
+                                echo form_label('Thị trường chính', 'main_market');
+                                $domestic = array(
+                                    'Thị trường Chính phủ' => 'Thị trường Chính phủ',
+                                    'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
+                                    'Thị trường người tiêu dùng (TT mass)' => 'Thị trường người tiêu dùng (TT mass)'
+                                );
+                                $target = array(
+                                    'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
+                                    'Châu Âu' => 'Châu Âu',
+                                    'Nhật Bản' => 'Nhật Bản',
+                                    'Các nước trong khu vực' => 'Các nước trong khu vực'
+                                );
+                                ?>
+                            </div>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
-                            <strong style="margin-left: -15px">Trong nước</strong>
-                            <div class="row" style="margin-left: 20px">
-                                <?php
-                                foreach ($domestic as $key => $value) {
-                                    echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
-                                    echo $key.'<br>';
-                                }
-                                ?>
-                            </div>
-                            <br>
-                            <strong style="margin-left: -15px">Quốc tế</strong>
-                            <div class="row" style="margin-left: 20px">
-                                <?php
-                                echo form_checkbox('main_market[]', 'Gia công xuất khẩu', false, 'class="btn-checkbox"');
-                                echo 'Gia công xuất khẩu';
-                                ?>
-                                &nbsp;&nbsp;&nbsp;
-                                <?php
-                                echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', false, 'class="btn-checkbox"');
-                                echo 'Xuất khẩu SP/Giải pháp';
-                                ?>
-                                &nbsp;&nbsp;&nbsp;
-                                <?php
-                                echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', false, 'class="btn-checkbox"');
-                                echo 'Xuất khẩu nhân lực CNTT';
-                                ?>
-                            </div>
-                            <div class="row" style="margin-left: 20px">
-                                <strong>Xuất khẩu mục tiêu</strong><br>
-                                <?php
-                                foreach ($target as $key => $value) {
-                                    echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
-                                    echo $key.'<br>';
-                                }
-                                echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous"');
-                                echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
-                                ?>
-                                <input type="text" name="anonymous" class="input-anonymous form-control" style="display: none;">
+                            <div class="row">
+                                <strong style="margin-left: -15px">Trong nước</strong>
+                                <div class="row" style="margin-left: 20px">
+                                    <?php
+                                    foreach ($domestic as $key => $value) {
+                                        echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
+                                        echo $key.'<br>';
+                                    }
+                                    ?>
+                                </div>
+                                <br>
+                                <strong style="margin-left: -15px">Quốc tế</strong>
+                                <div class="row" style="margin-left: 20px">
+                                    <?php
+                                    echo form_checkbox('main_market[]', 'Gia công xuất khẩu', false, 'class="btn-checkbox"');
+                                    echo 'Gia công xuất khẩu';
+                                    ?>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <?php
+                                    echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', false, 'class="btn-checkbox"');
+                                    echo 'Xuất khẩu SP/Giải pháp';
+                                    ?>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <?php
+                                    echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', false, 'class="btn-checkbox"');
+                                    echo 'Xuất khẩu nhân lực CNTT';
+                                    ?>
+                                </div>
+                                <div class="row" style="margin-left: 20px">
+                                    <strong>Xuất khẩu mục tiêu</strong><br>
+                                    <?php
+                                    foreach ($target as $key => $value) {
+                                        echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
+                                        echo $key.'<br>';
+                                    }
+                                    echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous"');
+                                    echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
+                                    ?>
+                                    <input type="text" name="anonymous" class="input-anonymous form-control" style="display: none;">
+                                </div>
                             </div>
                         </div>
                     </div>
