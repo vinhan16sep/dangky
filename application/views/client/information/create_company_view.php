@@ -289,11 +289,9 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
-                                ?>
-                            </div>
+                            <?php
+                            echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
+                            ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
@@ -309,11 +307,9 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('SP dịch vụ chính của DN', 'main_service');
-                                ?>
-                            </div>
+                            <?php
+                            echo form_label('SP dịch vụ chính của DN', 'main_service');
+                            ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
@@ -330,6 +326,7 @@
                                     'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
                                     'Tư vấn' => 'Tư vấn'
                                 );
+                                echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
                                 foreach ($options as $key => $value) {
                                     echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
                                     echo $key.'<br>';
@@ -347,25 +344,24 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Thị trường chính', 'main_market');
-                                $domestic = array(
-                                    'Thị trường Chính phủ' => 'Thị trường Chính phủ',
-                                    'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
-                                    'Thị trường người tiêu dùng' => 'Thị trường người tiêu dùng'
-                                );
-                                $target = array(
-                                    'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
-                                    'Châu Âu' => 'Châu Âu',
-                                    'Nhật Bản' => 'Nhật Bản',
-                                    'Các nước trong khu vực' => 'Các nước trong khu vực'
-                                );
-                                ?>
-                            </div>
+                            <?php
+                            echo form_label('Thị trường chính', 'main_market');
+                            $domestic = array(
+                                'Thị trường Chính phủ' => 'Thị trường Chính phủ',
+                                'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
+                                'Thị trường người tiêu dùng' => 'Thị trường người tiêu dùng'
+                            );
+                            $target = array(
+                                'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
+                                'Châu Âu' => 'Châu Âu',
+                                'Nhật Bản' => 'Nhật Bản',
+                                'Các nước trong khu vực' => 'Các nước trong khu vực'
+                            );
+                            ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
                             <div class="row">
+                                <label style="margin-left: -15px" id="main_market[]-error" class="error" for="main_market[]"></label><br />
                                 <strong style="margin-left: -15px">Trong nước</strong>
                                 <div class="row" style="margin-left: 20px">
                                     <?php
@@ -571,6 +567,14 @@
                 required: true,
                 digits: true
             },
+            'main_service[]': {
+                required: true,
+                minlength: 1
+            },
+            'main_market[]': {
+                required: true,
+                minlength: 1
+            },
             // description: {
             //     required: true
             // },
@@ -696,6 +700,12 @@
                 required: 'Không được để trống',
                 digits: 'Phải là số'
             },
+            'main_service[]': {
+                required: 'SP dịch vụ chính của DN không được để trống',
+            },
+            'main_market[]': {
+                required: 'Thị trường chính không được để trống',
+            }
             // description: {
             //     required: 'Cần nhập Giới thiệu chung'
             // },
