@@ -31,8 +31,8 @@
                     <div class="tab-content">
                         <div class="post">
                             <div class="form-group">
-                                <h2 style="text-align:center;">THÔNG TIN CƠ BẢN DOANH NGHIỆP</h2>
-                                <h3 style="text-align:center;">Mã số đăng ký kinh doanh: <span style="color:#3c8dbc"><?php echo $user->username; ?></span></h3>
+                                <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA DOANH NGHIỆP</h2>
+                                <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc"><?php echo $user->username; ?></span></h3>
                                 <div style="margin: auto; width: 100%; text-align: center;">
                                     <?php if ( $submitted['avatar'] && file_exists('assets/upload/avatar/' . $submitted['avatar']) ): ?>
                                         <img src="<?php echo base_url('assets/upload/avatar/') . $submitted['avatar']; ?>" class="img-circle" alt="user image" width=30%>

@@ -9,7 +9,7 @@
         <div class="row modified-mode">
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
-                    <h2 style="text-align:center;">THÔNG TIN CƠ BẢN DOANH NGHIỆP</h2>
+                    <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA DOANH NGHIỆP</h2>
                 </div>
                 <div class="form-group">
                     <h3 style="text-align:center;">Tên công ty: <span style="color:#3c8dbc;"><?php echo $user->company; ?></span></h3>
@@ -109,25 +109,20 @@
                     </div>
                 </div>
                 <hr>
-<!--                <div class="form-group">-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-sm-3 col-md-3 col-sx-12">-->
-<!--                            --><?php
-//                            echo form_label('Link download PĐK của DN', 'link');
-//                            ?>
-<!--                        </div>-->
-<!--                        <div class="col-sm-9 col-md-9 col-sx-12">-->
-<!--                            <p>Doanh nghiệp download mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu, scan, upload và chèn link dưới đây.</p>-->
-<!--                            <a class="btn btn-warning" href="--><?php //echo site_url('Phieu-dang-ky.docx') ?><!--" target="_blank">Download mẫu PĐK</a>-->
-<!--                            <br>-->
-<!--                            <br>-->
-<!--                            --><?php
-//                            echo form_error('link');
-//                            echo form_input('link', set_value('link', $extra['link']), 'class="form-control"');
-//                            ?>
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Link download PĐK của DN', 'link');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <p>Doanh nghiệp tải mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu và gửi lại bản cứng cho ban tổ chức.</p>
+                            <a class="btn btn-warning" href="<?php echo site_url('Phieu-dang-ky.docx') ?>" target="_blank">Tải mẫu Phiếu đăng ký</a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
                 <br>
                 <div class="form-group col-sm-12 text-right submit-extra-form">
                     <div class="col-sm-3 col-md-3 col-sx-12">

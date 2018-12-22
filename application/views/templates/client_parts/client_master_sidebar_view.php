@@ -41,21 +41,21 @@
                         <span>Thông tin doanh nghiệp</span>
                         <span class="pull-right-container"></span>
                     </a>
-                    <ul class="">
-                        <?php if($company_submitted): ?>
-                            <?php foreach ($company_submitted as $value){ ?>
-                                <li class="<?php echo ($active == 'menu')? 'active' : '' ?>">
-                                    <a href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>"> <i class="fa fa-minus" aria-hidden="true"></i> Năm <?php echo $value['year']; ?></a>
-                                    <?php if(date('Y') <= $value['year']){ ?>
-                                        <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>"><b style="color: orange">- sửa -</b></a>
-                                    <?php } ?>
-                                    <br>
-                                </li>
-                            <?php } ?>
-                        <?php else: ?>
-                            <p style="color: white">Chưa có thông tin</p>
-                        <?php endif; ?>
-                    </ul>
+<!--                    <ul class="">-->
+<!--                        --><?php //if($company_submitted): ?>
+<!--                            --><?php //foreach ($company_submitted as $value){ ?>
+<!--                                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
+<!--                                    <a href="--><?php //echo base_url('client/information/company?year=' . $value['year']) ?><!--"> <i class="fa fa-minus" aria-hidden="true"></i> Năm --><?php //echo $value['year']; ?><!--</a>-->
+<!--                                    --><?php //if(date('Y') <= $value['year']){ ?>
+<!--                                        <a style="display: inline;" href="--><?php //echo base_url('client/information/edit_company?year=' . $value['year']); ?><!--"><b style="color: orange">- sửa -</b></a>-->
+<!--                                    --><?php //} ?>
+<!--                                    <br>-->
+<!--                                </li>-->
+<!--                            --><?php //} ?>
+<!--                        --><?php //else: ?>
+<!--                            <p style="color: white">Chưa có thông tin</p>-->
+<!--                        --><?php //endif; ?>
+<!--                    </ul>-->
                 </li>
                 <li class="<?php echo ($active == 'products')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/products'); ?>">
