@@ -382,13 +382,9 @@
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
-                            <p style="color:red;">Ghi chú: Nếu đã có GCN bản quyền thì đặt link vào ô trên, nếu chưa có thì tải mẫu Cam kết bản quyền tại đây và đặt link vào ô dưới.</p>
+                            <p style="color:red;">Ghi chú: Nếu chưa có giấy chứng nhận bản quyền, thì tải mẫu Cam kết bản quyền tại đây, khai thông tin, ký, đóng dấu và gửi lại bản cứng cho ban tổ chức.</p>
+                            <a class="btn btn-warning" href="<?php echo site_url('Phieu-dang-ky.docx') ?>" target="_blank">Tải mẫu Cam kết bản quyền</a>
                             <br>
-                            <br>
-                            <?php
-                            echo form_error('certificate');
-                            echo form_input('certificate', set_value('certificate', $product['certificate']), 'class="form-control"');
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -491,10 +487,12 @@
             income_2016: {
                 required: true,
                 number: true,
+                maxlength: 8,
             },
             income_2017: {
                 required: true,
                 number: true,
+                maxlength: 8,
             },
             area: {
                 required: true
@@ -549,11 +547,13 @@
             },
             income_2016: {
                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
-                number: 'Doanh thu của SP/GP/DV năm 2016 phải là số'
+                number: 'Doanh thu của SP/GP/DV năm 2016 phải là số',
+                maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
             },
             income_2017: {
                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
-                number: 'Doanh thu của SP/GP/DV năm 2017 phải là số'
+                number: 'Doanh thu của SP/GP/DV năm 2017 phải là số',
+                maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
             },
             area: {
                 required: 'Thị phần của SP/giải pháp/DV'
