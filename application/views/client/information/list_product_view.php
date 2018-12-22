@@ -30,7 +30,7 @@
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
-                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM / GIẢI PHÁP / DỊCH VỤ' : 'Danh sách đã đăng ký' ?></h4>
+                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM / GIẢI PHÁP / DỊCH VỤ' : 'Danh sách sản phẩm/dịch vụ  đã đăng ký' ?></h4>
                             <?php if (!empty($products)): ?>
                                 <div class="row">
                                     <div class="col-lg-12" style="margin-top: 10px;">
@@ -38,7 +38,7 @@
                                         echo '<table class="table table-hover table-bordered table-condensed">';
                                         echo '<tr>';
                                         echo '<td><b>STT</b></td>';
-                                        echo '<td><b>Tên SP/dịch vụ/giải pháp/ứng dụng</b></td>';
+                                        echo '<td><b>Tên sản phẩm/dịch vụ</b></td>';
                                         echo '<td><b style="text-align: center !important;">Kết quả đánh giá</b></td>';
                                         if($reg_status['is_final'] == 0){
                                             echo '<td><b style="text-align: center !important;">Thao tác</b></td>';
