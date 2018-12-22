@@ -86,7 +86,7 @@
                             <?php echo form_input('username', set_value('username'), 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
-                            <?php echo form_label('Email: ', 'email'); ?>
+                            <?php echo form_label('Email công ty: ', 'email'); ?>
                             <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                             <?php echo form_input('email', set_value('email'), 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>

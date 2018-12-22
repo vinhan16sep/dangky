@@ -16,7 +16,7 @@
             <div class="col-lg-10 col-lg-offset-0">
                 <div class="form-group">
                     <h2 style="text-align:center;">THÔNG TIN CHI TIẾT DOANH NGHIỆP</h2>
-                    <h3 style="text-align:center;">DANH HIỆU NĂM <span style="color:#3c8dbc;"><?php echo $year; ?></span></h3>
+                    <h3 style="text-align:center;">DANH HIỆU SAO KHUÊ NĂM <span style="color:#3c8dbc;"><?php echo $year; ?></span></h3>
                 </div>
                 <hr>
                 <?php
@@ -334,9 +334,11 @@
                                     echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
                                     echo $key.'<br>';
                                 }
+                                echo form_checkbox('main_service[]', '', false, 'class="btn-checkbox" id="anonymous-service"');
+                                echo 'Khác (nêu rõ)<br>';
                                 // echo form_dropdown('main_service', $options, '', 'class="form-control"');
-
                                 ?>
+                                <input type="text" name="anonymous-service" class="input-anonymous-service form-control" style="display: none;">
                             </div>
                         </div>
                     </div>
@@ -351,7 +353,7 @@
                                 $domestic = array(
                                     'Thị trường Chính phủ' => 'Thị trường Chính phủ',
                                     'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
-                                    'Thị trường người tiêu dùng (TT mass)' => 'Thị trường người tiêu dùng (TT mass)'
+                                    'Thị trường người tiêu dùng' => 'Thị trường người tiêu dùng'
                                 );
                                 $target = array(
                                     'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
@@ -717,6 +719,19 @@
     $('.input-anonymous').change(function(){
         var anonymous = $(this).val();
         $('#anonymous').attr('value', anonymous);
+    })
+
+    $('#anonymous-service').click(function(){
+        if($(this).prop("checked") == true){
+            $('.input-anonymous-service').slideDown();
+        }else{
+            $('.input-anonymous-service').slideUp();
+        }
+    })
+
+    $('.input-anonymous-service').change(function(){
+        var anonymous = $(this).val();
+        $('#anonymous-service').attr('value', anonymous);
     })
 
 </script>

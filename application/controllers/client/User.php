@@ -215,7 +215,7 @@ class User extends MY_Controller {
                 // $this->email->message($body);
 
                 if ($forgotten) {
-                    $this->session->set_flashdata('auth_message','Đã gửi Email thành công. Vui lòng kiểm tra Email!');
+                    $this->session->set_flashdata('register_success','Đã gửi Email thành công. Vui lòng kiểm tra Email!');
                     return redirect('client/user/login');
                 }
             }
@@ -260,7 +260,7 @@ class User extends MY_Controller {
                             $data = array('password' => $this->input->post('password'));
                             if($this->ion_auth->update($user->id, $data)){
                                 $this->ion_auth->clear_forgotten_password_code($code);
-                                $this->session->set_flashdata('auth_message', $this->ion_auth->messages());
+                                $this->session->set_flashdata('register_success', $this->ion_auth->messages());
                                 redirect("client/user/login", 'refresh');
                             }else{
                                 redirect('client/user/reset_password/' . $code, 'refresh');
@@ -291,13 +291,13 @@ class User extends MY_Controller {
         if ($activation)
         {
             // redirect them to the auth page
-            $this->session->set_flashdata('message', $this->ion_auth->messages());
+            $this->session->set_flashdata('register_success', $this->ion_auth->messages());
             redirect("client/user/login", 'refresh');
         }
         else
         {
             // redirect them to the forgot password page
-            $this->session->set_flashdata('message', $this->ion_auth->errors());
+            $this->session->set_flashdata('auth_message', $this->ion_auth->errors());
             redirect("client/user/forgot_password", 'refresh');
         }
     }
