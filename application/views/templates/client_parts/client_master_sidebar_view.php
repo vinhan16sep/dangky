@@ -31,7 +31,7 @@
                 <li class="<?php echo ($active == 'extra')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/extra'); ?>">
                         <i class="fa fa-bars" aria-hidden="true"></i>
-                        <span>Thông tin đăng ký</span>
+                        <span>Thông tin cơ bản</span>
                         <span class="pull-right-container"></span>
                     </a>
                 </li>

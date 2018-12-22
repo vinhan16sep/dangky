@@ -283,7 +283,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('1 số khách hàng tiêu biểu', 'customer');
+                            echo form_label('Thông tin khách hàng (Số lượng khách hàng cá nhân, khách hàng tổ chức/doanh nghiệp, kể tên một số khách hàng tiêu biểu)', 'customer');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -293,7 +293,7 @@
                                 'name' => 'customer',
                                 'id' => 'customer',
                                 'value' => set_value('customer'),
-                                'rows' => '3',
+                                'rows' => '5',
                                 'class' => "form-control"
                             ));
                             ?>

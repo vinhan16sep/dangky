@@ -31,10 +31,11 @@
                                 <li class="list-group-item">
                                     <?php $service = json_decode($product['service']) ?>
                                     <a><i class="fa fa-circle margin-r-5"></i> Đăng ký tham gia lĩnh vực</a> <br>
-                                    <?php foreach ($service as $key => $value): ?>
-                                        <p class="" style="padding-left:20px;"><?php echo $value; ?></p>
-                                    <?php endforeach ?>
-                                    
+                                    <?php if(!is_null($service) && $service != null){ ?>
+                                        <?php foreach ($service as $key => $value): ?>
+                                            <p class="" style="padding-left:20px;"><?php echo $value; ?></p>
+                                        <?php endforeach ?>
+                                    <?php } ?>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-calendar margin-r-5"></i> Ngày thương mại hoá/ra mắt dịch vụ</a> <p class="pull-right"><?php echo $product['open_date']; ?></p>
@@ -78,7 +79,7 @@
                                     <a><i class="fa fa-money margin-r-5"></i> Giá SP/GP/DV</a> <p class="pull-right"><?php echo $product['price']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> 1 số khách hàng tiêu biểu</a> <br><p class="" style="padding-left:20px;"><?php echo $product['customer']; ?></p>
+                                    <a><i class="fa fa-users margin-r-5"></i> Thông tin khách hàng (Số lượng khách hàng cá nhân, khách hàng tổ chức/doanh nghiệp, kể tên một số khách hàng tiêu biểu)</a> <br><p class="" style="padding-left:20px;"><?php echo $product['customer']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-child margin-r-5"></i> Dịch vụ sau bán hàng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['after_sale']; ?></p>
