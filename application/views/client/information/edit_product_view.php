@@ -70,6 +70,7 @@
                                 'An toàn thông tin' => 'An toàn thông tin',
                                 'Các lĩnh vực khác' => 'Các lĩnh vực khác'
                             );
+                            echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
                             echo form_checkbox('group_1', '', '', 'class="btn-group-1"');
                             echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 18 lĩnh vực ứng dụng chuyên ngành</span><br>';
                             echo "<div class='row group-1' style='display:none; margin-left: 20px'>";
@@ -518,7 +519,11 @@
             },
             certificate: {
                 required: true
-            }
+            },
+            'service[]': {
+                required: true,
+                minlength: 1
+            },
         },
         messages :{
             name: {
@@ -578,7 +583,10 @@
             },
             certificate: {
                 required: 'Cần nhập Giấy chứng nhận bản quyền/cam kết bản quyền'
-            }
+            },
+            'service[]': {
+                required: 'Cần nhập lĩnh vực',
+            },
         }
     });
 </script>

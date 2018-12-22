@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Ảnh đại diện', 'avatar');
+                            echo form_label('Logo công ty <br /><span style="color: #f0ad4e">(*.jpg, *.jpeg, *.png, *.gif, file < 1200Kb)</span>', 'avatar');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">

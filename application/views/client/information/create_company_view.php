@@ -326,6 +326,7 @@
                                     'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
                                     'Tư vấn' => 'Tư vấn'
                                 );
+                                echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
                                 foreach ($options as $key => $value) {
                                     echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
                                     echo $key.'<br>';
@@ -360,6 +361,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
                             <div class="row">
+                                <label style="margin-left: -15px" id="main_market[]-error" class="error" for="main_market[]"></label><br />
                                 <strong style="margin-left: -15px">Trong nước</strong>
                                 <div class="row" style="margin-left: 20px">
                                     <?php
@@ -565,6 +567,14 @@
                 required: true,
                 digits: true
             },
+            'main_service[]': {
+                required: true,
+                minlength: 1
+            },
+            'main_market[]': {
+                required: true,
+                minlength: 1
+            },
             // description: {
             //     required: true
             // },
@@ -690,6 +700,12 @@
                 required: 'Không được để trống',
                 digits: 'Phải là số'
             },
+            'main_service[]': {
+                required: 'SP dịch vụ chính của DN không được để trống',
+            },
+            'main_market[]': {
+                required: 'Thị trường chính không được để trống',
+            }
             // description: {
             //     required: 'Cần nhập Giới thiệu chung'
             // },
