@@ -5717,3 +5717,9 @@ table.text-center th {
   color: red;
   float: none;
 }
+
+@media screen and (max-width: 990px) {
+    .profile-user-img {
+        width: 15%;
+    }
+}

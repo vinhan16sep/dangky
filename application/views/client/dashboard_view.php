@@ -1,7 +1,7 @@
 <!--main content start-->
 <div class="content-wrapper" style="min-height: 916px;">
     <div class="box-body pad table-responsive" style="box-shadow: 2px 2px 1px grey;">
-        <a target="_blank" href="http://danhhieusaokhue.vn/"><img style="width: 1185px !important;" src="<?php echo site_url('assets/public/img/2A.gif'); ?>" /></a>
+        <a target="_blank" href="http://danhhieusaokhue.vn/"><img style="width: 100% !important;" src="<?php echo site_url('assets/public/img/2A.gif'); ?>" /></a>
 <!--        <h3>Trang thông tin: <span style="color:red;">--><?php //echo $user->company; ?><!--</span></h3>-->
     </div>
     <section class="content">

@@ -309,6 +309,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
+                                $new_check_main_service = array();
                                 $main_service = json_decode($company['main_service']);
                                 $options = array(
                                     'Chính phủ điện tử' => 'Chính phủ điện tử',
@@ -322,6 +323,18 @@
                                     'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
                                     'Tư vấn' => 'Tư vấn'
                                 );
+
+                                $check_main_service = false;
+                                if(!is_null($main_service) && $main_service != null){
+
+                                    $check_main_service = array_diff($main_service, $options);
+                                    if($check_main_service){
+                                        foreach ($check_main_service as $key => $value) {
+                                            $new_check_main_service[] = $value;
+                                        }
+                                    }
+                                }
+
                                 foreach ($options as $key => $value) {
                                     if(!is_null($main_service) && $main_service != null){
                                         echo form_checkbox('main_service[]', $value, (in_array($value, $main_service, '')? true : false), 'class="btn-checkbox"');
@@ -332,9 +345,31 @@
                                     }
 
                                 }
+
                                 // echo form_dropdown('main_service', $options, '', 'class="form-control"');
+                                if($check_main_service){
+                                    if($new_check_main_service[0] != ''){
+                                        echo form_checkbox('main_service[]', '', true, 'class="btn-checkbox" id="anonymous-service"');
+                                        echo 'Sản phẩm - Khác (nêu rõ)<br>';
+                                    }else{
+                                        echo form_checkbox('main_service[]', '', false, 'class="btn-checkbox" id="anonymous-service"');
+                                        echo 'Sản phẩm - Khác (nêu rõ)<br>';
+                                    }
+                                }else{
+                                    echo form_checkbox('main_service[]', '', false, 'class="btn-checkbox" id="anonymous-service"');
+                                    echo 'Sản phẩm - Khác (nêu rõ)<br>';
+                                }
 
                                 ?>
+                                <?php if($check_main_service): ?>
+                                    <?php if ($new_check_main_service[0] != ''): ?>
+                                        <input type="text" name="anonymous-service" class="input-anonymous-service form-control" style="display: block;" value="<?php echo $new_check_main_service[0] ?>">
+                                    <?php else: ?>
+                                        <input type="text" name="anonymous-service" class="input-anonymous-service form-control" style="display: none;">
+                                    <?php endif ?>
+                                <?php else: ?>
+                                    <input type="text" name="anonymous-service" class="input-anonymous-service form-control" style="display: none;">
+                                <?php endif ?>
                             </div>
                         </div>
                     </div>
@@ -349,7 +384,7 @@
                             $domestic = array(
                                 'Thị trường Chính phủ' => 'Thị trường Chính phủ',
                                 'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
-                                'Thị trường người tiêu dùng (TT mass)' => 'Thị trường người tiêu dùng (TT mass)'
+                                'Thị trường người tiêu dùng' => 'Thị trường người tiêu dùng'
                             );
                             $target = array(
                                 'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
@@ -360,7 +395,7 @@
                             $root = array(
                                 'Thị trường Chính phủ' => 'Thị trường Chính phủ',
                                 'Thị trường doanh nghiệp' => 'Thị trường doanh nghiệp',
-                                'Thị trường người tiêu dùng (TT mass)' => 'Thị trường người tiêu dùng (TT mass)',
+                                'Thị trường người tiêu dùng' => 'Thị trường người tiêu dùng',
                                 'Mỹ và các nước Bắc Mỹ' => 'Mỹ và các nước Bắc Mỹ',
                                 'Châu Âu' => 'Châu Âu',
                                 'Nhật Bản' => 'Nhật Bản',
@@ -453,9 +488,8 @@
                                     }
                                 }else{
                                     echo form_checkbox('main_market[]', '', false, 'class="btn-checkbox" id="anonymous"');
-                                        echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
+                                    echo 'Xuất khẩu mục tiêu - Khác (nêu rõ)<br>';
                                 }
-
                                 ?>
                                 <?php if($check): ?>
                                     <?php if ($new_check[0] != ''): ?>
@@ -785,6 +819,31 @@
     $('.input-anonymous').change(function(){
         var anonymous = $(this).val();
         $('#anonymous').attr('value', anonymous);
+    })
+
+    $('.input-anonymous').each(function(){
+        var anonymous = $(this).val();
+        $('#anonymous').attr('value', anonymous);
+    });
+
+
+
+    $('#anonymous-service').click(function(){
+        if($(this).prop("checked") == true){
+            $('.input-anonymous-service').slideDown();
+        }else{
+            $('.input-anonymous-service').slideUp();
+        }
+    })
+
+    $('.input-anonymous-service').each(function(){
+        var anonymous_service = $(this).val();
+        $('#anonymous-service').attr('value', anonymous_service);
+    });
+
+    $('.input-anonymous-service').change(function(){
+        var anonymous_service = $(this).val();
+        $('#anonymous-service').attr('value', anonymous_service);
     })
 
 </script>
