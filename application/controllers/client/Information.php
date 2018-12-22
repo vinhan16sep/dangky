@@ -921,9 +921,10 @@ class Information extends Client_Controller {
     protected function check_img($filename, $filesize){
         $map = strripos($filename, '.')+1;
         $fileextension = substr($filename, $map,(strlen($filename)-$map));
-        if(!($fileextension == 'jpg' || $fileextension == 'jpeg' || $fileextension == 'png' || $fileextension == 'gif'  || $filesize > 1228800)){
+        $array_image = array('jpg', 'jpeg', 'png', 'gif');
+        if( !in_array($fileextension, $array_image) || $filesize > 1228800){
             $this->session->set_flashdata('message_error', 'Định dạng file không đúng hoặc dung lượng ảnh vượt quá 1200Kb');
-            redirect('client/information/create_extra');
+            redirect('client/information/extra');
         }
     }
 

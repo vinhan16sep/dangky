@@ -68,6 +68,7 @@
                                 'An toàn thông tin' => 'An toàn thông tin',
                                 'Các lĩnh vực khác' => 'Các lĩnh vực khác'
                             );
+                            echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
                             echo form_checkbox('group_1', '', false, 'class="btn-group-1"');
                             echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 18 lĩnh vực ứng dụng chuyên ngành</span><br>';
                             echo "<div class='row group-1' style='display:none; margin-left: 20px'>";
@@ -491,7 +492,11 @@
             },
             certificate: {
                 required: true
-            }
+            },
+            'service[]': {
+                required: true,
+                minlength: 1
+            },
         },
         messages :{
             name: {
@@ -532,10 +537,10 @@
                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016, 2017'
             },
             area: {
-                required: 'Thị phần của SP/giải pháp/DV'
+                required: 'Cần nhập thị phần của SP/giải pháp/DV'
             },
             open_date: {
-                required: 'Ngày thương mại hoá/ra mắt dịch vụ'
+                required: 'Cần nhập ngày thương mại hoá/ra mắt dịch vụ'
             },
             price: {
                 required: 'Cần nhập Giá SP/GP/DV',
@@ -554,7 +559,10 @@
             },
             certificate: {
                 required: 'Cần nhập Giấy chứng nhận bản quyền/cam kết bản quyền'
-            }
+            },
+            'service[]': {
+                required: 'Cần nhập lĩnh vực',
+            },
         }
     });
 </script>

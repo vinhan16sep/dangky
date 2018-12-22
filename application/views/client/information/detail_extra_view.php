@@ -30,6 +30,12 @@
                 <div class="nav-tabs-custom box-body" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
+                            <?php if ($this->session->flashdata('message_error')): ?>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
+                                </div>
+                            <?php endif ?>
                             <div class="form-group">
                                 <h2 style="text-align:center;">THÔNG TIN CƠ BẢN CỦA DOANH NGHIỆP</h2>
                                 <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc"><?php echo $user->username; ?></span></h3>

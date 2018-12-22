@@ -281,11 +281,9 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
-                                ?>
-                            </div>
+                            <?php
+                            echo form_label('Giới thiệu chung về DN (nêu thông tin về lịch sử hình thành, đội ngũ lãnh đạo DN, định hướng phát triển/chiến lược của DN, thế mạnh của DN...)', 'description');
+                            ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
@@ -300,11 +298,9 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
-                            <div class="row">
-                                <?php
-                                echo form_label('SP dịch vụ chính của DN', 'main_service');
-                                ?>
-                            </div>
+                            <?php
+                            echo form_label('SP dịch vụ chính của DN', 'main_service');
+                            ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
@@ -334,7 +330,7 @@
                                         }
                                     }
                                 }
-
+                                echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
                                 foreach ($options as $key => $value) {
                                     if(!is_null($main_service) && $main_service != null){
                                         echo form_checkbox('main_service[]', $value, (in_array($value, $main_service, '')? true : false), 'class="btn-checkbox"');
@@ -418,53 +414,57 @@
 
                             ?>
                         </div>
+
                         <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
-                            <strong style="margin-left: -15px">Trong nước</strong>
-                            <div class="row" style="margin-left: 20px">
-                                <?php
-                                foreach ($domestic as $key => $value) {
-                                    if(!is_null($main_market) && $main_market != null){
-                                        echo form_checkbox('main_market[]', $value, (in_array($value, $main_market, '')? true : false), 'class="btn-checkbox"');
-                                        echo $key.'<br>';
-                                    }else{
-                                        echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
-                                        echo $key.'<br>';
+                            <div class="row">
+                                <label style="margin-left: -15px" id="main_market[]-error" class="error" for="main_market[]"></label><br />
+                                <strong style="margin-left: -15px">Trong nước</strong>
+                                <div class="row" style="margin-left: 20px">
+                                    <?php
+                                    foreach ($domestic as $key => $value) {
+                                        if(!is_null($main_market) && $main_market != null){
+                                            echo form_checkbox('main_market[]', $value, (in_array($value, $main_market, '')? true : false), 'class="btn-checkbox"');
+                                            echo $key.'<br>';
+                                        }else{
+                                            echo form_checkbox('main_market[]', $value, false, 'class="btn-checkbox"');
+                                            echo $key.'<br>';
+                                        }
                                     }
-                                }
-                                ?>
-                            </div>
-                            <br>
-                            <strong style="margin-left: -15px">Quốc tế</strong>
-                            <div class="row" style="margin-left: 20px">
-                                <?php
-                                if(!is_null($main_market) && $main_market != null){
-                                    echo form_checkbox('main_market[]', 'Gia công xuất khẩu', (in_array('Gia công xuất khẩu', $main_market, '')? true : false), 'class="btn-checkbox"');
-                                    echo 'Gia công xuất khẩu';
-                                }else{
-                                    echo form_checkbox('main_market[]', 'Gia công xuất khẩu', false, 'class="btn-checkbox"');
-                                    echo 'Gia công xuất khẩu';
-                                }
-                                ?>
-                                &nbsp;&nbsp;&nbsp;
-                                <?php
-                                if(!is_null($main_market) && $main_market != null){
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', (in_array('Xuất khẩu SP/Giải pháp', $main_market, '')? true : false), 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu SP/Giải pháp';
-                                }else{
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', false, 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu SP/Giải pháp';
-                                }
-                                ?>
-                                &nbsp;&nbsp;&nbsp;
-                                <?php
-                                if(!is_null($main_market) && $main_market != null){
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', (in_array('Xuất khẩu nhân lực CNTT', $main_market, '')? true : false), 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu nhân lực CNTT';
-                                }else{
-                                    echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', false, 'class="btn-checkbox"');
-                                    echo 'Xuất khẩu nhân lực CNTT';
-                                }
-                                ?>
+                                    ?>
+                                </div>
+                                <br>
+                                <strong style="margin-left: -15px">Quốc tế</strong>
+                                <div class="row" style="margin-left: 20px">
+                                    <?php
+                                    if(!is_null($main_market) && $main_market != null){
+                                        echo form_checkbox('main_market[]', 'Gia công xuất khẩu', (in_array('Gia công xuất khẩu', $main_market, '')? true : false), 'class="btn-checkbox"');
+                                        echo 'Gia công xuất khẩu';
+                                    }else{
+                                        echo form_checkbox('main_market[]', 'Gia công xuất khẩu', false, 'class="btn-checkbox"');
+                                        echo 'Gia công xuất khẩu';
+                                    }
+                                    ?>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <?php
+                                    if(!is_null($main_market) && $main_market != null){
+                                        echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', (in_array('Xuất khẩu SP/Giải pháp', $main_market, '')? true : false), 'class="btn-checkbox"');
+                                        echo 'Xuất khẩu SP/Giải pháp';
+                                    }else{
+                                        echo form_checkbox('main_market[]', 'Xuất khẩu SP/Giải pháp', false, 'class="btn-checkbox"');
+                                        echo 'Xuất khẩu SP/Giải pháp';
+                                    }
+                                    ?>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <?php
+                                    if(!is_null($main_market) && $main_market != null){
+                                        echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', (in_array('Xuất khẩu nhân lực CNTT', $main_market, '')? true : false), 'class="btn-checkbox"');
+                                        echo 'Xuất khẩu nhân lực CNTT';
+                                    }else{
+                                        echo form_checkbox('main_market[]', 'Xuất khẩu nhân lực CNTT', false, 'class="btn-checkbox"');
+                                        echo 'Xuất khẩu nhân lực CNTT';
+                                    }
+                                    ?>
+                                </div>
                             </div>
                             <div class="row" style="margin-left: 20px">
                                 <strong>Xuất khẩu mục tiêu</strong><br>
@@ -671,6 +671,14 @@
                 required: true,
                 digits: true
             },
+            'main_service[]': {
+                required: true,
+                minlength: 1
+            },
+            'main_market[]': {
+                required: true,
+                minlength: 1
+            },
             // description: {
             //     required: true
             // },
@@ -796,6 +804,12 @@
                 required: 'Không được để trống',
                 digits: 'Phải là số'
             },
+            'main_service[]': {
+                required: 'SP dịch vụ chính của DN không được để trống',
+            },
+            'main_market[]': {
+                required: 'Thị trường chính không được để trống',
+            }
             // description: {
             //     required: 'Cần nhập Giới thiệu chung'
             // },
