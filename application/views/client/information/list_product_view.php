@@ -50,17 +50,7 @@
                                                 echo '<td>' . ($key + 1) . '</td>';
                                                 echo '<td><a href="' . base_url('client/information/detail_product/' . $product['id']) . '">' . $product['name'] . '</a></td>';
                                         ?>
-                                                <?php if($product['rating'] == 0): ?>
-                                                <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-default">Chưa đánh giá</a></td>
-                                                <?php else: ?>
-                                                    <?php if($product['rating'] == 1): ?>
-                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-success">Đồng ý</a></td>
-                                                    <?php elseif($product['rating'] == 2): ?>
-                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-warning">Đề nghị xem xét</a></td>
-                                                    <?php elseif($product['rating'] == 3): ?>
-                                                        <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-danger">Không đồng ý</a></td>
-                                                    <?php endif; ?>
-                                                <?php endif; ?>
+                                                <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-default">Xem chi tiết</a></td>
                                                 <?php if($reg_status['is_final'] == 0): ?>
                                                     <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/edit_product/' . $product['id']) ?>" class="btn btn-success">Chỉnh sửa</a></td>
                                                 <?php endif; ?>
@@ -79,7 +69,11 @@
                                 </div>
                             <?php endif ?>
                             <?php if($reg_status['is_final'] == 0): ?>
-                            <a href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary btn-block"><b>Thêm sản phẩm</b></a>
+                                <div>
+                                    <a id="complete" onclick="return complete();" <?php echo ($status['is_product'] == 0) ? 'disabled="disabled"' : '';?> style="display: inline;" href="#" class="btn btn-success pull-right"><b>Hoàn thành đăng ký</b></a>
+                                    <a style="display: inline;margin-right:10px !important;"  href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary pull-right"><b>Thêm sản phẩm</b></a>
+                                </div>
+
                             <?php else: ?>
                             <h4 style="color:red">Thông tin đã được gửi</h4>
                             <?php endif; ?>
@@ -92,4 +86,11 @@
         </div>
     </section>
 </div>
+<script>
+    function complete(){
+        if(confirm('Mời quay lại trang Tổng quan để xem lại hồ sơ/nộp cho Ban tổ chức')){
+            window.location.href = '<?php echo base_url('client/dashboard') ?>';
+        }
+    }
+</script>
 

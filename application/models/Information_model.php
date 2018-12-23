@@ -517,6 +517,20 @@ class Information_model extends CI_Model {
         return false;
     }
 
+    public function fetch_list_company_by_identity_and_year($identity, $year){
+        $query = $this->db->select('*')
+            ->from('company')
+            ->where('identity', $identity)
+            ->where('year', $year)
+            ->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }
+
+        return false;
+    }
+
     public function count_companies($identity) {
         $query = $this->db->select('*')
             ->from('company')

@@ -18,7 +18,7 @@ class Dashboard extends Client_Controller {
 
         $this->load->model('information_model');
         $this->data['information_submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
-        $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity($this->data['user']->username);
+        $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity_and_year($this->data['user']->username, $this->data['eventYear']);
         $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id);
 
         $checkInformation = $this->information_model->checkExist('information', $this->data['user']->username);
