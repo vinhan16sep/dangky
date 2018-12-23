@@ -2,17 +2,6 @@
 
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content">
-        <?php if($product['rating'] == 0): ?>
-            <div class="col-md-12" style="width:100%;height:50px;background-color:#fff;margin-bottom:20px;"><h4>Chưa đánh giá</h4></div>
-        <?php else: ?>
-            <?php if($product['rating'] == 1): ?>
-                <div class="col-md-12" style="width:100%;height:50px;background-color:#5cb85c;margin-bottom:20px;padding-top:5px;text-align:center;"><h4 style="color:#fff">Đồng ý</h4></div>
-            <?php elseif($product['rating'] == 2): ?>
-                <div class="col-md-12" style="width:100%;height:50px;background-color:#f0ad4e;margin-bottom:20px;padding-top:5px;text-align:center;"><h4 style="color:#fff">Đề nghị xem xét</h4></div>
-            <?php elseif($product['rating'] == 3): ?>
-                <div class="col-md-12" style="width:100%;height:50px;background-color:#d9534f;margin-bottom:20px;padding-top:5px;text-align:center;"><h4 style="color:#fff">Không đồng ý</h4></div>
-            <?php endif; ?>
-        <?php endif; ?>
         <div class="row">
             <div class="col-md-6">
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
@@ -21,8 +10,8 @@
                             <h4>Thông tin sản phẩm cơ bản</h4>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item" style="text-align: center;">
-                                    <a>Giấy chứng nhận bản quyền/cam kết bản quyền</a>
-                                    <br>
+<!--                                    <a>Giấy chứng nhận bản quyền/cam kết bản quyền</a>-->
+<!--                                    <br>-->
                                     <!--<img src="<?php echo base_url('assets/upload/product/'. $product['certificate']); ?>" alt="" style="width: 200px;">-->
                                 </li>
                                 <li class="list-group-item">

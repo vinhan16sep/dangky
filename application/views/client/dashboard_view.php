@@ -106,10 +106,9 @@
                                             <a href="<?php echo base_url('client/information/create_company?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         </span>
                                     <?php else: ?>
-                                        <p style="color:red;">Doanh nghiệp cần điền đầy đủ thông tin đăng ký</p>
-                                        <span>
-                                            <a href="<?php echo base_url('client/information/company'); ?>" style="width:100%" class="btn btn-success btn-block"><b>Xem danh sách qua các năm đã đăng ký<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
-                                        </span>
+<!--                                        <span>-->
+<!--                                            <a href="--><?php //echo base_url('client/information/company'); ?><!--" style="width:100%" class="btn btn-success btn-block"><b>Xem danh sách qua các năm đã đăng ký<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>-->
+<!--                                        </span>-->
                                         <br>
                                         <br>
                                         <?php foreach ($company_submitted as $value){ ?>
@@ -161,7 +160,8 @@
                         <?php if($reg_status['is_final'] == 0): ?>
                         <br>
                         <br>
-                        <a onclick="return confirm('Bạn vẫn muốn gửi?')" href="<?php echo base_url('client/information/set_final') ?>" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
+<!--                        <a onclick="return confirm('Bạn vẫn muốn gửi?')" href="--><?php //echo base_url('client/information/set_final') ?><!--" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>-->
+                        <a onclick="return confirmation();" href="#" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
                         <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
                         <?php else: ?>
                         <h4 style="color:red">Thông tin đã được gửi</h4>
@@ -187,26 +187,36 @@
 
     </section>
 </div>
-<!--<div id="myModal" class="modal fade" role="dialog">-->
-<!--    <div class="modal-dialog">-->
-<!---->
-<!--        <!-- Modal content-->-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 630px !important;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #3c8dbc">
 <!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                <h4 class="modal-title">Nhập mã số thuế</h4>-->
-<!--                <p>Chú ý: Mã số thuế không thể thay đổi sau khi bấm Đồng ý</p>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!--                <input id="identity" type="text" name="identity" class="form-control"/>-->
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--                <a onclick="confirmation();" class="btn btn-warning btn-block"><b>Đồng ý</b></a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--    </div>-->
-<!--</div>-->
+                <h4 style="color:white;">Cảm ơn quý đơn vị đã đăng ký tham gia chương trình Danh hiệu Sao Khuê <?php echo $eventYear; ?>.</h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="font-weight:bold !important;">Để hoàn tất hồ sơ, vui lòng gửi lại BTC các tài liệu sau qua đường bưu điện:</h4>
+                <h4> 1. File Phiếu đăng ký theo mẫu đã tải (có dấu và chữ ký của lãnh đạo công ty)</h4>
+                <h4> 2. Giấy đăng ký bản quyền sảnphẩm/dịch vụ đề cử (bản photo)</h4>
+                <h4> 3. Giấy phép đăng ký kinh doanh (bản photo)</h4>
+                <h4> 4. Bằng khen, chứng chỉ (nếu có)</h4>
+                <h4 style="text-decoration: underline !important;">Địa chỉ: </h4>
+                <h4 style="font-weight:bold !important;"> Ms. Hoàng Minh Thư</h4>
+                <h4 style="font-weight:bold !important;">Hiệp hội Phần mềm và Dịch vụ CNTT Việt Nam</h4>
+                <h4 style="font-weight:bold !important;">Tầng 11, tòa nhà Cung Trí thức thành phố</h4>
+                <h4 style="font-weight:bold !important;">Số 1 Tôn Thất Thuyết, Cầu Giấy, Hà Nội</h4>
+                <h4 style="font-weight:bold !important;">Mobile: 0385796096/02435772336</h4>
+
+            </div>
+            <div class="modal-footer">
+                <a onclick="reloadPage()" class="btn btn-warning btn-block"><b>Đóng</b></a>
+            </div>
+        </div>
+
+    </div>
+</div>
 <!--<div id="myModal1" class="modal fade" role="dialog">-->
 <!--    <div class="modal-dialog">-->
 <!---->
@@ -224,23 +234,27 @@
 <!--                </select>-->
 <!--            </div>-->
 <!--            <div class="modal-footer">-->
-<!--                <a onclick="this.href='--><?php //echo base_url("client/information/create_company") ?>//?year='+document.getElementById('selected_year').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
+<!--                <a onclick="this.href='--><?php //echo base_url("client/information/create_company") ?>////?year='+document.getElementById('selected_year').value" class="btn btn-warning btn-block"><b>Nhập thông tin</b></a>
 //            </div>
 //        </div>
 //
 //    </div>
 //</div>
-//<script>
-//    function confirmation() {
-//        if(document.getElementById('identity').value === null || document.getElementById('identity').value === ''){
-//            alert("Yêu cầu nhập mã số thuế");
-//        }else{
-//            if(confirm("CHẮC CHẮN MÃ SỐ THUẾ: " + document.getElementById('identity').value + " ?")){
-//                window.location.href = '<?php //echo base_url("client/information/create_extra") ?>//?identity='+document.getElementById('identity').value;
-//            } else{
-//
-//            }
-//        }
-//    }
+<script>
+    function confirmation() {
+        if(confirm('Bạn vẫn muốn gửi?')){
+            $.ajax({
+                url: "<?php echo base_url('client/information/set_final'); ?>",
+                success: function(result){
+                    $('#myModal').modal({backdrop: 'static', keyboard: false})
+                    $('#myModal').modal('show');
+                }
+            });
+
+        }
+    }
+    function reloadPage(){
+        location.reload();
+    }
 //</script>
 

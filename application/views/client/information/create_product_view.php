@@ -383,7 +383,8 @@
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
                         <?php
-                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
+                        echo form_submit('submit', 'Hoàn thành', 'id="submit" class="btn btn-primary pull-right" style="width:30%;display: inline;"');
+                        echo form_submit('submit', 'Lưu tạm', 'id="tmpSubmit" class="btn btn-normal pull-right" style="width:30%;display: inline;margin-right:10px !important;"');
                         echo form_close();
                         ?>
                     </div>
@@ -421,148 +422,169 @@
     //         $('.submit-extra-form').hide();
     //     }
     // }
-    $.validator.addMethod(
-        "dateFormat",
-        function ( value, element ) {
-            var bits = value.match( /([0-9]+)/gi ), str;
-            if ( ! bits )
-                return this.optional(element) || false;
-            str = bits[ 1 ] + '/' + bits[ 0 ] + '/' + bits[ 2 ];
-            return this.optional(element) || !/Invalid|NaN/.test(new Date( str ));
-        },
-        "Nhập định dạng ngày tháng dd/mm/yyyy"
-    );
-    $('#product-form').validate({
-        rules: {
-            name: {
-                required: true
+
+    $('#tmpSubmit').click(function(e){
+        $("#product-form").unbind();
+        $('#product-form').validate({
+            rules: {
+                name: {
+                    required: true
+                },
             },
-            service: {
-                required: true
-            },
-            functional: {
-                required: true
-            },
-            process: {
-                required: true
-            },
-            security: {
-                required: true
-            },
-            positive: {
-                required: true
-            },
-            compare: {
-                required: true
-            },
-            income_2016: {
-                required: true,
-                number: true,
-                maxlength: 8,
-            },
-            income_2017: {
-                required: true,
-                number: true,
-                maxlength: 8,
-            },
-            income: {
-                required: true
-            },
-            area: {
-                required: true
-            },
-            open_date: {
-                required: true,
-                dateFormat : true
-            },
-            price: {
-                required: true,
-            },
-            customer: {
-                required: true
-            },
-            after_sale: {
-                required: true
-            },
-            team: {
-                required: true
-            },
-            award: {
-                required: true
-            },
-            certificate: {
-                required: true
-            },
-            'service[]': {
-                required: true,
-                minlength: 1
-            },
-        },
-        messages :{
-            name: {
-                required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
-            },
-            service: {
-                required: 'Cần nhập lĩnh vực'
-            },
-            functional: {
-                required: 'Cần nhập Mô tả các công năng của sản phẩm'
-            },
-            certificate: {
-                required: 'Cần nhập công năng của sản phẩm'
-            },
-            process: {
-                required: 'Cần nhập công nghệ và quy trình chất lượng'
-            },
-            security: {
-                required: 'Cần nhập Bảo mật của sản phẩm'
-            },
-            positive: {
-                required: 'Cần nhập Các ưu điểm nổi trội'
-            },
-            compare: {
-                required: 'Cần nhập phần So sánh'
-            },
-            income_2016: {
-                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
-                number: 'Doanh thu của SP/GP/DV năm 2016 phải là số',
-                maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
-            },
-            income_2017: {
-                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
-                number: 'Doanh thu của SP/GP/DV năm 2017 phải là số',
-                maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
-            },
-            income: {
-                required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016, 2017'
-            },
-            area: {
-                required: 'Cần nhập thị phần của SP/giải pháp/DV'
-            },
-            open_date: {
-                required: 'Cần nhập ngày thương mại hoá/ra mắt dịch vụ'
-            },
-            price: {
-                required: 'Cần nhập Giá SP/GP/DV',
-            },
-            customer: {
-                required: 'Cần nhập 1 số khách hàng tiêu biểu'
-            },
-            after_sale: {
-                required: 'Cần nhập Dịch vụ sau bán hàng'
-            },
-            team: {
-                required : 'Cần nhập Đội ngũ phát triển'
-            },
-            award: {
-                required: 'Cần nhập Các giải thưởng/DH đã nhận được'
-            },
-            certificate: {
-                required: 'Cần nhập Giấy chứng nhận bản quyền/cam kết bản quyền'
-            },
-            'service[]': {
-                required: 'Cần nhập lĩnh vực',
-            },
-        }
+            messages :{
+                name: {
+                    required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
+                },
+            }
+        });
+        $('#product-form').submit();
     });
+    $('#submit').click(function(e){
+        $.validator.addMethod(
+            "dateFormat",
+            function ( value, element ) {
+                var bits = value.match( /([0-9]+)/gi ), str;
+                if ( ! bits )
+                    return this.optional(element) || false;
+                str = bits[ 1 ] + '/' + bits[ 0 ] + '/' + bits[ 2 ];
+                return this.optional(element) || !/Invalid|NaN/.test(new Date( str ));
+            },
+            "Nhập định dạng ngày tháng dd/mm/yyyy"
+        );
+        $('#product-form').validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                service: {
+                    required: true
+                },
+                functional: {
+                    required: true
+                },
+                process: {
+                    required: true
+                },
+                security: {
+                    required: true
+                },
+                positive: {
+                    required: true
+                },
+                compare: {
+                    required: true
+                },
+                income_2016: {
+                    required: true,
+                    number: true,
+                    maxlength: 8,
+                },
+                income_2017: {
+                    required: true,
+                    number: true,
+                    maxlength: 8,
+                },
+                income: {
+                    required: true
+                },
+                area: {
+                    required: true
+                },
+                open_date: {
+                    required: true,
+                    dateFormat : true
+                },
+                price: {
+                    required: true,
+                },
+                customer: {
+                    required: true
+                },
+                after_sale: {
+                    required: true
+                },
+                team: {
+                    required: true
+                },
+                award: {
+                    required: true
+                },
+                certificate: {
+                    required: true
+                },
+                'service[]': {
+                    required: true,
+                    minlength: 1
+                },
+            },
+            messages :{
+                name: {
+                    required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
+                },
+                service: {
+                    required: 'Cần nhập lĩnh vực'
+                },
+                functional: {
+                    required: 'Cần nhập Mô tả các công năng của sản phẩm'
+                },
+                certificate: {
+                    required: 'Cần nhập công năng của sản phẩm'
+                },
+                process: {
+                    required: 'Cần nhập công nghệ và quy trình chất lượng'
+                },
+                security: {
+                    required: 'Cần nhập Bảo mật của sản phẩm'
+                },
+                positive: {
+                    required: 'Cần nhập Các ưu điểm nổi trội'
+                },
+                compare: {
+                    required: 'Cần nhập phần So sánh'
+                },
+                income_2016: {
+                    required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
+                    number: 'Doanh thu của SP/GP/DV năm 2016 phải là số',
+                    maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
+                },
+                income_2017: {
+                    required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
+                    number: 'Doanh thu của SP/GP/DV năm 2017 phải là số',
+                    maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
+                },
+                income: {
+                    required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016, 2017'
+                },
+                area: {
+                    required: 'Cần nhập thị phần của SP/giải pháp/DV'
+                },
+                open_date: {
+                    required: 'Cần nhập ngày thương mại hoá/ra mắt dịch vụ'
+                },
+                price: {
+                    required: 'Cần nhập Giá SP/GP/DV',
+                },
+                customer: {
+                    required: 'Cần nhập 1 số khách hàng tiêu biểu'
+                },
+                after_sale: {
+                    required: 'Cần nhập Dịch vụ sau bán hàng'
+                },
+                team: {
+                    required : 'Cần nhập Đội ngũ phát triển'
+                },
+                award: {
+                    required: 'Cần nhập Các giải thưởng/DH đã nhận được'
+                },
+                certificate: {
+                    required: 'Cần nhập Giấy chứng nhận bản quyền/cam kết bản quyền'
+                },
+                'service[]': {
+                    required: 'Cần nhập lĩnh vực',
+                },
+            }
+        });
+        $('#product-form').submit();
+    });
+
 </script>
