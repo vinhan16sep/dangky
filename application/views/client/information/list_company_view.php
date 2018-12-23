@@ -50,9 +50,11 @@
                                                     <td style="text-align: center;width:110px;">
                                                         <a style="width:132px;" href="<?php echo base_url('client/information/company?year=' . $value['year']); ?>" class="btn btn-success btn-block">Xem thông tin</a>
                                                     </td>
+                                                    <?php if($status['is_final'] == 0){ ?>
                                                     <td style="text-align: center;width:110px;">
                                                         <a style="width:132px;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Sửa thông tin</a>
                                                     </td>
+                                                    <?php } ?>
                                                 <?php
                                                 }else{
                                                     echo '<td>Không thể sửa</td>';

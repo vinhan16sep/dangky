@@ -114,8 +114,10 @@
                                         <?php foreach ($company_submitted as $value){ ?>
                                             <div>
                                                 <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
-                                                <?php if(date('Y') <= $value['year']){ ?>
-                                                    <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
+                                                <?php if($status['is_final'] == 0){ ?>
+                                                    <?php if(date('Y') <= $value['year']){ ?>
+                                                        <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
+                                                    <?php } ?>
                                                 <?php } ?>
                                             </div>
                                             <hr style="width: 70%;">
@@ -155,12 +157,11 @@
                     </div>
                     <!-- /.tab-content -->
                 </div>
-                <?php if($complete == 1): ?>
+                <?php if($complete == 1 && $noMoreTemporaryData == 1): ?>
                     <?php if($identity != ''){ ?>
                         <?php if($reg_status['is_final'] == 0): ?>
                         <br>
                         <br>
-<!--                        <a onclick="return confirm('Bạn vẫn muốn gửi?')" href="--><?php //echo base_url('client/information/set_final') ?><!--" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>-->
                         <a onclick="return confirmation();" href="#" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
                         <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
                         <?php else: ?>
