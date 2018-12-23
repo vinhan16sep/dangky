@@ -20,7 +20,7 @@
                 </div>
                 <hr>
                 <?php
-                echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'company-form'));
+                echo form_open_multipart('client/information/create_company?year=' . $eventYear, array('class' => 'form-horizontal', 'id' => 'company-form'));
                 ?>
                 <div class="form-group">
                     <div class="row">
@@ -426,7 +426,8 @@
                     </div>
                     <div class="col-sm-9 col-md-9 col-sx-12">
                         <?php
-                        echo form_submit('submit', 'Hoàn thành', 'class="btn btn-primary pull-left" style="width:40%"');
+                        echo form_submit('submit', 'Hoàn thành', 'id="submit" class="btn btn-primary pull-right" style="width:30%;display: inline;"');
+                        echo form_submit('submit', 'Lưu tạm', 'id="tmpSubmit" class="btn btn-normal pull-right" style="width:30%;display: inline;margin-right:10px !important;"');
                         echo form_close();
                         ?>
                     </div>
@@ -451,271 +452,266 @@
     //        }
     //    }
 
-    $('#company-form').validate({
-        rules: {
-            equity_1: {
-                required: true,
-                digits: true,
-                maxlength: 8
+    $('#tmpSubmit').click(function(e){
+        $("#company-form").unbind();
+        $('#company-form').submit();
+    });
+    $('#submit').click(function(e){
+        $('#company-form').validate({
+            rules: {
+                equity_1: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                equity_2: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                equity_3: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                owner_equity_1: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                owner_equity_2: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                owner_equity_3: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                total_income_1: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                total_income_2: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                total_income_3: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                software_income_1: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                software_income_2: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                software_income_3: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                it_income_1: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                it_income_2: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                it_income_3: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                export_income_1: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                export_income_2: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                export_income_3: {
+                    required: true,
+                    digits: true,
+                    maxlength: 8
+                },
+                total_labor_1: {
+                    required: true,
+                    digits: true
+                },
+                total_labor_2: {
+                    required: true,
+                    digits: true
+                },
+                total_labor_3: {
+                    required: true,
+                    digits: true
+                },
+                total_ltv_1: {
+                    required: true,
+                    digits: true
+                },
+                total_ltv_2: {
+                    required: true,
+                    digits: true
+                },
+                total_ltv_3: {
+                    required: true,
+                    digits: true
+                },
+                'main_service[]': {
+                    required: true,
+                    minlength: 1
+                },
+                'main_market[]': {
+                    required: true,
+                    minlength: 1
+                },
+                description: {
+                    required: true
+                },
             },
-            equity_2: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            equity_3: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            owner_equity_1: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            owner_equity_2: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            owner_equity_3: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            total_income_1: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            total_income_2: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            total_income_3: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            software_income_1: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            software_income_2: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            software_income_3: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            it_income_1: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            it_income_2: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            it_income_3: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            export_income_1: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            export_income_2: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            export_income_3: {
-                required: true,
-                digits: true,
-                maxlength: 8
-            },
-            total_labor_1: {
-                required: true,
-                digits: true
-            },
-            total_labor_2: {
-                required: true,
-                digits: true
-            },
-            total_labor_3: {
-                required: true,
-                digits: true
-            },
-            total_ltv_1: {
-                required: true,
-                digits: true
-            },
-            total_ltv_2: {
-                required: true,
-                digits: true
-            },
-            total_ltv_3: {
-                required: true,
-                digits: true
-            },
-            'main_service[]': {
-                required: true,
-                minlength: 1
-            },
-            'main_market[]': {
-                required: true,
-                minlength: 1
-            },
-            // description: {
-            //     required: true
-            // },
-            // main_market: {
-            //     required: true
-            // },
-            // main_service: {
-            //     required: true
-            // }
-        },
-        messages :{
-            equity_1: {
-                required : 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            equity_2: {
-                required : 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            equity_3: {
-                required : 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            owner_equity_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            owner_equity_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            owner_equity_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            total_income_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            total_income_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            total_income_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            software_income_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            software_income_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            software_income_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            it_income_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            it_income_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            it_income_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            export_income_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            export_income_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            export_income_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số',
-                maxlength: "Tối đa 8 chữ số"
-            },
-            total_labor_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số'
-            },
-            total_labor_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số'
-            },
-            total_labor_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số'
-            },
-            total_ltv_1: {
-                required: 'Không được để trống',
-                digits: 'Phải là số'
-            },
-            total_ltv_2: {
-                required: 'Không được để trống',
-                digits: 'Phải là số'
-            },
-            total_ltv_3: {
-                required: 'Không được để trống',
-                digits: 'Phải là số'
-            },
-            'main_service[]': {
-                required: 'SP dịch vụ chính của DN không được để trống',
-            },
-            'main_market[]': {
-                required: 'Thị trường chính không được để trống',
+            messages :{
+                equity_1: {
+                    required : 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                equity_2: {
+                    required : 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                equity_3: {
+                    required : 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                owner_equity_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                owner_equity_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                owner_equity_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                total_income_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                total_income_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                total_income_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                software_income_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                software_income_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                software_income_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                it_income_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                it_income_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                it_income_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                export_income_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                export_income_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                export_income_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số',
+                    maxlength: "Tối đa 8 chữ số"
+                },
+                total_labor_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số'
+                },
+                total_labor_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số'
+                },
+                total_labor_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số'
+                },
+                total_ltv_1: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số'
+                },
+                total_ltv_2: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số'
+                },
+                total_ltv_3: {
+                    required: 'Không được để trống',
+                    digits: 'Phải là số'
+                },
+                'main_service[]': {
+                    required: 'SP dịch vụ chính của DN không được để trống',
+                },
+                'main_market[]': {
+                    required: 'Thị trường chính không được để trống',
+                },
+                description: {
+                    required: 'Cần nhập Giới thiệu chung'
+                },
             }
-            // description: {
-            //     required: 'Cần nhập Giới thiệu chung'
-            // },
-            // main_market: {
-            //     required: 'Cần nhập Thị trường chính'
-            // },
-            // main_service: {
-            //     required: 'Cần nhập SP dịch vụ chính của DN'
-            // }
-        }
+        });
+        $('#company-form').submit();
     });
 
     $('#anonymous').click(function(){
