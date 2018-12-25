@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('name');
+                            echo form_error('name', '<div class="error">', '</div>');
                             echo form_input('name', set_value('name'), 'class="form-control"');
                             ?>
                         </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('functional');
+                            echo form_error('functional', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'functional',
                                 'id' => 'functional',
@@ -124,7 +124,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('process');
+                            echo form_error('process', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'process',
                                 'id' => 'process',
@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('security');
+                            echo form_error('security', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'security',
                                 'id' => 'security',
@@ -166,7 +166,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('positive');
+                            echo form_error('positive', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'positive',
                                 'id' => 'positive',
@@ -187,7 +187,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('compare');
+                            echo form_error('compare', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'compare',
                                 'id' => 'compare',
@@ -203,12 +203,12 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2016', 'income_2016');
+                            echo form_label('Doanh thu của SP/GP/DV năm 2017', 'income_2016');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('income_2016');
+                            echo form_error('income_2016', '<div class="error">', '</div>');
                             echo form_input('income_2016', set_value('income_2016'), 'class="form-control"');
                             ?>
                         </div>
@@ -218,12 +218,12 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2017', 'income_2017');
+                            echo form_label('Doanh thu của SP/GP/DV năm 2018', 'income_2017');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('income_2017');
+                            echo form_error('income_2017', '<div class="error">', '</div>');
                             echo form_input('income_2017', set_value('income_2017'), 'class="form-control"');
                             ?>
                         </div>
@@ -238,7 +238,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('area');
+                            echo form_error('area', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'area',
                                 'id' => 'area',
@@ -259,7 +259,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('open_date');
+                            echo form_error('open_date', '<div class="error">', '</div>');
                             echo form_input('open_date', set_value('open_date'), 'class="form-control"');
                             ?>
                         </div>
@@ -274,7 +274,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('price');
+                            echo form_error('price', '<div class="error">', '</div>');
                             echo form_input('price', set_value('price'), 'class="form-control"');
                             ?>
                         </div>
@@ -289,7 +289,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('customer');
+                            echo form_error('customer', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'customer',
                                 'id' => 'customer',
@@ -310,7 +310,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('after_sale');
+                            echo form_error('after_sale', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'after_sale',
                                 'id' => 'after_sale',
@@ -331,7 +331,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('team');
+                            echo form_error('team', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'team',
                                 'id' => 'team',
@@ -352,7 +352,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('award');
+                            echo form_error('award', '<div class="error">', '</div>');
                             echo form_textarea(array(
                                 'name' => 'award',
                                 'id' => 'award',
@@ -373,7 +373,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
-                            echo form_error('file');
+                            echo form_error('file', '<div class="error">', '</div>');
                             echo form_upload('file', set_value('file'), 'class="form-control"');
                             ?>
                         </div>
@@ -440,168 +440,168 @@
     //     }
     // }
 
-    $('#tmpSubmit').click(function(e){
-        $("#product-form").unbind();
-        $('#product-form').validate({
-            rules: {
-                name: {
-                    required: true
-                },
-            },
-            messages :{
-                name: {
-                    required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
-                },
-            }
-        });
-        $('#product-form').submit();
-    });
-    $('#submit').click(function(e){
-        $.validator.addMethod(
-            "dateFormat",
-            function ( value, element ) {
-                var bits = value.match( /([0-9]+)/gi ), str;
-                if ( ! bits )
-                    return this.optional(element) || false;
-                str = bits[ 1 ] + '/' + bits[ 0 ] + '/' + bits[ 2 ];
-                return this.optional(element) || !/Invalid|NaN/.test(new Date( str ));
-            },
-            "Nhập định dạng ngày tháng dd/mm/yyyy"
-        );
-        $('#product-form').validate({
-            rules: {
-                name: {
-                    required: true
-                },
-                service: {
-                    required: true
-                },
-                functional: {
-                    required: true
-                },
-                process: {
-                    required: true
-                },
-                security: {
-                    required: true
-                },
-                positive: {
-                    required: true
-                },
-                compare: {
-                    required: true
-                },
-                income_2016: {
-                    required: true,
-                    number: true,
-                    maxlength: 8,
-                },
-                income_2017: {
-                    required: true,
-                    number: true,
-                    maxlength: 8,
-                },
-                income: {
-                    required: true
-                },
-                area: {
-                    required: true
-                },
-                open_date: {
-                    required: true,
-                    dateFormat : true
-                },
-                price: {
-                    required: true,
-                },
-                customer: {
-                    required: true
-                },
-                after_sale: {
-                    required: true
-                },
-                team: {
-                    required: true
-                },
-                award: {
-                    required: true
-                },
-                certificate: {
-                    required: true
-                },
-                'service[]': {
-                    required: true,
-                    minlength: 1
-                },
-            },
-            messages :{
-                name: {
-                    required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
-                },
-                service: {
-                    required: 'Cần nhập lĩnh vực'
-                },
-                functional: {
-                    required: 'Cần nhập Mô tả các công năng của sản phẩm'
-                },
-                certificate: {
-                    required: 'Cần nhập công năng của sản phẩm'
-                },
-                process: {
-                    required: 'Cần nhập công nghệ và quy trình chất lượng'
-                },
-                security: {
-                    required: 'Cần nhập Bảo mật của sản phẩm'
-                },
-                positive: {
-                    required: 'Cần nhập Các ưu điểm nổi trội'
-                },
-                compare: {
-                    required: 'Cần nhập phần So sánh'
-                },
-                income_2016: {
-                    required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
-                    number: 'Doanh thu của SP/GP/DV năm 2016 phải là số',
-                    maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
-                },
-                income_2017: {
-                    required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
-                    number: 'Doanh thu của SP/GP/DV năm 2017 phải là số',
-                    maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
-                },
-                income: {
-                    required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016, 2017'
-                },
-                area: {
-                    required: 'Cần nhập thị phần của SP/giải pháp/DV'
-                },
-                open_date: {
-                    required: 'Cần nhập ngày thương mại hoá/ra mắt dịch vụ'
-                },
-                price: {
-                    required: 'Cần nhập Giá SP/GP/DV',
-                },
-                customer: {
-                    required: 'Cần nhập 1 số khách hàng tiêu biểu'
-                },
-                after_sale: {
-                    required: 'Cần nhập Dịch vụ sau bán hàng'
-                },
-                team: {
-                    required : 'Cần nhập Đội ngũ phát triển'
-                },
-                award: {
-                    required: 'Cần nhập Các giải thưởng/DH đã nhận được'
-                },
-                certificate: {
-                    required: 'Cần nhập Giấy chứng nhận bản quyền/cam kết bản quyền'
-                },
-                'service[]': {
-                    required: 'Cần nhập lĩnh vực',
-                },
-            }
-        });
-        $('#product-form').submit();
-    });
+    // $('#tmpSubmit').click(function(e){
+    //     $("#product-form").unbind();
+    //     $('#product-form').validate({
+    //         rules: {
+    //             name: {
+    //                 required: true
+    //             },
+    //         },
+    //         messages :{
+    //             name: {
+    //                 required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
+    //             },
+    //         }
+    //     });
+    //     $('#product-form').submit();
+    // });
+    // $('#submit').click(function(e){
+    //     $.validator.addMethod(
+    //         "dateFormat",
+    //         function ( value, element ) {
+    //             var bits = value.match( /([0-9]+)/gi ), str;
+    //             if ( ! bits )
+    //                 return this.optional(element) || false;
+    //             str = bits[ 1 ] + '/' + bits[ 0 ] + '/' + bits[ 2 ];
+    //             return this.optional(element) || !/Invalid|NaN/.test(new Date( str ));
+    //         },
+    //         "Nhập định dạng ngày tháng dd/mm/yyyy"
+    //     );
+    //     $('#product-form').validate({
+    //         rules: {
+    //             name: {
+    //                 required: true
+    //             },
+    //             service: {
+    //                 required: true
+    //             },
+    //             functional: {
+    //                 required: true
+    //             },
+    //             process: {
+    //                 required: true
+    //             },
+    //             security: {
+    //                 required: true
+    //             },
+    //             positive: {
+    //                 required: true
+    //             },
+    //             compare: {
+    //                 required: true
+    //             },
+    //             income_2016: {
+    //                 required: true,
+    //                 number: true,
+    //                 maxlength: 8,
+    //             },
+    //             income_2017: {
+    //                 required: true,
+    //                 number: true,
+    //                 maxlength: 8,
+    //             },
+    //             income: {
+    //                 required: true
+    //             },
+    //             area: {
+    //                 required: true
+    //             },
+    //             open_date: {
+    //                 required: true,
+    //                 dateFormat : true
+    //             },
+    //             price: {
+    //                 required: true,
+    //             },
+    //             customer: {
+    //                 required: true
+    //             },
+    //             after_sale: {
+    //                 required: true
+    //             },
+    //             team: {
+    //                 required: true
+    //             },
+    //             award: {
+    //                 required: true
+    //             },
+    //             certificate: {
+    //                 required: true
+    //             },
+    //             'service[]': {
+    //                 required: true,
+    //                 minlength: 1
+    //             },
+    //         },
+    //         messages :{
+    //             name: {
+    //                 required : 'Cần nhập Tên SP/dịch vụ/giải pháp/ứng dụng'
+    //             },
+    //             service: {
+    //                 required: 'Cần nhập lĩnh vực'
+    //             },
+    //             functional: {
+    //                 required: 'Cần nhập Mô tả các công năng của sản phẩm'
+    //             },
+    //             certificate: {
+    //                 required: 'Cần nhập công năng của sản phẩm'
+    //             },
+    //             process: {
+    //                 required: 'Cần nhập công nghệ và quy trình chất lượng'
+    //             },
+    //             security: {
+    //                 required: 'Cần nhập Bảo mật của sản phẩm'
+    //             },
+    //             positive: {
+    //                 required: 'Cần nhập Các ưu điểm nổi trội'
+    //             },
+    //             compare: {
+    //                 required: 'Cần nhập phần So sánh'
+    //             },
+    //             income_2016: {
+    //                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016',
+    //                 number: 'Doanh thu của SP/GP/DV năm 2016 phải là số',
+    //                 maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
+    //             },
+    //             income_2017: {
+    //                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2017',
+    //                 number: 'Doanh thu của SP/GP/DV năm 2017 phải là số',
+    //                 maxlength: 'Doanh thu của SP/GP/DV năm 2017 chỉ tối đa 8 số',
+    //             },
+    //             income: {
+    //                 required: 'Cần nhập Doanh thu của SP/GP/DV năm 2016, 2017'
+    //             },
+    //             area: {
+    //                 required: 'Cần nhập thị phần của SP/giải pháp/DV'
+    //             },
+    //             open_date: {
+    //                 required: 'Cần nhập ngày thương mại hoá/ra mắt dịch vụ'
+    //             },
+    //             price: {
+    //                 required: 'Cần nhập Giá SP/GP/DV',
+    //             },
+    //             customer: {
+    //                 required: 'Cần nhập 1 số khách hàng tiêu biểu'
+    //             },
+    //             after_sale: {
+    //                 required: 'Cần nhập Dịch vụ sau bán hàng'
+    //             },
+    //             team: {
+    //                 required : 'Cần nhập Đội ngũ phát triển'
+    //             },
+    //             award: {
+    //                 required: 'Cần nhập Các giải thưởng/DH đã nhận được'
+    //             },
+    //             certificate: {
+    //                 required: 'Cần nhập Giấy chứng nhận bản quyền/cam kết bản quyền'
+    //             },
+    //             'service[]': {
+    //                 required: 'Cần nhập lĩnh vực',
+    //             },
+    //         }
+    //     });
+    //     $('#product-form').submit();
+    // });
 
 </script>
