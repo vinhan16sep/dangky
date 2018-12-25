@@ -257,7 +257,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tổng số LTV', 'total_ltv');
+                            echo form_label('Tổng số lập trình viên', 'total_ltv');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -316,11 +316,11 @@
                                 <?php
                                 $options = array(
                                     'Chính phủ điện tử' => 'Chính phủ điện tử',
-                                    'Ngành y tế' => 'Ngành y tế',
-                                    'Ngành giáo dục' => 'Ngành giáo dục',
+                                    'Y tế' => 'Y tế',
+                                    'Giáo dục' => 'Giáo dục',
                                     'Giao thông' => 'Giao thông',
                                     'Xây dựng' => 'Xây dựng',
-                                    'Các lĩnh vực sản xuất/dịch vụ cho DN' => 'Các lĩnh vực sản xuất/dịch vụ cho DN',
+                                    'Sản xuất/dịch vụ cho DN' => 'Sản xuất/dịch vụ cho DN',
                                     'Nội dung số và giải trí điện tử' => 'Nội dung số và giải trí điện tử',
                                     'Viễn thông' => 'Viễn thông',
                                     'Bảo mật an toàn thông tin' => 'Bảo mật an toàn thông tin',
