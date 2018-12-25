@@ -725,7 +725,7 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('award', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
-            // $this->form_validation->set_rules('certificate', 'Image', 'callback_check_file_selected');
+            $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
 
             if ($this->form_validation->run() == FALSE) {
                 if($this->data['reg_status']['is_information'] == 0){
@@ -735,9 +735,14 @@ class Information extends Client_Controller {
                 $this->render('client/information/create_product_view');
             } else {
                 if ($this->input->post()) {
+                    if(!empty($_FILES['file']['name'])){
+                        $this->check_file($_FILES['file']['name']);
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                    }
                     $service = json_encode($this->input->post('service'));
                     // $image = $this->upload_image('certificate', $_FILES['certificate']['name'], 'assets/upload/product', 'assets/upload/product/thumbs');
                     $data = array(
+                        'file' => $file,
                         'client_id' => $this->data['user']->id,
                         'name' => $this->input->post('name'),
                         'service' => $service,
@@ -898,6 +903,10 @@ class Information extends Client_Controller {
                 $this->render('client/information/edit_product_view');
             } else {
                 if ($this->input->post()) {
+                    if(!empty($_FILES['file']['name'])){
+                        $this->check_file($_FILES['file']['name']);
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                    }
                     $service = json_encode($this->input->post('service'));
                     $data = array(
                         'name' => $this->input->post('name'),
@@ -919,7 +928,8 @@ class Information extends Client_Controller {
                         'certificate' => $this->input->post('certificate'),
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
-                        'modified_by' => $this->author_info['modified_by']
+                        'modified_by' => $this->author_info['modified_by'],
+                        'file' => $file,
                     );
                     try {
                         $this->information_model->update_product('product', $this->data['user']->id, $id, $data);
@@ -983,8 +993,9 @@ class Information extends Client_Controller {
 
     function check_file_selected(){
 
-        $this->form_validation->set_message('check_file_selected', 'Please select file.');
-        if (empty($_FILES['certificate']['name'])) {
+        
+        if (empty($_FILES['file']['name'])) {
+            $this->form_validation->set_message(__FUNCTION__, 'Data không được trống');
             return false;
         }else{
             return true;
@@ -1003,6 +1014,15 @@ class Information extends Client_Controller {
         if( !in_array($fileextension, $array_image) || $filesize > 1228800){
             $this->session->set_flashdata('message_error', 'Định dạng file không đúng hoặc dung lượng ảnh vượt quá 1200Kb');
             redirect('client/information/extra');
+        }
+    }
+    protected function check_file($filename){
+        $map = strripos($filename, '.')+1;
+        $fileextension = substr($filename, $map,(strlen($filename)-$map));
+        $array_image = array('docx', 'doc', 'xlsx', 'xlsm', 'xlsb', 'xltx', 'xltm', 'xls', 'pdf');
+        if( !in_array($fileextension, $array_image)){
+            $this->session->set_flashdata('message_error', 'Định dạng file không đúng');
+            redirect('client/information/products');
         }
     }
 

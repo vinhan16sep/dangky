@@ -85,6 +85,16 @@ class MY_Controller extends CI_Controller {
             if ($this->upload->do_upload($image_input_id)) {
                 $upload_data = $this->upload->data();
                 $image = $upload_data['file_name'];
+
+                // $config_thumb['source_image'] = $upload_path . '/' . $image;
+                // $config_thumb['create_thumb'] = FALSE;
+                // $config_thumb['maintain_ratio'] = TRUE;
+                // $config_thumb['new_image'] = $upload_path;
+                // $config_thumb['width'] = 200;
+
+                // $this->load->library('image_lib', $config_thumb);
+
+                // $this->image_lib->resize();
             }
         }
 
@@ -99,6 +109,30 @@ class MY_Controller extends CI_Controller {
         $config['encrypt_name'] = TRUE;
        // $config['max_width']     = '1028';
        // $config['max_height']    = '1028';
+        return $config;
+    }
+
+    protected function upload_file_word($file_input ,$upload_path = '', $file_name = '' ) {
+        $file = '';
+        if (!empty($file_name)) {
+            $config = $this->config_file_word($upload_path);
+            $config['file_name'] = $file_name;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload($file_input)) {
+                $upload_data = $this->upload->data();
+                $file = $upload_data['file_name'];
+            }
+        }
+
+        return $file;
+    }
+
+    function config_file_word($upload_path = '') {
+        $config = array();
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'docx|doc|xlsx|xlsm|xlsb|xltx|xltm|xls|pdf';
         return $config;
     }
 

@@ -367,6 +367,22 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            echo form_label('File mô tả chi tiết sản phẩm', 'file');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('file');
+                            echo form_upload('file', set_value('file'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
                             echo form_label('Giấy chứng nhận bản quyền/cam kết bản quyền', 'certificate');
                             ?>
                         </div>
