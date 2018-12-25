@@ -191,77 +191,95 @@ class Information extends Client_Controller {
         $this->load->library('form_validation');
 
         if($this->input->post('submit') == 'Hoàn thành') {
-            $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
             $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
                 'required' => '%s không được trống.',
@@ -357,99 +375,94 @@ class Information extends Client_Controller {
                 }
             }
         }else{
-            $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|numeric', array(
+            $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|numeric', array(
                 'numeric' => '%s phải là số.',
             ));
-            $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
+            $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN ' . $this->data['rule3Year'][1], 'trim|numeric', array(
                 'numeric' => '%s phải là số.',
             ));
-            $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
+            $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN ' . $this->data['rule3Year'][2], 'trim|numeric', array(
                 'numeric' => '%s phải là số.',
             ));
-            $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
+            $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|numeric', array(
                 'numeric' => '%s phải là số.',
             ));
-            $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
+            $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|numeric', array(
                 'numeric' => '%s phải là số.',
             ));
-            $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_labor_2', 'Tổng số lao động của DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_labor_3', 'Tổng số lao động của DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
-            ));
-            $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
-                'required' => '%s không được trống.',
+            $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|numeric', array(
                 'numeric' => '%s phải là số.',
             ));
 
@@ -536,77 +549,95 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         if($this->input->post('submit') == 'Hoàn thành') {
-            $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('equity_1', 'Vốn điều lệ ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('equity_2', 'Vốn điều lệ ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('equity_3', 'Vốn điều lệ ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('owner_equity_1', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('owner_equity_2', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('owner_equity_3', 'Vốn chủ sở hữu ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_income_1', 'Tổng doanh thu DN ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_income_2', 'Tổng doanh thu DN ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_income_3', 'Tổng doanh thu DN ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('software_income_1', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('software_income_2', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('software_income_3', 'Tổng DT lĩnh vực sx phần mềm ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('it_income_1', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('it_income_2', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('it_income_3', 'Tổng doanh thu dịch vụ CNTT ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('export_income_1', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][0], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('export_income_2', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][1], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('export_income_3', 'Tổng DT xuất khẩu ' . $this->data['rule3Year'][2], 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
             $this->form_validation->set_rules('total_labor_1', 'Tổng số lao động của DN ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
                 'required' => '%s không được trống.',
@@ -910,13 +941,15 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('compare', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
-            $this->form_validation->set_rules('income_2016', 'Data', 'trim|required|numeric', array(
+            $this->form_validation->set_rules('income_2016', 'Data', 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('income_2017', 'Data', 'trim|required|numeric', array(
+            $this->form_validation->set_rules('income_2017', 'Data', 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
             $this->form_validation->set_rules('area', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
@@ -1003,6 +1036,14 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('name', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
+            $this->form_validation->set_rules('income_2016', 'Data', 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('income_2017', 'Data', 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
 
             if ($this->form_validation->run() == FALSE) {
                 if($this->data['reg_status']['is_information'] == 0){
@@ -1081,13 +1122,15 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('compare', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
-            $this->form_validation->set_rules('income_2016', 'Data', 'trim|required|numeric', array(
+            $this->form_validation->set_rules('income_2016', 'Data', 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
-            $this->form_validation->set_rules('income_2017', 'Data', 'trim|required|numeric', array(
+            $this->form_validation->set_rules('income_2017', 'Data', 'trim|required|numeric|max_length[8]', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
             $this->form_validation->set_rules('area', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
@@ -1113,7 +1156,8 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('service[]', 'Lĩnh vực', 'trim|required', array(
                 'required' => '%s không được trống.'
             ));
-            // $this->form_validation->set_rules('certificate', 'Image', 'callback_check_file_selected');
+            $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
+
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
                 $this->data['product'] = $this->information_model->fetch_product_by_user_id('product', $this->data['user']->id, $id);
@@ -1165,6 +1209,14 @@ class Information extends Client_Controller {
         }else{
             $this->form_validation->set_rules('name', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
+            ));
+            $this->form_validation->set_rules('income_2016', 'Data', 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
+            ));
+            $this->form_validation->set_rules('income_2017', 'Data', 'trim|numeric|max_length[8]', array(
+                'numeric' => '%s phải là số.',
+                'max_length' => 'Tối đa 8 chữ số'
             ));
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
