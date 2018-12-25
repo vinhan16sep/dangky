@@ -97,13 +97,13 @@
                                     <a><i class="fa fa-users margin-r-5"></i> Tổng số lao động của doanh nghiệp <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['total_labor_3'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_1'] ?></p>
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lập trình viên <?php echo $rule3Year[0]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_1'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_2'] ?></p>
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lập trình viên <?php echo $rule3Year[1]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_2'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số LTV <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_3'] ?></p>
+                                    <a><i class="fa fa-users margin-r-5"></i> Tổng số lập trình viên <?php echo $rule3Year[2]; ?></a> <p class="pull-right"><?php echo $company['total_ltv_3'] ?></p>
                                 </li>
                                 <li class="list-group-item" style="min-height:200px;">
                                     <a><i class="fa fa-file margin-r-5"></i> Giới thiệu chung</a> <p class="" style="padding-left:20px;"><?php echo $company['description'] ?></p>

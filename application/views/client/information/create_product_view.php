@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tên SP/dịch vụ/giải pháp/ứng dụng', 'name');
+                            echo form_label('Tên sản phẩm/giải pháp/dịch vụ đăng ký', 'name');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Đăng ký tham gia lĩnh vực', 'service');
+                            echo form_label('Nhóm lĩnh vực đề cử', 'service');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -98,7 +98,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Mô tả các công năng của sản phẩm', 'functional');
+                            echo form_label('Mô tả công năng sản phẩm: (Nêu rõ chức năng, tính hiệu quả, tác động đến KT, XH, MT…, ứng dụng chuyển đổi số, IoT, dữ liệu lớn, SMAC, AI, AR, VR, robotics… (nếu có) Có thể đính kèm các bảng biểu, số liệu, tài liệu,… để chứng minh) ', 'functional');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -119,7 +119,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Các công nghệ và quy trình chất lượng sử dụng để phát triển sản phẩm', 'process');
+                            echo form_label('Các công nghệ và quy trình chất lượng sử dụng để phát triển SP/GP/DV', 'process');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -254,7 +254,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Ngày thương mại hoá/ra mắt dịch vụ', 'open_date');
+                            echo form_label('Ngày thương mại hoá ra thị trường', 'open_date');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
