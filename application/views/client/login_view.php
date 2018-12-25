@@ -20,7 +20,7 @@
                 </div>
             <?php endif ?>
             <?php if ($this->session->flashdata('register_success')): ?>
-                <div class="alert alert-success alert-dismissible" role="alert">
+                <div class="alert alert-success alert-dismissible" role="alert" style="color:#ffffff !important;background-color: #3c763d !important;font-size: 13pt !important;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>Thông báo!</strong> <?php echo $this->session->flashdata('register_success'); ?>
                 </div>
