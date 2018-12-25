@@ -30,6 +30,12 @@
                 <div class="nav-tabs-custom box-body box-profile" style="box-shadow: 2px 2px 1px grey;">
                     <div class="tab-content">
                         <div class="post">
+                            <?php if ($this->session->flashdata('message_error')): ?>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
+                                </div>
+                            <?php endif ?>
                             <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM / GIẢI PHÁP / DỊCH VỤ' : 'Danh sách sản phẩm/dịch vụ  đã đăng ký' ?></h4>
                             <?php if (!empty($products)): ?>
                                 <div class="row">

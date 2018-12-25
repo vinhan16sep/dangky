@@ -41,9 +41,9 @@
                                 <h3 style="text-align:center;">Mã số thuế: <span style="color:#3c8dbc"><?php echo $user->username; ?></span></h3>
                                 <div style="margin: auto; width: 100%; text-align: center;">
                                     <?php if ( $submitted['avatar'] && file_exists('assets/upload/avatar/' . $submitted['avatar']) ): ?>
-                                        <img src="<?php echo base_url('assets/upload/avatar/') . $submitted['avatar']; ?>" class="img-circle" alt="user image" width=30%>
+                                        <img src="<?php echo base_url('assets/upload/avatar/') . $submitted['avatar']; ?>" class="" alt="user image" width=30%>
                                     <?php else: ?>
-                                        <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="img-circle" alt="user image" width=30%>
+                                        <img src="<?php echo site_url('assets/public/img/client.jpg'); ?>" class="" alt="user image" width=30%>
                                     <?php endif ?>
                                     <br>
                                 </div>

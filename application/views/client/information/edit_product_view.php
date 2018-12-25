@@ -45,19 +45,25 @@
                                 'Quản lý doanh nghiệp' => 'Quản lý doanh nghiệp',
                                 'Kế toán, tài chính, ngân hàng' => 'Kế toán, tài chính, ngân hàng',
                                 'Quản lý bán hàng và chuỗi cung ứng' => 'Quản lý bán hàng và chuỗi cung ứng',
+                                'Bất động sản' => 'Bất động sản',
+                                'Quảng cáo, tiếp thị và truyền thông số' => 'Quảng cáo, tiếp thị và truyền thông số',
+                                'Y tế, chăm sóc sức khỏe và làm đẹp' => 'Y tế, chăm sóc sức khỏe và làm đẹp',
                                 'Giáo dục, đào tạo' => 'Giáo dục, đào tạo',
                                 'Giao thông vận tải' => 'Giao thông vận tải',
-                                'Y tế, chăm sóc sức khỏe và làm đẹp' => 'Y tế, chăm sóc sức khỏe và làm đẹp',
+                                'Công nghệp và sản xuất' => 'Công nghệp và sản xuất',
                                 'Nông nghiệp và chế biến thực phẩm' => 'Nông nghiệp và chế biến thực phẩm',
                                 'Du lịch, quản lý nhà hàng/khách sạn' => 'Du lịch, quản lý nhà hàng/khách sạn',
                                 'Công tác nhân sự, văn phòng' => 'Công tác nhân sự, văn phòng',
                                 'Viễn thông' => 'Viễn thông',
+                                'Tài nguyên, Năng lượng và Tiện ích' => 'Tài nguyên, Năng lượng và Tiện ích',
+                                'Cơ khí và xây dựng' => 'Cơ khí và xây dựng',
                                 'Nền tảng và Công cụ ứng dụng' => 'Nền tảng và Công cụ ứng dụng',
                                 'Thanh toán điện tử' => 'Thanh toán điện tử ',
                                 'Thương mại điện tử' => 'Thương mại điện tử',
-                                'Giải trí điện tử' => 'Giải trí điện tử',
+                                'Truyền thông và Giải trí điện tử' => 'Truyền thông và Giải trí điện tử',
                                 'Bảo mật và an toàn thông tin' => 'Bảo mật và an toàn thông tin',
                                 'Bảo vệ môi trường và phát triển bền vững' => 'Bảo vệ môi trường và phát triển bền vững',
+                                'Nghiên cứu và phát triển' => 'Nghiên cứu và phát triển',
                                 'Các lĩnh vực khác' => 'Các lĩnh vực khác'
                             );
                             $options_4 = array(
@@ -371,6 +377,21 @@
                                 'rows' => '3',
                                 'class' => "form-control"
                             ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('File mô tả chi tiết sản phẩm', 'file');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('file');
+                            echo form_upload('file', set_value('file'), 'class="form-control"');
                             ?>
                         </div>
                     </div>
