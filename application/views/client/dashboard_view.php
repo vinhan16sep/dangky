@@ -13,9 +13,9 @@
                 <div class="box box-primary" style="box-shadow: 2px 2px 1px grey;">
                     <div class="box-body box-profile">
                         <?php if ( $information_submitted['avatar'] && file_exists('assets/upload/avatar/' . $information_submitted['avatar']) ): ?>
-                            <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" alt="User profile picture">
+                            <img class="profile-user-img img-responsive" src="<?php echo base_url('assets/upload/avatar/') . $information_submitted['avatar']; ?>" alt="User profile picture">
                         <?php else: ?>
-                            <img class="profile-user-img img-responsive img-circle" src="<?php echo site_url('assets/public/img/client.jpg'); ?>" alt="User profile picture">
+                            <img class="profile-user-img img-responsive" src="<?php echo site_url('assets/public/img/client.jpg'); ?>" alt="User profile picture">
                         <?php endif ?>
 
                         <h3 class="profile-username text-center"><?php echo $user->last_name . ' ' . $user->first_name; ?></h3>
