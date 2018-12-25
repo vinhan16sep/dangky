@@ -286,6 +286,12 @@ class Information extends Client_Controller {
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
             ));
+            $this->form_validation->set_rules('main_service[]', 'Sản phẩm dịch vụ chính của doanh nghiệp', 'trim|required', array(
+                'required' => '%s không được trống.'
+            ));
+            $this->form_validation->set_rules('main_market[]', 'Thị trường chính', 'trim|required', array(
+                'required' => '%s không được trống.'
+            ));
             if ($this->form_validation->run() === FALSE) {
                 if($this->data['reg_status']['is_information'] == 0){
                     $this->session->set_flashdata('need_input_information_first', 'Cần nhập thông tin cơ bản của doanh nghiệp trước (tại đây)');
@@ -445,6 +451,7 @@ class Information extends Client_Controller {
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
             ));
+
             if ($this->form_validation->run() === FALSE) {
                 if($this->data['reg_status']['is_information'] == 0){
                     $this->session->set_flashdata('need_input_information_first', 'Cần nhập thông tin cơ bản của doanh nghiệp trước (tại đây)');
@@ -623,6 +630,12 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
+            ));
+            $this->form_validation->set_rules('main_service[]', 'Sản phẩm dịch vụ chính của doanh nghiệp', 'trim|required', array(
+                'required' => '%s không được trống.'
+            ));
+            $this->form_validation->set_rules('main_market[]', 'Thị trường chính', 'trim|required', array(
+                'required' => '%s không được trống.'
             ));
 
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
@@ -925,6 +938,9 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('award', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
+            $this->form_validation->set_rules('service[]', 'Lĩnh vực', 'trim|required', array(
+                'required' => '%s không được trống.'
+            ));
             $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
 
             if ($this->form_validation->run() == FALSE) {
@@ -1092,6 +1108,9 @@ class Information extends Client_Controller {
             ));
             $this->form_validation->set_rules('award', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
+            ));
+            $this->form_validation->set_rules('service[]', 'Lĩnh vực', 'trim|required', array(
+                'required' => '%s không được trống.'
             ));
             // $this->form_validation->set_rules('certificate', 'Image', 'callback_check_file_selected');
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');

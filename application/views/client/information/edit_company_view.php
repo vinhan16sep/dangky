@@ -331,6 +331,7 @@
                                     }
                                 }
                                 echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
+                                echo form_error('main_service[]', '<div class="error"  style="margin-left: -15px">', '</div>');
                                 foreach ($options as $key => $value) {
                                     if(!is_null($main_service) && $main_service != null){
                                         echo form_checkbox('main_service[]', $value, (in_array($value, $main_service, '')? true : false), 'class="btn-checkbox"');
@@ -418,6 +419,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
                             <div class="row">
                                 <label style="margin-left: -15px" id="main_market[]-error" class="error" for="main_market[]"></label><br />
+                                <?php echo form_error('main_market[]', '<div class="error"  style="margin-left: -15px">', '</div>'); ?>
                                 <strong style="margin-left: -15px">Trong nước</strong>
                                 <div class="row" style="margin-left: 20px">
                                     <?php

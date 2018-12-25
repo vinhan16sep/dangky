@@ -33,21 +33,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'equity_2');
-                                echo form_error('equity_1');
+                                echo form_error('equity_1', '<div class="error">', '</div>');
                                 echo form_input('equity_1', set_value('equity_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'equity_2');
-                                echo form_error('equity_2');
+                                echo form_error('equity_2', '<div class="error">', '</div>');
                                 echo form_input('equity_2', set_value('equity_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'equity_3');
-                                echo form_error('equity_3');
+                                echo form_error('equity_3', '<div class="error">', '</div>');
                                 echo form_input('equity_3', set_value('equity_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -66,21 +66,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'owner_equity_1');
-                                echo form_error('owner_equity_1');
+                                echo form_error('owner_equity_1', '<div class="error">', '</div>');
                                 echo form_input('owner_equity_1', set_value('owner_equity_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'owner_equity_2');
-                                echo form_error('owner_equity_2');
+                                echo form_error('owner_equity_2', '<div class="error">', '</div>');
                                 echo form_input('owner_equity_2', set_value('owner_equity_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'owner_equity_3');
-                                echo form_error('owner_equity_3');
+                                echo form_error('owner_equity_3', '<div class="error">', '</div>');
                                 echo form_input('owner_equity_3', set_value('owner_equity_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -99,21 +99,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'total_income_1');
-                                echo form_error('total_income_1');
+                                echo form_error('total_income_1', '<div class="error">', '</div>');
                                 echo form_input('total_income_1', set_value('total_income_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'total_income_2');
-                                echo form_error('total_income_2');
+                                echo form_error('total_income_2', '<div class="error">', '</div>');
                                 echo form_input('total_income_2', set_value('total_income_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'total_income_3');
-                                echo form_error('total_income_3');
+                                echo form_error('total_income_3', '<div class="error">', '</div>');
                                 echo form_input('total_income_3', set_value('total_income_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -132,21 +132,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'software_income_1');
-                                echo form_error('software_income_1');
+                                echo form_error('software_income_1', '<div class="error">', '</div>');
                                 echo form_input('software_income_1', set_value('software_income_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'software_income_2');
-                                echo form_error('software_income_2');
+                                echo form_error('software_income_2', '<div class="error">', '</div>');
                                 echo form_input('software_income_2', set_value('software_income_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'software_income_3');
-                                echo form_error('software_income_3');
+                                echo form_error('software_income_3', '<div class="error">', '</div>');
                                 echo form_input('software_income_3', set_value('software_income_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -165,21 +165,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'it_income_1');
-                                echo form_error('it_income_1');
+                                echo form_error('it_income_1', '<div class="error">', '</div>');
                                 echo form_input('it_income_1', set_value('it_income_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'it_income_2');
-                                echo form_error('it_income_2');
+                                echo form_error('it_income_2', '<div class="error">', '</div>');
                                 echo form_input('it_income_2', set_value('it_income_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'it_income_3');
-                                echo form_error('it_income_3');
+                                echo form_error('it_income_3', '<div class="error">', '</div>');
                                 echo form_input('it_income_3', set_value('it_income_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -198,21 +198,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'export_income_1');
-                                echo form_error('export_income_1');
+                                echo form_error('export_income_1', '<div class="error">', '</div>');
                                 echo form_input('export_income_1', set_value('export_income_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'export_income_2');
-                                echo form_error('export_income_2');
+                                echo form_error('export_income_2', '<div class="error">', '</div>');
                                 echo form_input('export_income_2', set_value('export_income_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'export_income_3');
-                                echo form_error('export_income_3');
+                                echo form_error('export_income_3', '<div class="error">', '</div>');
                                 echo form_input('export_income_3', set_value('export_income_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -231,21 +231,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'total_labor_1');
-                                echo form_error('total_labor_1');
+                                echo form_error('total_labor_1', '<div class="error">', '</div>');
                                 echo form_input('total_labor_1', set_value('total_labor_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'total_labor_2');
-                                echo form_error('total_labor_2');
+                                echo form_error('total_labor_2', '<div class="error">', '</div>');
                                 echo form_input('total_labor_2', set_value('total_labor_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'total_labor_3');
-                                echo form_error('total_labor_3');
+                                echo form_error('total_labor_3', '<div class="error">', '</div>');
                                 echo form_input('total_labor_3', set_value('total_labor_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -264,21 +264,21 @@
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[0], 'total_ltv_1');
-                                echo form_error('total_ltv_1');
+                                echo form_error('total_ltv_1', '<div class="error">', '</div>');
                                 echo form_input('total_ltv_1', set_value('total_ltv_1'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[1], 'total_ltv_2');
-                                echo form_error('total_ltv_2');
+                                echo form_error('total_ltv_2', '<div class="error">', '</div>');
                                 echo form_input('total_ltv_2', set_value('total_ltv_2'), 'class="form-control"');
                                 ?>
                             </div>
                             <div class="row">
                                 <?php
                                 echo form_label('Năm ' . $rule3Year[2], 'total_ltv_3');
-                                echo form_error('total_ltv_3');
+                                echo form_error('total_ltv_3', '<div class="error">', '</div>');
                                 echo form_input('total_ltv_3', set_value('total_ltv_3'), 'class="form-control"');
                                 ?>
                             </div>
@@ -296,7 +296,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <div class="row">
                                 <?php
-                                echo form_error('description');
+                                echo form_error('description', '<div class="error">', '</div>');
                                 echo form_textarea('description', set_value('description'), 'class="form-control"');
                                 ?>
                             </div>
@@ -327,6 +327,7 @@
                                     'Tư vấn' => 'Tư vấn'
                                 );
                                 echo '<label id="main_service[]-error" class="error" for="main_service[]"></label><br />';
+                                echo form_error('main_service[]', '<div class="error"  style="margin-left: -15px">', '</div>');
                                 foreach ($options as $key => $value) {
                                     echo form_checkbox('main_service[]', $value, false, 'class="btn-checkbox"');
                                     echo $key.'<br>';
@@ -362,6 +363,7 @@
                         <div class="col-sm-9 col-md-9 col-sx-12" style="padding-left: 30px;">
                             <div class="row">
                                 <label style="margin-left: -15px" id="main_market[]-error" class="error" for="main_market[]"></label><br />
+                                <?php echo form_error('main_market[]', '<div class="error"  style="margin-left: -15px">', '</div>'); ?>
                                 <strong style="margin-left: -15px">Trong nước</strong>
                                 <div class="row" style="margin-left: 20px">
                                     <?php
