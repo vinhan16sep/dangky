@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Tên SP/dịch vụ/giải pháp/ứng dụng', 'name');
+                            echo form_label('Tên Sản phẩm/giải pháp/dịch vụ', 'name');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Đăng ký tham gia lĩnh vực', 'service');
+                            echo form_label('Đăng ký tham gia nhóm', 'service');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -44,13 +44,13 @@
                                 'Chính phủ điện tử' => 'Chính phủ điện tử',
                                 'Quản lý doanh nghiệp' => 'Quản lý doanh nghiệp',
                                 'Kế toán, tài chính, ngân hàng' => 'Kế toán, tài chính, ngân hàng',
-                                'Quản lý bán hàng và chuỗi cung ứng' => 'Quản lý bán hàng và chuỗi cung ứng',
+                                'Quản lý bán hàng, phân phối, bán lẻ và chuỗi cung ứng' => 'Quản lý bán hàng, phân phối, bán lẻ và chuỗi cung ứng',
                                 'Bất động sản' => 'Bất động sản',
                                 'Quảng cáo, tiếp thị và truyền thông số' => 'Quảng cáo, tiếp thị và truyền thông số',
                                 'Y tế, chăm sóc sức khỏe và làm đẹp' => 'Y tế, chăm sóc sức khỏe và làm đẹp',
                                 'Giáo dục, đào tạo' => 'Giáo dục, đào tạo',
                                 'Giao thông vận tải' => 'Giao thông vận tải',
-                                'Công nghệp và sản xuất' => 'Công nghệp và sản xuất',
+                                'Công nghiệp và sản xuất' => 'Công nghiệp và sản xuất',
                                 'Nông nghiệp và chế biến thực phẩm' => 'Nông nghiệp và chế biến thực phẩm',
                                 'Du lịch, quản lý nhà hàng/khách sạn' => 'Du lịch, quản lý nhà hàng/khách sạn',
                                 'Công tác nhân sự, văn phòng' => 'Công tác nhân sự, văn phòng',
@@ -79,7 +79,7 @@
                             echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
                             echo form_error('service[]', '<div class="error">', '</div>');
                             echo form_checkbox('group_1', '', '', 'class="btn-group-1"');
-                            echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 18 lĩnh vực ứng dụng chuyên ngành</span><br>';
+                            echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</span><br>';
                             echo "<div class='row group-1' style='display:none; margin-left: 20px'>";
                             foreach ($options_1 as $key => $value) {
                                 if(!is_null($service) && $service != null){
@@ -93,6 +93,8 @@
                             echo "</div>";
                             echo form_checkbox('service[]', 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0', ($service && in_array('Các sản phẩm, giải pháp ứng dụng công nghệ 4.0', $service, '') ? true : false), 'class="btn-checkbox"');
                             echo '<span style="color:blue">Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</span><br>';
+                            echo form_checkbox('service[]', 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp', ($service && in_array('Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp', $service, '') ? true : false), 'class="btn-checkbox"');
+                            echo '<span style="color:blue">Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</span><br>';
                             echo form_checkbox('service[]', 'Các sản phẩm, giải pháp phần mềm mới', ($service && in_array('Các sản phẩm, giải pháp phần mềm mới', $service, '')? true : false), 'class="btn-checkbox"');
                             echo '<span style="color:blue">Các sản phẩm, giải pháp phần mềm mới</span><br>';
                             echo form_checkbox('group_4', '', false, 'class="btn-group-4"');
@@ -221,7 +223,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2017', 'income_2016');
+                            echo form_label('Doanh thu của SP/GP/DV năm 2017 (triệu đồng)', 'income_2016');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -236,7 +238,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2018', 'income_2017');
+                            echo form_label('Doanh thu của SP/GP/DV năm 2018 (triệu đồng)', 'income_2017');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -251,7 +253,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Thị phần của SP/giải pháp/DV', 'area');
+                            echo form_label('Thị phần của SP/GP/DV', 'area');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -272,7 +274,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Ngày thương mại hoá/ra mắt dịch vụ', 'open_date');
+                            echo form_label('Ngày thương mại hoá ra thị trường', 'open_date');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">

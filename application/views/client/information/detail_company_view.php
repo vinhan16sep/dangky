@@ -138,7 +138,7 @@
                                     </div>
                                     <?php if($eventYear == $company['year']){ ?>
                                     <div class="col-xs-12 col-md-4 pull-left">
-                                        <a href="<?php echo base_url('client/information/edit_company?year=' . $eventYear); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin năm sự kiện hiện tại</b></a>
+                                        <a href="<?php echo base_url('client/information/edit_company?year=' . $eventYear); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
                                     </div>
                                     <?php } ?>
                                     <div class="col-xs-12 col-md-4 pull-right">
