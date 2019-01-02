@@ -376,7 +376,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('File mô tả chi tiết sản phẩm', 'file');
+                            echo form_label('File mô tả chi tiết sản phẩm <br> <span style="color: red">(*.doc, *.docx, *.xlsx, *.pdf, file <= 2Mb)</span>', 'file');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">

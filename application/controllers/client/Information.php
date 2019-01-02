@@ -40,10 +40,24 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required');
-        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required');
-        $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|numeric');
+        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+        $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email', array(
+            'required' => '%s không được trống.',
+            'valid_email' => 'Định dạng email không đúng.',
+        ));
+        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[9]|max_length[12]', array(
+            'required' => '%s không được trống.',
+            'integer' => '%s phải là số nguyên.',
+            'min_length' => '%s tối thiểu %s ký tự.',
+            'max_length' => '%s tối đa %s ký tự.',
+        ));
 //        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -106,10 +120,24 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required');
-        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required');
-        $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|numeric');
+        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+        $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email', array(
+            'required' => '%s không được trống.',
+            'valid_email' => 'Định dạng email không đúng.',
+        ));
+        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[9]|max_length[12]', array(
+            'required' => '%s không được trống.',
+            'integer' => '%s phải là số nguyên.',
+            'min_length' => '%s tối thiểu %s ký tự.',
+            'max_length' => '%s tối đa %s ký tự.',
+        ));
 //        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
@@ -293,17 +321,17 @@ class Information extends Client_Controller {
                 'required' => '%s không được trống.',
                 'numeric' => '%s phải là số.',
             ));
-            $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_ltv_1', 'Tổng số LTV ' . $this->data['rule3Year'][0], 'trim|required|integer', array(
                 'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
+                'integer' => '%s phải là số nguyên.',
             ));
-            $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_ltv_2', 'Tổng số LTV ' . $this->data['rule3Year'][1], 'trim|required|integer', array(
                 'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
+                'integer' => '%s phải là số nguyên.',
             ));
-            $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|numeric', array(
+            $this->form_validation->set_rules('total_ltv_3', 'Tổng số LTV ' . $this->data['rule3Year'][2], 'trim|required|integer', array(
                 'required' => '%s không được trống.',
-                'numeric' => '%s phải là số.',
+                'integer' => '%s phải là số nguyên.',
             ));
             $this->form_validation->set_rules('main_service[]', 'Sản phẩm dịch vụ chính của doanh nghiệp', 'trim|required', array(
                 'required' => '%s không được trống.'
@@ -989,10 +1017,9 @@ class Information extends Client_Controller {
                         $this->check_file($_FILES['file']['name']);
                         $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
                     }
+
                     $service = json_encode($this->input->post('service'));
-                    // $image = $this->upload_image('certificate', $_FILES['certificate']['name'], 'assets/upload/product', 'assets/upload/product/thumbs');
                     $data = array(
-                        'file' => $file,
                         'client_id' => $this->data['user']->id,
                         'name' => $this->input->post('name'),
                         'service' => $service,
@@ -1020,7 +1047,9 @@ class Information extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
-
+                    if(!empty($_FILES['file']['name'])){
+                        $data['file'] = $file;
+                    }
                     $insert = $this->information_model->insert_product('product', $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
@@ -1054,6 +1083,10 @@ class Information extends Client_Controller {
             } else {
                 if ($this->input->post()) {
                     $service = json_encode($this->input->post('service'));
+                    if(!empty($_FILES['file']['name'])){
+                        $this->check_file($_FILES['file']['name']);
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                    }
                     // $image = $this->upload_image('certificate', $_FILES['certificate']['name'], 'assets/upload/product', 'assets/upload/product/thumbs');
                     $data = array(
                         'client_id' => $this->data['user']->id,
@@ -1083,7 +1116,9 @@ class Information extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
-
+                    if(!empty($_FILES['file']['name'])){
+                        $data['file'] = $file;
+                    }
                     $insert = $this->information_model->insert_product('product', $data);
                     if (!$insert) {
                         $this->session->set_flashdata('message', 'There was an error inserting item');
@@ -1193,8 +1228,10 @@ class Information extends Client_Controller {
                         'is_submit' => 1,
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by'],
-                        'file' => $file,
                     );
+                    if(!empty($_FILES['file']['name'])){
+                        $data['file'] = $file;
+                    }
                     try {
                         $this->information_model->update_product('product', $this->data['user']->id, $id, $data);
                         $this->load->model('status_model');
@@ -1227,6 +1264,10 @@ class Information extends Client_Controller {
                 $this->render('client/information/edit_product_view');
             } else {
                 if ($this->input->post()) {
+                    if(!empty($_FILES['file']['name'])){
+                        $this->check_file($_FILES['file']['name']);
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                    }
                     $service = json_encode($this->input->post('service'));
                     $data = array(
                         'name' => $this->input->post('name'),
@@ -1250,6 +1291,9 @@ class Information extends Client_Controller {
                         'modified_at' => $this->author_info['modified_at'],
                         'modified_by' => $this->author_info['modified_by']
                     );
+                    if(!empty($_FILES['file']['name'])){
+                        $data['file'] = $file;
+                    }
                     try {
                         $this->information_model->update_product('product', $this->data['user']->id, $id, $data);
                         $this->session->set_flashdata('message', 'Item updated successfully');

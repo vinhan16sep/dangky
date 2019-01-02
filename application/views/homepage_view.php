@@ -13,7 +13,7 @@
 <section class="main_content container-fluid">
     <div class="megatron">
         <div class="container">
-            <img src="<?php echo site_url('assets/public/img/vinasaBanner.png') ?>">
+            <img src="<?php echo site_url('assets/public/img/2A.gif') ?>">
             <h1>Cổng đăng ký danh hiệu Sao Khuê</h1>
             <p></p>
             <ul class="nav nav-pills nav-justified">
@@ -27,6 +27,15 @@
                     <a href="<?php echo base_url('client/user/login') ?>"><h4>Doanh nghiệp</h4></a>
                 </li>
             </ul>
+            <br>
+            <br>
+            <br>
+            <img src="<?php echo site_url('assets/public/img/vinasaBanner.png') ?>">
+            <br>
+            <p><strong>Điện thoại:</strong> 024 3577 2336/38</p>
+            <p><strong>Fax:</strong> 024 3577 2337</p>
+            <p><strong>Email:</strong> contact@vinasa.org.vn</p>
+            <p><strong>Địa chỉ:</strong> Tầng 11, tòa nhà Cung Trí thức Thành phố, số 1 Tôn Thất Thuyết, Cầu Giấy, Hà Nội</p>
         </div>
     </div>
 </section>
