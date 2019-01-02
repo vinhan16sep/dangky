@@ -36,7 +36,7 @@
                                     <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
                                 </div>
                             <?php endif ?>
-                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM / GIẢI PHÁP / DỊCH VỤ' : 'Danh sách sản phẩm/dịch vụ  đã đăng ký' ?></h4>
+                            <h4 style="text-align: center;"><?php echo empty($products) ? 'THÔNG TIN SẢN PHẨM <i class="fa fa-arrow-right" aria-hidden="true"></i> THÔNG TIN SẢN PHẨM/ DỊCH VỤ ĐỀ CỬ' : 'Danh sách sản phẩm/dịch vụ  đã đăng ký' ?></h4>
                             <?php if (!empty($products)): ?>
                                 <div class="row">
                                     <div class="col-lg-12" style="margin-top: 10px;">
