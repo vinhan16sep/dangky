@@ -975,7 +975,7 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('service[]', 'Lĩnh vực', 'trim|required', array(
                 'required' => '%s không được trống.'
             ));
-            $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
+            // $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
 
             if ($this->form_validation->run() == FALSE) {
                 if($this->data['reg_status']['is_information'] == 0){
@@ -1156,7 +1156,7 @@ class Information extends Client_Controller {
             $this->form_validation->set_rules('service[]', 'Lĩnh vực', 'trim|required', array(
                 'required' => '%s không được trống.'
             ));
-            $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
+            // $this->form_validation->set_rules('file', 'Data', 'callback_check_file_selected');
 
             $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
             if ($this->form_validation->run() == FALSE) {
