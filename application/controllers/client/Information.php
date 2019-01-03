@@ -52,7 +52,7 @@ class Information extends Client_Controller {
             'required' => '%s không được trống.',
             'valid_email' => 'Định dạng email không đúng.',
         ));
-        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[9]|max_length[12]', array(
+        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[10]|max_length[12]', array(
             'required' => '%s không được trống.',
             'integer' => '%s phải là số nguyên.',
             'min_length' => '%s tối thiểu %s ký tự.',
@@ -132,7 +132,7 @@ class Information extends Client_Controller {
             'required' => '%s không được trống.',
             'valid_email' => 'Định dạng email không đúng.',
         ));
-        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[9]|max_length[12]', array(
+        $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[10]|max_length[12]', array(
             'required' => '%s không được trống.',
             'integer' => '%s phải là số nguyên.',
             'min_length' => '%s tối thiểu %s ký tự.',

@@ -64,7 +64,6 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
-                <?php if($status['is_final'] == 1): ?>
                 <li>
                     <a onclick="return openModal();" href="#"><b></b>
                         <i class="fa fa-exclamation" aria-hidden="true"></i>
@@ -72,7 +71,6 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
-                <?php endif; ?>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -89,7 +87,7 @@
                 <div class="modal-body">
                     <h4 style="font-weight:bold !important;">Để hoàn tất hồ sơ, vui lòng gửi lại BTC các tài liệu sau qua đường bưu điện:</h4>
                     <h4> 1. File Phiếu đăng ký theo mẫu đã tải (có dấu và chữ ký của lãnh đạo công ty)</h4>
-                    <h4> 2. Giấy đăng ký bản quyền sảnphẩm/dịch vụ đề cử (bản photo)</h4>
+                    <h4> 2. Giấy đăng ký bản quyền sản phẩm/dịch vụ đề cử (bản photo)</h4>
                     <h4> 3. Giấy phép đăng ký kinh doanh (bản photo)</h4>
                     <h4> 4. Bằng khen, chứng chỉ (nếu có)</h4>
                     <h4 style="text-decoration: underline !important;">Địa chỉ: </h4>
@@ -97,6 +95,7 @@
                     <h4 style="font-weight:bold !important;">Hiệp hội Phần mềm và Dịch vụ CNTT Việt Nam</h4>
                     <h4 style="font-weight:bold !important;">Tầng 11, tòa nhà Cung Trí thức thành phố</h4>
                     <h4 style="font-weight:bold !important;">Số 1 Tôn Thất Thuyết, Cầu Giấy, Hà Nội</h4>
+                    <h4 style="font-weight:bold !important;">Email: thuhm@vinasa.org.vn</h4>
                     <h4 style="font-weight:bold !important;">Mobile: 0385796096/02435772336</h4>
 
                 </div>

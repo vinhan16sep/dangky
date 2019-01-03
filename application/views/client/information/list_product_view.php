@@ -56,9 +56,9 @@
                                                 echo '<td>' . ($key + 1) . '</td>';
                                                 echo '<td><a href="' . base_url('client/information/detail_product/' . $product['id']) . '">' . $product['name'] . '</a></td>';
                                         ?>
-                                                <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-default">Xem chi tiết</a></td>
+                                                <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/detail_product/' . $product['id']) ?>" class="btn btn-primary">Xem chi tiết</a></td>
                                                 <?php if($reg_status['is_final'] == 0): ?>
-                                                    <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/edit_product/' . $product['id']) ?>" class="btn btn-success">Chỉnh sửa</a></td>
+                                                    <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/edit_product/' . $product['id']) ?>" class="btn btn-primary">Chỉnh sửa</a></td>
                                                 <?php endif; ?>
                                         <?php
                                                 echo '</tr>';
@@ -76,7 +76,7 @@
                             <?php endif ?>
                             <?php if($reg_status['is_final'] == 0): ?>
                                 <div>
-                                    <a id="complete" onclick="return complete();" <?php echo ($status['is_product'] == 0) ? 'disabled="disabled"' : '';?> style="display: inline;" href="#" class="btn btn-success pull-right"><b>Hoàn thành đăng ký</b></a>
+                                    <a id="complete" onclick="return complete();" <?php echo ($status['is_product'] == 0) ? 'disabled="disabled"' : '';?> style="display: inline;" href="#" class="btn btn-warning pull-right"><b>Hoàn thành đăng ký</b></a>
                                     <a style="display: inline;margin-right:10px !important;"  href="<?php echo base_url('client/information/create_product') ?>" class="btn btn-primary pull-right"><b>Thêm sản phẩm</b></a>
                                 </div>
 

@@ -48,7 +48,7 @@
                                                 echo '<td><a href="javascript:void(0);">' . $value['year'] . '</a></td>';
                                                 if($eventYear == $value['year']){ ?>
                                                     <td style="text-align: center;width:110px;">
-                                                        <a style="width:132px;" href="<?php echo base_url('client/information/company?year=' . $value['year']); ?>" class="btn btn-success btn-block">Xem thông tin</a>
+                                                        <a style="width:132px;" href="<?php echo base_url('client/information/company?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Xem thông tin</a>
                                                     </td>
                                                     <?php if($status['is_final'] == 0){ ?>
                                                     <td style="text-align: center;width:110px;">

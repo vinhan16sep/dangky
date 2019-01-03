@@ -2,7 +2,7 @@
 <div class="content-wrapper" style="min-height: 916px;">
     <div class="box-body pad table-responsive" style="box-shadow: 2px 2px 1px grey;">
         <strong style="color: #2d76b8; font-size: 18px">Quý doanh nghiệp vui lòng khai đầy đủ thông tin theo các bước sau:</strong>
-        <a target="_blank" href="http://danhhieusaokhue.vn/"><img style="width: 100% !important;" src="<?php echo site_url('assets/public/img/flow.png'); ?>" /></a>
+        <a target="_blank" href="http://danhhieusaokhue.vn/"><img style="width: 100% !important;" src="<?php echo site_url('assets/public/img/flow3.png'); ?>" /></a>
         <i style="color: #2d76b8; font-size: 15px">Thời hạn nộp hồ sơ: 05/03/2019</i><br>
         <i style="color: #2d76b8; font-size: 15px"><ins>Cán bộ hỗ trợ:</ins> Ms. Cao Ánh Hằng, mobile: 0974 29 87 86, email: hangca@vinasa.org.vn</i>
 <!--        <h3>Trang thông tin: <span style="color:red;">--><?php //echo $user->company; ?><!--</span></h3>-->
@@ -88,7 +88,7 @@
                                         <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>
                                     </span>
                                 <?php else: ?>
-                                    <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-success btn-block"><b>Xem thông tin</b></a>
+                                    <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-primary btn-block"><b>Xem thông tin</b></a>
                                     <a href="<?php echo base_url('client/information/edit_extra'); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
     <!--                                <p style="color:green;">Doanh nghiệp đã gửi thông tin đăng ký</p>-->
     <!--                                <span>-->
@@ -96,7 +96,7 @@
     <!--                                </span>-->
                                 <?php endif; ?>
                             <?php else: ?>
-                                <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-success btn-block"><b>Xem thông tin</b></a>
+                                <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-primary btn-block"><b>Xem thông tin</b></a>
                             <?php endif; ?>
                         </div>
                         <div class="post">
@@ -116,7 +116,7 @@
                                         <br>
                                         <?php foreach ($company_submitted as $value){ ?>
                                             <div>
-                                                <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
+                                                <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-primary btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
                                                 <?php if($status['is_final'] == 0){ ?>
                                                     <?php if(date('Y') <= $value['year']){ ?>
                                                         <a style="display: inline;" href="<?php echo base_url('client/information/edit_company?year=' . $value['year']); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin <?php echo $value['year']; ?></b></a>
@@ -130,7 +130,7 @@
                                     <br>
                                     <?php foreach ($company_submitted as $value){ ?>
                                         <div>
-                                            <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
+                                            <a style="display: inline;" href="<?php echo base_url('client/information/company?year=' . $value['year']) ?>" class="btn btn-primary btn-block"><b>Xem thông tin đã đăng ký <?php echo $value['year']; ?></b></a>
                                         </div>
                                         <hr>
                                     <?php } ?>
@@ -150,7 +150,7 @@
                                 <?php else: ?>
                                     <p style="color:green;">Doanh nghiệp đã đăng ký <?php echo $count_product; ?> sản phẩm / giải pháp / dịch vụ.</p>
                                     <span>
-                                        <a href="<?php echo base_url('client/information/products') ?>" class="btn btn-success btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
+                                        <a href="<?php echo base_url('client/information/products') ?>" class="btn btn-primary btn-block"><b>Xem thông tin sản phẩm đã đăng ký</b></a>
                                     </span>
                                 <?php endif; ?>
                             <?php }else{
@@ -166,21 +166,21 @@
                         <br>
                         <br>
                         <a onclick="return confirmation();" href="#" class="btn btn-warning btn-block"><b>Gửi Ban tổ chức</b></a>
-                        <p style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</p>
+                        <h4 style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</h4>
                         <?php else: ?>
                         <h4 style="color:red">Thông tin đã được gửi</h4>
                         <?php endif; ?>
                     <?php } ?>
                 <?php else: ?>
-                    <?php if($identity != ''){ ?>
-                        <?php if($reg_status['is_final'] == 0): ?>
-                            <br>
-                            <br>
-                            <a disabled="disabled" class="btn btn-warning btn-block"><b>Cần nhập đủ thông tin Đăng ký / Doanh nghiệp / Sản phẩm</b></a>
-                        <?php else: ?>
-                            <h4 style="color:red">Thông tin đã được gửi</h4>
-                        <?php endif; ?>
-                    <?php } ?>
+<!--                    --><?php //if($identity != ''){ ?>
+<!--                        --><?php //if($reg_status['is_final'] == 0): ?>
+<!--                            <br>-->
+<!--                            <br>-->
+<!--                            <a disabled="disabled" class="btn btn-warning btn-block"><b>Cần nhập đủ thông tin Đăng ký / Doanh nghiệp / Sản phẩm</b></a>-->
+<!--                        --><?php //else: ?>
+<!--                            <h4 style="color:red">Thông tin đã được gửi</h4>-->
+<!--                        --><?php //endif; ?>
+<!--                    --><?php //} ?>
                 <?php endif; ?>
                 
                 <!-- /.nav-tabs-custom -->
@@ -203,7 +203,7 @@
             <div class="modal-body">
                 <h4 style="font-weight:bold !important;">Để hoàn tất hồ sơ, vui lòng gửi lại BTC các tài liệu sau qua đường bưu điện:</h4>
                 <h4> 1. File Phiếu đăng ký theo mẫu đã tải (có dấu và chữ ký của lãnh đạo công ty)</h4>
-                <h4> 2. Giấy đăng ký bản quyền sảnphẩm/dịch vụ đề cử (bản photo)</h4>
+                <h4> 2. Giấy đăng ký bản quyền sản phẩm/dịch vụ đề cử (bản photo)</h4>
                 <h4> 3. Giấy phép đăng ký kinh doanh (bản photo)</h4>
                 <h4> 4. Bằng khen, chứng chỉ (nếu có)</h4>
                 <h4 style="text-decoration: underline !important;">Địa chỉ: </h4>
@@ -211,6 +211,7 @@
                 <h4 style="font-weight:bold !important;">Hiệp hội Phần mềm và Dịch vụ CNTT Việt Nam</h4>
                 <h4 style="font-weight:bold !important;">Tầng 11, tòa nhà Cung Trí thức thành phố</h4>
                 <h4 style="font-weight:bold !important;">Số 1 Tôn Thất Thuyết, Cầu Giấy, Hà Nội</h4>
+                <h4 style="font-weight:bold !important;">Email: thuhm@vinasa.org.vn</h4>
                 <h4 style="font-weight:bold !important;">Mobile: 0385796096/02435772336</h4>
 
             </div>
