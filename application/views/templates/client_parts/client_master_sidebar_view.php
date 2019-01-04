@@ -31,14 +31,14 @@
                 <li class="<?php echo ($active == 'extra')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/extra'); ?>">
                         <i class="fa fa-address-card" aria-hidden="true"></i>
-                        <span>Thông tin đăng ký</span>
+                        <span>Thông tin cơ bản</span>
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
                 <li class="<?php echo ($active == 'company')? 'active' : '' ?>">
                     <a href="<?php echo base_url('client/information/company'); ?>">
                         <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                        <span>Thông tin doanh nghiệp<br>theo từng năm</span>
+                        <span>Thông tin doanh nghiệp</span>
                         <span class="pull-right-container"></span>
                     </a>
 <!--                    <ul class="">-->
