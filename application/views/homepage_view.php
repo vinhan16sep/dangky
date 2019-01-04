@@ -23,7 +23,7 @@
                 <li>
                     <a href="<?php echo base_url('member/user/login') ?>"><h4>Hội đồng đánh giá</h4></a>
                 </li>
-                <li style="border-left:1px solid orange;">
+                <li class="company-border" style="border-left:1px solid orange;">
                     <a href="<?php echo base_url('client/user/login') ?>"><h4>Doanh nghiệp</h4></a>
                 </li>
             </ul>
