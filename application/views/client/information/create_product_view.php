@@ -106,6 +106,21 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
+                            echo form_label('Số giấy chứng nhận bản quyền', 'copyright_certificate');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('copyright_certificate', '<div class="error">', '</div>');
+                            echo form_input('copyright_certificate', set_value('copyright_certificate'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
                             echo form_label('Mô tả công năng sản phẩm: (Nêu rõ chức năng, tính hiệu quả, tác động đến KT, XH, MT…, ứng dụng chuyển đổi số, IoT, dữ liệu lớn, SMAC, AI, AR, VR, robotics… (nếu có) Có thể đính kèm các bảng biểu, số liệu, tài liệu,… để chứng minh) ', 'functional');
                             ?>
                         </div>

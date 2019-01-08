@@ -27,6 +27,9 @@
                                     <?php } ?>
                                 </li>
                                 <li class="list-group-item">
+                                    <a><i class="fa fa-calendar margin-r-5"></i> Số giấy chứng nhận bản quyền</a> <p class="pull-right"><?php echo $product['copyright_certificate']; ?></p>
+                                </li>
+                                <li class="list-group-item">
                                     <a><i class="fa fa-calendar margin-r-5"></i> Ngày thương mại hoá ra thị trường</a> <p class="pull-right"><?php echo $product['open_date']; ?></p>
                                 </li>
                                 <li class="list-group-item">

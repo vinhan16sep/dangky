@@ -954,6 +954,9 @@ class Information extends Client_Controller {
                 'required' => '%s không được trống.',
             ));
             // $this->form_validation->set_rules('service', 'Data', 'trim|required');
+            $this->form_validation->set_rules('copyright_certificate', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
             $this->form_validation->set_rules('functional', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
@@ -1023,6 +1026,7 @@ class Information extends Client_Controller {
                         'client_id' => $this->data['user']->id,
                         'name' => $this->input->post('name'),
                         'service' => $service,
+                        'copyright_certificate' => $this->input->post('copyright_certificate'),
                         'functional' => $this->input->post('functional'),
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
@@ -1092,6 +1096,7 @@ class Information extends Client_Controller {
                         'client_id' => $this->data['user']->id,
                         'name' => $this->input->post('name'),
                         'service' => $service,
+                        'copyright_certificate' => $this->input->post('copyright_certificate'),
                         'functional' => $this->input->post('functional'),
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
@@ -1142,6 +1147,9 @@ class Information extends Client_Controller {
                 'required' => '%s không được trống.',
             ));
             // $this->form_validation->set_rules('service', 'Data', 'trim|required');
+            $this->form_validation->set_rules('copyright_certificate', 'Data', 'trim|required', array(
+                'required' => '%s không được trống.',
+            ));
             $this->form_validation->set_rules('functional', 'Data', 'trim|required', array(
                 'required' => '%s không được trống.',
             ));
@@ -1210,6 +1218,7 @@ class Information extends Client_Controller {
                     $data = array(
                         'name' => $this->input->post('name'),
                         'service' => $service,
+                        'copyright_certificate' => $this->input->post('copyright_certificate'),
                         'functional' => $this->input->post('functional'),
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
@@ -1272,6 +1281,7 @@ class Information extends Client_Controller {
                     $data = array(
                         'name' => $this->input->post('name'),
                         'service' => $service,
+                        'copyright_certificate' => $this->input->post('copyright_certificate'),
                         'functional' => $this->input->post('functional'),
                         'process' => $this->input->post('process'),
                         'security' => $this->input->post('security'),
