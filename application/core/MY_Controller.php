@@ -161,6 +161,13 @@ class Admin_Controller extends MY_Controller {
             'modified_at' => date('Y-m-d H:i:s', now()),
             'modified_by' => $this->ion_auth->user()->row()->email
         );
+
+        $this->data['eventYear'] = (date('m') == 12) ? (date('Y') + 1) : date('Y');
+        $this->data['rule3Year'] = array(
+            $this->data['eventYear'] - 3,
+            $this->data['eventYear'] - 2,
+            $this->data['eventYear'] - 1
+        );
     }
 
 
