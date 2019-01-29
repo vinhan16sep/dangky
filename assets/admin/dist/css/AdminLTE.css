@@ -5723,3 +5723,7 @@ table.text-center th {
         width: 15%;
     }
 }
+
+.error {
+  color: red;
+}

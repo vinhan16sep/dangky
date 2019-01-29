@@ -2,7 +2,23 @@
 
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content row">
-        <a type="button" href="<?php echo site_url('admin/users/create/' . $group); ?>" class="btn btn-primary">THÊM MỚI</a>
+        
+        <div class="row" style="padding: 10px;">
+            <div class="col-md-6">
+                <a type="button" href="<?php echo site_url('admin/users/create/' . $group); ?>" class="btn btn-primary">THÊM MỚI</a>
+            </div>
+            <div class="col-md-6">
+                <form action="<?php echo base_url('admin/users/index') ?>" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm ..." name="search" value="<?= $keywords ?>">
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-block btn-primary" value="Tìm kiếm">
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="container col-md-12">
             <div>
                 <span><?php echo $this->session->flashdata('message'); ?></span>
@@ -76,6 +92,9 @@
                                 </tr>
                             <?php endforeach ?>
                         </table>
+                    </div>
+                    <div class="col-md-6 col-md-offset-5 page">
+                        <?php echo $page_links ?>
                     </div>
                 </div>
             <?php else: ?>
