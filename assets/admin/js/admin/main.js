@@ -354,4 +354,116 @@ function deleteItem(id, url){
  }
 
 
+switch(window.location.origin){
+    case 'http://dangky.danhhieusaokhue.vn/':
+        var HOSTNAME = 'http://dangky.danhhieusaokhue.vn/';
+        break;
+    default:
+        var HOSTNAME = 'http://localhost/dangky/';
+}
 
+$(document).ready(function(){
+    "use strict";
+
+    tinymce.init({
+        selector: ".tinymce-area",
+        theme: "modern",
+        block_formats: 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
+        height: 300,
+        relative_urls: false,
+        remove_script_host: false,
+        forced_root_block : false,
+        plugins: [
+            "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "save table contextmenu directionality emoticons template paste textcolor responsivefilemanager"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | responsivefilemanager | print preview media fullpage | forecolor backcolor emoticons",
+        style_formats: [
+            {title: "Bold text", inline: "b"},
+            {title: "Red text", inline: "span", styles: {color: "#ff0000"}},
+            {title: "Red header", block: "h1", styles: {color: "#ff0000"}},
+            {title: "Example 1", inline: "span", classes: "example1"},
+            {title: "Example 2", inline: "span", classes: "example2"},
+            {title: "Table styles"},
+            {title: "Table row 1", selector: "tr", classes: "tablerow1"}
+        ],
+        external_filemanager_path: HOSTNAME + "filemanager/",
+        filemanager_title: "Responsive Filemanager",
+        external_plugins: {"filemanager": HOSTNAME + "filemanager/plugin.min.js"}
+    });
+
+    $('#title_vi').change(function(){
+        $('#slug').val(to_slug($('#title_vi').val()));
+    });
+});
+
+$('.btn-delete').click(function(event){
+    event.preventDefault();
+    var id = $(this).data('id');
+    var url = $(this).data('url');
+    var name = $(this).data('name');
+    if (confirm(`Chắc chắn xóa ${name}?`)) {
+        $.ajax({
+            method: "get",
+            url: url,
+            data: {
+                id : id
+            },
+            success: function(response){
+                if ( response.status == 200 && response.isExisted == true ) {
+                    $( '.remove-' + id ).fadeOut();
+                }
+                if ( response.status == 200 && response.isExisted == false ) {
+                    alert('Có lỗi! Xóa không thành công.');
+                }
+            },
+            error: function(jqXHR, exception){
+                if((jqXHR.status == 404 || jqXHR.status == 400) && jqXHR.responseJSON.message != 'undefined'){
+                    alert(jqXHR.responseJSON.message);
+                }else{
+                    console.log(errorHandle(jqXHR, exception));
+                }
+            }
+        });
+    }
+    
+});
+
+//delete all
+$('.btn-delete-all').click(function(){
+    url = $(this).data('url');
+    var ids = [];
+    $('.ids').each(function(){
+        if( $(this).is(':checked') ){
+            ids.push($(this).val())
+        }
+    });
+    if ( ids.length > 0 ) {
+        if(confirm('Chắc chắn xóa các mục đã chọn?')){
+        $.ajax({
+            method: "get",
+            url: url,
+            data: {
+                ids : ids
+            },
+            success: function(response){
+                if ( response.status == 200 && response.isExisted == true ) {
+                    $.each(ids, function(index, id){
+                        $( '.remove-' + id ).fadeOut();
+                    })
+                    
+                }
+            },
+            error: function(jqXHR, exception){
+                if(jqXHR.status == 404 && jqXHR.responseJSON.message != 'undefined'){
+                    alert(jqXHR.responseJSON.message);
+                    location.reload();
+                }else{
+                    console.log(errorHandle(jqXHR, exception));
+                }
+            }
+        });
+    }
+    }
+});

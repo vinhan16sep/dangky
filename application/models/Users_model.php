@@ -120,4 +120,24 @@ class Users_model extends CI_Model{
 
         return false;
     }
+
+    public function count_search($keywords = ''){
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->like('username', $keywords)->or_like('company', $keywords);;
+
+        return $result = $this->db->get()->num_rows();
+    }
+
+    public function get_all_with_pagination_search($limit = NULL, $start = NULL, $keywords = null) {
+        $this->db->select('*');
+        $this->db->from('users');
+        if ( !empty($keywords) ){
+            $this->db->like('username', $keywords)->or_like('company', $keywords);;
+        }
+        $this->db->limit($limit, $start);
+        $this->db->order_by("id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
 }
