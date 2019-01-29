@@ -30,7 +30,7 @@ class Users extends Admin_Controller
         $this->load->library('pagination');
         $config = array();
         $base_url = base_url('admin/users/index');
-        $per_page = 10;
+        $per_page = 20;
         $uri_segment = 4;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
