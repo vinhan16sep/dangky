@@ -473,7 +473,7 @@ class Company extends Admin_Controller{
 
         // read data to active sheet
 
-        $filename='Danh_sach_san_pham_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+        $filename='Chi_tiet_doanh_nghiep_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
 

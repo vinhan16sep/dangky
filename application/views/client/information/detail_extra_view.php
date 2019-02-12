@@ -64,6 +64,19 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-mobile margin-r-5"></i> Di động</a> <p class="pull-right"><?php echo $submitted['lp_phone']; ?></p>
                                 </li>
+
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-user margin-r-5"></i> Tên người liên hệ với BTC</a> <p class="pull-right"><?php echo $submitted['connector']; ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-star margin-r-5"></i> Chức danh người liên hệ với BTC</a> <p class="pull-right"><?php echo $submitted['c_position']; ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-envelope margin-r-5"></i> Email người liên hệ với BTC</a> <p class="pull-right"><?php echo $submitted['c_email']; ?></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-mobile margin-r-5"></i> Di động người liên hệ với BTC</a> <p class="pull-right"><?php echo $submitted['c_phone']; ?></p>
+                                </li>
 <!--                                <li class="list-group-item">-->
 <!--                                    <a><i class="fa fa-link margin-r-5"></i> Link download PĐK của DN</a> <p class="pull-right">--><?php //echo $submitted['link']; ?><!--</p>-->
 <!--                                </li>-->

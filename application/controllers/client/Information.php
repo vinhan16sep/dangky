@@ -48,11 +48,32 @@ class Information extends Client_Controller {
             'required' => '%s không được trống.',
             'regex_match' => '%s phải là chữ.',
         ));
+
+        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+        $this->form_validation->set_rules('c_position', 'Chức danh người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email', array(
             'required' => '%s không được trống.',
             'valid_email' => 'Định dạng email không đúng.',
         ));
         $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[10]|max_length[12]', array(
+            'required' => '%s không được trống.',
+            'integer' => '%s phải là số nguyên.',
+            'min_length' => '%s tối thiểu %s ký tự.',
+            'max_length' => '%s tối đa %s ký tự.',
+        ));
+
+        $this->form_validation->set_rules('c_email', 'Email người liên hệ với BTC', 'trim|required|valid_email', array(
+            'required' => '%s không được trống.',
+            'valid_email' => 'Định dạng email không đúng.',
+        ));
+        $this->form_validation->set_rules('c_phone', 'Di động người liên hệ với BTC', 'trim|required|integer|min_length[10]|max_length[12]', array(
             'required' => '%s không được trống.',
             'integer' => '%s phải là số nguyên.',
             'min_length' => '%s tối thiểu %s ký tự.',
@@ -82,6 +103,11 @@ class Information extends Client_Controller {
                     'lp_position' => $this->input->post('lp_position'),
                     'lp_email' => $this->input->post('lp_email'),
                     'lp_phone' => $this->input->post('lp_phone'),
+                    'connector' => $this->input->post('connector'),
+                    'c_position' => $this->input->post('c_position'),
+                    'c_email' => $this->input->post('c_email'),
+                    'c_phone' => $this->input->post('c_phone'),
+                    'website' => $this->input->post('website'),
 //                    'link' => $this->input->post('link'),
                     'identity' => $this->data['user']->username,
 //                    'is_submit' => 1,
@@ -128,11 +154,32 @@ class Information extends Client_Controller {
             'required' => '%s không được trống.',
             'regex_match' => '%s phải là chữ.',
         ));
+
+        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+        $this->form_validation->set_rules('c_position', 'Chức danh người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+            'required' => '%s không được trống.',
+            'regex_match' => '%s phải là chữ.',
+        ));
+
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email', array(
             'required' => '%s không được trống.',
             'valid_email' => 'Định dạng email không đúng.',
         ));
         $this->form_validation->set_rules('lp_phone', 'Di động', 'trim|required|integer|min_length[10]|max_length[12]', array(
+            'required' => '%s không được trống.',
+            'integer' => '%s phải là số nguyên.',
+            'min_length' => '%s tối thiểu %s ký tự.',
+            'max_length' => '%s tối đa %s ký tự.',
+        ));
+
+        $this->form_validation->set_rules('c_email', 'Email người liên hệ với BTC', 'trim|required|valid_email', array(
+            'required' => '%s không được trống.',
+            'valid_email' => 'Định dạng email không đúng.',
+        ));
+        $this->form_validation->set_rules('c_phone', 'Di động người liên hệ với BTC', 'trim|required|integer|min_length[10]|max_length[12]', array(
             'required' => '%s không được trống.',
             'integer' => '%s phải là số nguyên.',
             'min_length' => '%s tối thiểu %s ký tự.',
@@ -166,6 +213,11 @@ class Information extends Client_Controller {
                     'lp_position' => $this->input->post('lp_position'),
                     'lp_email' => $this->input->post('lp_email'),
                     'lp_phone' => $this->input->post('lp_phone'),
+                    'connector' => $this->input->post('connector'),
+                    'c_position' => $this->input->post('c_position'),
+                    'c_email' => $this->input->post('c_email'),
+                    'c_phone' => $this->input->post('c_phone'),
+                    'website' => $this->input->post('website'),
 //                    'link' => $this->input->post('link'),
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
