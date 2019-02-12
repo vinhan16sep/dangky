@@ -20,7 +20,7 @@
                                     <a><i class="fa fa-user margin-r-5"></i> Tên người đại diện pháp luật</a> <p class="pull-right"><?php echo $company['legal_representative'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-star margin-r-5"></i> Chức danh</a> <p class="pull-right"><?php echo $company['position'] ?></p>
+                                    <a><i class="fa fa-star margin-r-5"></i> Chức danh</a> <p class="pull-right"><?php echo $company['lp_position'] ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-envelope margin-r-5"></i> Email</a> <p class="pull-right"><?php echo $company['lp_email'] ?></p>
