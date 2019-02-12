@@ -36,7 +36,7 @@
                                 <td><b><a href="#">E-Mail</a></b></td>
                                 <td><b><a href="#">Thời gian tạo</a></b></td>
                                 <?php if ($this->uri->segment(4) == 3): ?>
-                                <td><b><a href="#">T/t đăng ký</a></b></td>
+                                <td><b><a href="#">T/t cơ bản</a></b></td>
                                 <td><b><a href="#">T/t doanh nghiệp</a></b></td>
                                 <td><b><a href="#">T/t sản phẩm</a></b></td>
                                 <?php endif; ?>
@@ -57,7 +57,7 @@
                                     <td><?php echo $number++; ?></td>
                                     <td><?php echo $user['username']; ?></td>
                                     <td><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></td>
-                                    <td><a href="<?php echo base_url('admin/company/detail_by_client/' . $user['id']) ?>"><?php echo $user['company']; ?></a></td>
+                                    <td><?php echo $user['company']; ?></td>
                                     <td><?php echo $user['phone']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><?php echo date('H:i:s d-m-Y',$user['created_on']); ?></td>
@@ -79,7 +79,7 @@
                                     <!--</td>-->
                                     <td>
                                         <form class="form_ajax">
-                                            <a href="<?php echo base_url('admin/users/edit/' . $user['user_id']); ?>" title="Chỉnh sửa">
+                                            <a href="<?php echo base_url('admin/users/edit/' . $user['user_id']); ?>" title="Xem">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                             &nbsp&nbsp
