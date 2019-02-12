@@ -346,11 +346,14 @@ class Company extends Admin_Controller{
     }
     public function export_company_detail($id){
         //activate worksheet number 1
+        
+
+        // $sheet_basic = $this->excel->createSheet(0);
+        // $sheet_basic->setTitle('Thong Tin Co Ban');
+        $sheet = $this->excel->createSheet(1);
+        $sheet->setTitle('Thong Tin Doanh Nghiep');
+
         $this->excel->setActiveSheetIndex(0);
-
-        $sheet_basic = $this->excel->createSheet('Thong Tin Co Ban');
-        $sheet = $this->excel->createSheet('Thong Tin Doanh Nghiep');
-
         //name the worksheet
         $this->excel->getActiveSheet()->setTitle('Thong Tin Co Ban');
 
@@ -358,13 +361,17 @@ class Company extends Admin_Controller{
         $this->load->database();
 
         // get all users in array formate
-        $select_basic = 'website, legal_representative, position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
-        $data_basic = $this->information_model->get_detail_information_with_select_by_id($select, $id);
+        $select_basic = 'website, legal_representative, lp_position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
+        $data_basic = $this->information_model->get_detail_information_with_select_by_id($id);
+
+        
+        $data = $this->information_model->fetch_company_by_id($id);
+
         $data_basic_export = array(
             '0' => array(
                 'website' => 'Website',
                 'legal_representative' => 'Tên người đại diện pháp luật',
-                'position' => 'Chức danh người đại diện pháp luật',
+                'lp_position' => 'Chức danh người đại diện pháp luật',
                 'lp_email' => 'Email người đại diện pháp luật',
                 'lp_phone' => 'Di động người đại diện pháp luật',
                 'connector' => 'Tên người liên hệ với BTC',
@@ -374,10 +381,10 @@ class Company extends Admin_Controller{
             )
         );
 
-        $data_basic_export[$key + 1] = array(
+        $data_basic_export[] = array(
             'website' => $data_basic['website'],
             'legal_representative' => $data_basic['legal_representative'],
-            'position' => $data_basic['position'],
+            'lp_position' => $data_basic['lp_position'],
             'lp_email' => $data_basic['lp_email'],
             'lp_phone' => $data_basic['lp_phone'],
             'connector' => $data_basic['connector'],
@@ -385,11 +392,86 @@ class Company extends Admin_Controller{
             'c_email' => $data_basic['c_email'],
             'c_phone' => $data_basic['c_phone']
         );
-        echo '<pre>';
-        print_r($data_basic_export);die;
+        $this->excel->getActiveSheet()->fromArray($data_basic_export);
+
+        $data_export = array(
+            '0' => array(
+                'equity_1' => 'Vốn điều lệ năm '. $this->data['rule3Year'][0] .' (triệu VND)',
+                'equity_2' => 'Vốn điều lệ năm '. $this->data['rule3Year'][1] .' (triệu VND)',
+                'equity_3' => 'Vốn điều lệ năm '. $this->data['rule3Year'][2] .' (triệu VND)',
+                'owner_equity_1' => 'Vốn chủ sở hữu '. $this->data['rule3Year'][0] .' (triệu VND)',
+                'owner_equity_2' => 'Vốn chủ sở hữu '. $this->data['rule3Year'][1] .' (triệu VND)',
+                'owner_equity_3' => 'Vốn chủ sở hữu '. $this->data['rule3Year'][2] .' (triệu VND)',
+                'total_income_1' => 'Tổng doanh thu DN '. $this->data['rule3Year'][0],
+                'total_income_2' => 'Tổng doanh thu DN '. $this->data['rule3Year'][1],
+                'total_income_3' => 'Tổng doanh thu DN '. $this->data['rule3Year'][2],
+                'software_income_1' => 'Tổng DT lĩnh vực sx phần mềm '. $this->data['rule3Year'][0] .' (Triệu VND)',
+                'software_income_2' => 'Tổng DT lĩnh vực sx phần mềm '. $this->data['rule3Year'][1] .' (Triệu VND)',
+                'software_income_3' => 'Tổng DT lĩnh vực sx phần mềm '. $this->data['rule3Year'][2] .' (Triệu VND)',
+                'it_income_1' => 'Tổng doanh thu dịch vụ CNTT '. $this->data['rule3Year'][0] .' (triệu VND)',
+                'it_income_2' => 'Tổng doanh thu dịch vụ CNTT '. $this->data['rule3Year'][1] .' (triệu VND)',
+                'it_income_3' => 'Tổng doanh thu dịch vụ CNTT '. $this->data['rule3Year'][2] .' (triệu VND)',
+                'export_income_1' => 'Tổng DT xuất khẩu (USD) '. $this->data['rule3Year'][0],
+                'export_income_2' => 'Tổng DT xuất khẩu (USD) '. $this->data['rule3Year'][1],
+                'export_income_3' => 'Tổng DT xuất khẩu (USD) '. $this->data['rule3Year'][2],
+                'total_labor_1' => 'Tổng số lao động của DN '. $this->data['rule3Year'][0],
+                'total_labor_2' => 'Tổng số lao động của DN '. $this->data['rule3Year'][1],
+                'total_labor_3' => 'Tổng số lao động của DN '. $this->data['rule3Year'][2],
+                'total_ltv_1' => 'Tổng số LTV '. $this->data['rule3Year'][0],
+                'total_ltv_2' => 'Tổng số LTV '. $this->data['rule3Year'][1],
+                'total_ltv_3' => 'Tổng số LTV '. $this->data['rule3Year'][2],
+                'main_service' => 'SP dịch vụ chính của DN',
+                'main_market' => 'Thị trường chính',
+            )
+        );
+        $str_main_service = '';
+        if (( !empty($data['main_service']) && $data['main_service'] != 'null' && $data['main_service'] != null )) {
+            $main_service = json_decode($data['main_service']);
+            foreach ($main_service as $key => $value) {
+                $str_main_service .= $value . ' ,';
+            }
+        }
+
+        $str_main_market = '';
+        if (( !empty($data['main_market']) && $data['main_market'] != 'null' && $data['main_market'] != null )) {
+            $main_market = json_decode($data['main_market']);
+            foreach ($main_market as $key => $value) {
+                $str_main_market .= $value . ' ,';
+            }
+        }
+
+        
+        $data_export[] = array(
+            'equity_1' => $data['equity_1'],
+            'equity_2' => $data['equity_2'],
+            'equity_3' => $data['equity_3'],
+            'owner_equity_1' => $data['owner_equity_1'],
+            'owner_equity_2' => $data['owner_equity_2'],
+            'owner_equity_3' => $data['owner_equity_3'],
+            'total_income_1' => $data['total_income_1'],
+            'total_income_2' => $data['total_income_2'],
+            'total_income_3' => $data['total_income_3'],
+            'software_income_1' => $data['software_income_1'],
+            'software_income_2' => $data['software_income_2'],
+            'software_income_3' => $data['software_income_3'],
+            'it_income_1' => $data['it_income_1'],
+            'it_income_2' => $data['it_income_2'],
+            'it_income_3' => $data['it_income_3'],
+            'export_income_1' => $data['export_income_1'],
+            'export_income_2' => $data['export_income_2'],
+            'export_income_3' => $data['export_income_3'],
+            'total_labor_1' => $data['total_labor_1'],
+            'total_labor_2' => $data['total_labor_2'],
+            'total_labor_3' => $data['total_labor_3'],
+            'total_ltv_1' => $data['total_ltv_1'],
+            'total_ltv_2' => $data['total_ltv_2'],
+            'total_ltv_3' => $data['total_ltv_3'],
+            'main_service' => $str_main_service,
+            'main_market' => $str_main_market,
+        );
+        $sheet->fromArray($data_export);
 
         // read data to active sheet
-        $this->excel->getActiveSheet()->fromArray($data_basic_export);
 
         $filename='Danh_sach_san_pham_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
 
