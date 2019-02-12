@@ -79,7 +79,7 @@
                                     <!--</td>-->
                                     <td>
                                         <form class="form_ajax">
-                                            <a href="<?php echo base_url('admin/users/edit/' . $user['id']); ?>" title="Chỉnh sửa">
+                                            <a href="<?php echo base_url('admin/users/edit/' . $user['user_id']); ?>" title="Chỉnh sửa">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                             &nbsp&nbsp
