@@ -26,13 +26,15 @@
             <?php if ($users): ?>
                 <div class="row">
                     <div class="col-lg-12" style="margin-top: 10px;">
-                        <table class="table table-hover table-bordered table-condensed admin">
+                        <table class="table table-striped table-bordered table-condensed admin">
                             <tr>
-                                <td><b><a href="#">STT</a></b></td>
+                                <td style="width: 3%"><b><a href="#">STT</a></b></td>
                                 <td><b><a href="#">Mã số thuế</a></b></td>
                                 <td><b><a href="#">Họ tên</a></b></td>
                                 <td><b><a href="#">Doanh nghiệp</a></b></td>
                                 <td><b><a href="#">Điện thoại</a></b></td>
+                                <td><b><a href="#">E-Mail</a></b></td>
+                                <td><b><a href="#">Thời gian tạo</a></b></td>
                                 <?php if ($this->uri->segment(4) == 3): ?>
                                 <td><b><a href="#">T/t đăng ký</a></b></td>
                                 <td><b><a href="#">T/t doanh nghiệp</a></b></td>
@@ -46,14 +48,19 @@
                                 <td><b>Thao tác</b></td>
                             </tr>
 
-                            <?php foreach ($users as $key => $user): ?>
+                            <?php
+                                $number = ($page * $per_page) + 1;
+                                foreach ($users as $key => $user):
+                            ?>
 
                                 <tr class="row_<?php echo $user['id']; ?>">
-                                    <td><?php echo $key + 1; ?></td>
+                                    <td><?php echo $number++; ?></td>
                                     <td><?php echo $user['username']; ?></td>
                                     <td><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></td>
                                     <td><a href="<?php echo base_url('admin/company/detail_by_client/' . $user['id']) ?>"><?php echo $user['company']; ?></a></td>
                                     <td><?php echo $user['phone']; ?></td>
+                                    <td><?php echo $user['email']; ?></td>
+                                    <td><?php echo date('H:i:s d-m-Y',$user['created_on']); ?></td>
                                     <?php if ($this->uri->segment(4) == 3): ?>
                                     <td style="text-align:center"><?php echo ($user['status']['is_information'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                     <td style="text-align:center"><?php echo ($user['status']['is_company'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>

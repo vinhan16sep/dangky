@@ -87,6 +87,7 @@ class Information_model extends CI_Model {
 
     public function count_companys() {
         $query = $this->db->select('*')
+            ->join('users', 'users.id = company.client_id')
             ->from('company')
             ->get();
 
@@ -377,7 +378,7 @@ class Information_model extends CI_Model {
         $this->db->join('users', 'users.id = company.client_id');
         $this->db->limit($limit, $start);
         $this->db->like('users.company', $search);
-        $this->db->order_by("company.id", "desc");
+        $this->db->order_by("company.created_at", "desc");
 
         return $result = $this->db->get()->result_array();
     }
@@ -548,5 +549,19 @@ class Information_model extends CI_Model {
             ->get();
 
         return $query->num_rows();
+    }
+
+    public function get_detail_information_with_select_by_id($select = '*', $client_id){
+        $query = $this->db->select($select)
+            ->from('information')
+            ->where('client_id', $client_id)
+            ->limit(1)
+            ->get();
+
+        if($query->num_rows() == 1){
+            return $query->row_array();
+        }
+
+        return false;
     }
 }

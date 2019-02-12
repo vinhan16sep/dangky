@@ -14,12 +14,11 @@
             </form>
             <!-- /.col -->
             <div class="col-md-12">
-                <div class="nav-tabs-custom">
                     <div class="tab-content">
                         <?php if ($companies): ?>
-                        <?php $stt = 1; ?>
-                        <div class="post">
-                            <table class="table">
+                        <?php $stt = ($page * $per_page) + 1;; ?>
+                        <div class="post box-body">
+                            <table class="table table-striped table-bordered table-condensed">
                                 <th>STT</th>
                                 <th>Tên Doanh Nghiệp</th>
                                 <th>Người quản lý</th>
@@ -59,7 +58,6 @@
                         <?php endif ?>
                     </div>
                     <!-- /.tab-content -->
-                </div>
                 <div class="col-md-6 col-md-offset-5 page">
                     <?php echo $page_links ?>
                 </div>

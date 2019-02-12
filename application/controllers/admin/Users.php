@@ -26,19 +26,19 @@ class Users extends Admin_Controller
             $keywords = $this->input->get('search');
         }
         $this->data['keywords'] = $keywords;
-        $total_rows  = $this->users_model->count_search($keywords);
-        $this->load->library('pagination');
+        $total_rows  = $this->users_model->count_search($group_id, $keywords);
+        $this->load->library('pagination', TRUE);
         $config = array();
-        $base_url = base_url('admin/users/index');
-        $per_page = 20;
-        $uri_segment = 4;
+        $base_url = base_url('admin/users/index/' . $group_id);
+        $per_page = 50;
+        $uri_segment = 5;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
         }
-        $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) - 1 : 0;
         $this->pagination->initialize($config);
         $this->data['page_links'] = $this->pagination->create_links();
-        $users = $this->users_model->get_all_with_pagination_search($per_page, $this->data['page'], $keywords);
+        $users = $this->users_model->get_all_with_pagination_search($group_id, $per_page, $per_page*$this->data['page'], $keywords);
         if ($group_id == 3) {
             foreach ($users as $key => $value) {
                 $company = $this->information_model->fetch_client_id($value['id']);
@@ -47,6 +47,7 @@ class Users extends Admin_Controller
             }
         }
         
+        $this->data['per_page'] = $per_page;
         $this->data['group'] = $group_id;
         $this->data['users'] = $users;
         $this->render('admin/users/list_users_view');

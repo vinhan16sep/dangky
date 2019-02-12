@@ -34,19 +34,20 @@ class Company extends Admin_Controller{
 		$this->load->library('pagination');
 		$config = array();
 		$base_url = base_url('admin/company/index');
-		$per_page = 10;
+		$per_page = 50;
 		$uri_segment = 4;
-		
+        // echo $total_rows;die;
+
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
         }
         $this->pagination->initialize($config);
 
         $this->data['page_links'] = $this->pagination->create_links();
-        $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $result = $this->information_model->fetch_all_company_pagination($per_page, $this->data['page']);
+        $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) - 1 : 0;
+        $result = $this->information_model->fetch_all_company_pagination($per_page, $per_page*$this->data['page']);
         if($keywords != ''){
-            $result = $this->information_model->fetch_all_company_pagination_search($per_page, $this->data['page'], $keywords);
+            $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords);
         }
         foreach ($result as $key => $value) {
             $member_id = json_decode($value['member_id']);
@@ -56,9 +57,8 @@ class Company extends Admin_Controller{
                     $result[$key]['member_name'][$val] = $member['first_name'].''.$member['last_name'].' ('.$member['username'].')';
                 }
             }
-            
-            
         }
+        $this->data['per_page'] = $per_page;
         $this->data['companies'] = $result;
 		$this->render('admin/company/list_company_view');
 	}
@@ -327,6 +327,69 @@ class Company extends Admin_Controller{
 
         // read data to active sheet
         $this->excel->getActiveSheet()->fromArray($data_export);
+
+        $filename='Danh_sach_san_pham_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+
+        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+
+        header('Cache-Control: max-age=0'); //no cache
+
+        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+        //if you want to save it as .XLSX Excel 2007 format
+
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+
+        //force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+    public function export_company_detail($id){
+        //activate worksheet number 1
+        $this->excel->setActiveSheetIndex(0);
+
+        $sheet_basic = $this->excel->createSheet('Thong Tin Co Ban');
+        $sheet = $this->excel->createSheet('Thong Tin Doanh Nghiep');
+
+        //name the worksheet
+        $this->excel->getActiveSheet()->setTitle('Thong Tin Co Ban');
+
+        // load database
+        $this->load->database();
+
+        // get all users in array formate
+        $select_basic = 'website, legal_representative, position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
+        $data_basic = $this->information_model->get_detail_information_with_select_by_id($select, $id);
+        $data_basic_export = array(
+            '0' => array(
+                'website' => 'Website',
+                'legal_representative' => 'Tên người đại diện pháp luật',
+                'position' => 'Chức danh người đại diện pháp luật',
+                'lp_email' => 'Email người đại diện pháp luật',
+                'lp_phone' => 'Di động người đại diện pháp luật',
+                'connector' => 'Tên người liên hệ với BTC',
+                'c_position' => 'Chức danh người liên hệ với BTC',
+                'c_email' => 'Email người liên hệ với BTC',
+                'c_phone' => 'Di động người liên hệ với BTC',
+            )
+        );
+
+        $data_basic_export[$key + 1] = array(
+            'website' => $data_basic['website'],
+            'legal_representative' => $data_basic['legal_representative'],
+            'position' => $data_basic['position'],
+            'lp_email' => $data_basic['lp_email'],
+            'lp_phone' => $data_basic['lp_phone'],
+            'connector' => $data_basic['connector'],
+            'c_position' => $data_basic['c_position'],
+            'c_email' => $data_basic['c_email'],
+            'c_phone' => $data_basic['c_phone']
+        );
+        echo '<pre>';
+        print_r($data_basic_export);die;
+
+        // read data to active sheet
+        $this->excel->getActiveSheet()->fromArray($data_basic_export);
 
         $filename='Danh_sach_san_pham_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
 
