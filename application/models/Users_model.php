@@ -121,22 +121,28 @@ class Users_model extends CI_Model{
         return false;
     }
 
-    public function count_search($keywords = ''){
+    public function count_search($group_id = null, $keywords = ''){
         $this->db->select('*');
+        $this->db->join('users_groups', 'users.id = user_id');
         $this->db->from('users');
-        $this->db->like('username', $keywords)->or_like('company', $keywords);;
+        $this->db->like('username', $keywords)->or_like('company', $keywords);
+        $this->db->where('email !=', 'admin@admin.com');
+        $this->db->where('users_groups.group_id', $group_id);
 
         return $result = $this->db->get()->num_rows();
     }
 
-    public function get_all_with_pagination_search($limit = NULL, $start = NULL, $keywords = null) {
+    public function get_all_with_pagination_search($group_id = null, $limit = NULL, $start = NULL, $keywords = null) {
         $this->db->select('*');
+        $this->db->join('users_groups', 'users.id = user_id');
         $this->db->from('users');
         if ( !empty($keywords) ){
             $this->db->like('username', $keywords)->or_like('company', $keywords);;
         }
+        $this->db->where('email !=', 'admin@admin.com');
         $this->db->limit($limit, $start);
-        $this->db->order_by("id", "desc");
+        $this->db->where('users_groups.group_id', $group_id);
+        $this->db->order_by('created_on', 'desc');
 
         return $result = $this->db->get()->result_array();
     }

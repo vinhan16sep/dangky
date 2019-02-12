@@ -58,8 +58,12 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="tab-content">
+                        <a type="button" href="http://localhost/dangky/admin/company/export_company_detail/<?php echo $company['id'] ?>" class="btn btn-success" style="margin-bottom: 20px">EXPORT DATA SẢN PHẨM</a>
+                    </div>
                     <!-- /.tab-content -->
                 </div>
+                
                 <!-- /.nav-tabs-custom -->
             </div>
             <div class="col-md-6">

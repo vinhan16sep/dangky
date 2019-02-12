@@ -71,6 +71,7 @@ class MY_Controller extends CI_Controller {
         $config['next_link'] = 'Next';
         $config['total_rows']  = $total_rows;
         $config['reuse_query_string'] = true;
+        $config['use_page_numbers'] = TRUE;
         return $config;
     }
 
