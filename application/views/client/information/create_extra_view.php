@@ -102,6 +102,81 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Tên người liên hệ với BTC <span style="color: red">(*)</span>', 'connector');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('connector', '<div class="error">', '</div>');
+                            echo form_input('connector', set_value('connector'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Chức danh người liên hệ với BTC <span style="color: red">(*)</span>', 'c_position');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('c_position', '<div class="error">', '</div>');
+                            echo form_input('c_position', set_value('c_position'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Email người liên hệ với BTC <span style="color: red">(*)</span>', 'c_email');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('c_email', '<div class="error">', '</div>');
+                            echo form_input('c_email', set_value('c_email'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Di động người liên hệ với BTC <span style="color: red">(*)</span>', 'c_phone');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('c_phone', '<div class="error">', '</div>');
+                            echo form_input('c_phone', set_value('c_phone'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Website', 'website');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                            echo form_error('website', '<div class="error">', '</div>');
+                            echo form_input('website', set_value('website'), 'class="form-control"');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-sm-6 col-md-6 col-sx-12"><strong>Lưu ý:</strong> <span style="color: red">(*)</span> là các trường cần nhập thông tin</div>
                     </div>
                 </div>

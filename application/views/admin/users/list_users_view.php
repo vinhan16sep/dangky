@@ -60,7 +60,7 @@
                                     <td><?php echo $user['company']; ?></td>
                                     <td><?php echo $user['phone']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
-                                    <td><?php echo date('H:i:s d-m-Y',$user['created_on']); ?></td>
+                                    <td><?php echo date('d-m-Y H:i:s',$user['created_on']); ?></td>
                                     <?php if ($this->uri->segment(4) == 3): ?>
                                     <td style="text-align:center"><?php echo ($user['status']['is_information'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                     <td style="text-align:center"><?php echo ($user['status']['is_company'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
