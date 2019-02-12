@@ -343,7 +343,7 @@ class Information_model extends CI_Model {
     }
 
     public function fetch_company_by_id($id = null){
-        $this->db->select('company.*, users.*, information.*');
+        $this->db->select('company.*, users.*, information.*, company.id as company_id');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
         $this->db->join('information', 'information.client_id = company.client_id');
@@ -551,17 +551,12 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function get_detail_information_with_select_by_id($select = '*', $client_id){
-        $query = $this->db->select($select)
-            ->from('information')
-            ->where('client_id', $client_id)
-            ->limit(1)
-            ->get();
-
-        if($query->num_rows() == 1){
-            return $query->row_array();
-        }
-
-        return false;
+    public function get_detail_information_with_select_by_id($id){
+        $this->db->select('information.*');
+        $this->db->from('company');
+        $this->db->join('information', 'information.client_id = company.client_id');
+        $this->db->where('company.id', $id);
+        // $this->db->where('company.is_submit', 1);
+        return $result = $this->db->get()->row_array();
     }
 }
