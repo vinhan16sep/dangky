@@ -30,11 +30,9 @@
                             <tr>
                                 <td style="width: 3%"><b><a href="#">STT</a></b></td>
                                 <td><b><a href="#">Mã số thuế</a></b></td>
-                                <td><b><a href="#">Họ tên</a></b></td>
                                 <td><b><a href="#">Doanh nghiệp</a></b></td>
-                                <td><b><a href="#">Điện thoại</a></b></td>
                                 <td><b><a href="#">E-Mail</a></b></td>
-                                <td><b><a href="#">Thời gian tạo</a></b></td>
+                                <td style="width: 10%;"><b><a href="#">Thời gian tạo</a></b></td>
                                 <?php if ($this->uri->segment(4) == 3): ?>
                                 <td><b><a href="#">T/t cơ bản</a></b></td>
                                 <td><b><a href="#">T/t doanh nghiệp</a></b></td>
@@ -56,9 +54,7 @@
                                 <tr class="row_<?php echo $user['id']; ?>">
                                     <td><?php echo $number++; ?></td>
                                     <td><?php echo $user['username']; ?></td>
-                                    <td><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></td>
                                     <td><?php echo $user['company']; ?></td>
-                                    <td><?php echo $user['phone']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s',$user['created_on']); ?></td>
                                     <?php if ($this->uri->segment(4) == 3): ?>
@@ -83,7 +79,7 @@
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
                                             &nbsp&nbsp
-                                            <a href="javascript:void(0);" onclick="deleteItem(<?php echo $user['id']; ?>, '<?php echo base_url('admin/users/delete'); ?>')" >
+                                            <a href="javascript:void(0);" onclick="deleteItem(<?php echo $user['user_id']; ?>, '<?php echo base_url('admin/users/delete'); ?>')" >
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp&nbsp

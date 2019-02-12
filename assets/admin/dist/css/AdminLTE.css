@@ -2793,7 +2793,7 @@ a:focus {
   margin-top: 5px;
 }
 .table-bordered {
-  border: px solid #f4f4f4;
+  border: 1px solid #f4f4f4;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
