@@ -23,7 +23,7 @@ class Users extends Admin_Controller
 
         $keywords = '';
         if($this->input->get('search')){
-            $keywords = $this->input->get('search');
+            $keywords = trim($this->input->get('search'));
         }
         $this->data['keywords'] = $keywords;
         $total_rows  = $this->users_model->count_search($group_id, $keywords);
@@ -47,6 +47,7 @@ class Users extends Admin_Controller
             }
         }
         
+        $this->data['group_id'] = $group_id;
         $this->data['per_page'] = $per_page;
         $this->data['group'] = $group_id;
         $this->data['users'] = $users;
