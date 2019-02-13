@@ -46,13 +46,10 @@
                                 <td><b>Thao tác</b></td>
                             </tr>
 
-                            <?php
-                                $number = ($page * $per_page) + 1;
-                                foreach ($users as $key => $user):
-                            ?>
+                            <?php foreach ($users as $key => $user): ?>
 
                                 <tr class="row_<?php echo $user['id']; ?>">
-                                    <td><?php echo $number++; ?></td>
+                                    <td><?php echo $number--; ?></td>
                                     <td><?php echo $user['username']; ?></td>
                                     <td><?php echo $user['company']; ?></td>
                                     <td><?php echo $user['email']; ?></td>

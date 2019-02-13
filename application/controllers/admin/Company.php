@@ -58,7 +58,16 @@ class Company extends Admin_Controller{
                 }
             }
         }
-        $this->data['per_page'] = $per_page;
+        
+        if($this->data['page'] == 0){
+            $number = $total_rows;
+        }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        };
+
+        $this->data['number'] = $number;
         $this->data['companies'] = $result;
 		$this->render('admin/company/list_company_view');
 	}
