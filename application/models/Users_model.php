@@ -125,7 +125,7 @@ class Users_model extends CI_Model{
         $this->db->select('*');
         $this->db->join('users_groups', 'users.id = user_id');
         $this->db->from('users');
-        $this->db->like('username', $keywords)->or_like('company', $keywords);
+        $this->db->like('username', $keywords)->or_like('company', $keywords)->or_like('email', $keywords);
         $this->db->where('email !=', 'admin@admin.com');
         $this->db->where('users_groups.group_id', $group_id);
 
@@ -137,7 +137,7 @@ class Users_model extends CI_Model{
         $this->db->join('users_groups', 'users.id = user_id');
         $this->db->from('users');
         if ( !empty($keywords) ){
-            $this->db->like('username', $keywords)->or_like('company', $keywords);;
+            $this->db->like('username', $keywords)->or_like('company', $keywords)->or_like('email', $keywords);
         }
         $this->db->where('email !=', 'admin@admin.com');
         $this->db->limit($limit, $start);

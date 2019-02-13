@@ -9,7 +9,7 @@
 
         <div class="row">
             <form action="<?php echo base_url('admin/company/index/') ?>" class="form-horizontal col-md-12 col-sm-12 col-xs-12" method="get" style="margin-bottom: 30px;">
-                <input type="text" name="search" value="<?php echo ($keywords != '')? $keywords : '' ?>" placeholder="Tìm Kiếm Danh Mục..." class="form-control" style=" width: 40%; float: left;margin-right: 5px;">
+                <input type="text" name="search" value="<?php echo ($keywords != '')? $keywords : '' ?>" placeholder="Tìm Kiếm Doanh Nghiệp..." class="form-control" style=" width: 40%; float: left;margin-right: 5px;">
                 <input type="submit" name="btn-search" value="Tìm Kiếm" class="btn btn-primary" style="float: left">
             </form>
             <!-- /.col -->
