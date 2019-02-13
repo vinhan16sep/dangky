@@ -16,7 +16,6 @@
             <div class="col-md-12">
                     <div class="tab-content">
                         <?php if ($companies): ?>
-                        <?php $stt = ($page * $per_page) + 1;; ?>
                         <div class="post box-body">
                             <table class="table table-striped table-bordered table-condensed">
                                 <th>STT</th>
@@ -25,7 +24,7 @@
                                 <th style="text-align: center;">Thao Tác</th>
                                 <?php foreach ($companies as $key => $value): ?>
                                     <tr>
-                                        <td><?php echo $stt++ ?></td>
+                                        <td><?php echo $number-- ?></td>
                                         <td><?php echo $value['company'] ?></td>
                                         <td data-client="<?php echo $value['client_id'] ?>" data-company="<?php echo $value['id'] ?>">
                                             <ul class="select2-selection__rendered ">

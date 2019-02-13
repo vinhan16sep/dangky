@@ -47,8 +47,16 @@ class Users extends Admin_Controller
             }
         }
         
+        if($this->data['page'] == 0){
+            $number = $total_rows;
+        }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        };
+
+        $this->data['number'] = $number;
         $this->data['group_id'] = $group_id;
-        $this->data['per_page'] = $per_page;
         $this->data['group'] = $group_id;
         $this->data['users'] = $users;
         $this->render('admin/users/list_users_view');
