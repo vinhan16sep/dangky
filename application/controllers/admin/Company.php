@@ -229,30 +229,30 @@ class Company extends Admin_Controller{
                 'c_email' => $extra_info['c_email'],
                 'c_phone' => $extra_info['c_phone'],
                 'link' => $extra_info['link'],
-                'equity_2015' => $company['equity_2015'],
-                'equity_2016' => $company['equity_2016'],
-                'equity_2017' => $company['equity_2017'],
-                'owner_equity_2015' => $company['owner_equity_2015'],
-                'owner_equity_2016' => $company['owner_equity_2016'],
-                'owner_equity_2017' => $company['owner_equity_2017'],
-                'total_income_2015' => $company['total_income_2015'],
-                'total_income_2016' => $company['total_income_2016'],
-                'total_income_2017' => $company['total_income_2017'],
-                'software_income_2015' => $company['software_income_2015'],
-                'software_income_2016' => $company['software_income_2016'],
-                'software_income_2017' => $company['software_income_2017'],
-                'it_income_2015' => $company['it_income_2015'],
-                'it_income_2016' => $company['it_income_2016'],
-                'it_income_2017' => $company['it_income_2017'],
-                'export_income_2015' => $company['export_income_2015'],
-                'export_income_2016' => $company['export_income_2016'],
-                'export_income_2017' => $company['export_income_2017'],
-                'total_labor_2015' => $company['total_labor_2015'],
-                'total_labor_2016' => $company['total_labor_2016'],
-                'total_labor_2017' => $company['total_labor_2017'],
-                'total_ltv_2015' => $company['total_ltv_2015'],
-                'total_ltv_2016' => $company['total_ltv_2016'],
-                'total_ltv_2017' => $company['total_ltv_2017'],
+                'equity_2015' => $company['equity_1'],
+                'equity_2016' => $company['equity_2'],
+                'equity_2017' => $company['equity_3'],
+                'owner_equity_2015' => $company['owner_equity_1'],
+                'owner_equity_2016' => $company['owner_equity_2'],
+                'owner_equity_2017' => $company['owner_equity_3'],
+                'total_income_2015' => $company['total_income_1'],
+                'total_income_2016' => $company['total_income_2'],
+                'total_income_2017' => $company['total_income_3'],
+                'software_income_2015' => $company['software_income_1'],
+                'software_income_2016' => $company['software_income_2'],
+                'software_income_2017' => $company['software_income_3'],
+                'it_income_2015' => $company['it_income_1'],
+                'it_income_2016' => $company['it_income_2'],
+                'it_income_2017' => $company['it_income_3'],
+                'export_income_2015' => $company['export_income_1'],
+                'export_income_2016' => $company['export_income_2'],
+                'export_income_2017' => $company['export_income_3'],
+                'total_labor_2015' => $company['total_labor_1'],
+                'total_labor_2016' => $company['total_labor_2'],
+                'total_labor_2017' => $company['total_labor_3'],
+                'total_ltv_2015' => $company['total_ltv_1'],
+                'total_ltv_2016' => $company['total_ltv_2'],
+                'total_ltv_2017' => $company['total_ltv_3'],
                 'description' => $company['description'],
                 'main_service' => implode(", ", (array)json_decode($company['main_service'])),
                 'main_market' => implode(", ", (array)json_decode($company['main_market']))
@@ -316,7 +316,7 @@ class Company extends Admin_Controller{
             $data_export[$key + 1] = array(
                 'company' => $extra_info['company'],
                 'name' => $extra_info['name'],
-                'service' => implode(", ", json_decode($extra_info['service'])),
+                'service' => (is_array(json_decode($extra_info['service']))) ? implode(", ", (array)json_decode($extra_info['service'])) : '',
                 'functional' => $extra_info['functional'],
                 'process' => $extra_info['process'],
                 'security' => $extra_info['security'],
@@ -375,6 +375,9 @@ class Company extends Admin_Controller{
 
         
         $data = $this->information_model->fetch_company_by_id($id);
+
+        // Get user info
+        $target_user = $this->users_model->fetch_by_id($data['client_id']);
 
         $data_basic_export = array(
             '0' => array(
@@ -482,7 +485,7 @@ class Company extends Admin_Controller{
 
         // read data to active sheet
 
-        $filename='Chi_tiet_doanh_nghiep_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+        $filename='Chi_tiet_doanh_nghiep_' . str_replace(' ', '-', $target_user['company']) . '_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
 

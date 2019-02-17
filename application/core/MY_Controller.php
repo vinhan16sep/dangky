@@ -148,6 +148,7 @@ class Admin_Controller extends MY_Controller {
             redirect('admin/user/login', 'refresh');
         }
         $this->data['user_email'] = $this->ion_auth->user()->row()->email;
+        $this->data['user_company'] = $this->ion_auth->user()->row()->company;
         $this->data['page_title'] = 'Administrator area';
 
         // Get current class

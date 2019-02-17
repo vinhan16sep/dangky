@@ -397,7 +397,7 @@ class Information_model extends CI_Model {
         if($client_id != null){
             $this->db->where('client_id', $client_id);
         }
-        $this->db->where('is_submit', 1);
+//        $this->db->where('is_submit', 1);
         $this->db->order_by("id", "asc");
 
         return $result = $this->db->get()->result_array();

@@ -113,7 +113,7 @@ class Product extends Admin_Controller{
         // read data to active sheet
         $this->excel->getActiveSheet()->fromArray($data_export);
 
-        $filename = $this->vn_to_str($extra_info['company']) . '_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
+        $filename = 'Thong_tin_san_pham_' . $this->vn_to_str($extra_info['company']) . '_' . date("d-m-Y") . '.xls'; //save our workbook as this file name
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
 

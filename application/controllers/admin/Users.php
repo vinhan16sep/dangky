@@ -13,6 +13,7 @@ class Users extends Admin_Controller
             $this->session->set_flashdata('message','You are not allowed to visit the Groups page');
             redirect('admin','refresh');
         }
+        $this->load->model('status_model');
     }
 
     public function index($group_id = null){
@@ -254,5 +255,21 @@ class Users extends Admin_Controller
         $this->data['page_title'] = 'Quản lý user';
         $this->data['users'] = $this->users_model->fetch_all_client($id);
         $this->render('admin/users/list_client_of_member_view');
+    }
+
+    public function open_final($client_id){
+        $information = array(
+            'is_information' => 0,
+            'is_company' => 0,
+            'is_product' => 0,
+            'is_final' => 0,
+        );
+        if($client_id){
+            $update = $this->status_model->update('status', $client_id, $information);
+            if($update){
+                return $this->output->set_status_header(200)
+                    ->set_output(json_encode(array('message' => 'done')));
+            }
+        }
     }
 }

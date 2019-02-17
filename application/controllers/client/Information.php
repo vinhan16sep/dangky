@@ -229,6 +229,8 @@ class Information extends Client_Controller {
 
                 try {
                     $this->information_model->update_by_identity('information', $this->data['user']->username, $data);
+                    $this->load->model('status_model');
+                    $this->status_model->update('status', $this->data['user']->id, array('is_information' => 1));
                     if ( file_exists('assets/upload/avatar/' . $this->data['extra']['avatar']) && $avatar !='' ) {
                         unlink('assets/upload/avatar/' . $this->data['extra']['avatar']);
                     }
@@ -1070,7 +1072,7 @@ class Information extends Client_Controller {
                 if ($this->input->post()) {
                     if(!empty($_FILES['file']['name'])){
                         $this->check_file($_FILES['file']['name']);
-                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . date('d-m-Y'));
                     }
 
                     $service = json_encode($this->input->post('service'));
@@ -1141,7 +1143,7 @@ class Information extends Client_Controller {
                     $service = json_encode($this->input->post('service'));
                     if(!empty($_FILES['file']['name'])){
                         $this->check_file($_FILES['file']['name']);
-                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . date('d-m-Y'));
                     }
                     // $image = $this->upload_image('certificate', $_FILES['certificate']['name'], 'assets/upload/product', 'assets/upload/product/thumbs');
                     $data = array(
@@ -1264,7 +1266,7 @@ class Information extends Client_Controller {
                 if ($this->input->post()) {
                     if(!empty($_FILES['file']['name'])){
                         $this->check_file($_FILES['file']['name']);
-                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . date('d-m-Y'));
                     }
                     $service = json_encode($this->input->post('service'));
                     $data = array(
@@ -1327,7 +1329,7 @@ class Information extends Client_Controller {
                 if ($this->input->post()) {
                     if(!empty($_FILES['file']['name'])){
                         $this->check_file($_FILES['file']['name']);
-                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . $this->input->post('name') . '_' . date('Y'));
+                        $file = $this->upload_file_word('file', 'assets/upload/file', $this->ion_auth->user()->row()->username . '_' . date('d-m-Y'));
                     }
                     $service = json_encode($this->input->post('service'));
                     $data = array(
