@@ -62,9 +62,56 @@ class Users extends Admin_Controller
         $this->render('admin/users/list_users_view');
     }
 
+    public function index_member($group_id = null){
+        $this->load->model('information_model');
+        $this->load->model('status_model');
+        $this->load->model('users_model');
+        $this->data['page_title'] = 'Quản lý user';
+
+        $keywords = '';
+        if($this->input->get('search')){
+            $keywords = trim($this->input->get('search'));
+        }
+        $this->data['keywords'] = $keywords;
+        $total_rows  = $this->users_model->count_search($group_id, $keywords);
+        $this->load->library('pagination', TRUE);
+        $config = array();
+        $base_url = base_url('admin/users/index/' . $group_id);
+        $per_page = 50;
+        $uri_segment = 5;
+        foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
+            $config[$key] = $value;
+        }
+        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) - 1 : 0;
+        $this->pagination->initialize($config);
+        $this->data['page_links'] = $this->pagination->create_links();
+        $users = $this->users_model->get_all_with_pagination_search($group_id, $per_page, $per_page*$this->data['page'], $keywords);
+        if ($group_id == 3) {
+            foreach ($users as $key => $value) {
+                $company = $this->information_model->fetch_client_id($value['id']);
+                $users[$key]['member_id'] = $company['member_id'];
+                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id']);
+            }
+        }
+        if($this->data['page'] == 0){
+            $number = $total_rows;
+        }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        };
+
+        $this->data['number'] = $number;
+        $this->data['group_id'] = $group_id;
+        $this->data['group'] = $group_id;
+        $this->data['users'] = $users;
+        $this->render('admin/users/list_users_member_view');
+    }
+
     public function create($group_id = null){
-        $this->data['page_title'] = 'Tạo mới user';
+        $this->data['page_title'] = 'Tạo mới thành viên hội đồng';
         $this->load->library('form_validation');
+        $this->form_validation->set_rules('member_role','Member Role','trim');
         $this->form_validation->set_rules('first_name','First name','trim');
         $this->form_validation->set_rules('last_name','Last name','trim');
         $this->form_validation->set_rules('company','Company','trim');
@@ -87,11 +134,13 @@ class Users extends Admin_Controller
             $group_ids = array($group_id);
 
             $additional_data = array(
+                'member_role' => $this->input->post('member_role'),
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'company' => $this->input->post('company'),
                 'position' => $this->input->post('position'),
-                'phone' => $this->input->post('phone')
+                'phone' => $this->input->post('phone'),
+                'active' => 1,
             );
             $register = $this->ion_auth->register($username, $password, $email, $additional_data, $group_ids);
 
@@ -109,7 +158,11 @@ class Users extends Admin_Controller
                 }
             }
             $this->session->set_flashdata('message',$this->ion_auth->messages());
-            redirect('admin/users/index/' . $group_id,'refresh');
+            if($group_id == 3){
+                redirect('admin/users/index/' . $group_id,'refresh');
+            }else{
+                redirect('admin/users/index_member/' . $group_id,'refresh');
+            }
         }
     }
 
@@ -171,7 +224,12 @@ class Users extends Admin_Controller
             // }
 
             $this->session->set_flashdata('message',$this->ion_auth->messages());
-            redirect('admin/users/index/' . $this->input->post('user_group'),'refresh');
+
+            if($this->input->post('user_group') == 3){
+                redirect('admin/users/index/' . $this->input->post('user_group'),'refresh');
+            }else{
+                redirect('admin/users/index_member/' . $this->input->post('user_group'),'refresh');
+            }
         }
     }
 

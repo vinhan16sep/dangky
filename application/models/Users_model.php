@@ -122,12 +122,16 @@ class Users_model extends CI_Model{
     }
 
     public function count_search($group_id = null, $keywords = ''){
-        $this->db->select('*');
-        $this->db->join('users_groups', 'users.id = user_id');
-        $this->db->from('users');
-        $this->db->like('username', $keywords)->or_like('company', $keywords)->or_like('email', $keywords);
-        $this->db->where('email !=', 'admin@admin.com');
-        $this->db->where('users_groups.group_id', $group_id);
+
+        $this->db->select('*')
+        ->join('users_groups', 'users.id = users_groups.user_id')
+        ->from('users')
+        ->where('email !=', 'admin@admin.com')
+        ->where('users_groups.group_id', $group_id);
+
+        if($keywords != ''){
+            $this->db->where('(username LIKE "%' . $keywords . '%" OR company LIKE "%' . $keywords . '%" OR email LIKE "%' . $keywords . '%")');
+        }
 
         return $result = $this->db->get()->num_rows();
     }
@@ -145,5 +149,25 @@ class Users_model extends CI_Model{
         $this->db->order_by('created_on', 'desc');
 
         return $result = $this->db->get()->result_array();
+    }
+
+    public function fetch_all_leaders(){
+	    $this->db->select('*')
+            ->from('users')
+            ->join('users_groups', 'users.id = users_groups.user_id')
+            ->where('users_groups.group_id', 2)
+            ->where('users.member_role', 'leader');
+
+	    return $this->db->get()->result_array();
+    }
+
+    public function fetch_all_members(){
+        $this->db->select('*')
+            ->from('users')
+            ->join('users_groups', 'users.id = users_groups.user_id')
+            ->where('users_groups.group_id', 2)
+            ->where('users.member_role', 'member');
+
+        return $this->db->get()->result_array();
     }
 }

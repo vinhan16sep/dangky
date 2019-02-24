@@ -29,21 +29,11 @@
                         <table class="table table-striped table-bordered table-condensed admin">
                             <tr>
                                 <td style="width: 3%"><b><a href="#">STT</a></b></td>
-                                <td><b><a href="#">Mã số thuế</a></b></td>
+                                <td><b><a href="#">Username</a></b></td>
                                 <td><b><a href="#">Doanh nghiệp</a></b></td>
                                 <td><b><a href="#">E-Mail</a></b></td>
                                 <td style="width: 10%;"><b><a href="#">Thời gian tạo</a></b></td>
-                                <?php if ($this->uri->segment(4) == 3): ?>
-                                <td><b><a href="#">T/t cơ bản</a></b></td>
-                                <td><b><a href="#">T/t doanh nghiệp</a></b></td>
-                                <td><b><a href="#">T/t sản phẩm</a></b></td>
-                                <td><b><a href="#">Đã gửi</a></b></td>
-                                <?php endif; ?>
-                                <?php if ($this->uri->segment(4) == 2): ?>
                                 <td><b><a href="#">DN được chỉ định</a></b></td>
-                                <?php elseif($this->uri->segment(4) == 3): ?>
-                                <!--<td><b><a href="#">Người quản lý</a></b></td>-->
-                                <?php endif ?>
                                 <td><b>Thao tác</b></td>
                             </tr>
 
@@ -55,25 +45,24 @@
                                     <td><?php echo $user['company']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s',$user['created_on']); ?></td>
-                                    <?php if ($this->uri->segment(4) == 3): ?>
-                                    <td style="text-align:center"><?php echo ($user['status']['is_information'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
-                                    <td style="text-align:center"><?php echo ($user['status']['is_company'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
-                                    <td style="text-align:center"><?php echo ($user['status']['is_product'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
-                                    <td style="text-align:center"><?php echo ($user['status']['is_final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<a id="openStatus" onclick="openStatus(' . $user['user_id'] . ');" href="javascript:void(0);"><i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i></a>'; ?></td>
-                                    <?php endif; ?>
-                                    <!--<td>-->
-                                    <!--    <?php if ($this->uri->segment(4) == 2): ?>-->
-                                    <!--    <a href="<?php echo base_url('admin/users/list_client/' . $user['id']); ?>" title="Danh sách">-->
-                                    <!--        Xem danh sách-->
-                                    <!--    </a>-->
-                                    <!--    <?php elseif($this->uri->segment(4) == 3 && $user['member_id'] != null): ?>-->
-                                    <!--    <a href="<?php echo base_url('admin/users/edit/' . $user['member_id']); ?>" title="Người quản lý">-->
-                                    <!--        Xem thông tin-->
-                                    <!--    </a>-->
-                                    <!--    <?php endif ?>-->
-                                    <!--</td>-->
+                                    <td>Listing</td>
+<!--                                    <td>-->
+<!--                                        --><?php //if ($this->uri->segment(4) == 2): ?>
+<!--                                        <a href="--><?php //echo base_url('admin/users/list_client/' . $user['id']); ?><!--" title="Danh sách">-->
+<!--                                            Xem danh sách-->
+<!--                                        </a>-->
+<!--                                        --><?php //elseif($this->uri->segment(4) == 3 && $user['member_id'] != null): ?>
+<!--                                        <a href="--><?php //echo base_url('admin/users/edit/' . $user['member_id']); ?><!--" title="Người quản lý">-->
+<!--                                            Xem thông tin-->
+<!--                                        </a>-->
+<!--                                        --><?php //endif ?>
+<!--                                    </td>-->
                                     <td>
                                         <form class="form_ajax">
+<!--                                            <a href="--><?php //echo base_url('admin/users/edit/' . $user['user_id']); ?><!--" title="Xem">-->
+<!--                                                <span class="glyphicon glyphicon-plus"></span>-->
+<!--                                            </a>-->
+<!--                                            &nbsp&nbsp-->
                                             <a href="<?php echo base_url('admin/users/edit/' . $user['user_id']); ?>" title="Xem">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
@@ -82,15 +71,6 @@
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp&nbsp
-                                            <!--<?php if($user['active'] == 0): ?>-->
-                                            <!--<a style="color:red;" href="javascript:void(0);" onclick="activeItem(<?php echo $user['id']; ?>, '<?php echo base_url('admin/users/active'); ?>')" >-->
-                                            <!--    <i class="fa fa-times-circle" aria-hidden="true"></i>-->
-                                            <!--</a>-->
-                                            <!--<?php else: ?>-->
-                                            <!--<a style="color:green;" href="javascript:void(0);">-->
-                                            <!--    <i class="fa fa-check-circle" aria-hidden="true"></i>-->
-                                            <!--</a>-->
-                                            <!--<?php endif; ?>-->
                                         </form>
                                     </td>
                                 </tr>
