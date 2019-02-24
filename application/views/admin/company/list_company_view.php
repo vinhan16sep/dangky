@@ -21,6 +21,7 @@
                                 <th>STT</th>
                                 <th>Tên Doanh Nghiệp</th>
                                 <th>Người quản lý</th>
+                                <th>Trạng thái</th>
                                 <th style="text-align: center;">Thao Tác</th>
                                 <?php foreach ($companies as $key => $value): ?>
                                     <tr>
@@ -44,6 +45,7 @@
                                                 
                                             </ul>
                                         </td>
+                                        <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<a id="openStatus" onclick="openStatus(' . $value['client_id'] . ');" href="javascript:void(0);"><i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i></a>'; ?></td>
                                         <td style="text-align: center;">
                                             <a href="<?php echo base_url('admin/company/detail/' . $value['id']) ?>" class="btn btn-info">Thông tin DN</a>
                                             <a href="<?php echo base_url('admin/product/index/' . $value['client_id']) ?>" class="btn btn-info">Thông tin SP/DV</a>
@@ -89,5 +91,20 @@
             });
         };
     });
+</script>
+<script>
+    function openStatus(userId){
+        if(confirm("Chắc chắn mở lại cho doanh nghiệp đã chọn nhập lại thông tin?")){
+            $.ajax({
+                url: "<?php echo base_url('admin/users/open_final/'); ?>" + userId,
+                success: function(result){
+                    if(JSON.parse(result).message == 'done'){
+                        if(!alert('Doanh nghiệp cần xác nhận lại toàn bộ thông tin, nếu muốn gửi lại Ban tổ chức')){window.location.reload();}
+                    }
+                }
+            });
+        }
+
+    }
 </script>
 

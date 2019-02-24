@@ -58,16 +58,15 @@ class Company extends Admin_Controller{
                 }
             }
         }
-        
         if($this->data['page'] == 0){
-            $number = $total_rows;
-        }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
-            $number = $total_rows - ($this->data['page'] * $per_page);
-        }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
-            $number = $total_rows - ($this->data['page'] * $per_page);
-        };
+             $number = $total_rows;
+         }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+             $number = $total_rows - ($this->data['page'] * $per_page);
+         }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+             $number = $total_rows - ($this->data['page'] * $per_page);
+         };
 
-        $this->data['number'] = $number;
+         $this->data['number'] = $number;
         $this->data['companies'] = $result;
 		$this->render('admin/company/list_company_view');
 	}
@@ -372,13 +371,12 @@ class Company extends Admin_Controller{
         // get all users in array formate
         $select_basic = 'website, legal_representative, lp_position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
         $data_basic = $this->information_model->get_detail_information_with_select_by_id($id);
-
         
         $data = $this->information_model->fetch_company_by_id($id);
 
         // Get user info
         $target_user = $this->users_model->fetch_by_id($data['client_id']);
-
+        
         $data_basic_export = array(
             '0' => array(
                 'website' => 'Website',

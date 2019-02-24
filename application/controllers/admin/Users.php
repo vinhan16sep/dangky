@@ -47,16 +47,15 @@ class Users extends Admin_Controller
                 $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id']);
             }
         }
-        
         if($this->data['page'] == 0){
-            $number = $total_rows;
-        }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
-            $number = $total_rows - ($this->data['page'] * $per_page);
-        }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
-            $number = $total_rows - ($this->data['page'] * $per_page);
-        };
+             $number = $total_rows;
+         }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+             $number = $total_rows - ($this->data['page'] * $per_page);
+         }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+             $number = $total_rows - ($this->data['page'] * $per_page);
+         };
 
-        $this->data['number'] = $number;
+         $this->data['number'] = $number;
         $this->data['group_id'] = $group_id;
         $this->data['group'] = $group_id;
         $this->data['users'] = $users;
@@ -256,7 +255,7 @@ class Users extends Admin_Controller
         $this->data['users'] = $this->users_model->fetch_all_client($id);
         $this->render('admin/users/list_client_of_member_view');
     }
-
+    
     public function open_final($client_id){
         $information = array(
             'is_information' => 0,

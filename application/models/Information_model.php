@@ -333,9 +333,10 @@ class Information_model extends CI_Model {
     }
 
     public function fetch_all_company_pagination($limit = NULL, $start = NULL) {
-        $this->db->select('company.*, users.company as company');
+        $this->db->select('company.*, users.company as company, status.is_final as final');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
+        $this->db->join('status', 'status.client_id = company.client_id');
         $this->db->limit($limit, $start);
         $this->db->order_by("company.id", "desc");
 
@@ -373,9 +374,10 @@ class Information_model extends CI_Model {
     }
 
     public function fetch_all_company_pagination_search($limit = NULL, $start = NULL, $search = '') {
-        $this->db->select('company.*, users.company as company');
+        $this->db->select('company.*, users.company as company, status.is_final as final');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
+        $this->db->join('status', 'status.client_id = company.client_id');
         $this->db->limit($limit, $start);
         $this->db->like('users.company', $search);
         $this->db->order_by("company.created_at", "desc");
@@ -397,7 +399,7 @@ class Information_model extends CI_Model {
         if($client_id != null){
             $this->db->where('client_id', $client_id);
         }
-//        $this->db->where('is_submit', 1);
+        // $this->db->where('is_submit', 1);
         $this->db->order_by("id", "asc");
 
         return $result = $this->db->get()->result_array();

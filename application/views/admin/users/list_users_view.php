@@ -61,6 +61,17 @@
                                     <td style="text-align:center"><?php echo ($user['status']['is_product'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                     <td style="text-align:center"><?php echo ($user['status']['is_final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<a id="openStatus" onclick="openStatus(' . $user['user_id'] . ');" href="javascript:void(0);"><i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i></a>'; ?></td>
                                     <?php endif; ?>
+                                    <!--<td>-->
+                                    <!--    <?php if ($this->uri->segment(4) == 2): ?>-->
+                                    <!--    <a href="<?php echo base_url('admin/users/list_client/' . $user['id']); ?>" title="Danh sách">-->
+                                    <!--        Xem danh sách-->
+                                    <!--    </a>-->
+                                    <!--    <?php elseif($this->uri->segment(4) == 3 && $user['member_id'] != null): ?>-->
+                                    <!--    <a href="<?php echo base_url('admin/users/edit/' . $user['member_id']); ?>" title="Người quản lý">-->
+                                    <!--        Xem thông tin-->
+                                    <!--    </a>-->
+                                    <!--    <?php endif ?>-->
+                                    <!--</td>-->
                                     <td>
                                         <form class="form_ajax">
                                             <a href="<?php echo base_url('admin/users/edit/' . $user['user_id']); ?>" title="Xem">
@@ -71,6 +82,15 @@
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp&nbsp
+                                            <!--<?php if($user['active'] == 0): ?>-->
+                                            <!--<a style="color:red;" href="javascript:void(0);" onclick="activeItem(<?php echo $user['id']; ?>, '<?php echo base_url('admin/users/active'); ?>')" >-->
+                                            <!--    <i class="fa fa-times-circle" aria-hidden="true"></i>-->
+                                            <!--</a>-->
+                                            <!--<?php else: ?>-->
+                                            <!--<a style="color:green;" href="javascript:void(0);">-->
+                                            <!--    <i class="fa fa-check-circle" aria-hidden="true"></i>-->
+                                            <!--</a>-->
+                                            <!--<?php endif; ?>-->
                                         </form>
                                     </td>
                                 </tr>

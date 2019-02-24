@@ -190,7 +190,7 @@
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <p>Doanh nghiệp tải mẫu phiếu đăng ký ở đây, khai đầy đủ thông tin, ký, đóng dấu và gửi lại bản cứng cho ban tổ chức.</p>
-                            <a class="btn btn-warning" href="<?php echo site_url('Phieu-dang-ky.docx') ?>" target="_blank">Tải mẫu Phiếu đăng ký</a>
+                            <a class="btn btn-warning" href="<?php echo site_url('PDK2018_done.docx') ?>" target="_blank">Tải mẫu Phiếu đăng ký</a>
                             <br>
                         </div>
                     </div>
