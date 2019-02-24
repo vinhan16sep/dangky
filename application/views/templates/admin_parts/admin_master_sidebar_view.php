@@ -30,30 +30,44 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href=""><i class="fa fa-list" aria-hidden="true"></i> T/k Thành viên
+                    <a href=""><i class="fa fa-list" aria-hidden="true"></i> Hội đồng
                         <span class="pull-right-container">
                         </span>
                     </a>
                     <ul class="treeview-menu">
                         <li class="active">
-                            <a href="<?php echo base_url('admin/users/index/2') ?>">
+                            <a href="<?php echo base_url('admin/users/index_member/2') ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
-                                T/k Hội đồng
+                                Tài khoản
                             </a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo base_url('admin/users/index/3'); ?>">
+                            <a href="<?php echo base_url('admin/team/index'); ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
-                                T/k Doanh nghiệp
+                                Nhóm hội đồng
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="active">
-                    <a href="<?php echo base_url('admin/company'); ?>"> Doanh nghiệp 
+                    <a href=""> Doanh nghiệp
                         <span class="pull-right-container">
                         </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/users/index/3'); ?>">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                Tài khoản
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/company'); ?>">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                Thông tin
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 <!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
 <!--                    <a href="--><?php //echo base_url('client/information/company'); ?><!--">-->

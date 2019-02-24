@@ -5,10 +5,33 @@
         <div class="container col-md-12">
             <div class="modified-mode">
                 <div class="col-lg-10 col-lg-offset-0" style="margin-left: 15px;">
-                    <h1>TẠO MỚI USER</h1>
+                    <h1>TẠO MỚI TÀI KHOẢN HỘI ĐỒNG</h1>
                     <?php
                     echo form_open_multipart('', array('class' => 'form-horizontal'));
                     ?>
+                    <br>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-sx-12">
+                                <?php
+                                echo form_label('Chọn chức vụ', 'member_role');
+                                ?>
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-sx-12">
+                                <?php
+                                $options = array(
+                                    '' => '-- Chọn chức vụ --',
+                                    'member' => 'Thành viên',
+                                    'leader' => 'Trưởng nhóm',
+                                    'manager' => 'Chủ tịch'
+                                );
+                                echo form_error('member_role');
+                                echo form_dropdown('member_role', $options, '', 'class="form-control"');
+
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <?php
                         echo form_label('Tên','first_name');
