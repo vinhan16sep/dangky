@@ -111,7 +111,7 @@ class Users extends Admin_Controller
     public function create($group_id = null){
         $this->data['page_title'] = 'Tạo mới thành viên hội đồng';
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('member_role','Member Role','trim');
+        $this->form_validation->set_rules('member_role','Member Role','trim|required');
         $this->form_validation->set_rules('first_name','First name','trim');
         $this->form_validation->set_rules('last_name','Last name','trim');
         $this->form_validation->set_rules('company','Company','trim');
