@@ -23,9 +23,11 @@
                                                     <?php if ( isset($value['product_list'])): ?>
                                                     <div class="post box-body">
                                                         <table class="table table-striped table-bordered table-condensed">
-                                                            <th>STT</th>
-                                                            <th>Tên sản phẩm</th>
-                                                            <th style="text-align: center;">Thao Tác</th>
+                                                            <tr>
+                                                                <td class="col-md-1">STT</td>
+                                                                <td class="col-md-9">Tên sản phẩm</td>
+                                                                <td class="col-md-2" style="text-align: center;">Thao Tác</td>
+                                                            </tr>
                                                             <?php foreach ($value['product_list'] as $key => $value): ?>
                                                                 <tr>
                                                                     <td><?php echo $key + 1 ?></td>
