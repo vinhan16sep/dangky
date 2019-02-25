@@ -39,6 +39,14 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_product() {
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->order_by("id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function fetch_all_by_type($type){
         $query = $this->db->select('*')
             ->from('information')
@@ -248,6 +256,16 @@ class Information_model extends CI_Model {
         }
 
         return false;
+    }
+
+    public function fetch_product_by_ids($type, $ids){
+        $query = $this->db->select('*')
+            ->from($type)
+            ->where_in('id', $id)
+            ->limit()
+            ->get()->result_array();
+
+        return $query;
     }
 
     public function insert($type, $data){
