@@ -561,4 +561,11 @@ class Information_model extends CI_Model {
         // $this->db->where('company.is_submit', 1);
         return $result = $this->db->get()->row_array();
     }
+
+    public function get_personal_products($ids){
+        $query = $this->db->select('*')
+            ->from('product')
+            ->where_in('id', $ids);
+        return $query->get()->result_array();
+    }
 }

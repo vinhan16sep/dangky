@@ -230,9 +230,6 @@
 
     $('#extra-form').validate({
         rules: {
-            website: {
-                required: true
-            },
             legal_representative: {
                 required: true
             },
@@ -252,9 +249,6 @@
             }
         },
         messages :{
-            website: {
-                required : 'Cần nhập Tên đơn vị'
-            },
             legal_representative: {
                 required: 'Cần nhập Tên người đại diện pháp luật'
             },
