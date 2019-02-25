@@ -20,7 +20,9 @@ class Team extends Admin_Controller{
 	    $teams = $this->team_model->fetch_all_team();
 
 	    $this->data['leaders'] = $this->users_model->fetch_all_leaders();
-	    $this->data['members'] = $this->users_model->fetch_all_members();
+        $this->data['members'] = $this->users_model->fetch_all_members();
+        $this->data['companys'] = $this->information_model->fetch_all_company_pagination();
+	    $this->data['products'] = $this->information_model->get_product();
         $this->data['teams'] = $teams;
         $this->render('admin/team/list_team_view');
 	}
@@ -60,12 +62,12 @@ class Team extends Admin_Controller{
         $team_members = explode(',', $team['member_id']);
 
         if($team['member_id'] == ''){
-            $update = $this->team_model->update('team', $team_id, array('member_id' => $member_id));
+            $update = $this->team_model->update('team', $team_id, array('member_id' => ',' .$member_id .','));
         }else{
             if(in_array($member_id, $team_members)){
                 $update = false;
             }else{
-                $string_team_members .= ',' . $member_id;
+                $string_team_members .= $member_id . ',';
                 $update = $this->team_model->update('team', $team_id, array('member_id' => $string_team_members));
             }
         }
@@ -87,6 +89,64 @@ class Team extends Admin_Controller{
         if (($key = array_search($member_id, $team_members)) !== false) {
             unset($team_members[$key]);
             $update = $this->team_model->update('team', $team_id, array('member_id' => implode(',', $team_members)));
+        }
+        if($update){
+            return $this->output->set_status_header(200)
+                ->set_output(json_encode(array('name' => $team['name'])));
+        }
+        return $this->output->set_status_header(200)
+            ->set_output(json_encode(array('message' => 'Có lỗi khi xoá thành viên hội đồng')));
+    }
+
+    public function get_products(){
+        $client_id = $this->input->get('client_id');
+        $products = $this->information_model->get_all_product($client_id);
+        foreach ($products as $key => $value) {
+            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id']);
+            if ( $check_product_in_team > 0 ) {
+                unset($products[$key]);
+            }
+        }
+        return $this->output->set_status_header(200)
+            ->set_output(json_encode(array('products' => $products)));
+    }
+
+    public function add_product(){
+        $team_id = $this->input->get('team_id');
+        $product_id = $this->input->get('product_id');
+
+        $team = $this->team_model->fetch_by_id('team', $team_id);
+        $string_team_products = $team['product_id'];
+        $team_products = explode(',', $team['product_id']);
+
+        if($team['product_id'] == ''){
+            $update = $this->team_model->update('team', $team_id, array('product_id' => ',' . $product_id . ','));
+        }else{
+            if(in_array($product_id, $team_products)){
+                $update = false;
+            }else{
+                $string_team_products .= $product_id . ',';
+                $update = $this->team_model->update('team', $team_id, array('product_id' => $string_team_products));
+            }
+        }
+        if($update){
+            return $this->output->set_status_header(200)
+                ->set_output(json_encode(array('name' => $team['name'])));
+        }
+        return $this->output->set_status_header(200)
+            ->set_output(json_encode(array('message' => 'Có lỗi khi chọn sản phẩm hoặc sản phẩm đã tồn tại trong nhóm')));
+    }
+
+    public function remove_team_product(){
+        $team_id = $this->input->get('team_id');
+        $product_id = $this->input->get('product_id');
+
+        $team = $this->team_model->fetch_by_id('team', $team_id);
+        $team_products = explode(',', $team['product_id']);
+
+        if (($key = array_search($product_id, $team_products)) !== false) {
+            unset($team_products[$key]);
+            $update = $this->team_model->update('team', $team_id, array('product_id' => implode(',', $team_products)));
         }
         if($update){
             return $this->output->set_status_header(200)
