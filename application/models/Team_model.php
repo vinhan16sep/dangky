@@ -42,4 +42,18 @@ class Team_model extends CI_Model {
         $this->db->where('id', $id);
         return $result = $this->db->get()->row_array();
     }
+
+    public function check_exist_product_id($table, $product_id=''){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->like('product_id', ',' . $product_id . ',');
+        return $result = $this->db->get()->num_rows();
+    }
+
+    public function get_by_user_id($table, $member_id=''){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->like('member_id', ',' . $member_id . ',');
+        return $result = $this->db->get()->result_array();
+    }
 }

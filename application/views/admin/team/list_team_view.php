@@ -22,6 +22,7 @@
                                 <td><b><a href="#">Tên nhóm</a></b></td>
                                 <td><b><a href="#">Trưởng nhóm</a></b></td>
                                 <td><b><a href="#">Thành viên</a></b></td>
+                                <td><b><a href="#">Sản phẩm</a></b></td>
                                 <td><b>Thao tác</b></td>
                             </tr>
 
@@ -52,6 +53,18 @@
                                         </ul>
                                     </td>
                                     <td>
+                                        <ul>
+                                        <?php
+                                        $array_product_id = explode(',', $team['product_id']);
+                                        foreach($products as $key => $product){
+                                            if(in_array($product['id'], $array_product_id)){
+                                                echo '<li>' . $product['name']  . '  ' . '<a href="javascript:void(0);" onclick="removeProduct(' . $team['id'] . ',' . $product['id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+                                            }
+                                        }
+                                        ?>
+                                        </ul>
+                                    </td>
+                                    <td>
                                         <div class="col-md-6">
 <!--                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#addLeader" id="btnAddLeader">-->
 <!--                                                <i class="fa fa-star" aria-hidden="true"></i>-->
@@ -62,6 +75,9 @@
                                             &nbsp;&nbsp;
                                             <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddMemberModal(this);" id="btnAddMember">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddProductModal(this);" id="btnAddProduct">
+                                                <i class="fa fa-product-hunt" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -155,6 +171,36 @@
         </div>
     </div>
 </div>
+<div id="addProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Chọn Sản Phẩm</h4>
+            </div>
+            <div class="modal-body" id="modal-form">
+                <input type="hidden" value="" id="hiddenTeamId"/>
+                    <select id="selectCompanys" class="form-control" style="margin-bottom: 20px;" >
+                        <option value="">-- Chọn công ty --</option>
+                        <?php if($companys){ ?>
+                            <?php foreach($companys as $key => $company){ ?>
+                                <option value="<?php echo $company['client_id'] ?>"><?php echo $company['company']; ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select>
+                    <select id="selectProducts" class="form-control" disabled>
+                        <option value="">-- Chọn sản phẩm --</option>
+                    </select>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="confirmAddProducts">Đồng ý</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $('#createTeam').click(function(){
        if($('#teamName').val() == ''){
@@ -215,6 +261,11 @@
         $('#addMember').modal('show');
     }
 
+    function openAddProductModal(event){
+        $('#hiddenTeamId').val($(event).data("team"));
+        $('#addProduct').modal('show');
+    }
+
     $('#confirmAddMember').click(function(){
         if($('#selectMember').val() == ''){
             alert('Cần chọn thành viên');
@@ -253,6 +304,80 @@
                     let data = JSON.parse(result);
                     if(data.name != undefined){
                         alert('Xoá thành viên cho nhóm' + data.name + ' thành công')
+                        window.location.reload();
+                    }else{
+                        alert(data.message)
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    }
+
+
+    $('#selectCompanys').change(function(){
+        $.ajax({
+            method: "GET",
+            url: "<?php echo base_url('admin/team/get_products'); ?>",
+            data: {
+                client_id: $(this).val()
+            },
+            success: function(result){
+                let data = JSON.parse(result);
+                html = '';
+                if (data.products.length > 0) {
+                    $("#selectProducts").prop('disabled', false);
+                    html += '<option value="">-- Chọn sản phẩm --</option>';
+                    $.each(data.products, function(index, item){
+                        html += '<option value="' + item.id + '">' + item.name + '</option>';
+                    })
+                }else{
+                    $("#selectProducts").prop('disabled', true);
+                    html += '<option value="">Không có sản phẩm được chỉ định hoặc sản phẩm đã được chỉ định hết</option>';
+                }
+                $('#selectProducts').html(html);
+            }
+        });
+    });
+
+    $('#confirmAddProducts').click(function(){
+        if($('#selectProducts').val() == ''){
+            alert('Cần chọn sản phẩm');
+        }else{
+            $.ajax({
+                method: "GET",
+                url: "<?php echo base_url('admin/team/add_product'); ?>",
+                data: {
+                    team_id: $('#hiddenTeamId').val(),
+                    product_id: $('#selectProducts').val()
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    if(data.name != undefined){
+                        alert('Chọn chọn sản phẩm cho ' + data.name + ' thành công')
+                        window.location.reload();
+                    }else{
+                        alert(data.message)
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    });
+
+    function removeProduct(teamId, productId){
+        if(confirm('Chắc chắn xoá?')){
+            $.ajax({
+                method: "GET",
+                url: "<?php echo base_url('admin/team/remove_team_product'); ?>",
+                data: {
+                    team_id: teamId,
+                    product_id: productId
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    if(data.name != undefined){
+                        alert('Xoá sản phẩm cho nhóm' + data.name + ' thành công')
                         window.location.reload();
                     }else{
                         alert(data.message)
