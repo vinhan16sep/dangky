@@ -12,12 +12,42 @@
                     <div class="tab-content">
                         
                         <?php foreach ($team as $key => $value): ?>
-                            <div class="post">
-                                <h4>Nhóm: <span style="color: red"><?php echo $value['name']; ?></span></h4>
-                                    <p style="color:green;">Danh sách sản phẩm của nhóm: <span style="color: red"><?php echo $value['name']; ?></span></p>
-                                    <span>
-                                        <a href="<?php echo base_url('member/company/index/'.$user_id); ?>" class="btn btn-success btn-block"><b>Xem danh sách các doanh nghiệp đã đăng ký</b></a>
-                                    </span>
+                            <div class="panel panel-info">
+                                <div class="panel-heading"><h4>Nhóm: <span style="color: red"><?php echo $value['name']; ?></span></h4></div>
+                                <div class="panel-body">
+                                    <!--main content start-->
+                                    <div class="row">
+                                        <!-- /.col -->
+                                        <div class="col-md-12">
+                                                <div class="tab-content">
+                                                    <?php if ( isset($value['product_list'])): ?>
+                                                    <div class="post box-body">
+                                                        <table class="table table-striped table-bordered table-condensed">
+                                                            <th>STT</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th style="text-align: center;">Thao Tác</th>
+                                                            <?php foreach ($value['product_list'] as $key => $value): ?>
+                                                                <tr>
+                                                                    <td><?php echo $key + 1 ?></td>
+                                                                    <td><?php echo $value['name']; ?></td>
+                                                                    <td style="text-align: center;">
+                                                                        <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>" class="btn btn-info">Thông tin sản phẩm</a>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach ?>
+                                                            
+                                                        </table>
+                                                    </div>
+                                                    <?php else: ?>
+                                                        <div class="post">Không có sản phẩm được chỉ định!</div>
+                                                    <?php endif ?>
+                                                </div>
+                                                <!-- /.tab-content -->
+                                            <!-- /.nav-tabs-custom -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </div>
                             </div>
                         <?php endforeach ?>
                         

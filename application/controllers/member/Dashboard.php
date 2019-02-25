@@ -25,9 +25,7 @@ class Dashboard extends Member_Controller {
         $this->data['team'] = $team;
 
     	if($user->member_role == 'member'){
-            $products = $this->get_personal_products($user->id);
-            echo '<pre>';
-            print_r($products);die;
+            $this->data['team'] = $this->get_personal_products($user->id);
         }
 
 
@@ -55,16 +53,23 @@ class Dashboard extends Member_Controller {
     public function get_personal_products($user_id){
         $list_team = $this->team_model->get_current_user_team($user_id);
         $product_string = '';
-        foreach($list_team as $key => $value){
-            $product_string .= $value['product_id'];
-        }
-        $product_ids = explode(',', $product_string);
-        foreach($product_ids as $key => $value){
-            if(empty($value)){
-                unset($product_ids[$key]);
+        if ( !empty($list_team) ) {
+            foreach($list_team as $key => $value){
+                $product_string .= $value['product_id'];
+            }
+            if ( $product_string != '' ) {
+                $product_ids = explode(',', $product_string);
+                if ( is_array($product_ids) && !empty($product_ids) ) {
+                    foreach($product_ids as $k => $val){
+                        if(empty($val)){
+                            unset($product_ids[$k]);
+                        }
+                    }
+                    $products = $this->information_model->get_personal_products($product_ids);
+                    $list_team[$key]['product_list'] = $products;
+                }
             }
         }
-
-        return $this->information_model->get_personal_products($product_ids);
+        return $list_team;
     }
 }
