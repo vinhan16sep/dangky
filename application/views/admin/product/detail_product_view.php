@@ -18,6 +18,14 @@
                                     <a><i class="fa fa-globe margin-r-5"></i> Tên SP/dịch vụ/giải pháp/ứng dụng</a> <br><p class="" style="padding-left:20px;"><?php echo $product['name']; ?></p>
                                 </li>
                                 <li class="list-group-item">
+                                    <a><i class="fa fa-file margin-r-5"></i> File mô tả</a> <br><p class="" style="padding-left:20px;"></p>
+                                    <?php if($product['file'] && $product['file'] != ''){ ?>
+                                        <a class="btn btn-success" href="<?php echo base_url('assets/upload/file/'. $product['file']); ?>" target="_blank">Tải mẫu Cam kết bản quyền</a>
+                                    <?php }else{ ?>
+                                        <p class="" style="color:red;padding-left:20px;">Chưa có file</p>
+                                    <?php } ?>
+                                </li>
+                                <li class="list-group-item">
                                     <?php $service = json_decode($product['service']) ?>
                                     <a><i class="fa fa-circle margin-r-5"></i> Đăng ký tham gia lĩnh vực</a> <br>
                                     <?php foreach ($service as $key => $value): ?>
