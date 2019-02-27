@@ -30,10 +30,9 @@
                             <tr>
                                 <td style="width: 3%"><b><a href="#">STT</a></b></td>
                                 <td><b><a href="#">Username</a></b></td>
-                                <td><b><a href="#">Doanh nghiệp</a></b></td>
+                                <td><b><a href="#">Chức danh</a></b></td>
                                 <td><b><a href="#">E-Mail</a></b></td>
-                                <td style="width: 10%;"><b><a href="#">Thời gian tạo</a></b></td>
-                                <td><b><a href="#">DN được chỉ định</a></b></td>
+                                <td style="width: 20%;"><b><a href="#">Thời gian tạo</a></b></td>
                                 <td><b>Thao tác</b></td>
                             </tr>
 
@@ -42,10 +41,9 @@
                                 <tr class="row_<?php echo $user['id']; ?>">
                                     <td><?php echo $number--; ?></td>
                                     <td><?php echo $user['username']; ?></td>
-                                    <td><?php echo $user['company']; ?></td>
+                                    <td><?php echo strtoupper($user['member_role']); ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s',$user['created_on']); ?></td>
-                                    <td>Listing</td>
 <!--                                    <td>-->
 <!--                                        --><?php //if ($this->uri->segment(4) == 2): ?>
 <!--                                        <a href="--><?php //echo base_url('admin/users/list_client/' . $user['id']); ?><!--" title="Danh sách">-->

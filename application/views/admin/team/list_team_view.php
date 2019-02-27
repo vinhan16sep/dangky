@@ -18,12 +18,12 @@
                     <div class="col-lg-12" style="margin-top: 10px;">
                         <table class="table table-striped table-bordered table-condensed admin">
                             <tr>
-                                <td style="width: 3%"><b><a href="#">STT</a></b></td>
-                                <td><b><a href="#">Tên nhóm</a></b></td>
-                                <td><b><a href="#">Trưởng nhóm</a></b></td>
-                                <td><b><a href="#">Thành viên</a></b></td>
-                                <td><b><a href="#">Sản phẩm</a></b></td>
-                                <td><b>Thao tác</b></td>
+                                <td style="width: 5%"><b><a href="#">STT</a></b></td>
+                                <td style="width: 10%; text-align: center;"><b><a href="#">Tên nhóm</a></b></td>
+                                <td style="width: 20%; text-align: center;"><b><a href="#">Trưởng nhóm</a></b></td>
+                                <td style="width: 20%; text-align: center;"><b><a href="#">Thành viên</a></b></td>
+                                <td style="text-align: center;"><b><a href="#">Sản phẩm</a></b></td>
+                                <td style="width: 10%; text-align: center;"><b>Thao tác</b></td>
                             </tr>
 
                             <?php foreach ($teams as $key => $team): ?>
@@ -31,11 +31,12 @@
                                 <tr class="row_<?php echo $team['id']; ?>">
                                     <td><?php echo $key + 1; ?></td>
                                     <td><?php echo $team['name']; ?></td>
-                                    <td>
+                                    <td style="text-align: center;">
                                         <?php
                                             foreach($leaders as $key => $leader){
                                                 if($team['leader_id'] == $leader['user_id']){
-                                                    echo $leader['username'] . ' (' . $leader['email'] . ')';
+//                                                    echo $leader['username'] . ' (' . $leader['email'] . ')';
+                                                    echo $leader['username'];
                                                 }
                                             }
                                         ?>
@@ -46,7 +47,8 @@
                                         $array_member_id = explode(',', $team['member_id']);
                                         foreach($members as $key => $member){
                                             if(in_array($member['user_id'], $array_member_id)){
-                                                echo '<li>' . $member['username'] . ' (' . $member['email'] . ')' . '  ' . '<a href="javascript:void(0);" onclick="removeMember(' . $team['id'] . ',' . $member['user_id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+                                                echo '<li>' . $member['username'] . '  ' . '<a href="javascript:void(0);" onclick="removeMember(' . $team['id'] . ',' . $member['user_id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+//                                                echo '<li>' . $member['username'] . ' (' . $member['email'] . ')' . '  ' . '<a href="javascript:void(0);" onclick="removeMember(' . $team['id'] . ',' . $member['user_id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
                                             }
                                         }
                                         ?>
@@ -65,19 +67,28 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <div class="col-md-6">
+                                        <div>
 <!--                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#addLeader" id="btnAddLeader">-->
 <!--                                                <i class="fa fa-star" aria-hidden="true"></i>-->
 <!--                                            </a>-->
                                             <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddLeaderModal(this);" id="btnAddLeader">
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </a>
-                                            &nbsp;&nbsp;
+                                            &nbsp
                                             <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddMemberModal(this);" id="btnAddMember">
+                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                            </a>
+                                            &nbsp
+                                            <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddProductModal(this);" id="btnAddProduct">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </a>
-                                            <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddProductModal(this);" id="btnAddProduct">
-                                                <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                                            &nbsp
+                                            <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" data-name="<?php echo $team['name']; ?>" onclick="openChangeTeamNameModal(this);" id="btnAddProduct">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                            &nbsp
+                                            <a href="javascript:void(0);" onclick="deleteTeam(<?php echo $team['id']; ?>, <?php echo $team['name']; ?>);" id="btnAddProduct">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -112,6 +123,26 @@
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-primary" id="createTeam">Đồng ý</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="changeTeamName" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tên nhóm</h4>
+            </div>
+            <div class="modal-body" id="modal-form">
+                <input type="hidden" value="" id="changeNameTeamId"/>
+                <input type="text" name="team-name" id="teamCurrentName" class="form-control"/>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="btnChangeTeamName">Đồng ý</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
@@ -280,7 +311,7 @@
                 success: function(result){
                     let data = JSON.parse(result);
                     if(data.name != undefined){
-                        alert('Chọn thành viên cho nhóm' + data.name + ' thành công')
+                        alert('Chọn thành viên cho nhóm ' + data.name + ' thành công')
                         window.location.reload();
                     }else{
                         alert(data.message)
@@ -303,7 +334,7 @@
                 success: function(result){
                     let data = JSON.parse(result);
                     if(data.name != undefined){
-                        alert('Xoá thành viên cho nhóm' + data.name + ' thành công')
+                        alert('Xoá thành viên cho nhóm ' + data.name + ' thành công')
                         window.location.reload();
                     }else{
                         alert(data.message)
@@ -313,6 +344,37 @@
             });
         }
     }
+
+    function openChangeTeamNameModal(event){
+        $('#changeNameTeamId').val($(event).data("team"));
+        $('#teamCurrentName').val($(event).data("name"));
+        $('#changeTeamName').modal('show');
+    }
+
+    $('#btnChangeTeamName').click(function(){
+        if($('#teamCurrentName').val() == ''){
+            alert('Cần nhập tên nhóm hội đồng');
+        }else{
+            $.ajax({
+                method: "GET",
+                url: "<?php echo base_url('admin/team/change_name/'); ?>",
+                data: {
+                    id: $('#changeNameTeamId').val(),
+                    name: $('#teamCurrentName').val()
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    if(data.name != undefined){
+                        alert('Đổi tên nhóm thành công')
+                        window.location.reload();
+                    }else{
+                        alert(data.message)
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    });
 
 
     $('#selectCompanys').change(function(){
@@ -333,7 +395,7 @@
                     })
                 }else{
                     $("#selectProducts").prop('disabled', true);
-                    html += '<option value="">Không có sản phẩm được chỉ định hoặc sản phẩm đã được chỉ định hết</option>';
+                    html += '<option value="">Không có sản phẩm hoặc sản phẩm đã được chỉ định hết</option>';
                 }
                 $('#selectProducts').html(html);
             }
@@ -377,7 +439,30 @@
                 success: function(result){
                     let data = JSON.parse(result);
                     if(data.name != undefined){
-                        alert('Xoá sản phẩm cho nhóm' + data.name + ' thành công')
+                        alert('Xoá sản phẩm cho nhóm ' + data.name + ' thành công')
+                        window.location.reload();
+                    }else{
+                        alert(data.message)
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    }
+
+    function deleteTeam(id, name){
+        if(confirm('Chắc chắn xoá?')){
+            $.ajax({
+                method: "GET",
+                url: "<?php echo base_url('admin/team/delete_team'); ?>",
+                data: {
+                    id: id,
+                    name: name
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
+                    if(data.name != undefined){
+                        alert('Xoá nhóm ' + data.name + ' thành công')
                         window.location.reload();
                     }else{
                         alert(data.message)

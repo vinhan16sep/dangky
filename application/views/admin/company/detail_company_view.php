@@ -46,15 +46,6 @@
                                 <p class="">
                                     <a style="text-decoration: underline;" href="<?php echo $company['link'] ?>" target="_blank"><i class="margin-r-5"></i> <?php echo $company['link'] ?></a>
                                 </p>
-                                <li class="list-group-item" data-company="<?php echo $company['client_id'] ?>">
-                                    <a><i class="fa fa-group margin-r-5"></i> Thêm người quản lý</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <select class="btn btn-info change-member">
-                                        <option value="">Chọn người quản lý</option>
-                                        <?php foreach ($members as $key => $value): ?>
-                                            <option value="<?php echo $value['id'] ?>"><?php echo $value['first_name'].' '.$value['last_name'].' ('.$value['username'].')'; ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </li>
                             </ul>
                         </div>
                     </div>
