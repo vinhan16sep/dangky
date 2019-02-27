@@ -33,44 +33,44 @@
                                     <td><?php echo $team['name']; ?></td>
                                     <td style="text-align: center;">
                                         <?php
-                                            foreach($leaders as $key => $leader){
-                                                if($team['leader_id'] == $leader['user_id']){
+                                        foreach($leaders as $key => $leader){
+                                            if($team['leader_id'] == $leader['user_id']){
 //                                                    echo $leader['username'] . ' (' . $leader['email'] . ')';
-                                                    echo $leader['username'];
-                                                }
+                                                echo $leader['username'];
                                             }
+                                        }
                                         ?>
                                     </td>
                                     <td>
                                         <ul>
-                                        <?php
-                                        $array_member_id = explode(',', $team['member_id']);
-                                        foreach($members as $key => $member){
-                                            if(in_array($member['user_id'], $array_member_id)){
-                                                echo '<li>' . $member['username'] . '  ' . '<a href="javascript:void(0);" onclick="removeMember(' . $team['id'] . ',' . $member['user_id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+                                            <?php
+                                            $array_member_id = explode(',', $team['member_id']);
+                                            foreach($members as $key => $member){
+                                                if(in_array($member['user_id'], $array_member_id)){
+                                                    echo '<li>' . $member['username'] . '  ' . '<a href="javascript:void(0);" onclick="removeMember(' . $team['id'] . ',' . $member['user_id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
 //                                                echo '<li>' . $member['username'] . ' (' . $member['email'] . ')' . '  ' . '<a href="javascript:void(0);" onclick="removeMember(' . $team['id'] . ',' . $member['user_id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+                                                }
                                             }
-                                        }
-                                        ?>
+                                            ?>
                                         </ul>
                                     </td>
                                     <td>
                                         <ul>
-                                        <?php
-                                        $array_product_id = explode(',', $team['product_id']);
-                                        foreach($products as $key => $product){
-                                            if(in_array($product['id'], $array_product_id)){
-                                                echo '<li>' . $product['name']  . '  ' . '<a href="javascript:void(0);" onclick="removeProduct(' . $team['id'] . ',' . $product['id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+                                            <?php
+                                            $array_product_id = explode(',', $team['product_id']);
+                                            foreach($products as $key => $product){
+                                                if(in_array($product['id'], $array_product_id)){
+                                                    echo '<li>' . $product['name']  . '  ' . '<a href="javascript:void(0);" onclick="removeProduct(' . $team['id'] . ',' . $product['id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
+                                                }
                                             }
-                                        }
-                                        ?>
+                                            ?>
                                         </ul>
                                     </td>
                                     <td>
                                         <div>
-<!--                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#addLeader" id="btnAddLeader">-->
-<!--                                                <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                                            </a>-->
+                                            <!--                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#addLeader" id="btnAddLeader">-->
+                                            <!--                                                <i class="fa fa-star" aria-hidden="true"></i>-->
+                                            <!--                                            </a>-->
                                             <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" onclick="openAddLeaderModal(this);" id="btnAddLeader">
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </a>
@@ -83,11 +83,11 @@
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </a>
                                             &nbsp
-                                            <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" data-name="<?php echo $team['name']; ?>" onclick="openChangeTeamNameModal(this);" id="btnAddProduct">
+                                            <a href="javascript:void(0);" data-team="<?php echo $team['id']; ?>" data-name="<?php echo $team['name']; ?>" onclick="openChangeTeamNameModal(this);" id="btnChangeName">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
                                             &nbsp
-                                            <a href="javascript:void(0);" onclick="deleteTeam(<?php echo $team['id']; ?>, <?php echo $team['name']; ?>);" id="btnAddProduct">
+                                            <a href="javascript:void(0);" onclick="deleteTeam(<?php echo $team['id']; ?>);" id="btnDeleteTeam">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </div>
@@ -213,17 +213,17 @@
             </div>
             <div class="modal-body" id="modal-form">
                 <input type="hidden" value="" id="hiddenTeamId"/>
-                    <select id="selectCompanys" class="form-control" style="margin-bottom: 20px;" >
-                        <option value="">-- Chọn công ty --</option>
-                        <?php if($companys){ ?>
-                            <?php foreach($companys as $key => $company){ ?>
-                                <option value="<?php echo $company['client_id'] ?>"><?php echo $company['company']; ?></option>
-                            <?php } ?>
+                <select id="selectCompanys" class="form-control" style="margin-bottom: 20px;" >
+                    <option value="">-- Chọn công ty --</option>
+                    <?php if($companys){ ?>
+                        <?php foreach($companys as $key => $company){ ?>
+                            <option value="<?php echo $company['client_id'] ?>"><?php echo $company['company']; ?></option>
                         <?php } ?>
-                    </select>
-                    <select id="selectProducts" class="form-control" disabled>
-                        <option value="">-- Chọn sản phẩm --</option>
-                    </select>
+                    <?php } ?>
+                </select>
+                <select id="selectProducts" class="form-control" disabled>
+                    <option value="">-- Chọn sản phẩm --</option>
+                </select>
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-primary" id="confirmAddProducts">Đồng ý</a>
@@ -234,17 +234,17 @@
 </div>
 <script>
     $('#createTeam').click(function(){
-       if($('#teamName').val() == ''){
-           alert('Cần nhập tên nhóm hội đồng');
-       }else{
-           $.ajax({
-               method: "GET",
-               url: "<?php echo base_url('admin/team/create/'); ?>",
-               data: {
-                   name: $('#teamName').val()
-               },
-               success: function(result){
-                   let data = JSON.parse(result);
+        if($('#teamName').val() == ''){
+            alert('Cần nhập tên nhóm hội đồng');
+        }else{
+            $.ajax({
+                method: "GET",
+                url: "<?php echo base_url('admin/team/create/'); ?>",
+                data: {
+                    name: $('#teamName').val()
+                },
+                success: function(result){
+                    let data = JSON.parse(result);
                     if(data.name != undefined){
                         alert('Tạo nhóm ' + data.name + ' thành công')
                         window.location.reload();
@@ -252,9 +252,9 @@
                         alert(data.message)
                         window.location.reload();
                     }
-               }
-           });
-       }
+                }
+            });
+        }
     });
 
     function openAddLeaderModal(event){
@@ -450,22 +450,21 @@
         }
     }
 
-    function deleteTeam(id, name){
+    function deleteTeam(id){
         if(confirm('Chắc chắn xoá?')){
             $.ajax({
                 method: "GET",
                 url: "<?php echo base_url('admin/team/delete_team'); ?>",
                 data: {
                     id: id,
-                    name: name
                 },
                 success: function(result){
                     let data = JSON.parse(result);
                     if(data.name != undefined){
-                        alert('Xoá nhóm ' + data.name + ' thành công')
+                        alert('Xoá nhóm ' + data.name);
                         window.location.reload();
                     }else{
-                        alert(data.message)
+                        alert(data.message);
                         window.location.reload();
                     }
                 }
