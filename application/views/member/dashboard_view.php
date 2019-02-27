@@ -32,8 +32,9 @@
                                                                 <tr>
                                                                     <td><?php echo $key + 1 ?></td>
                                                                     <td><?php echo $value['name']; ?></td>
-                                                                    <td style="text-align: center;">
+                                                                    <td style="text-align: center; width: 40%">
                                                                         <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>" class="btn btn-info">Thông tin sản phẩm</a>
+                                                                        <a href="<?php echo base_url('member/new_rating/index/' . $value['id']) ?>" class="btn btn-success">Chấm điểm</a>
                                                                     </td>
                                                                 </tr>
                                                             <?php endforeach ?>

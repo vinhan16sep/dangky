@@ -340,9 +340,13 @@ class Ion_auth
 				$this->set_error('account_creation_unsuccessful');
 				return FALSE;
 			}
-
 			// deactivate so the user much follow the activation flow
-			$deactivate = $this->ion_auth_model->deactivate($id);
+			if ( in_array(2, $group_ids) ) {
+				$deactivate = $this->ion_auth_model->deactivate($id, true);
+			}else{
+				$deactivate = $this->ion_auth_model->deactivate($id, false);
+			}
+			
 
 			// the deactivate method call adds a message, here we need to clear that
 			$this->ion_auth_model->clear_messages();
@@ -373,21 +377,26 @@ class Ion_auth
 			}
 			else
 			{
-				$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
-
-				$this->email->clear();
-				$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
-				$this->email->to($email);
-				$this->email->subject($this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_activation_subject'));
-				$this->email->message($message);
-
-				if ($this->email->send() === TRUE)
-				{
-					$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
-					$this->set_message('activation_email_successful');
-					return $id;
+				if (in_array(2, $group_ids)) {
+					$message = $this->load->view($this->config->item('email_templates_member', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
+				}else{
+					$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
 				}
+				
+				if ( !in_array(2, $group_ids) ) {
+					$this->email->clear();
+					$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
+					$this->email->to($email);
+					$this->email->subject($this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_activation_subject'));
+					$this->email->message($message);
 
+					if ($this->email->send() === TRUE)
+					{
+						$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
+						$this->set_message('activation_email_successful');
+						return $id;
+					}
+				}
 			}
 
 			$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_unsuccessful', 'activation_email_unsuccessful'));

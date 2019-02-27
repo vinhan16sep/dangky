@@ -531,7 +531,7 @@ class Ion_auth_model extends CI_Model
 	 * @return bool
 	 * @author Mathew
 	 */
-	public function deactivate($id = NULL)
+	public function deactivate($id = NULL, $is_member)
 	{
 		$this->trigger_events('deactivate');
 
@@ -551,8 +551,14 @@ class Ion_auth_model extends CI_Model
 
 		$data = array(
 		    'activation_code' => $activation_code,
-		    'active'          => 0
 		);
+
+		//Tu dinh nghia
+		if ( $is_member ) {
+			$data['active'] = 1;
+		}else{
+			$data['active'] = 0;
+		}
 
 		$this->trigger_events('extra_where');
 		$this->db->update($this->tables['users'], $data, array('id' => $id));
@@ -971,8 +977,14 @@ class Ion_auth_model extends CI_Model
 			'email' => $email,
 			'ip_address' => $ip_address,
 			'created_on' => time(),
-			'active' => ($manual_activation === FALSE ? 1 : 0)
+			// 'active' => ($manual_activation === FALSE ? 1 : 0)
 		);
+		$active_send_mail = 0;
+		if (in_array(2, $groups)) {
+			$active_send_mail = 1;
+		}
+
+		$data['active'] = $active_send_mail;
 
 		if ($this->store_salt)
 		{
@@ -982,12 +994,14 @@ class Ion_auth_model extends CI_Model
 		// filter out any data passed that doesnt have a matching column in the users table
 		// and merge the set user data and the additional data
 		$user_data = array_merge($this->_filter_data($this->tables['users'], $additional_data), $data);
+		// echo '<pre>';
+		// print_r($user_data);die;
 
 		$this->trigger_events('extra_set');
 
 		$this->db->insert($this->tables['users'], $user_data);
-
 		$id = $this->db->insert_id($this->tables['users'] . '_id_seq');
+
 
 		// add in groups array if it doesn't exists and stop adding into default group if default group ids are set
 		if (isset($default_group->id) && empty($groups))
@@ -1003,8 +1017,8 @@ class Ion_auth_model extends CI_Model
 				$this->add_to_group($group, $id);
 			}
 		}
-
 		$this->trigger_events('post_register');
+		
 
 		return (isset($id)) ? $id : FALSE;
 	}
