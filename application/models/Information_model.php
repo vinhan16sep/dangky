@@ -33,6 +33,7 @@ class Information_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('product');
         $this->db->where('client_id', $id);
+        $this->db->where('is_deleted', 0);
         $this->db->limit($limit, $start);
         $this->db->order_by("id", "desc");
 
