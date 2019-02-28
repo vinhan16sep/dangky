@@ -477,9 +477,20 @@ class Information_model extends CI_Model {
         }
         return false;
     }
+
     public function update_product($type, $client_id, $id, $information){
         $this->db->set($information)
             ->where('client_id', $client_id)
+            ->where('id', $id)
+            ->update($type);
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+        return false;
+    }
+
+    public function update_main_service($type, $id, $information){
+        $this->db->set($information)
             ->where('id', $id)
             ->update($type);
         if($this->db->affected_rows() == 1){

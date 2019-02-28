@@ -34,6 +34,18 @@ class Product extends Admin_Controller{
 		$this->render('admin/product/list_product_view');
 	}
 
+    public function set_main_service(){
+        $id = $this->input->get('id');
+        $main_service = $this->input->get('main_service');
+        $update = $this->information_model->update_main_service('product', $id, array('main_service' => $main_service));
+        if($update){
+            return $this->output->set_status_header(200)
+                ->set_output(json_encode(array('name' => 'thành công')));
+        }
+        return $this->output->set_status_header(200)
+            ->set_output(json_encode(array('message' => 'Có lỗi khi đặt lĩnh vực chính cho sản phẩm')));
+    }
+
 	public function detail($id = null){
 	    if(!$id){
 	        redirect('admin/dashboard', 'refresh');

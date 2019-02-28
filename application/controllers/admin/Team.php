@@ -170,11 +170,10 @@ class Team extends Admin_Controller{
 
     public function delete_team(){
         $team_id = $this->input->get('id');
-        $name = $this->input->get('name');
-        $update = $this->team_model->update('team', $team_id, array('is_deleted' => $name));
+        $update = $this->team_model->update('team', $team_id, array('is_deleted' => $team_id));
         if($update){
             return $this->output->set_status_header(200)
-                ->set_output(json_encode(array('name' => $name)));
+                ->set_output(json_encode(array('name' => 'thành công')));
         }
         return $this->output->set_status_header(200)
             ->set_output(json_encode(array('message' => 'Có lỗi khi xoá nhóm hội đồng')));
