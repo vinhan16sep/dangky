@@ -65,9 +65,11 @@
                                     <th class="col-sm-1">STT</th>
                                     <th class="col-sm-2">Tiêu chí</th>
                                     <th class="col-sm-1">Trọng số (%)</th>
+                                    <th class="col-sm-1">Điểm chính</th>
                                     <th class="col-sm-2">Tiêu chí chi tiết</th>
                                     <th class="col-sm-1">Trọng số (%)</th>
-                                    <th class="col-sm-1">Điểm số</th>
+                                    <th class="col-sm-1">Điểm phụ</th>
+                                    <th class="col-sm-1">Ghi chú</th>
                                 </tr>
                             </thead>
 
@@ -80,15 +82,35 @@
                                     <td rowspan="2">1</td>
                                     <td rowspan="2">Tính độc đáo</td>
                                     <td rowspan="2">15</td>
-                                    <td>Công nghệ sáng tạo</td>
-                                    <td>60</td>
                                     <td rowspan="2">
                                         <?php
-                                        echo form_error('1', '<div class="error">', '</div>');
+                                        echo form_error('main_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('1', set_value('1', $rating[0]), 'class="form-control" id="1"');
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
                                         }else{
-                                            echo form_input('1', set_value('1'), 'class="form-control" id="1"');
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>Công nghệ sáng tạo</td>
+                                    <td>60</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('sub1_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('sub1_1', set_value('sub1_1', $rating[0]), 'class="form-control" id="sub1_1"');
+                                        }else{
+                                            echo form_input('sub1_1', set_value('sub1_1'), 'class="form-control" id="sub1_1"');
+                                        }
+                                        ?>
+                                    </td>
+                                    <td rowspan="2">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
                                         }
                                         ?>
                                     </td>
@@ -96,6 +118,16 @@
                                 <tr>
                                     <td>Định hình/phù hợp xu hướng</td>
                                     <td>40</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('sub2_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('sub2_1', set_value('sub2_1', $rating[0]), 'class="form-control" id="sub2_1"');
+                                        }else{
+                                            echo form_input('sub2_1', set_value('sub2_1'), 'class="form-control" id="sub2_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <!------------------------------------------ 2 ------------------------------------------>
@@ -104,9 +136,43 @@
                                     <td rowspan="3">2</td>
                                     <td rowspan="3">Tính hiệu quả</td>
                                     <td rowspan="3">15</td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                        }else{
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td>Tối ưu quy trình, quản lý</td>
                                     <td>40</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td rowspan="3">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tăng năng suất</td>
+                                    <td>30</td>
+                                    <td>
                                         <?php
                                         echo form_error('2', '<div class="error">', '</div>');
                                         if($rating){
@@ -118,12 +184,18 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Tăng năng suất</td>
-                                    <td>30</td>
-                                </tr>
-                                <tr>
                                     <td>Tiết kiệm chi phí sản xuất</td>
                                     <td>30</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <!------------------------------------------ 3 ------------------------------------------>
@@ -132,9 +204,19 @@
                                     <td rowspan="2">3</td>
                                     <td rowspan="2">Tiềm năng thị trường</td>
                                     <td rowspan="2">15</td>
+                                    <td rowspan="2">
+                                        <?php
+                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                        }else{
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td>Thị phần và tiềm năng thị trường</td>
                                     <td>60</td>
-                                    <td rowspan="2">
+                                    <td>
                                         <?php
                                         echo form_error('3', '<div class="error">', '</div>');
                                         if($rating){
@@ -144,10 +226,30 @@
                                         }
                                         ?>
                                     </td>
+                                    <td rowspan="2">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Mô hình, chiến lược kinh doanh</td>
                                     <td>40</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('sub2_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('sub2_1', set_value('sub2_1', $rating[0]), 'class="form-control" id="sub2_1"');
+                                        }else{
+                                            echo form_input('sub2_1', set_value('sub2_1'), 'class="form-control" id="sub2_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <!------------------------------------------ 4 ------------------------------------------>
@@ -156,9 +258,19 @@
                                     <td rowspan="3">4</td>
                                     <td rowspan="3">Tính năng</td>
                                     <td rowspan="3">10</td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                        }else{
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td>Khả năng đáp ứng nhu cầu người dùng</td>
                                     <td>50</td>
-                                    <td rowspan="3">
+                                    <td>
                                         <?php
                                         echo form_error('4', '<div class="error">', '</div>');
                                         if($rating){
@@ -168,14 +280,44 @@
                                         }
                                         ?>
                                     </td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Khả năng tương thích và phát triển tùy biến</td>
                                     <td>25</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Tính năng bảo mật</td>
                                     <td>25</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <!------------------------------------------ 5 ------------------------------------------>
@@ -184,9 +326,19 @@
                                     <td rowspan="3">5</td>
                                     <td rowspan="3">Công nghệ,  chất lượng sản phẩm</td>
                                     <td rowspan="3">15</td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                        }else{
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td>Công nghệ tiên tiến</td>
                                     <td>40</td>
-                                    <td rowspan="3">
+                                    <td>
                                         <?php
                                         echo form_error('5', '<div class="error">', '</div>');
                                         if($rating){
@@ -196,14 +348,44 @@
                                         }
                                         ?>
                                     </td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Các tiêu chuẩn/quy trình áp dụng</td>
                                     <td>30</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Sự ổn định và độ tin cậy/sự hài lòng của khách hàng</td>
                                     <td>30</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <!------------------------------------------ 6 ------------------------------------------>
@@ -212,9 +394,19 @@
                                     <td rowspan="3">6</td>
                                     <td rowspan="3">Tài chính/doanh thu/ tác động kinh tế, xã hội/số lượng người sử dụng</td>
                                     <td rowspan="3">20</td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                        }else{
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td>Doanh thu sản phẩm</td>
                                     <td>40</td>
-                                    <td rowspan="3">
+                                    <td>
                                         <?php
                                         echo form_error('6', '<div class="error">', '</div>');
                                         if($rating){
@@ -224,14 +416,44 @@
                                         }
                                         ?>
                                     </td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Số lượng người/DN/tổ chức sử dụng</td>
                                     <td>30</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Tác động kinh tế, xã hội</td>
                                     <td>30</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
 
                                 <!------------------------------------------ 7 ------------------------------------------>
@@ -240,9 +462,19 @@
                                     <td rowspan="3">7</td>
                                     <td rowspan="3">Chất lượng hồ sơ, năng lực trình bày</td>
                                     <td rowspan="3">10</td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                        }else{
+                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                        }
+                                        ?>
+                                    </td>
                                     <td>Chuẩn bị hồ sơ hoàn chỉnh</td>
                                     <td>30</td>
-                                    <td rowspan="3">
+                                    <td>
                                         <?php
                                         echo form_error('7', '<div class="error">', '</div>');
                                         if($rating){
@@ -253,14 +485,44 @@
 
                                         ?>
                                     </td>
+                                    <td rowspan="3">
+                                        <?php
+                                        echo form_error('note_1', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
+                                        }else{
+                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Trình bày rõ ràng, thông tin chính xác</td>
                                     <td>40</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Trả lời tốt các câu hỏi</td>
                                     <td>30</td>
+                                    <td>
+                                        <?php
+                                        echo form_error('2', '<div class="error">', '</div>');
+                                        if($rating){
+                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                        }else{
+                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
