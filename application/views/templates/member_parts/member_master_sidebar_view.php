@@ -22,10 +22,18 @@
             <ul class="sidebar-menu tree" data-widget="tree">
 
                 <li class="header">MENU</li>
-                <li class="<?php echo ($active == 'dashboard')? 'active' : '' ?>">
+                <li class="<?php echo ($active == 'dashboard' && $sub_active == '')? 'active' : '' ?>">
                     <a href="<?php echo base_url('member/dashboard'); ?>">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
                         <span>Tổng quan</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+
+                <li class="<?php echo ($active == 'dashboard'  && $sub_active == 'users')? 'active' : '' ?>">
+                    <a href="<?php echo base_url('member/dashboard/users'); ?>">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <span>Quản lý thành viên</span>
                         <span class="pull-right-container"></span>
                     </a>
                 </li>

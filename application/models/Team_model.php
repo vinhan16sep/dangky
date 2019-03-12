@@ -52,6 +52,14 @@ class Team_model extends CI_Model {
             ->where('is_deleted', 0);
         return $query->get()->result_array();
     }
+
+    public function get_current_leader($user_id){
+        $query = $this->db->select('*')
+            ->from('team')
+            ->where('leader_id', $user_id)
+            ->where('is_deleted', 0);
+        return $query->get()->result_array();
+    }
   
     public function check_exist_product_id($table, $product_id=''){
         $this->db->select('*');

@@ -598,4 +598,11 @@ class Information_model extends CI_Model {
             ->where_in('id', $ids);
         return $query->get()->result_array();
     }
+
+    public function get_personal_members($ids){
+        $query = $this->db->select('*')
+            ->from('users')
+            ->where_in('id', $ids);
+        return $query->get()->result_array();
+    }
 }
