@@ -31,7 +31,7 @@
                                         
                                         </td>
                                         <td style="text-align: center;">
-                                            <select id="selectMainService" class="form-control" style="width:90%;" data-id="<?php echo $value['id']; ?>">
+                                            <select id="" class="form-control selectMainService" style="width:90%;" data-id="<?php echo $value['id']; ?>">
                                                 <option value="">-- Lĩnh vực chính --</option>
                                                 <option value="1" <?php echo ($value['main_service'] == 1) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
                                                 <option value="2" <?php echo ($value['main_service'] == 2) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
@@ -74,13 +74,13 @@
     </section>
 </div>
 <script>
-    $('#selectMainService').change(function(){
+    $('.selectMainService').change(function(){
         $.ajax({
             method: 'GET',
             url: '<?php echo base_url('admin/product/set_main_service') ?>',
             data: {
                 id: $(this).data('id'),
-                main_service: $('#selectMainService').val()
+                main_service: $(this).val()
             },
             success: function(result){
                 let data = JSON.parse(result);
