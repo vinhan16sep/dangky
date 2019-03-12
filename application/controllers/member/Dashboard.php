@@ -20,7 +20,7 @@ class Dashboard extends Member_Controller {
         }
         $this->data['team'] = $team;
 
-    	if($user->member_role == 'member'){
+    	if($user->member_role == 'member' || $user->member_role == 'leader'){
             $this->data['team'] = $this->get_personal_products($user->id);
             $this->data['user_id'] = $user->id;
 

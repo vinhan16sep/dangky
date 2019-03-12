@@ -274,6 +274,7 @@
                     leader_id: $('#selectLeader').val()
                 },
                 success: function(result){
+                    console.log(result);
                     let data = JSON.parse(result);
                     if(data.name != undefined){
                         alert('Chọn trưởng nhóm ' + data.name + ' thành công')
