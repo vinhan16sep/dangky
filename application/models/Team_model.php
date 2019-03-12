@@ -49,6 +49,7 @@ class Team_model extends CI_Model {
         $query = $this->db->select('*')
             ->from('team')
             ->like('member_id', ',' . $user_id . ',')
+            ->or_where('leader_id', $user_id)
             ->where('is_deleted', 0);
         return $query->get()->result_array();
     }
