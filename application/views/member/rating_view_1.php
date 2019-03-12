@@ -14,6 +14,11 @@
         border:1px solid black;
     }
 </style>
+<?php
+    $rate = (array) json_decode($rating['rating']);
+    $enable = ($rate) ? 0 : 1;
+    $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'] + $rate['6'] + $rate['7'] : 0;
+?>
 <div class="content-wrapper" style="min-height: 916px;padding-bottom: 200px;">
     <section class="content">
         <div class="row">
@@ -53,7 +58,7 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
-                        <h3>Phần chấm điểm</h3>
+                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $total : 0; ?></span></h3>
                         <?php
                             echo form_open_multipart('member/new_rating/rating', array('class' => 'form-horizontal', 'id' => 'rating1Form'));
                             echo form_hidden('member_id', $this->ion_auth->user()->row()->id);
@@ -69,26 +74,22 @@
                                     <th class="col-sm-2">Tiêu chí chi tiết</th>
                                     <th class="col-sm-1">Trọng số (%)</th>
                                     <th class="col-sm-1">Điểm phụ</th>
-                                    <th class="col-sm-1">Ghi chú</th>
                                 </tr>
                             </thead>
 
                             <!------------------------------------------ 1 ------------------------------------------>
                             <tbody>
-                                <?php
-                                    $rating = ($rating) ? explode(',', $rating['rating']) : array();
-                                ?>
                                 <tr>
                                     <td rowspan="2">1</td>
                                     <td rowspan="2">Tính độc đáo</td>
                                     <td rowspan="2">15</td>
                                     <td rowspan="2">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('1', set_value('1', $rate['1']), 'class="form-control main" readonly readonly id="1"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('1', set_value('1', 0), 'class="form-control main" readonly id="1"');
                                         }
                                         ?>
                                     </td>
@@ -96,21 +97,11 @@
                                     <td>60</td>
                                     <td>
                                         <?php
-                                        echo form_error('sub1_1', '<div class="error">', '</div>');
+                                        echo form_error('1_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('sub1_1', set_value('sub1_1', $rating[0]), 'class="form-control" id="sub1_1"');
+                                            echo form_input('1_1', set_value('1_1', ($rate['1_1'] != 0) ? ltrim($rate['1_1'], '0') : 0), 'class="form-control sub" readonly id="1_1"');
                                         }else{
-                                            echo form_input('sub1_1', set_value('sub1_1'), 'class="form-control" id="sub1_1"');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td rowspan="2">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                            echo form_input('1_1', set_value('1_1', 0), 'class="form-control sub" id="1_1"');
                                         }
                                         ?>
                                     </td>
@@ -120,11 +111,11 @@
                                     <td>40</td>
                                     <td>
                                         <?php
-                                        echo form_error('sub2_1', '<div class="error">', '</div>');
+                                        echo form_error('1_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('sub2_1', set_value('sub2_1', $rating[0]), 'class="form-control" id="sub2_1"');
+                                            echo form_input('1_2', set_value('1_2', ($rate['1_2'] != 0) ? ltrim($rate['1_2'], '0') : 0), 'class="form-control sub" readonly id="1_2"');
                                         }else{
-                                            echo form_input('sub2_1', set_value('sub2_1'), 'class="form-control" id="sub2_1"');
+                                            echo form_input('1_2', set_value('1_2', 0), 'class="form-control sub" id="1_2"');
                                         }
                                         ?>
                                     </td>
@@ -138,11 +129,11 @@
                                     <td rowspan="3">15</td>
                                     <td rowspan="3">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('2', set_value('2', $rate['2']), 'class="form-control main" readonly id="2"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('2', set_value('2', 0), 'class="form-control main" readonly id="2"');
                                         }
                                         ?>
                                     </td>
@@ -150,21 +141,11 @@
                                     <td>40</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('2_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('2_1', set_value('2_1', ($rate['2_1'] != 0) ? ltrim($rate['2_1'], '0') : 0), 'class="form-control sub" readonly id="2_1"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td rowspan="3">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                            echo form_input('2_1', set_value('2_1', 0), 'class="form-control sub" id="2_1"');
                                         }
                                         ?>
                                     </td>
@@ -174,11 +155,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('2_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('2_2', set_value('2_2', ($rate['2_2'] != 0) ? ltrim($rate['2_2'], '0') : 0), 'class="form-control sub" readonly id="2_2"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('2_2', set_value('2_2', 0), 'class="form-control sub" id="2_2"');
                                         }
                                         ?>
                                     </td>
@@ -188,11 +169,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('2_3', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('2_3', set_value('2_3', ($rate['2_3'] != 0) ? ltrim($rate['2_3'], '0') : 0), 'class="form-control sub" readonly id="2_3"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('2_3', set_value('2_3', 0), 'class="form-control sub" id="2_3"');
                                         }
                                         ?>
                                     </td>
@@ -206,11 +187,11 @@
                                     <td rowspan="2">15</td>
                                     <td rowspan="2">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('3', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('3', set_value('3', $rate['3']), 'class="form-control main" readonly id="3"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('3', set_value('3', 0), 'class="form-control main" readonly id="3"');
                                         }
                                         ?>
                                     </td>
@@ -218,21 +199,11 @@
                                     <td>60</td>
                                     <td>
                                         <?php
-                                        echo form_error('3', '<div class="error">', '</div>');
+                                        echo form_error('3_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('3', set_value('3', $rating[2]), 'class="form-control" id="3"');
+                                            echo form_input('3_1', set_value('3_1', ($rate['3_1'] != 0) ? ltrim($rate['3_1'], '0') : 0), 'class="form-control sub" readonly id="3_1"');
                                         }else{
-                                            echo form_input('3', set_value('3'), 'class="form-control" id="3"');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td rowspan="2">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                            echo form_input('3_1', set_value('3_1', 0), 'class="form-control sub" id="3_1"');
                                         }
                                         ?>
                                     </td>
@@ -242,11 +213,11 @@
                                     <td>40</td>
                                     <td>
                                         <?php
-                                        echo form_error('sub2_1', '<div class="error">', '</div>');
+                                        echo form_error('3_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('sub2_1', set_value('sub2_1', $rating[0]), 'class="form-control" id="sub2_1"');
+                                            echo form_input('3_2', set_value('3_2', ($rate['3_2'] != 0) ? ltrim($rate['3_2'], '0') : 0), 'class="form-control sub" readonly id="3_2"');
                                         }else{
-                                            echo form_input('sub2_1', set_value('sub2_1'), 'class="form-control" id="sub2_1"');
+                                            echo form_input('3_2', set_value('3_2', 0), 'class="form-control sub" id="3_2"');
                                         }
                                         ?>
                                     </td>
@@ -260,11 +231,11 @@
                                     <td rowspan="3">10</td>
                                     <td rowspan="3">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('4', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('4', set_value('4', $rate['4']), 'class="form-control main" readonly id="4"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('4', set_value('4', 0), 'class="form-control main" readonly id="4"');
                                         }
                                         ?>
                                     </td>
@@ -272,21 +243,11 @@
                                     <td>50</td>
                                     <td>
                                         <?php
-                                        echo form_error('4', '<div class="error">', '</div>');
+                                        echo form_error('4_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('4', set_value('4', $rating[3]), 'class="form-control" id="4"');
+                                            echo form_input('4_1', set_value('4_1', ($rate['4_1'] != 0) ? ltrim($rate['4_1'], '0') : 0), 'class="form-control sub" readonly id="4_1"');
                                         }else{
-                                            echo form_input('4', set_value('4'), 'class="form-control" id="4"');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td rowspan="3">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                            echo form_input('4_1', set_value('4_1', 0), 'class="form-control sub" id="4_1"');
                                         }
                                         ?>
                                     </td>
@@ -296,11 +257,11 @@
                                     <td>25</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('4_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('4_2', set_value('4_2', ($rate['4_2'] != 0) ? ltrim($rate['4_2'], '0') : 0), 'class="form-control sub" readonly id="4_2"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('4_2', set_value('4_2', 0), 'class="form-control sub" id="4_2"');
                                         }
                                         ?>
                                     </td>
@@ -310,11 +271,11 @@
                                     <td>25</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('4_3', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('4_3', set_value('4_3', ($rate['4_3'] != 0) ? ltrim($rate['4_3'], '0') : 0), 'class="form-control sub" readonly id="4_3"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('4_3', set_value('4_3', 0), 'class="form-control sub" id="4_3"');
                                         }
                                         ?>
                                     </td>
@@ -328,11 +289,11 @@
                                     <td rowspan="3">15</td>
                                     <td rowspan="3">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('5', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('5', set_value('5', $rate['5']), 'class="form-control main" readonly id="5"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('5', set_value('5', 0), 'class="form-control main" readonly id="5"');
                                         }
                                         ?>
                                     </td>
@@ -340,21 +301,11 @@
                                     <td>40</td>
                                     <td>
                                         <?php
-                                        echo form_error('5', '<div class="error">', '</div>');
+                                        echo form_error('5_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('5', set_value('5', $rating[4]), 'class="form-control" id="5"');
+                                            echo form_input('5_1', set_value('5_1', ($rate['5_1'] != 0) ? ltrim($rate['5_1'], '0') : 0), 'class="form-control sub" readonly id="5_1"');
                                         }else{
-                                            echo form_input('5', set_value('5'), 'class="form-control" id="5"');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td rowspan="3">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                            echo form_input('5_1', set_value('5_1', 0), 'class="form-control sub" id="5_1"');
                                         }
                                         ?>
                                     </td>
@@ -364,11 +315,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('5_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('5_2', set_value('5_2', ($rate['5_2'] != 0) ? ltrim($rate['5_2'], '0') : 0), 'class="form-control sub" readonly id="5_2"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('5_2', set_value('5_2', 0), 'class="form-control sub" id="5_2"');
                                         }
                                         ?>
                                     </td>
@@ -378,11 +329,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('5_3', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('5_3', set_value('5_3', ($rate['5_3'] != 0) ? ltrim($rate['5_3'], '0') : 0), 'class="form-control sub" readonly id="5_3"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('5_3', set_value('5_3', 0), 'class="form-control sub" id="5_3"');
                                         }
                                         ?>
                                     </td>
@@ -396,11 +347,11 @@
                                     <td rowspan="3">20</td>
                                     <td rowspan="3">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('6', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('6', set_value('6', $rate['6']), 'class="form-control main" readonly id="6"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('6', set_value('6', 0), 'class="form-control main" readonly id="6"');
                                         }
                                         ?>
                                     </td>
@@ -408,21 +359,11 @@
                                     <td>40</td>
                                     <td>
                                         <?php
-                                        echo form_error('6', '<div class="error">', '</div>');
+                                        echo form_error('6_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('6', set_value('6', $rating[5]), 'class="form-control" id="6"');
+                                            echo form_input('6_1', set_value('6_1', ($rate['6_1'] != 0) ? ltrim($rate['6_1'], '0') : 0), 'class="form-control sub" readonly id="6_1"');
                                         }else{
-                                            echo form_input('6', set_value('6'), 'class="form-control" id="6"');
-                                        }
-                                        ?>
-                                    </td>
-                                    <td rowspan="3">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
+                                            echo form_input('6_1', set_value('6_1', 0), 'class="form-control sub" id="6_1"');
                                         }
                                         ?>
                                     </td>
@@ -432,11 +373,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('6_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('6_2', set_value('6_2', ($rate['6_2'] != 0) ? ltrim($rate['6_2'], '0') : 0), 'class="form-control sub" readonly id="6_2"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('6_2', set_value('6_2', 0), 'class="form-control sub" id="6_2"');
                                         }
                                         ?>
                                     </td>
@@ -446,11 +387,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('6_3', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('6_3', set_value('6_3', ($rate['6_3'] != 0) ? ltrim($rate['6_3'], '0') : 0), 'class="form-control sub" readonly id="6_3"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('6_3', set_value('6_3', 0), 'class="form-control sub" id="6_3"');
                                         }
                                         ?>
                                     </td>
@@ -464,11 +405,11 @@
                                     <td rowspan="3">10</td>
                                     <td rowspan="3">
                                         <?php
-                                        echo form_error('main_1', '<div class="error">', '</div>');
+                                        echo form_error('7', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('main_1', set_value('main_1', $rating[0]), 'class="form-control" id="main_1"');
+                                            echo form_input('7', set_value('7', $rate['7']), 'class="form-control main" readonly id="7"');
                                         }else{
-                                            echo form_input('main_1', set_value('main_1'), 'class="form-control" id="main_1"');
+                                            echo form_input('7', set_value('7', 0), 'class="form-control main" readonly id="7"');
                                         }
                                         ?>
                                     </td>
@@ -476,23 +417,13 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('7', '<div class="error">', '</div>');
+                                        echo form_error('7_1', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('7', set_value('7', $rating[6]), 'class="form-control" id="7"');
+                                            echo form_input('7_1', set_value('7_1', ($rate['7_1'] != 0) ? ltrim($rate['7_1'], '0') : 0), 'class="form-control sub" readonly id="7_1"');
                                         }else{
-                                            echo form_input('7', set_value('7'), 'class="form-control" id="7"');
+                                            echo form_input('7_1', set_value('7_1', 0), 'class="form-control sub" id="7_1"');
                                         }
 
-                                        ?>
-                                    </td>
-                                    <td rowspan="3">
-                                        <?php
-                                        echo form_error('note_1', '<div class="error">', '</div>');
-                                        if($rating){
-                                            echo form_textarea('note_1', set_value('note_1', $rating[0]), 'class="form-control" id="note_1"');
-                                        }else{
-                                            echo form_textarea('note_1', set_value('note_1'), 'class="form-control" id="note_1"');
-                                        }
                                         ?>
                                     </td>
                                 </tr>
@@ -501,11 +432,11 @@
                                     <td>40</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('7_2', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('7_2', set_value('7_2', ($rate['7_2'] != 0) ? ltrim($rate['7_2'], '0') : 0), 'class="form-control sub" readonly id="7_2"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('7_2', set_value('7_2', 0), 'class="form-control sub" id="7_2"');
                                         }
                                         ?>
                                     </td>
@@ -515,11 +446,11 @@
                                     <td>30</td>
                                     <td>
                                         <?php
-                                        echo form_error('2', '<div class="error">', '</div>');
+                                        echo form_error('7_3', '<div class="error">', '</div>');
                                         if($rating){
-                                            echo form_input('2', set_value('1', $rating[1]), 'class="form-control" id="1"');
+                                            echo form_input('7_3', set_value('7_3', ($rate['7_3'] != 0) ? ltrim($rate['7_3'], '0') : 0), 'class="form-control sub" readonly id="7_3"');
                                         }else{
-                                            echo form_input('2', set_value('2'), 'class="form-control" id="2"');
+                                            echo form_input('7_3', set_value('7_3', 0), 'class="form-control sub" id="7_3"');
                                         }
                                         ?>
                                     </td>
@@ -543,6 +474,31 @@
     </section>
 </div>
 <script>
+    $('.sub').change(function(){
+        let main1 = (parseInt($('#1_1').val()) * 0.6 + parseInt($('#1_2').val()) * 0.4) * 0.15;
+        $('#1').val(Number(main1.toFixed(2)));
+
+        let main2 = (parseInt($('#2_1').val()) * 0.4 + parseInt($('#2_2').val()) * 0.3 + parseInt($('#2_3').val()) * 0.3) * 0.15;
+        $('#2').val(Number(main2.toFixed(2)));
+
+        let main3 = (parseInt($('#3_1').val()) * 0.6 + parseInt($('#3_2').val()) * 0.4) * 0.15;
+        $('#3').val(Number(main3.toFixed(2)));
+
+        let main4 = (parseInt($('#4_1').val()) * 0.5 + parseInt($('#4_2').val()) * 0.25 + parseInt($('#4_3').val()) * 0.25) * 0.1;
+        $('#4').val(Number(main4.toFixed(2)));
+
+        let main5 = (parseInt($('#5_1').val()) * 0.4 + parseInt($('#5_2').val()) * 0.3 + parseInt($('#5_3').val()) * 0.3) * 0.15;
+        $('#5').val(Number(main5.toFixed(2)));
+
+        let main6 = (parseInt($('#6_1').val()) * 0.4 + parseInt($('#6_1').val()) * 0.3 + parseInt($('#6_1').val()) * 0.3) * 0.2;
+        $('#6').val(Number(main6.toFixed(2)));
+
+        let main7 = (parseInt($('#7_1').val()) * 0.3 + parseInt($('#7_1').val()) * 0.4 + parseInt($('#7_1').val()) * 0.3) * 0.1;
+        $('#7').val(Number(main7.toFixed(2)));
+
+        $('#totalRating').html(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
+    });
+
     $('#rating1Form').submit(function(e){
         var form = $(this);
         var url = form.attr('action');
@@ -555,7 +511,7 @@
         }
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: url,
             data: form.serialize(), // serializes the form's elements.
             success: function(result){

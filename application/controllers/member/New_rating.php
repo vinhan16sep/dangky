@@ -68,20 +68,17 @@ class New_rating extends Member_Controller{
     }
 
     public function rating(){
-	    $post = $this->input->post();
-	    $rating = '';
-	    for($i = 1;$i <= (count($post) - 2); $i++){
-	        if($i == 1){
-                $rating .= $post[$i];
-            }else{
-                $rating .= ',' . $post[$i];
-            }
-        }
+	    $request = $this->input->get();
+        $member_id = $request['member_id'];
+        $product_id = $request['product_id'];
+        unset($request['member_id']);
+        unset($request['product_id']);
+        unset($request['csrf_sitecom_token']);
 
 	    $data = array(
-	        'member_id' => $post['member_id'],
-	        'product_id' => $post['product_id'],
-            'rating' => $rating
+	        'member_id' => $member_id,
+	        'product_id' => $product_id,
+            'rating' => json_encode($request)
         );
 
 	    $insert = $this->new_rating_model->insert('new_rating', $data);
