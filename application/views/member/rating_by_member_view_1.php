@@ -17,7 +17,11 @@
 <?php
     $rate = (array) json_decode($rating['rating']);
     $enable = ($rate) ? 0 : 1;
-    $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'] + $rate['6'] + $rate['7'] : 0;
+    $arrRate = [];
+    foreach($rate as $key => $val){
+        $arrRate[$key] = $val;
+    }
+    $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
 ?>
 <div class="content-wrapper" style="min-height: 916px;padding-bottom: 200px;">
     <section class="content">
@@ -80,19 +84,19 @@
                                     <td rowspan="2">Tính độc đáo</td>
                                     <td rowspan="2">15</td>
                                     <td rowspan="2">
-                                        <?php echo $rate['1'] ?>
+                                        <?php echo $arrRate['1'] ?>
                                     </td>
                                     <td>Công nghệ sáng tạo</td>
                                     <td>60</td>
                                     <td>
-                                        <?php echo ($rate['1_1'] != 0) ? ltrim($rate['1_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Định hình/phù hợp xu hướng</td>
                                     <td>40</td>
                                     <td>
-                                        <?php echo ($rate['1_2'] != 0) ? ltrim($rate['1_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['1_2'] != 0) ? ltrim($arrRate['1_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
 
@@ -103,26 +107,26 @@
                                     <td rowspan="3">Tính hiệu quả</td>
                                     <td rowspan="3">15</td>
                                     <td rowspan="3">
-                                        <?php echo $rate['2'] ?>
+                                        <?php echo $arrRate['2'] ?>
                                     </td>
                                     <td>Tối ưu quy trình, quản lý</td>
                                     <td>40</td>
                                     <td>
-                                        <?php echo ($rate['2_1'] != 0) ? ltrim($rate['2_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['2_1'] != 0) ? ltrim($arrRate['2_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tăng năng suất</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['2_2'] != 0) ? ltrim($rate['2_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['2_2'] != 0) ? ltrim($arrRate['2_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tiết kiệm chi phí sản xuất</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['2_3'] != 0) ? ltrim($rate['2_3'], '0') : 0 ?>
+                                        <?php echo ($arrRate['2_3'] != 0) ? ltrim($arrRate['2_3'], '0') : 0 ?>
                                     </td>
                                 </tr>
 
@@ -133,19 +137,19 @@
                                     <td rowspan="2">Tiềm năng thị trường</td>
                                     <td rowspan="2">15</td>
                                     <td rowspan="2">
-                                        <?php echo $rate['3'] ?>
+                                        <?php echo $arrRate['3'] ?>
                                     </td>
                                     <td>Thị phần và tiềm năng thị trường</td>
                                     <td>60</td>
                                     <td>
-                                        <?php echo ($rate['3_1'] != 0) ? ltrim($rate['3_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['3_1'] != 0) ? ltrim($arrRate['3_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Mô hình, chiến lược kinh doanh</td>
                                     <td>40</td>
                                     <td>
-                                        <?php echo ($rate['3_2'] != 0) ? ltrim($rate['3_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['3_2'] != 0) ? ltrim($arrRate['3_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
 
@@ -156,26 +160,26 @@
                                     <td rowspan="3">Tính năng</td>
                                     <td rowspan="3">10</td>
                                     <td rowspan="3">
-                                        <?php echo $rate['4'] ?>
+                                        <?php echo $arrRate['4'] ?>
                                     </td>
                                     <td>Khả năng đáp ứng nhu cầu người dùng</td>
                                     <td>50</td>
                                     <td>
-                                        <?php echo ($rate['4_1'] != 0) ? ltrim($rate['4_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['4_1'] != 0) ? ltrim($arrRate['4_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Khả năng tương thích và phát triển tùy biến</td>
                                     <td>25</td>
                                     <td>
-                                        <?php echo ($rate['4_2'] != 0) ? ltrim($rate['4_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['4_2'] != 0) ? ltrim($arrRate['4_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tính năng bảo mật</td>
                                     <td>25</td>
                                     <td>
-                                        <?php echo ($rate['4_3'] != 0) ? ltrim($rate['4_3'], '0') : 0 ?>
+                                        <?php echo ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0 ?>
                                     </td>
                                 </tr>
 
@@ -186,26 +190,26 @@
                                     <td rowspan="3">Công nghệ,  chất lượng sản phẩm</td>
                                     <td rowspan="3">15</td>
                                     <td rowspan="3">
-                                        <?php echo $rate['5'] ?>
+                                        <?php echo $arrRate['5'] ?>
                                     </td>
                                     <td>Công nghệ tiên tiến</td>
                                     <td>40</td>
                                     <td>
-                                        <?php echo ($rate['5_1'] != 0) ? ltrim($rate['5_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['5_1'] != 0) ? ltrim($arrRate['5_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Các tiêu chuẩn/quy trình áp dụng</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['5_2'] != 0) ? ltrim($rate['5_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['5_2'] != 0) ? ltrim($arrRate['5_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Sự ổn định và độ tin cậy/sự hài lòng của khách hàng</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['5_3'] != 0) ? ltrim($rate['5_3'], '0') : 0 ?>
+                                        <?php echo ($arrRate['5_3'] != 0) ? ltrim($arrRate['5_3'], '0') : 0 ?>
                                     </td>
                                 </tr>
 
@@ -216,26 +220,26 @@
                                     <td rowspan="3">Tài chính/doanh thu/ tác động kinh tế, xã hội/số lượng người sử dụng</td>
                                     <td rowspan="3">20</td>
                                     <td rowspan="3">
-                                        <?php echo $rate['6'] ?>
+                                        <?php echo $arrRate['6'] ?>
                                     </td>
                                     <td>Doanh thu sản phẩm</td>
                                     <td>40</td>
                                     <td>
-                                        <?php echo ($rate['6_1'] != 0) ? ltrim($rate['6_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['6_1'] != 0) ? ltrim($arrRate['6_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Số lượng người/DN/tổ chức sử dụng</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['6_2'] != 0) ? ltrim($rate['6_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['6_2'] != 0) ? ltrim($arrRate['6_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tác động kinh tế, xã hội</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['6_3'] != 0) ? ltrim($rate['6_3'], '0') : 0 ?>
+                                        <?php echo ($arrRate['6_3'] != 0) ? ltrim($arrRate['6_3'], '0') : 0 ?>
                                     </td>
                                 </tr>
 
@@ -246,26 +250,26 @@
                                     <td rowspan="3">Chất lượng hồ sơ, năng lực trình bày</td>
                                     <td rowspan="3">10</td>
                                     <td rowspan="3">
-                                        <?php echo $rate['7'] ?>
+                                        <?php echo $arrRate['7'] ?>
                                     </td>
                                     <td>Chuẩn bị hồ sơ hoàn chỉnh</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['7_1'] != 0) ? ltrim($rate['7_1'], '0') : 0 ?>
+                                        <?php echo ($arrRate['7_1'] != 0) ? ltrim($arrRate['7_1'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Trình bày rõ ràng, thông tin chính xác</td>
                                     <td>40</td>
                                     <td>
-                                        <?php echo ($rate['7_2'] != 0) ? ltrim($rate['7_2'], '0') : 0 ?>
+                                        <?php echo ($arrRate['7_2'] != 0) ? ltrim($arrRate['7_2'], '0') : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Trả lời tốt các câu hỏi</td>
                                     <td>30</td>
                                     <td>
-                                        <?php echo ($rate['7_3'] != 0) ? ltrim($rate['7_3'], '0') : 0 ?>
+                                        <?php echo ($arrRate['7_3'] != 0) ? ltrim($arrRate['7_3'], '0') : 0 ?>
                                     </td>
                                 </tr>
                             </tbody>

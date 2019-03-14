@@ -56,9 +56,12 @@
                                                                         <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $value['main_service']); ?>">
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
                                                                         </a>
-                                                                        <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" title="Danh sách member">
-                                                                            <i class="fa fa-users" aria-hidden="true"></i>
-                                                                        </a>
+                                                                        <?php if ($this->ion_auth->user()->row()->member_role == 'leader'): ?>
+                                                                            <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" title="Danh sách member">
+                                                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                                                            </a>
+                                                                        <?php endif ?>
+                                                                        
                                                                     </td>
                                                                 </tr>
                                                             <?php endforeach ?>
