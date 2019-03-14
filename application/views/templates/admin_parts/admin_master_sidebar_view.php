@@ -22,6 +22,7 @@
             <ul class="sidebar-menu tree" data-widget="tree">
 
                 <li class="header">MENU</li>
+                <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
                 <li class="active">
                     <a href="<?php echo base_url('admin/dashboard'); ?>">
                         <i class="fa fa-tachometer" aria-hidden="true"></i>
@@ -49,18 +50,21 @@
                         </li>
                     </ul>
                 </li>
+                <?php } ?>
                 <li class="active">
                     <a href=""> Doanh nghiệp
                         <span class="pull-right-container">
                         </span>
                     </a>
                     <ul class="treeview-menu">
+                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
                         <li class="active">
                             <a href="<?php echo base_url('admin/users/index/3'); ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                 Tài khoản
                             </a>
                         </li>
+                        <?php } ?>
                         <li class="active">
                             <a href="<?php echo base_url('admin/company'); ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>

@@ -479,6 +479,9 @@ class Information_model extends CI_Model {
     }
 
     public function update_product($type, $client_id, $id, $information){
+        // $this->db->query("SET GLOBAL innodb_file_format=Barracuda;");
+        // $this->db->query("SET GLOBAL innodb_file_per_table=ON;");
+        $this->db->query("ALTER TABLE product ENGINE = InnoDB ROW_FORMAT = DYNAMIC;");
         $this->db->set($information)
             ->where('client_id', $client_id)
             ->where('id', $id)

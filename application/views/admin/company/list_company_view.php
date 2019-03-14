@@ -14,7 +14,7 @@
             </form>
             <!-- /.col -->
             <div class="col-md-12">
-                    <div class="tab-content">
+                    <div class="tab-content" style="margin-bottom: 40px;">
                         <?php if ($companies): ?>
                         <div class="post box-body">
                             <table class="table table-striped table-bordered table-condensed">
@@ -26,7 +26,7 @@
                                 <?php foreach ($companies as $key => $value): ?>
                                     <tr>
                                         <td><?php echo $number-- ?></td>
-                                        <td><?php echo $value['company'] ?></td>
+                                        <td style="width: 40%;"><?php echo $value['company'] ?></td>
                                         <td data-client="<?php echo $value['client_id'] ?>" data-company="<?php echo $value['id'] ?>">
                                             <ul class="select2-selection__rendered ">
                                                 <?php if (!empty($value['member_name'])): ?>
@@ -45,7 +45,11 @@
                                                 
                                             </ul>
                                         </td>
-                                        <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<a id="openStatus" onclick="openStatus(' . $value['client_id'] . ');" href="javascript:void(0);"><i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i></a>'; ?></td>
+                                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
+                                            <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<a id="openStatus" onclick="openStatus(' . $value['client_id'] . ');" href="javascript:void(0);"><i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i></a>'; ?></td>
+                                        <?php }else{ ?>
+                                            <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
+                                        <?php } ?>
                                         <td style="text-align: center;">
                                             <a href="<?php echo base_url('admin/company/detail/' . $value['id']) ?>" class="btn btn-info">Thông tin DN</a>
                                             <a href="<?php echo base_url('admin/product/index/' . $value['client_id']) ?>" class="btn btn-info">Thông tin SP/DV</a>

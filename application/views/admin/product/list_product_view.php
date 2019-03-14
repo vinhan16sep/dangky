@@ -17,7 +17,11 @@
                                 <th>STT</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Lĩnh vực</th>
+
+                                <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
                                 <th style="text-align: center;width:30%;">Nhóm lĩnh vực chính</th>
+                                <?php } ?>
+
                                 <th style="text-align: center;">Thông tin / Kết quả</th>
                                 <?php foreach ($products as $key => $value): ?>
                                     <tr>
@@ -30,6 +34,8 @@
                                             <?php endforeach ?>
                                         
                                         </td>
+
+                                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
                                         <td style="text-align: center;">
                                             <select id="" class="form-control selectMainService" style="width:90%;" data-id="<?php echo $value['id']; ?>">
                                                 <option value="">-- Lĩnh vực chính --</option>
@@ -40,6 +46,8 @@
                                                 <option value="5" <?php echo ($value['main_service'] == 5) ? 'selected' : ''; ?>>Các dịch vụ CNTT</option>
                                             </select>
                                         </td>
+                                        <?php } ?>
+
                                         <?php if($value['rating'] == 0): ?>
                                             <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-default">Chưa đánh giá</a></td>
                                         <?php else: ?>
