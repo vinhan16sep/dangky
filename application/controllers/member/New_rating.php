@@ -91,6 +91,9 @@ class New_rating extends Member_Controller{
     }
 
     public function rating_by_member(){
+        if ($this->ion_auth->user()->row()->member_role != 'leader') {
+            redirect('member/','refresh')
+        }
         $request = $this->input->get();
         $member_id = $request['member_id'];
         $product_id = $request['product_id'];

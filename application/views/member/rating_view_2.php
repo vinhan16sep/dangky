@@ -17,7 +17,11 @@
 <?php
 $rate = (array) json_decode($rating['rating']);
 $enable = ($rate) ? 0 : 1;
-$total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'] + $rate['6'] + $rate['7'] : 0;
+$arrRate = [];
+    foreach($rate as $key => $val){
+        $arrRate[$key] = $val;
+    }
+$total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
 ?>
 <div class="content-wrapper" style="min-height: 916px;padding-bottom: 200px;">
     <section class="content">
@@ -87,7 +91,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('1', set_value('1', $rate['1']), 'class="form-control main" readonly readonly id="1"');
+                                        echo form_input('1', set_value('1', $arrRate['1']), 'class="form-control main" readonly readonly id="1"');
                                     }else{
                                         echo form_input('1', set_value('1', 0), 'class="form-control main" readonly id="1"');
                                     }
@@ -99,7 +103,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('1_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('1_1', set_value('1_1', ($rate['1_1'] != 0) ? ltrim($rate['1_1'], '0') : 0), 'class="form-control sub" readonly id="1_1"');
+                                        echo form_input('1_1', set_value('1_1', ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0), 'class="form-control sub" readonly id="1_1"');
                                     }else{
                                         echo form_input('1_1', set_value('1_1', 0), 'class="form-control sub" id="1_1"');
                                     }
@@ -113,7 +117,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('1_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('1_2', set_value('1_2', ($rate['1_2'] != 0) ? ltrim($rate['1_2'], '0') : 0), 'class="form-control sub" readonly id="1_2"');
+                                        echo form_input('1_2', set_value('1_2', ($arrRate['1_2'] != 0) ? ltrim($arrRate['1_2'], '0') : 0), 'class="form-control sub" readonly id="1_2"');
                                     }else{
                                         echo form_input('1_2', set_value('1_2', 0), 'class="form-control sub" id="1_2"');
                                     }
@@ -131,7 +135,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2', set_value('2', $rate['2']), 'class="form-control main" readonly id="2"');
+                                        echo form_input('2', set_value('2', $arrRate['2']), 'class="form-control main" readonly id="2"');
                                     }else{
                                         echo form_input('2', set_value('2', 0), 'class="form-control main" readonly id="2"');
                                     }
@@ -143,7 +147,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('2_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2_1', set_value('2_1', ($rate['2_1'] != 0) ? ltrim($rate['2_1'], '0') : 0), 'class="form-control sub" readonly id="2_1"');
+                                        echo form_input('2_1', set_value('2_1', ($arrRate['2_1'] != 0) ? ltrim($arrRate['2_1'], '0') : 0), 'class="form-control sub" readonly id="2_1"');
                                     }else{
                                         echo form_input('2_1', set_value('2_1', 0), 'class="form-control sub" id="2_1"');
                                     }
@@ -157,7 +161,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('2_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2_2', set_value('2_2', ($rate['2_2'] != 0) ? ltrim($rate['2_2'], '0') : 0), 'class="form-control sub" readonly id="2_2"');
+                                        echo form_input('2_2', set_value('2_2', ($arrRate['2_2'] != 0) ? ltrim($arrRate['2_2'], '0') : 0), 'class="form-control sub" readonly id="2_2"');
                                     }else{
                                         echo form_input('2_2', set_value('2_2', 0), 'class="form-control sub" id="2_2"');
                                     }
@@ -171,7 +175,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('2_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2_3', set_value('2_3', ($rate['2_3'] != 0) ? ltrim($rate['2_3'], '0') : 0), 'class="form-control sub" readonly id="2_3"');
+                                        echo form_input('2_3', set_value('2_3', ($arrRate['2_3'] != 0) ? ltrim($arrRate['2_3'], '0') : 0), 'class="form-control sub" readonly id="2_3"');
                                     }else{
                                         echo form_input('2_3', set_value('2_3', 0), 'class="form-control sub" id="2_3"');
                                     }
@@ -189,7 +193,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('3', set_value('3', $rate['3']), 'class="form-control main" readonly id="3"');
+                                        echo form_input('3', set_value('3', $arrRate['3']), 'class="form-control main" readonly id="3"');
                                     }else{
                                         echo form_input('3', set_value('3', 0), 'class="form-control main" readonly id="3"');
                                     }
@@ -201,7 +205,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('3_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('3_1', set_value('3_1', ($rate['3_1'] != 0) ? ltrim($rate['3_1'], '0') : 0), 'class="form-control sub" readonly id="3_1"');
+                                        echo form_input('3_1', set_value('3_1', ($arrRate['3_1'] != 0) ? ltrim($arrRate['3_1'], '0') : 0), 'class="form-control sub" readonly id="3_1"');
                                     }else{
                                         echo form_input('3_1', set_value('3_1', 0), 'class="form-control sub" id="3_1"');
                                     }
@@ -215,7 +219,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('3_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('3_2', set_value('3_2', ($rate['3_2'] != 0) ? ltrim($rate['3_2'], '0') : 0), 'class="form-control sub" readonly id="3_2"');
+                                        echo form_input('3_2', set_value('3_2', ($arrRate['3_2'] != 0) ? ltrim($arrRate['3_2'], '0') : 0), 'class="form-control sub" readonly id="3_2"');
                                     }else{
                                         echo form_input('3_2', set_value('3_2', 0), 'class="form-control sub" id="3_2"');
                                     }
@@ -233,7 +237,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('4', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4', set_value('4', $rate['4']), 'class="form-control main" readonly id="4"');
+                                        echo form_input('4', set_value('4', $arrRate['4']), 'class="form-control main" readonly id="4"');
                                     }else{
                                         echo form_input('4', set_value('4', 0), 'class="form-control main" readonly id="4"');
                                     }
@@ -245,7 +249,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('4_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_1', set_value('4_1', ($rate['4_1'] != 0) ? ltrim($rate['4_1'], '0') : 0), 'class="form-control sub" readonly id="4_1"');
+                                        echo form_input('4_1', set_value('4_1', ($arrRate['4_1'] != 0) ? ltrim($arrRate['4_1'], '0') : 0), 'class="form-control sub" readonly id="4_1"');
                                     }else{
                                         echo form_input('4_1', set_value('4_1', 0), 'class="form-control sub" id="4_1"');
                                     }
@@ -259,7 +263,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('4_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_2', set_value('4_2', ($rate['4_2'] != 0) ? ltrim($rate['4_2'], '0') : 0), 'class="form-control sub" readonly id="4_2"');
+                                        echo form_input('4_2', set_value('4_2', ($arrRate['4_2'] != 0) ? ltrim($arrRate['4_2'], '0') : 0), 'class="form-control sub" readonly id="4_2"');
                                     }else{
                                         echo form_input('4_2', set_value('4_2', 0), 'class="form-control sub" id="4_2"');
                                     }
@@ -273,7 +277,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('4_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_3', set_value('4_3', ($rate['4_3'] != 0) ? ltrim($rate['4_3'], '0') : 0), 'class="form-control sub" readonly id="4_3"');
+                                        echo form_input('4_3', set_value('4_3', ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" readonly id="4_3"');
                                     }else{
                                         echo form_input('4_3', set_value('4_3', 0), 'class="form-control sub" id="4_3"');
                                     }
@@ -291,7 +295,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('5', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5', set_value('5', $rate['5']), 'class="form-control main" readonly id="5"');
+                                        echo form_input('5', set_value('5', $arrRate['5']), 'class="form-control main" readonly id="5"');
                                     }else{
                                         echo form_input('5', set_value('5', 0), 'class="form-control main" readonly id="5"');
                                     }
@@ -303,7 +307,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('5_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5_1', set_value('5_1', ($rate['5_1'] != 0) ? ltrim($rate['5_1'], '0') : 0), 'class="form-control sub" readonly id="5_1"');
+                                        echo form_input('5_1', set_value('5_1', ($arrRate['5_1'] != 0) ? ltrim($arrRate['5_1'], '0') : 0), 'class="form-control sub" readonly id="5_1"');
                                     }else{
                                         echo form_input('5_1', set_value('5_1', 0), 'class="form-control sub" id="5_1"');
                                     }
@@ -317,7 +321,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('5_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5_2', set_value('5_2', ($rate['5_2'] != 0) ? ltrim($rate['5_2'], '0') : 0), 'class="form-control sub" readonly id="5_2"');
+                                        echo form_input('5_2', set_value('5_2', ($arrRate['5_2'] != 0) ? ltrim($arrRate['5_2'], '0') : 0), 'class="form-control sub" readonly id="5_2"');
                                     }else{
                                         echo form_input('5_2', set_value('5_2', 0), 'class="form-control sub" id="5_2"');
                                     }
@@ -331,7 +335,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('5_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5_3', set_value('5_3', ($rate['5_3'] != 0) ? ltrim($rate['5_3'], '0') : 0), 'class="form-control sub" readonly id="5_3"');
+                                        echo form_input('5_3', set_value('5_3', ($arrRate['5_3'] != 0) ? ltrim($arrRate['5_3'], '0') : 0), 'class="form-control sub" readonly id="5_3"');
                                     }else{
                                         echo form_input('5_3', set_value('5_3', 0), 'class="form-control sub" id="5_3"');
                                     }
@@ -349,7 +353,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('6', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6', set_value('6', $rate['6']), 'class="form-control main" readonly id="6"');
+                                        echo form_input('6', set_value('6', $arrRate['6']), 'class="form-control main" readonly id="6"');
                                     }else{
                                         echo form_input('6', set_value('6', 0), 'class="form-control main" readonly id="6"');
                                     }
@@ -361,7 +365,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('6_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6_1', set_value('6_1', ($rate['6_1'] != 0) ? ltrim($rate['6_1'], '0') : 0), 'class="form-control sub" readonly id="6_1"');
+                                        echo form_input('6_1', set_value('6_1', ($arrRate['6_1'] != 0) ? ltrim($arrRate['6_1'], '0') : 0), 'class="form-control sub" readonly id="6_1"');
                                     }else{
                                         echo form_input('6_1', set_value('6_1', 0), 'class="form-control sub" id="6_1"');
                                     }
@@ -375,7 +379,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('6_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6_2', set_value('6_2', ($rate['6_2'] != 0) ? ltrim($rate['6_2'], '0') : 0), 'class="form-control sub" readonly id="6_2"');
+                                        echo form_input('6_2', set_value('6_2', ($arrRate['6_2'] != 0) ? ltrim($arrRate['6_2'], '0') : 0), 'class="form-control sub" readonly id="6_2"');
                                     }else{
                                         echo form_input('6_2', set_value('6_2', 0), 'class="form-control sub" id="6_2"');
                                     }
@@ -389,7 +393,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('6_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6_3', set_value('6_3', ($rate['6_3'] != 0) ? ltrim($rate['6_3'], '0') : 0), 'class="form-control sub" readonly id="6_3"');
+                                        echo form_input('6_3', set_value('6_3', ($arrRate['6_3'] != 0) ? ltrim($arrRate['6_3'], '0') : 0), 'class="form-control sub" readonly id="6_3"');
                                     }else{
                                         echo form_input('6_3', set_value('6_3', 0), 'class="form-control sub" id="6_3"');
                                     }
@@ -407,7 +411,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('7', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7', set_value('7', $rate['7']), 'class="form-control main" readonly id="7"');
+                                        echo form_input('7', set_value('7', $arrRate['7']), 'class="form-control main" readonly id="7"');
                                     }else{
                                         echo form_input('7', set_value('7', 0), 'class="form-control main" readonly id="7"');
                                     }
@@ -419,7 +423,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('7_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7_1', set_value('7_1', ($rate['7_1'] != 0) ? ltrim($rate['7_1'], '0') : 0), 'class="form-control sub" readonly id="7_1"');
+                                        echo form_input('7_1', set_value('7_1', ($arrRate['7_1'] != 0) ? ltrim($arrRate['7_1'], '0') : 0), 'class="form-control sub" readonly id="7_1"');
                                     }else{
                                         echo form_input('7_1', set_value('7_1', 0), 'class="form-control sub" id="7_1"');
                                     }
@@ -434,7 +438,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('7_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7_2', set_value('7_2', ($rate['7_2'] != 0) ? ltrim($rate['7_2'], '0') : 0), 'class="form-control sub" readonly id="7_2"');
+                                        echo form_input('7_2', set_value('7_2', ($arrRate['7_2'] != 0) ? ltrim($arrRate['7_2'], '0') : 0), 'class="form-control sub" readonly id="7_2"');
                                     }else{
                                         echo form_input('7_2', set_value('7_2', 0), 'class="form-control sub" id="7_2"');
                                     }
@@ -448,7 +452,7 @@ $total = ($rate) ? $rate['1'] + $rate['2'] + $rate['3'] + $rate['4'] + $rate['5'
                                     <?php
                                     echo form_error('7_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7_3', set_value('7_3', ($rate['7_3'] != 0) ? ltrim($rate['7_3'], '0') : 0), 'class="form-control sub" readonly id="7_3"');
+                                        echo form_input('7_3', set_value('7_3', ($arrRate['7_3'] != 0) ? ltrim($arrRate['7_3'], '0') : 0), 'class="form-control sub" readonly id="7_3"');
                                     }else{
                                         echo form_input('7_3', set_value('7_3', 0), 'class="form-control sub" id="7_3"');
                                     }

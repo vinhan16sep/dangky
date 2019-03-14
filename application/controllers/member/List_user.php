@@ -10,6 +10,9 @@ class List_user extends Member_Controller {
     }
 
     public function index($team_id='', $product_id=''){
+    	if ($this->ion_auth->user()->row()->member_role != 'leader') {
+    		redirect('member/','refresh')
+    	}
     	$team = $this->team_model->fetch_by_id('team', $team_id);
     	$list_team = array();
     	if ($team && $team['member_id']) {
@@ -20,6 +23,7 @@ class List_user extends Member_Controller {
                         unset($member_ids[$k]);
                     }
                 }
+                $member_ids[] = $team['leader_id'];
                 if($member_ids){
                     $members = $this->information_model->get_personal_members($member_ids);
                     if ($members) {
@@ -39,7 +43,7 @@ class List_user extends Member_Controller {
     	}
     	$product = $this->information_model->fetch_by_id('product', $product_id);
     	// echo '<pre>';
-    	// print_r($list_team);die;
+    	// print_r($member_ids);die;
     	$this->data['team'] = $list_team;
     	$this->data['product_id'] = $product_id;
     	$this->data['main_service'] = $product ? $product['main_service'] : '';
