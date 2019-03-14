@@ -17,6 +17,7 @@
                     <div class="tab-content">
                         
                         <?php foreach ($team as $key => $value): ?>
+                            <?php $team_id = $value['id'] ?>
                             <div class="panel panel-info">
                                 <div class="panel-heading"><h4>Nhóm: <span style="color: red"><?php echo $value['name']; ?></span></h4></div>
                                 <div class="panel-body">
@@ -54,6 +55,9 @@
                                                                         </a>
                                                                         <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $value['main_service']); ?>">
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                                                                        </a>
+                                                                        <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" title="Danh sách member">
+                                                                            <i class="fa fa-users" aria-hidden="true"></i>
                                                                         </a>
                                                                     </td>
                                                                 </tr>
