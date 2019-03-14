@@ -11,7 +11,7 @@ class List_user extends Member_Controller {
 
     public function index($team_id='', $product_id=''){
     	if ($this->ion_auth->user()->row()->member_role != 'leader') {
-    		redirect('member/','refresh')
+    		redirect('member/','refresh');
     	}
     	$team = $this->team_model->fetch_by_id('team', $team_id);
     	$list_team = array();
