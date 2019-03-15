@@ -20,7 +20,7 @@
                                 <li class="list-group-item">
                                     <a><i class="fa fa-file margin-r-5"></i> File mô tả</a> <br><p class="" style="padding-left:20px;"></p>
                                     <?php if($product['file'] && $product['file'] != ''){ ?>
-                                        <a class="btn btn-success" href="<?php echo base_url('assets/upload/file/'. $product['file']); ?>" target="_blank">Tải mẫu Cam kết bản quyền</a>
+                                        <a class="btn btn-success" href="<?php echo base_url('assets/upload/file/'. $product['file']); ?>" target="_blank">Tải file mô tả</a>
                                     <?php }else{ ?>
                                         <p class="" style="color:red;padding-left:20px;">Chưa có file</p>
                                     <?php } ?>
@@ -51,10 +51,10 @@
                                     <a><i class="fa fa-star margin-r-5"></i> So sánh với các SP/GP/DV khác</a> <br><p class="" style="padding-left:20px;"><?php echo $product['compare']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2017</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2017 (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2018</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2018 (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/giải pháp/DV</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>
