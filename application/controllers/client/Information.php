@@ -40,24 +40,18 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-
-        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-        $this->form_validation->set_rules('c_position', 'Chức danh người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('c_position', 'Chức danh người liên hệ với BTC', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email', array(
             'required' => '%s không được trống.',
             'valid_email' => 'Định dạng email không đúng.',
@@ -146,24 +140,18 @@ class Information extends Client_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('legal_representative', 'Tên người đại diện pháp luật', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('lp_position', 'Chức danh', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-
-        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('connector', 'Tên người liên hệ với BTC', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-        $this->form_validation->set_rules('c_position', 'Chức danh người liên hệ với BTC', 'trim|required|regex_match[/^([a-z[:space:]ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂ ưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ])+$/i]', array(
+        $this->form_validation->set_rules('c_position', 'Chức danh người liên hệ với BTC', 'trim|required', array(
             'required' => '%s không được trống.',
-            'regex_match' => '%s phải là chữ.',
         ));
-
         $this->form_validation->set_rules('lp_email', 'Email', 'trim|required|valid_email', array(
             'required' => '%s không được trống.',
             'valid_email' => 'Định dạng email không đúng.',
