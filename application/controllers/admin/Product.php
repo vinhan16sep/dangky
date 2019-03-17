@@ -8,7 +8,8 @@ class Product extends Admin_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('information_model');
-		$this->load->model('rating_model');
+        $this->load->model('rating_model');
+		$this->load->model('new_rating_model');
 
         $this->excel = new PHPExcel();
 	}
@@ -30,6 +31,16 @@ class Product extends Admin_Controller{
         $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
         // Kiem tra neu cong ty da chinh thuc gui thong tin len ban to chuc, admin moi duoc chon linh vuc chinh cho san pham
         $result = $this->information_model->get_all_product_and_status($client_id, $per_page, $this->data['page']);
+        foreach ($result as $key => $value) {
+            $new_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $value['id']);
+            if ($new_rating > 0) {
+                $result[$key]['is_rating'] = 1;
+            }else{
+                $result[$key]['is_rating'] = 0;
+            }
+        }
+        // echo '<pre>';
+        // print_r($result);die;
 
         $this->data['products'] = $result;
 

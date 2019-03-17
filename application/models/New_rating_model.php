@@ -76,6 +76,14 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
+    public function check_rating_exist_by_product_id($table, $product_id){
+        $query = $this->db->select('*')
+            ->from($table)
+            ->where('product_id', $product_id)
+            ->get();
+        return $query->num_rows();
+    }
+
    public function fetch_all(){
        $query = $this->db->select('*')
            ->from('new_rating')
