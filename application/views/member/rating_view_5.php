@@ -22,6 +22,10 @@ $arrRate = [];
         $arrRate[$key] = $val;
     }
 $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
+
+$is_readonly = ($rating['is_submit'] == 1) ? "readonly" : "";
+$is_submit = ($rating['is_submit'] == 1) ? 1 : 0;
+$form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/' . $rating['id'] : 'member/new_rating/rating';
 ?>
 <div class="content-wrapper" style="min-height: 916px;padding-bottom: 200px;">
     <section class="content">
@@ -62,12 +66,14 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
-                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $total : 0; ?></span></h3>
                         <?php
-                        echo form_open_multipart('member/new_rating/rating', array('class' => 'form-horizontal', 'id' => 'rating1Form'));
+                        echo form_open_multipart($form_action, array('class' => 'form-horizontal', 'id' => 'rating1Form'));
                         echo form_hidden('member_id', $this->ion_auth->user()->row()->id);
                         echo form_hidden('product_id', $detail['id']);
+
+                        echo form_hidden('total', set_value('total', $total), 'id="inputTotal" class="form-control" readonly');
                         ?>
+                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $total : 0; ?></span></h3>
                         <table class="table table-bordered rating-table" style="border: 1px solid black;">
                             <thead>
                             <tr>
@@ -103,7 +109,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('1_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('1_1', set_value('1_1', ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0), 'class="form-control sub" readonly id="1_1"');
+                                        echo form_input('1_1', set_value('1_1', ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="1_1"');
                                     }else{
                                         echo form_input('1_1', set_value('1_1', 0), 'class="form-control sub" id="1_1"');
                                     }
@@ -117,7 +123,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('1_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('1_2', set_value('1_2', ($arrRate['1_2'] != 0) ? ltrim($arrRate['1_2'], '0') : 0), 'class="form-control sub" readonly id="1_2"');
+                                        echo form_input('1_2', set_value('1_2', ($arrRate['1_2'] != 0) ? ltrim($arrRate['1_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="1_2"');
                                     }else{
                                         echo form_input('1_2', set_value('1_2', 0), 'class="form-control sub" id="1_2"');
                                     }
@@ -147,7 +153,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('2_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2_1', set_value('2_1', ($arrRate['2_1'] != 0) ? ltrim($arrRate['2_1'], '0') : 0), 'class="form-control sub" readonly id="2_1"');
+                                        echo form_input('2_1', set_value('2_1', ($arrRate['2_1'] != 0) ? ltrim($arrRate['2_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="2_1"');
                                     }else{
                                         echo form_input('2_1', set_value('2_1', 0), 'class="form-control sub" id="2_1"');
                                     }
@@ -161,7 +167,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('2_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2_2', set_value('2_2', ($arrRate['2_2'] != 0) ? ltrim($arrRate['2_2'], '0') : 0), 'class="form-control sub" readonly id="2_2"');
+                                        echo form_input('2_2', set_value('2_2', ($arrRate['2_2'] != 0) ? ltrim($arrRate['2_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="2_2"');
                                     }else{
                                         echo form_input('2_2', set_value('2_2', 0), 'class="form-control sub" id="2_2"');
                                     }
@@ -175,7 +181,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('2_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('2_3', set_value('2_3', ($arrRate['2_3'] != 0) ? ltrim($arrRate['2_3'], '0') : 0), 'class="form-control sub" readonly id="2_3"');
+                                        echo form_input('2_3', set_value('2_3', ($arrRate['2_3'] != 0) ? ltrim($arrRate['2_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="2_3"');
                                     }else{
                                         echo form_input('2_3', set_value('2_3', 0), 'class="form-control sub" id="2_3"');
                                     }
@@ -205,7 +211,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('3_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('3_1', set_value('3_1', ($arrRate['3_1'] != 0) ? ltrim($arrRate['3_1'], '0') : 0), 'class="form-control sub" readonly id="3_1"');
+                                        echo form_input('3_1', set_value('3_1', ($arrRate['3_1'] != 0) ? ltrim($arrRate['3_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="3_1"');
                                     }else{
                                         echo form_input('3_1', set_value('3_1', 0), 'class="form-control sub" id="3_1"');
                                     }
@@ -219,7 +225,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('3_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('3_2', set_value('3_2', ($arrRate['3_2'] != 0) ? ltrim($arrRate['3_2'], '0') : 0), 'class="form-control sub" readonly id="3_2"');
+                                        echo form_input('3_2', set_value('3_2', ($arrRate['3_2'] != 0) ? ltrim($arrRate['3_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="3_2"');
                                     }else{
                                         echo form_input('3_2', set_value('3_2', 0), 'class="form-control sub" id="3_2"');
                                     }
@@ -249,7 +255,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('4_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_1', set_value('4_1', ($arrRate['4_1'] != 0) ? ltrim($arrRate['4_1'], '0') : 0), 'class="form-control sub" readonly id="4_1"');
+                                        echo form_input('4_1', set_value('4_1', ($arrRate['4_1'] != 0) ? ltrim($arrRate['4_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_1"');
                                     }else{
                                         echo form_input('4_1', set_value('4_1', 0), 'class="form-control sub" id="4_1"');
                                     }
@@ -263,7 +269,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('4_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_2', set_value('4_2', ($arrRate['4_2'] != 0) ? ltrim($arrRate['4_2'], '0') : 0), 'class="form-control sub" readonly id="4_2"');
+                                        echo form_input('4_2', set_value('4_2', ($arrRate['4_2'] != 0) ? ltrim($arrRate['4_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_2"');
                                     }else{
                                         echo form_input('4_2', set_value('4_2', 0), 'class="form-control sub" id="4_2"');
                                     }
@@ -277,7 +283,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('4_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_3', set_value('4_3', ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" readonly id="4_3"');
+                                        echo form_input('4_3', set_value('4_3', ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_3"');
                                     }else{
                                         echo form_input('4_3', set_value('4_3', 0), 'class="form-control sub" id="4_3"');
                                     }
@@ -307,7 +313,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('5_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5_1', set_value('5_1', ($arrRate['5_1'] != 0) ? ltrim($arrRate['5_1'], '0') : 0), 'class="form-control sub" readonly id="5_1"');
+                                        echo form_input('5_1', set_value('5_1', ($arrRate['5_1'] != 0) ? ltrim($arrRate['5_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="5_1"');
                                     }else{
                                         echo form_input('5_1', set_value('5_1', 0), 'class="form-control sub" id="5_1"');
                                     }
@@ -321,7 +327,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('5_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5_2', set_value('5_2', ($arrRate['5_2'] != 0) ? ltrim($arrRate['5_2'], '0') : 0), 'class="form-control sub" readonly id="5_2"');
+                                        echo form_input('5_2', set_value('5_2', ($arrRate['5_2'] != 0) ? ltrim($arrRate['5_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="5_2"');
                                     }else{
                                         echo form_input('5_2', set_value('5_2', 0), 'class="form-control sub" id="5_2"');
                                     }
@@ -335,7 +341,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('5_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('5_3', set_value('5_3', ($arrRate['5_3'] != 0) ? ltrim($arrRate['5_3'], '0') : 0), 'class="form-control sub" readonly id="5_3"');
+                                        echo form_input('5_3', set_value('5_3', ($arrRate['5_3'] != 0) ? ltrim($arrRate['5_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="5_3"');
                                     }else{
                                         echo form_input('5_3', set_value('5_3', 0), 'class="form-control sub" id="5_3"');
                                     }
@@ -365,7 +371,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('6_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6_1', set_value('6_1', ($arrRate['6_1'] != 0) ? ltrim($arrRate['6_1'], '0') : 0), 'class="form-control sub" readonly id="6_1"');
+                                        echo form_input('6_1', set_value('6_1', ($arrRate['6_1'] != 0) ? ltrim($arrRate['6_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="6_1"');
                                     }else{
                                         echo form_input('6_1', set_value('6_1', 0), 'class="form-control sub" id="6_1"');
                                     }
@@ -379,7 +385,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('6_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6_2', set_value('6_2', ($arrRate['6_2'] != 0) ? ltrim($arrRate['6_2'], '0') : 0), 'class="form-control sub" readonly id="6_2"');
+                                        echo form_input('6_2', set_value('6_2', ($arrRate['6_2'] != 0) ? ltrim($arrRate['6_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="6_2"');
                                     }else{
                                         echo form_input('6_2', set_value('6_2', 0), 'class="form-control sub" id="6_2"');
                                     }
@@ -393,7 +399,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('6_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('6_3', set_value('6_3', ($arrRate['6_3'] != 0) ? ltrim($arrRate['6_3'], '0') : 0), 'class="form-control sub" readonly id="6_3"');
+                                        echo form_input('6_3', set_value('6_3', ($arrRate['6_3'] != 0) ? ltrim($arrRate['6_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="6_3"');
                                     }else{
                                         echo form_input('6_3', set_value('6_3', 0), 'class="form-control sub" id="6_3"');
                                     }
@@ -423,7 +429,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('7_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7_1', set_value('7_1', ($arrRate['7_1'] != 0) ? ltrim($arrRate['7_1'], '0') : 0), 'class="form-control sub" readonly id="7_1"');
+                                        echo form_input('7_1', set_value('7_1', ($arrRate['7_1'] != 0) ? ltrim($arrRate['7_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="7_1"');
                                     }else{
                                         echo form_input('7_1', set_value('7_1', 0), 'class="form-control sub" id="7_1"');
                                     }
@@ -438,7 +444,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('7_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7_2', set_value('7_2', ($arrRate['7_2'] != 0) ? ltrim($arrRate['7_2'], '0') : 0), 'class="form-control sub" readonly id="7_2"');
+                                        echo form_input('7_2', set_value('7_2', ($arrRate['7_2'] != 0) ? ltrim($arrRate['7_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="7_2"');
                                     }else{
                                         echo form_input('7_2', set_value('7_2', 0), 'class="form-control sub" id="7_2"');
                                     }
@@ -452,7 +458,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                                     <?php
                                     echo form_error('7_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('7_3', set_value('7_3', ($arrRate['7_3'] != 0) ? ltrim($arrRate['7_3'], '0') : 0), 'class="form-control sub" readonly id="7_3"');
+                                        echo form_input('7_3', set_value('7_3', ($arrRate['7_3'] != 0) ? ltrim($arrRate['7_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="7_3"');
                                     }else{
                                         echo form_input('7_3', set_value('7_3', 0), 'class="form-control sub" id="7_3"');
                                     }
@@ -466,7 +472,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                 </div>
                 <div class="right">
                     <?php
-                    if(!$rating){
+                    if(!$rating || ($rating && $is_submit == 0)){
                         echo form_submit('submit', 'Gửi điểm', 'class="btn btn-primary pull-right" style="width:40%;"');
                     }
                     echo form_close();
@@ -494,13 +500,14 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
         let main5 = (parseInt($('#5_1').val()) * 0.4 + parseInt($('#5_2').val()) * 0.3 + parseInt($('#5_3').val()) * 0.3) * 0.15;
         $('#5').val(Number(main5.toFixed(2)));
 
-        let main6 = (parseInt($('#6_1').val()) * 0.5 + parseInt($('#6_1').val()) * 0.25 + parseInt($('#6_1').val()) * 0.25) * 0.2;
+        let main6 = (parseInt($('#6_1').val()) * 0.5 + parseInt($('#6_2').val()) * 0.25 + parseInt($('#6_3').val()) * 0.25) * 0.2;
         $('#6').val(Number(main6.toFixed(2)));
 
-        let main7 = (parseInt($('#7_1').val()) * 0.3 + parseInt($('#7_1').val()) * 0.4 + parseInt($('#7_1').val()) * 0.3) * 0.1;
+        let main7 = (parseInt($('#7_1').val()) * 0.3 + parseInt($('#7_2').val()) * 0.4 + parseInt($('#7_3').val()) * 0.3) * 0.1;
         $('#7').val(Number(main7.toFixed(2)));
 
         $('#totalRating').html(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
+        $('input[name="total"]').val(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
     });
 
     $('#rating1Form').submit(function(e){
