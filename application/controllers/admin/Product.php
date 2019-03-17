@@ -28,7 +28,9 @@ class Product extends Admin_Controller{
 		$this->data['client'] = $this->ion_auth->user((int) $client_id)->row();
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
-        $result = $this->information_model->get_all_product($client_id, $per_page, $this->data['page']);
+        // Kiem tra neu cong ty da chinh thuc gui thong tin len ban to chuc, admin moi duoc chon linh vuc chinh cho san pham
+        $result = $this->information_model->get_all_product_and_status($client_id, $per_page, $this->data['page']);
+
         $this->data['products'] = $result;
 
 		$this->render('admin/product/list_product_view');

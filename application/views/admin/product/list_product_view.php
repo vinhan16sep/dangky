@@ -35,17 +35,21 @@
                                         
                                         </td>
 
-                                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
-                                        <td style="text-align: center;">
-                                            <select id="" class="form-control selectMainService" style="width:90%;" data-id="<?php echo $value['id']; ?>">
-                                                <option value="">-- Lĩnh vực chính --</option>
-                                                <option value="1" <?php echo ($value['main_service'] == 1) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
-                                                <option value="2" <?php echo ($value['main_service'] == 2) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
-                                                <option value="3" <?php echo ($value['main_service'] == 3) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
-                                                <option value="4" <?php echo ($value['main_service'] == 4) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm mới</option>
-                                                <option value="5" <?php echo ($value['main_service'] == 5) ? 'selected' : ''; ?>>Các dịch vụ CNTT</option>
-                                            </select>
-                                        </td>
+                                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com' && $value['is_final'] == 1){ ?>
+                                            <td style="text-align: center;">
+                                                <select id="" class="form-control selectMainService" style="width:90%;" data-id="<?php echo $value['id']; ?>">
+                                                    <option value="">-- Lĩnh vực chính --</option>
+                                                    <option value="1" <?php echo ($value['main_service'] == 1) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
+                                                    <option value="2" <?php echo ($value['main_service'] == 2) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
+                                                    <option value="3" <?php echo ($value['main_service'] == 3) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
+                                                    <option value="4" <?php echo ($value['main_service'] == 4) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm mới</option>
+                                                    <option value="5" <?php echo ($value['main_service'] == 5) ? 'selected' : ''; ?>>Các dịch vụ CNTT</option>
+                                                </select>
+                                            </td>
+                                        <?php }else{ ?>
+                                            <td style="text-align: center;">
+                                                <p style="color: red;">DN chưa chính thức gửi thông tin lên BTC</p>
+                                            </td>
                                         <?php } ?>
 
                                         <?php if($value['rating'] == 0): ?>

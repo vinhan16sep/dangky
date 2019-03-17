@@ -40,6 +40,18 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_all_product_and_status($id, $limit = NULL, $start = NULL) {
+        $this->db->select('product.*, status.is_final');
+        $this->db->from('product');
+        $this->db->join('status', 'product.client_id = status.client_id');
+        $this->db->where('product.client_id', $id);
+        $this->db->where('product.is_deleted', 0);
+        $this->db->limit($limit, $start);
+        $this->db->order_by("product.id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function get_product() {
         $this->db->select('*');
         $this->db->from('product');
