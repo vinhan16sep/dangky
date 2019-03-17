@@ -1,8 +1,8 @@
 <!--main content start-->
 <div class="content-wrapper" style="min-height: 916px;">
-    <!-- <div class="box-body pad table-responsive">
-        <h3>Trang thông tin: <span style="color:red;"><?php echo $user->company; ?></span></h3>
-    </div> -->
+    <div class="box-body pad table-responsive">
+        <h3>ROLE: <span style="color:red;"><?php echo $this->ion_auth->user()->row()->member_role;  ?></span></h3>
+    </div>
     <section class="content">
         <?php if ($this->session->flashdata('main_service_message')): ?>
             <div class="alert alert-danger alert-dismissible" role="alert">

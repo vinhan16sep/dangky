@@ -62,12 +62,16 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
-                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $total : 0; ?></span></h3>
                         <?php
-                            echo form_open_multipart('member/new_rating/rating', array('class' => 'form-horizontal', 'id' => 'rating1Form'));
-                            echo form_hidden('member_id', $this->ion_auth->user()->row()->id);
-                            echo form_hidden('product_id', $detail['id']);
+                        echo form_open_multipart('member/new_rating/rating', array('class' => 'form-horizontal', 'id' => 'rating1Form'));
+                        echo form_hidden('member_id', $this->ion_auth->user()->row()->id);
+                        echo form_hidden('product_id', $detail['id']);
+
+                        echo form_hidden('total', set_value('total', $total), 'id="inputTotal" class="form-control" readonly');
                         ?>
+
+                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $total : 0; ?></span></h3>
+
                         <table class="table table-bordered rating-table" style="border: 1px solid black;">
                             <thead>
                                 <tr>
@@ -494,13 +498,14 @@
         let main5 = (parseInt($('#5_1').val()) * 0.4 + parseInt($('#5_2').val()) * 0.3 + parseInt($('#5_3').val()) * 0.3) * 0.15;
         $('#5').val(Number(main5.toFixed(2)));
 
-        let main6 = (parseInt($('#6_1').val()) * 0.4 + parseInt($('#6_1').val()) * 0.3 + parseInt($('#6_1').val()) * 0.3) * 0.2;
+        let main6 = (parseInt($('#6_1').val()) * 0.4 + parseInt($('#6_2').val()) * 0.3 + parseInt($('#6_3').val()) * 0.3) * 0.2;
         $('#6').val(Number(main6.toFixed(2)));
 
-        let main7 = (parseInt($('#7_1').val()) * 0.3 + parseInt($('#7_1').val()) * 0.4 + parseInt($('#7_1').val()) * 0.3) * 0.1;
+        let main7 = (parseInt($('#7_1').val()) * 0.3 + parseInt($('#7_2').val()) * 0.4 + parseInt($('#7_3').val()) * 0.3) * 0.1;
         $('#7').val(Number(main7.toFixed(2)));
 
         $('#totalRating').html(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
+        $('input[name="total"]').val(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
     });
 
     $('#rating1Form').submit(function(e){

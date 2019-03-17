@@ -29,14 +29,24 @@
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
-
-                <li class="<?php echo ($active == 'dashboard'  && $sub_active == 'users')? 'active' : '' ?>">
-                    <a href="<?php echo base_url('member/dashboard/users'); ?>">
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        <span>Quản lý thành viên</span>
-                        <span class="pull-right-container"></span>
-                    </a>
-                </li>
+                <?php if($this->ion_auth->user()->row()->member_role == 'leader'){ ?>
+                    <li class="<?php echo ($active == 'dashboard'  && $sub_active == 'users')? 'active' : '' ?>">
+                        <a href="<?php echo base_url('member/dashboard/users'); ?>">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span>Quản lý thành viên</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if($this->ion_auth->user()->row()->member_role == 'manager'){ ?>
+                    <li class="<?php echo ($active == 'dashboard'  && $sub_active == 'product')? 'active' : '' ?>">
+                        <a href="<?php echo base_url('member/product'); ?>">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span>Sản phẩm</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                <?php } ?>
 <!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
 <!--                    <a href="--><?php //echo base_url('client/information/extra'); ?><!--">-->
 <!--                        <i class="fa fa-bars" aria-hidden="true"></i>-->

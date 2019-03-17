@@ -30,13 +30,26 @@
                                         <td><?php echo $key + 1 ?></td>
                                         <td><?php echo $value['username'] ?></td>
                                         <td>
-                                            <?php echo ($value['is_rating'] == 1) ? '<span class="label label-success">Đã đánh giá</span>' : '<span class="label label-warning">Chưa đánh giá</span>' ?>
+                                            <?php
+                                                $is_rating = false;
+                                                if($value['is_rating'] == 1){
+                                                    $rating_status = '<span class="label label-success">Đã đánh giá</span>';
+                                                }elseif($value['is_rating'] == 2){
+                                                    $rating_status = '<span class="label label-warning">Đang chờ sửa</span>';
+                                                }else{
+                                                    $rating_status = '<span class="label label-danger">Chưa đánh giá</span>';
+                                                }
+                                            ?>
+                                            <?php echo $rating_status; ?>
                                         </td>
-                                        <td>
+                                        <td align="center">
                                             <?php if ($value['is_rating'] == 1): ?>
                                                 <a href="<?php echo base_url('member/new_rating/index?id=' . $product_id . '&main_service=' . $main_service . '&member_id=' . $value['id']); ?>">
                                                     <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                                </a>    
+                                                </a>
+                                                <a id="openRating" data-product="<?php echo $product_id; ?>" data-member="<?php echo $value['id']; ?>" href="javascript:void(0);">
+                                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                                </a>
                                             <?php endif ?>
                                         </td>
                                     </tr>
@@ -52,7 +65,28 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
-
     </section>
 </div>
+<script>
+    $('#openRating').click(function(){
+
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url('member/new_rating/open_rating'); ?>",
+            data: {
+                product: $(this).data('product'),
+                member: $(this).data('member')
+            },
+            success: function(result){
+                let data = JSON.parse(result);
+                if(data.name != undefined){
+                    alert('Đã mở phần chấm điểm thành công');
+                    window.location.reload();
+                }else{
+                    alert(data.message)
+                }
+            }
+        });
+    });
+</script>
 
