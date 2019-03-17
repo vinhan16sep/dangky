@@ -143,7 +143,7 @@ class Product extends Member_Controller{
         }
 	}
 
-    public function detail($team_id='', $product_id=''){
+    public function detail_rating($team_id='', $product_id=''){
         if ($this->ion_auth->user()->row()->member_role != 'manager') {
             redirect('member/','refresh');
         }
@@ -162,9 +162,11 @@ class Product extends Member_Controller{
                     $members = $this->information_model->get_personal_members($member_ids);
                     if ($members) {
                         foreach ($members as $key => $value) {
-                            $is_rating = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $value['id']);
-                            if ( $is_rating) {
+                            $check_rating = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $value['id']);
+                            if ( $check_rating && $check_rating['is_submit'] == 1) {
                                 $members[$key]['is_rating'] = 1;
+                            }elseif( $check_rating && $check_rating['is_submit'] == 0){
+                                $members[$key]['is_rating'] = 2;
                             }else{
                                 $members[$key]['is_rating'] = 0;
                             }
@@ -176,12 +178,23 @@ class Product extends Member_Controller{
             }
         }
         $product = $this->information_model->fetch_by_id('product', $product_id);
-        // echo '<pre>';
-        // print_r($member_ids);die;
+
         $this->data['team'] = $team;
         $this->data['list_team'] = $list_team;
         $this->data['product_id'] = $product_id;
         $this->data['main_service'] = $product ? $product['main_service'] : '';
         $this->render('member/list_team_by_manager_view');
+    }
+
+    public function detail($id = null){
+        if(!$id){
+            redirect('member/dashboard', 'refresh');
+        }
+        $product = $this->information_model->fetch_product_by_id('product', $id);
+        if(!$product){
+            redirect('member/dashboard', 'refresh');
+        }
+        $this->data['product'] = $product;
+        $this->render('member/product/detail_product_view');
     }
 }

@@ -17,10 +17,28 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
+    public function update($type, $id, $information){
+        $this->db->set($information)
+            ->where('id', $id)
+            ->update($type);
+
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+
+        return false;
+    }
+
     public function update_by_member_id_and_product_id($member_id='', $product_id = '', $data){
         $this->db->where('member_id', $member_id);
         $this->db->where('product_id', $product_id);
         $this->db->update('new_rating', $data);
+
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+
+        return false;
     }
 
     public function fetch_by_product_id($type, $id){
@@ -61,6 +79,7 @@ class New_rating_model extends CI_Model {
    public function fetch_all(){
        $query = $this->db->select('*')
            ->from('new_rating')
+           ->where('is_submit', 1)
            ->get();
 
        if($query->num_rows() > 0){
