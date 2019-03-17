@@ -4,7 +4,15 @@
         <h3>Danh sách sản phẩm <span style="color:red;"><?php echo $client->company; ?></span></h3><a type="button" href="<?php echo site_url('admin/product/export/' . $client->id); ?>" class="btn btn-success">EXPORT DATA</a>
     </div>
     <section class="content">
-
+        <?php 
+            $main_service = array(
+                'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
+                'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
+                'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
+                'Các sản phẩm, giải pháp phần mềm mới',
+                'Các dịch vụ CNTT'
+            );
+        ?>
         <div class="row">
             <!-- /.col -->
             <div class="col-md-12">
@@ -34,35 +42,47 @@
                                             <?php endforeach ?>
                                         
                                         </td>
+                                        
+                                        <?php if ( $value['is_rating'] == 0): ?>
+                                            <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com' && $value['is_final'] == 1){ ?>
+                                                <td style="text-align: center;">
+                                                    <select id="" class="form-control selectMainService" style="width:90%;" data-id="<?php echo $value['id']; ?>">
+                                                        <option value="">-- Lĩnh vực chính --</option>
+                                                        <option value="1" <?php echo ($value['main_service'] == 1) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
+                                                        <option value="2" <?php echo ($value['main_service'] == 2) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
+                                                        <option value="3" <?php echo ($value['main_service'] == 3) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
+                                                        <option value="4" <?php echo ($value['main_service'] == 4) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm mới</option>
+                                                        <option value="5" <?php echo ($value['main_service'] == 5) ? 'selected' : ''; ?>>Các dịch vụ CNTT</option>
+                                                    </select>
+                                                </td>
+                                            <?php }else{ ?>
+                                                <td style="text-align: center;">
+                                                    <p style="color: red;">DN chưa chính thức gửi thông tin lên BTC</p>
+                                                </td>
+                                            <?php } ?>
 
-                                        <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com' && $value['is_final'] == 1){ ?>
-                                            <td style="text-align: center;">
-                                                <select id="" class="form-control selectMainService" style="width:90%;" data-id="<?php echo $value['id']; ?>">
-                                                    <option value="">-- Lĩnh vực chính --</option>
-                                                    <option value="1" <?php echo ($value['main_service'] == 1) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
-                                                    <option value="2" <?php echo ($value['main_service'] == 2) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
-                                                    <option value="3" <?php echo ($value['main_service'] == 3) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
-                                                    <option value="4" <?php echo ($value['main_service'] == 4) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm mới</option>
-                                                    <option value="5" <?php echo ($value['main_service'] == 5) ? 'selected' : ''; ?>>Các dịch vụ CNTT</option>
-                                                </select>
-                                            </td>
-                                        <?php }else{ ?>
-                                            <td style="text-align: center;">
-                                                <p style="color: red;">DN chưa chính thức gửi thông tin lên BTC</p>
-                                            </td>
-                                        <?php } ?>
-
-                                        <?php if($value['rating'] == 0): ?>
-                                            <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-default">Chưa đánh giá</a></td>
-                                        <?php else: ?>
-                                            <?php if($value['rating'] == 1): ?>
-                                                <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-success">Đồng ý</a></td>
-                                            <?php elseif($value['rating'] == 2): ?>
-                                                <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-warning">Đề nghị xem xét</a></td>
-                                            <?php elseif($value['rating'] == 3): ?>
-                                                <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-danger">Không đồng ý</a></td>
+                                            <?php if($value['rating'] == 0): ?>
+                                                <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-default">Chưa đánh giá</a></td>
+                                            <?php else: ?>
+                                                <?php if($value['rating'] == 1): ?>
+                                                    <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-success">Đồng ý</a></td>
+                                                <?php elseif($value['rating'] == 2): ?>
+                                                    <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-warning">Đề nghị xem xét</a></td>
+                                                <?php elseif($value['rating'] == 3): ?>
+                                                    <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-danger">Không đồng ý</a></td>
+                                                <?php endif; ?>
                                             <?php endif; ?>
-                                        <?php endif; ?>
+
+                                        <?php else: ?>
+                                            <td>
+                                                <?php
+                                                    if ( $value['main_service'] !=  null && $value['main_service'] != '') {
+                                                        echo $main_service[$value['main_service']];
+                                                    }
+                                                ?>
+                                            </td>
+                                        <?php endif ?>
+                                        
 
                                     </tr>
                                 <?php endforeach ?>
