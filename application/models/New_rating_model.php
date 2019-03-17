@@ -17,6 +17,12 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
+    public function update_by_member_id_and_product_id($member_id='', $product_id = '', $data){
+        $this->db->where('member_id', $member_id);
+        $this->db->where('product_id', $product_id);
+        $this->db->update('new_rating', $data);
+    }
+
     public function fetch_by_product_id($type, $id){
         $query = $this->db->select('rating.*, users.*')
             ->from($type)
@@ -52,18 +58,17 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
-//    public function fetch_all($type){
-//        $query = $this->db->select('*')
-//            ->from($type)
-//            ->where('is_deleted', 0)
-//            ->get();
-//
-//        if($query->num_rows() > 0){
-//            return $query->result_array();
-//        }
-//
-//        return false;
-//    }
+   public function fetch_all(){
+       $query = $this->db->select('*')
+           ->from('new_rating')
+           ->get();
+
+       if($query->num_rows() > 0){
+           return $query->result_array();
+       }
+
+       return false;
+   }
 //
 //    public function fetch_all_pagination($limit = NULL, $start = NULL) {
 //        $this->db->select('*');

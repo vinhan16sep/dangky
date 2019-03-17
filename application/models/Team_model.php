@@ -77,4 +77,13 @@ class Team_model extends CI_Model {
             ->where('is_deleted', 0);
         return $result = $this->db->get()->result_array();
     }
+
+    public function get_by_product_id($product_id='')
+    {
+        $this->db->select('*');
+        $this->db->from('team');
+        $this->db->like('product_id', ',' . $product_id . ',')
+            ->where('is_deleted', 0);
+        return $result = $this->db->get()->row_array();
+    }
 }

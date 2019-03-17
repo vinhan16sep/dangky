@@ -6,6 +6,7 @@ class Dashboard extends Member_Controller {
         parent::__construct();
         $this->load->model('information_model');
         $this->load->model('team_model');
+        $this->load->model('status_model');
     }
 
     public function index(){
