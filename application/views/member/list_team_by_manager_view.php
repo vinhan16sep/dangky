@@ -34,7 +34,7 @@
                                         </td>
                                         <td>
                                             <?php if ($value['is_rating'] == 1): ?>
-                                                <a href="<?php echo base_url('member/new_rating/rating_by_member?member_id=' . $value['id'] . '&product_id=' . $product_id . '&main_service=' . $main_service); ?>">
+                                                <a href="<?php echo base_url('member/new_rating/index?id=' . $product_id . '&main_service=' . $main_service . '&member_id=' . $value['id']); ?>">
                                                     <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                                                 </a>    
                                             <?php endif ?>

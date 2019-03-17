@@ -608,4 +608,36 @@ class Information_model extends CI_Model {
             ->where_in('id', $ids);
         return $query->get()->result_array();
     }
+
+    public function fetch_product_by_client_ids_with_search_pagination($client_ids = array(), $limit = NULL, $start = NUL, $search = '', $main_service = '') {
+        $this->db->select('id, client_id, name, main_service');
+        $this->db->from('product');
+        $this->db->where('is_deleted', 0);
+        $this->db->where_in('client_id', $client_ids);
+        $this->db->limit($limit, $start);
+        if ( $main_service != '') {
+            $this->db->where('main_service', $main_service);
+        }
+        if ( $search != '') {
+            $this->db->like('name', $search);
+        }
+        $this->db->order_by("id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
+    public function count_product_by_client_ids_with_search($client_ids = array(), $search = '', $main_service = '') {
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('is_deleted', 0);
+        $this->db->where_in('client_id', $client_ids);
+        if ( $main_service != '') {
+            $this->db->where('main_service', $main_service);
+        }
+        if ( $search != '') {
+            $this->db->like('name', $search);
+        }
+
+        return $this->db->get()->num_rows();
+    }
 }

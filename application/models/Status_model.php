@@ -35,4 +35,11 @@ class Status_model extends CI_Model {
         $this->db->where('client_id', $id);
         return $result = $this->db->get()->row_array();
     }
+
+    public function fetch_by_is_final($is_final = 0){
+        $this->db->select('*');
+        $this->db->from('status');
+        $this->db->where('is_final', $is_final);
+        return $result = $this->db->get()->result_array();
+    }
 }

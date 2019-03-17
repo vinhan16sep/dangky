@@ -62,7 +62,16 @@ class New_rating extends Member_Controller{
         $this->data['detail'] = $detail;
         $this->data['company'] = $company;
         $this->data['main_service'] = $main_service;
-        $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $detail['id'], $this->ion_auth->user()->row()->id);
+        //TODO
+        
+        $this->load->model('users_model');
+        $user = $this->ion_auth->user()->row();
+        if ($user->member_role == 'manager') {
+            $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $detail['id'], $this->input->get('member_id'));
+        }else{
+            $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $detail['id'], $this->ion_auth->user()->row()->id);
+        }
+        
 
         $this->render('member/rating_view_' . $main_service);
     }
@@ -75,19 +84,33 @@ class New_rating extends Member_Controller{
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
 
-	    $data = array(
-	        'member_id' => $member_id,
-	        'product_id' => $product_id,
-            'rating' => json_encode($request)
-        );
-
-	    $insert = $this->new_rating_model->insert('new_rating', $data);
-        if($insert){
+        if ($this->ion_auth->user()->row()->member_role == 'manager') {
+            $data = array(
+                'rating' => json_encode($request)
+            );
+            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+            if($update){
+                return $this->output->set_status_header(200)
+                    ->set_output(json_encode(array('name' => $product_id)));
+            }
             return $this->output->set_status_header(200)
-                ->set_output(json_encode(array('name' => $insert)));
+                ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+        }else{
+            $data = array(
+                'member_id' => $member_id,
+                'product_id' => $product_id,
+                'rating' => json_encode($request)
+            );
+
+            $insert = $this->new_rating_model->insert('new_rating', $data);
+            if($insert){
+                return $this->output->set_status_header(200)
+                    ->set_output(json_encode(array('name' => $insert)));
+            }
+            return $this->output->set_status_header(200)
+                ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
         }
-        return $this->output->set_status_header(200)
-            ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+	    
     }
 
     public function rating_by_member(){

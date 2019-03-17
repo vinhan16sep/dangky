@@ -44,7 +44,8 @@ class List_user extends Member_Controller {
     	$product = $this->information_model->fetch_by_id('product', $product_id);
     	// echo '<pre>';
     	// print_r($member_ids);die;
-    	$this->data['team'] = $list_team;
+        $this->data['team'] = $team;
+    	$this->data['list_team'] = $list_team;
     	$this->data['product_id'] = $product_id;
     	$this->data['main_service'] = $product ? $product['main_service'] : '';
     	$this->render('member/list_team/index');
