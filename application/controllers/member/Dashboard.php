@@ -30,6 +30,10 @@ class Dashboard extends Member_Controller {
             $this->data['user_id'] = $user->id;
 
             $this->render('member/dashboard_view');
+        }else{
+            $this->data['team'] = array();
+            $this->data['user_id'] = array();
+            $this->render('member/dashboard_view');
         }
     	
     }
