@@ -19,7 +19,6 @@ class Dashboard extends Member_Controller {
                 $product_ids[] = explode(',', $value['product_id']);
             }
         }
-        $this->data['team'] = $team;
 
     	if($user->member_role == 'member' || $user->member_role == 'leader'){
             $this->data['team'] = $this->get_personal_products($user->id);
@@ -31,13 +30,14 @@ class Dashboard extends Member_Controller {
             $this->data['user_id'] = $user->id;
 
             $this->render('member/dashboard_view');
-        }else{
-            $this->render('member/dashboard_view');
         }
     	
     }
 
     public function users(){
+        if ($this->ion_auth->user()->row()->member_role != 'leader') {
+            redirect('member','refresh');
+        }
         $user = $this->ion_auth->user()->row();
         if ($user->member_role == 'leader') {
             $this->data['team'] = $this->get_personal_members_by_leader($user->id);

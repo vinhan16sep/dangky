@@ -13,6 +13,40 @@ class List_user extends Member_Controller {
     	if ($this->ion_auth->user()->row()->member_role != 'leader') {
     		redirect('member/','refresh');
     	}
+
+        $this->load->model('users_model');
+        $user = $this->ion_auth->user()->row();
+        $user_id = $user->id;
+        $team_by_leader = $this->team_model->get_by_leader_id('team', $user_id);
+        $list_product = array();
+        $list_team_by_leader = array();
+        if ($team_by_leader) {
+            foreach ($team_by_leader as $key => $value) {
+                $product_ids = explode(',', $value['product_id']);
+                foreach ($product_ids as $k => $val) {
+                    if ( !empty($val) ) {
+                        $list_product[] = $val;
+                    }
+                }
+                $list_team_by_leader[] = $value['id'];
+            }
+
+            
+        }
+
+        $list_product = array_unique($list_product);
+        $list_team_by_leader = array_unique($list_team_by_leader);
+        
+        if (!in_array($product_id, $list_product)) {
+            $this->session->set_flashdata('main_service_message', 'Sản phẩm không tồn tại hoặc không thuộc nhóm của bạn');
+            redirect('member','refresh');
+        }
+        if (!in_array($team_id, $list_team_by_leader)) {
+            $this->session->set_flashdata('main_service_message', 'Nhóm không tồn tại hoặc không phải nhóm do bạn quản lý bạn');
+            redirect('member','refresh');
+        }
+
+
     	$team = $this->team_model->fetch_by_id('team', $team_id);
     	$list_team = array();
     	if ($team && $team['member_id']) {
