@@ -510,95 +510,76 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
         $('input[name="total"]').val(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
     });
 
-    $('#rating1Form').submit(function(e){
-        var form = $(this);
-        var url = form.attr('action');
+    $('#rating1Form').validate({
+        submitHandler: function(e){
+            var form = $('#rating1Form');
+            var url = form.attr('action');
 
-        for(let i = 1; i <= 7; i++){
-            if($('#' + i).val() == ''){
-                alert('Chưa chấm hết tất cả các mục');
-                return false;
-            }
-        }
-
-        $.ajax({
-            type: "GET",
-            url: url,
-            data: form.serialize(), // serializes the form's elements
-            success: function(result){
-                let data = JSON.parse(result);
-                if(data.name != undefined){
-                    alert('Đã gửi điểm thành công');
-                    window.location.reload();
-                }else{
-                    alert(data.message)
+            for(let i = 1; i <= 7; i++){
+                if($('#' + i).val() == ''){
+                    alert('Chưa chấm hết tất cả các mục');
+                    return false;
                 }
             }
-        });
-        // $('rating1Form').unbind('submit').submit();
-        e.preventDefault();
-    });
-    $('#extra-form').validate({
-        rules: {
-            criteria_1: {
-                required: true,
-                digits: true
-            },
-            criteria_2: {
-                required: true,
-                digits: true
-            },
-            criteria_3: {
-                required: true,
-                digits: true
-            },
-            criteria_4: {
-                required: true,
-                digits: true
-            },
-            criteria_5: {
-                required: true,
-                digits: true
-            },
-            criteria_6: {
-                required: true,
-                digits: true
-            },
-            criteria_7: {
-                required: true,
-                digits: true
-            }
-        },
-        messages :{
-            criteria_1: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            },
-            criteria_2: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            },
-            criteria_3: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            },
-            criteria_4: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            },
-            criteria_5: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            },
-            criteria_6: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            },
-            criteria_7: {
-                required: 'Không được trống',
-                digits: 'Điểm chỉ chứa ký tự số'
-            }
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(result){
+                    let data = JSON.parse(result);
+                    if(data.name != undefined){
+                        alert('Đã gửi điểm thành công');
+                        window.location.reload();
+                    }else{
+                        alert(data.message)
+                    }
+                }
+            });
+            // $('rating1Form').unbind('submit').submit();
+            e.preventDefault();
         }
     });
+    $('.sub').each(function() {
+        $(this).rules('add', {
+            required: true,
+            digits: true,
+            max: 10,
+            messages: {
+                required: 'Không được trống',
+                digits: 'Điểm chỉ chứa ký tự số',
+                max: 'Số phải nhỏ hơn hoặc bằng 10',
+            }
+        });
+    });
+
+    // $('#rating1Form').submit(function(e){
+    //     var form = $(this);
+    //     var url = form.attr('action');
+
+    //     for(let i = 1; i <= 7; i++){
+    //         if($('#' + i).val() == ''){
+    //             alert('Chưa chấm hết tất cả các mục');
+    //             return false;
+    //         }
+    //     }
+
+    //     $.ajax({
+    //         type: "GET",
+    //         url: url,
+    //         data: form.serialize(), // serializes the form's elements
+    //         success: function(result){
+    //             let data = JSON.parse(result);
+    //             if(data.name != undefined){
+    //                 alert('Đã gửi điểm thành công');
+    //                 window.location.reload();
+    //             }else{
+    //                 alert(data.message)
+    //             }
+    //         }
+    //     });
+    //     // $('rating1Form').unbind('submit').submit();
+    //     e.preventDefault();
+    // });
 </script>
 
