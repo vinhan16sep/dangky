@@ -31,9 +31,10 @@
                                                         <table class="table table-striped table-bordered table-condensed">
                                                             <tr>
                                                                 <td class="col-sm-1" style="font-weight:bold;color: #31708f;">STT</td>
-                                                                <td class="col-sm-5" style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
-                                                                <td class="col-sm-5" style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
-                                                                <td class="col-sm-1" style="text-align: center;font-weight:bold;color: #31708f;">Thao Tác</td>
+                                                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
+                                                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
+                                                                <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Trạng thái</td>
+                                                                <td class="col-sm-2" style="text-align: center;font-weight:bold;color: #31708f;">Thao Tác</td>
                                                             </tr>
                                                             <?php foreach ($value['product_list'] as $key => $value): ?>
                                                                 <?php
@@ -49,15 +50,16 @@
                                                                     <td><?php echo $key + 1 ?></td>
                                                                     <td><?php echo $value['name']; ?></td>
                                                                     <td><?php echo (!empty($value['main_service'])) ? $main_services[$value['main_service']] : '<span style="color: red;">(chưa có)</span>'; ?></td>
-                                                                    <td style="text-align: center; width: 40%">
-                                                                        <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>">
+                                                                    <td><?php echo $value['is_rating'] == 1 ? '<i class="fa fa-check" aria-hidden="true" style="color:#5cb85c" data-toggle="tooltip" data-placement="right" title="Đã chấm điểm"></i>' : '<i class="fa fa-times" aria-hidden="true"style="color:#ac2925" data-toggle="tooltip" data-placement="right" title="Chưa chấm điểm"></i>' ?></td>
+                                                                    <td style="text-align: center;">
+                                                                        <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin sản phẩm">
                                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                                         </a>
-                                                                        <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $value['main_service']); ?>">
+                                                                        <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $value['main_service']); ?>" data-toggle="tooltip" data-placement="top" title="Chấm điểm">
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
                                                                         </a>
                                                                         <?php if ($this->ion_auth->user()->row()->member_role == 'leader'): ?>
-                                                                            <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" title="Danh sách member">
+                                                                            <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Danh sách member">
                                                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                                                             </a>
                                                                         <?php endif ?>

@@ -82,7 +82,7 @@ class Product extends Member_Controller{
             
             $this->load->library('pagination');
             $config = array();
-            $base_url = base_url('admin/member/index');
+            $base_url = base_url('member/product/index');
             
             $uri_segment = 4;
 

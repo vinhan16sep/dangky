@@ -94,40 +94,19 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="2">Tính độc đáo / sáng tạo</td>
                                 <td rowspan="2">15</td>
                                 <td rowspan="2">
-                                    <?php
-                                    echo form_error('1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('1', set_value('1', $arrRate['1']), 'class="form-control main" readonly readonly id="1"');
-                                    }else{
-                                        echo form_input('1', set_value('1', 0), 'class="form-control main" readonly id="1"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['1'] ?>
                                 </td>
                                 <td>Công nghệ sáng tạo / độc đáo</td>
                                 <td>60</td>
                                 <td>
-                                    <?php
-                                    echo form_error('1_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('1_1', set_value('1_1', ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="1_1"');
-                                    }else{
-                                        echo form_input('1_1', set_value('1_1', 0), 'class="form-control sub" id="1_1"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Định hình/phù hợp xu hướng</td>
                                 <td>40</td>
                                 <td>
-                                    <?php
-                                    echo form_error('1_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('1_2', set_value('1_2', ($arrRate['1_2'] != 0) ? ltrim($arrRate['1_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="1_2"');
-                                    }else{
-                                        echo form_input('1_2', set_value('1_2', 0), 'class="form-control sub" id="1_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['1_2'] != 0) ? ltrim($arrRate['1_2'], '0') : 0 ?>
                                 </td>
                             </tr>
 
@@ -138,54 +117,26 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="3">Tính hiệu quả</td>
                                 <td rowspan="3">15</td>
                                 <td rowspan="3">
-                                    <?php
-                                    echo form_error('2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('2', set_value('2', $arrRate['2']), 'class="form-control main" readonly id="2"');
-                                    }else{
-                                        echo form_input('2', set_value('2', 0), 'class="form-control main" readonly id="2"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['2'] ?>
                                 </td>
                                 <td>Tối ưu quy trình, quản lý</td>
                                 <td>40</td>
                                 <td>
-                                    <?php
-                                    echo form_error('2_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('2_1', set_value('2_1', ($arrRate['2_1'] != 0) ? ltrim($arrRate['2_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="2_1"');
-                                    }else{
-                                        echo form_input('2_1', set_value('2_1', 0), 'class="form-control sub" id="2_1"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['2_1'] != 0) ? ltrim($arrRate['2_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Tăng năng suất</td>
                                 <td>30</td>
                                 <td>
-                                    <?php
-                                    echo form_error('2_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('2_2', set_value('2_2', ($arrRate['2_2'] != 0) ? ltrim($arrRate['2_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="2_2"');
-                                    }else{
-                                        echo form_input('2_2', set_value('2_2', 0), 'class="form-control sub" id="2_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['2_2'] != 0) ? ltrim($arrRate['2_2'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Tiết kiệm chi phí sản xuất</td>
                                 <td>30</td>
                                 <td>
-                                    <?php
-                                    echo form_error('2_3', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('2_3', set_value('2_3', ($arrRate['2_3'] != 0) ? ltrim($arrRate['2_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="2_3"');
-                                    }else{
-                                        echo form_input('2_3', set_value('2_3', 0), 'class="form-control sub" id="2_3"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['2_3'] != 0) ? ltrim($arrRate['2_3'], '0') : 0 ?>
                                 </td>
                             </tr>
 
@@ -196,40 +147,19 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="2">Tiềm năng thị trường</td>
                                 <td rowspan="2">15</td>
                                 <td rowspan="2">
-                                    <?php
-                                    echo form_error('3', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('3', set_value('3', $arrRate['3']), 'class="form-control main" readonly id="3"');
-                                    }else{
-                                        echo form_input('3', set_value('3', 0), 'class="form-control main" readonly id="3"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['3'] ?>
                                 </td>
                                 <td>Thị phần và tiềm năng thị trường</td>
                                 <td>60</td>
                                 <td>
-                                    <?php
-                                    echo form_error('3_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('3_1', set_value('3_1', ($arrRate['3_1'] != 0) ? ltrim($arrRate['3_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="3_1"');
-                                    }else{
-                                        echo form_input('3_1', set_value('3_1', 0), 'class="form-control sub" id="3_1"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['3_1'] != 0) ? ltrim($arrRate['3_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Mô hình, chiến lược kinh doanh</td>
                                 <td>40</td>
                                 <td>
-                                    <?php
-                                    echo form_error('3_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('3_2', set_value('3_2', ($arrRate['3_2'] != 0) ? ltrim($arrRate['3_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="3_2"');
-                                    }else{
-                                        echo form_input('3_2', set_value('3_2', 0), 'class="form-control sub" id="3_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['3_2'] != 0) ? ltrim($arrRate['3_2'], '0') : 0 ?>
                                 </td>
                             </tr>
 
@@ -240,54 +170,26 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="3">Tính năng</td>
                                 <td rowspan="3">15</td> 
                                 <td rowspan="3">
-                                    <?php
-                                    echo form_error('4', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('4', set_value('4', $arrRate['4']), 'class="form-control main" readonly id="4"');
-                                    }else{
-                                        echo form_input('4', set_value('4', 0), 'class="form-control main" readonly id="4"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['4'] ?>
                                 </td>
                                 <td>Đáp ứng nhu cầu người dùng</td>
                                 <td>50</td>
                                 <td>
-                                    <?php
-                                    echo form_error('4_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('4_1', set_value('4_1', ($arrRate['4_1'] != 0) ? ltrim($arrRate['4_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_1"');
-                                    }else{
-                                        echo form_input('4_1', set_value('4_1', 0), 'class="form-control sub" id="4_1"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['4_1'] != 0) ? ltrim($arrRate['4_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Khả năng tương thích và phát triển tùy biến</td>
                                 <td>25</td>
                                 <td>
-                                    <?php
-                                    echo form_error('4_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('4_2', set_value('4_2', ($arrRate['4_2'] != 0) ? ltrim($arrRate['4_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_2"');
-                                    }else{
-                                        echo form_input('4_2', set_value('4_2', 0), 'class="form-control sub" id="4_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['4_2'] != 0) ? ltrim($arrRate['4_2'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Tính năng bảo mật</td>
                                 <td>25</td>
                                 <td>
-                                    <?php
-                                    echo form_error('4_3', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('4_3', set_value('4_3', ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_3"');
-                                    }else{
-                                        echo form_input('4_3', set_value('4_3', 0), 'class="form-control sub" id="4_3"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0 ?>
                                 </td>
                             </tr>
 
@@ -298,54 +200,26 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="3">Chất lượng dịch vụ</td>
                                 <td rowspan="3">15</td>
                                 <td rowspan="3">
-                                    <?php
-                                    echo form_error('5', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('5', set_value('5', $arrRate['5']), 'class="form-control main" readonly id="5"');
-                                    }else{
-                                        echo form_input('5', set_value('5', 0), 'class="form-control main" readonly id="5"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['5'] ?>
                                 </td>
                                 <td>Công nghệ tiên tiến/tỉ lệ lỗi/sự hài lòng của khách hàng</td>
                                 <td>40</td>
                                 <td>
-                                    <?php
-                                    echo form_error('5_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('5_1', set_value('5_1', ($arrRate['5_1'] != 0) ? ltrim($arrRate['5_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="5_1"');
-                                    }else{
-                                        echo form_input('5_1', set_value('5_1', 0), 'class="form-control sub" id="5_1"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['5_1'] != 0) ? ltrim($arrRate['5_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Các tiêu chuẩn áp dụng</td>
                                 <td>30</td>
                                 <td>
-                                    <?php
-                                    echo form_error('5_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('5_2', set_value('5_2', ($arrRate['5_2'] != 0) ? ltrim($arrRate['5_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="5_2"');
-                                    }else{
-                                        echo form_input('5_2', set_value('5_2', 0), 'class="form-control sub" id="5_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['5_2'] != 0) ? ltrim($arrRate['5_2'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Chăm sóc khách hàng và hậu mãi</td>
                                 <td>30</td>
                                 <td>
-                                    <?php
-                                    echo form_error('5_3', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('5_3', set_value('5_3', ($arrRate['5_3'] != 0) ? ltrim($arrRate['5_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="5_3"');
-                                    }else{
-                                        echo form_input('5_3', set_value('5_3', 0), 'class="form-control sub" id="5_3"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['5_3'] != 0) ? ltrim($arrRate['5_3'], '0') : 0 ?>
                                 </td>
                             </tr>
 
@@ -356,54 +230,26 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="3">Tài chính/doanh thu/ tác động kinh tế, xã hội/số lượng người sử dụng</td>
                                 <td rowspan="3">20</td>
                                 <td rowspan="3">
-                                    <?php
-                                    echo form_error('6', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('6', set_value('6', $arrRate['6']), 'class="form-control main" readonly id="6"');
-                                    }else{
-                                        echo form_input('6', set_value('6', 0), 'class="form-control main" readonly id="6"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['6'] ?>
                                 </td>
                                 <td>Doanh thu dịch vụ</td>
                                 <td>50</td>
                                 <td>
-                                    <?php
-                                    echo form_error('6_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('6_1', set_value('6_1', ($arrRate['6_1'] != 0) ? ltrim($arrRate['6_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="6_1"');
-                                    }else{
-                                        echo form_input('6_1', set_value('6_1', 0), 'class="form-control sub" id="6_1"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['6_1'] != 0) ? ltrim($arrRate['6_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Số lượng người/DN/tổ chức sử dụng</td>
                                 <td>25</td>
                                 <td>
-                                    <?php
-                                    echo form_error('6_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('6_2', set_value('6_2', ($arrRate['6_2'] != 0) ? ltrim($arrRate['6_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="6_2"');
-                                    }else{
-                                        echo form_input('6_2', set_value('6_2', 0), 'class="form-control sub" id="6_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['6_2'] != 0) ? ltrim($arrRate['6_2'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Tác động kinh tế, xã hội</td>
                                 <td>25</td>
                                 <td>
-                                    <?php
-                                    echo form_error('6_3', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('6_3', set_value('6_3', ($arrRate['6_3'] != 0) ? ltrim($arrRate['6_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="6_3"');
-                                    }else{
-                                        echo form_input('6_3', set_value('6_3', 0), 'class="form-control sub" id="6_3"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['6_3'] != 0) ? ltrim($arrRate['6_3'], '0') : 0 ?>
                                 </td>
                             </tr>
 
@@ -414,55 +260,26 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                 <td rowspan="3">Chất lượng hồ sơ, năng lực trình bày</td>
                                 <td rowspan="3">10</td>
                                 <td rowspan="3">
-                                    <?php
-                                    echo form_error('7', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('7', set_value('7', $arrRate['7']), 'class="form-control main" readonly id="7"');
-                                    }else{
-                                        echo form_input('7', set_value('7', 0), 'class="form-control main" readonly id="7"');
-                                    }
-                                    ?>
+                                    <?php echo $arrRate['7'] ?>
                                 </td>
                                 <td>Chuẩn bị hồ sơ hoàn chỉnh</td>
                                 <td>30</td>
                                 <td>
-                                    <?php
-                                    echo form_error('7_1', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('7_1', set_value('7_1', ($arrRate['7_1'] != 0) ? ltrim($arrRate['7_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="7_1"');
-                                    }else{
-                                        echo form_input('7_1', set_value('7_1', 0), 'class="form-control sub" id="7_1"');
-                                    }
-
-                                    ?>
+                                    <?php echo ($arrRate['7_1'] != 0) ? ltrim($arrRate['7_1'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Trình bày rõ ràng, thông tin chính xác</td>
                                 <td>40</td>
                                 <td>
-                                    <?php
-                                    echo form_error('7_2', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('7_2', set_value('7_2', ($arrRate['7_2'] != 0) ? ltrim($arrRate['7_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="7_2"');
-                                    }else{
-                                        echo form_input('7_2', set_value('7_2', 0), 'class="form-control sub" id="7_2"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['7_2'] != 0) ? ltrim($arrRate['7_2'], '0') : 0 ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Trả lời tốt các câu hỏi</td>
                                 <td>30</td>
                                 <td>
-                                    <?php
-                                    echo form_error('7_3', '<div class="error">', '</div>');
-                                    if($rating){
-                                        echo form_input('7_3', set_value('7_3', ($arrRate['7_3'] != 0) ? ltrim($arrRate['7_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="7_3"');
-                                    }else{
-                                        echo form_input('7_3', set_value('7_3', 0), 'class="form-control sub" id="7_3"');
-                                    }
-                                    ?>
+                                    <?php echo ($arrRate['7_3'] != 0) ? ltrim($arrRate['7_3'], '0') : 0 ?>
                                 </td>
                             </tr>
                             </tbody>

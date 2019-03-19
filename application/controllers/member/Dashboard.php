@@ -6,6 +6,7 @@ class Dashboard extends Member_Controller {
         parent::__construct();
         $this->load->model('information_model');
         $this->load->model('team_model');
+        $this->load->model('new_rating_model');
         $this->load->model('status_model');
     }
 
@@ -65,6 +66,16 @@ class Dashboard extends Member_Controller {
                     }
                     if($product_ids){
                         $products = $this->information_model->get_personal_products($product_ids);
+                        if ($products) {
+                            foreach ($products as $it => $item) {
+                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id']);
+                                if ( $check_product_is_rating ) {
+                                    $products[$it]['is_rating'] = 1;
+                                }else{
+                                    $products[$it]['is_rating'] = 0;
+                                }
+                            }
+                        }
                         $list_team[$key]['product_list'] = $products;
                     }
 
