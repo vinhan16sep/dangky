@@ -111,6 +111,12 @@ class New_rating_model extends CI_Model {
 
        return false;
    }
+
+   public function delete_rating($team_products, $user_id){
+       $this->db->where_in('product_id', $team_products);
+       $this->db->where('member_id', $user_id);
+       $this->db->delete('new_rating');
+   }
 //
 //    public function fetch_all_pagination($limit = NULL, $start = NULL) {
 //        $this->db->select('*');
