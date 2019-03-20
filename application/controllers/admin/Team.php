@@ -12,6 +12,7 @@ class Team extends Admin_Controller{
 		$this->load->model('information_model');
         $this->load->model('users_model');
         $this->load->model('team_model');
+        $this->load->model('new_rating_model');
 
         $this->excel = new PHPExcel();
 	}
@@ -46,6 +47,16 @@ class Team extends Admin_Controller{
         $team = $this->team_model->fetch_by_id('team', $team_id);
         $update = $this->team_model->update('team', $team_id, array('leader_id' => $leader_id));
         if($update){
+
+            $team_product_ids = $this->team_model->get_team_products($team_id);
+            $team_products_string = explode(',', $team_product_ids[0]['product_id']);
+            $team_products_array = array_filter($team_products_string, function($value){
+                return $value != '';
+            });
+            if(!empty($team_products_array)){
+                $this->new_rating_model->delete_rating($team_products_array, $team['leader_id']);
+            }
+
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('name' => $team['name'])));
         }
@@ -91,6 +102,16 @@ class Team extends Admin_Controller{
             $update = $this->team_model->update('team', $team_id, array('member_id' => implode(',', $team_members)));
         }
         if($update){
+
+            $team_product_ids = $this->team_model->get_team_products($team_id);
+            $team_products_string = explode(',', $team_product_ids[0]['product_id']);
+            $team_products_array = array_filter($team_products_string, function($value){
+                return $value != '';
+            });
+            if(!empty($team_products_array)){
+                $this->new_rating_model->delete_rating($team_products_array, $member_id);
+            }
+
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('name' => $team['name'])));
         }

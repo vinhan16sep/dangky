@@ -94,4 +94,11 @@ class Team_model extends CI_Model {
             ->where('is_deleted', 0);
         return $result = $this->db->get()->row_array();
     }
+
+    public function get_team_products($team_id){
+        $this->db->select('product_id');
+        $this->db->from('team');
+        $this->db->where('id', $team_id);
+        return $result = $this->db->get()->result_array();
+    }
 }

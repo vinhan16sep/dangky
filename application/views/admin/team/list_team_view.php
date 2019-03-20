@@ -266,25 +266,28 @@
         if($('#selectLeader').val() == ''){
             alert('Cần chọn trưởng nhóm');
         }else{
-            $.ajax({
-                method: "GET",
-                url: "<?php echo base_url('admin/team/add_team_leader'); ?>",
-                data: {
-                    team_id: $('#hiddenTeamId').val(),
-                    leader_id: $('#selectLeader').val()
-                },
-                success: function(result){
-                    console.log(result);
-                    let data = JSON.parse(result);
-                    if(data.name != undefined){
-                        alert('Chọn trưởng nhóm ' + data.name + ' thành công')
-                        window.location.reload();
-                    }else{
-                        alert(data.message)
-                        window.location.reload();
+            if(confirm("Nếu thay đổi trưởng nhóm, điểm đã chấm của user này với các sản phẩm trong nhóm sẽ bị xoá. Chắc chắn thay đổi?")){
+                $.ajax({
+                    method: "GET",
+                    url: "<?php echo base_url('admin/team/add_team_leader'); ?>",
+                    data: {
+                        team_id: $('#hiddenTeamId').val(),
+                        leader_id: $('#selectLeader').val()
+                    },
+                    success: function(result){
+                        console.log(result);
+                        let data = JSON.parse(result);
+                        if(data.name != undefined){
+                            alert('Chọn trưởng nhóm ' + data.name + ' thành công')
+                            window.location.reload();
+                        }else{
+                            alert(data.message)
+                            window.location.reload();
+                        }
                     }
-                }
-            });
+                });
+            }
+
         }
     });
 
@@ -324,7 +327,7 @@
     });
 
     function removeMember(teamId, memberId){
-        if(confirm('Chắc chắn xoá?')){
+        if(confirm('Nếu xoá thành viên ra khỏi nhóm, điểm đã chấm của user này cho các sản phẩm trong nhóm sẽ bị xoá. Chắc chắn xoá?')){
             $.ajax({
                 method: "GET",
                 url: "<?php echo base_url('admin/team/remove_team_member'); ?>",
