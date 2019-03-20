@@ -106,7 +106,7 @@ class New_rating extends Member_Controller{
     }
 
     public function rating(){
-	    $request = $this->input->get();
+        $request = $this->input->get();
         $member_id = $request['member_id'];
         $product_id = $request['product_id'];
         $total = $request['total'];
@@ -141,6 +141,63 @@ class New_rating extends Member_Controller{
             }
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+        }
+        
+    }
+    public function rating_temp(){
+	    $request = $this->input->get();
+        $member_id = $request['member_id'];
+        $product_id = $request['product_id'];
+        $total = $request['total'];
+        unset($request['member_id']);
+        unset($request['product_id']);
+        unset($request['csrf_sitecom_token']);
+        unset($request['total']);
+
+        if ($this->ion_auth->user()->row()->member_role == 'manager') {
+            $data = array(
+                'rating' => json_encode($request)
+            );
+            $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+            if($update){
+                return $this->output->set_status_header(200)
+                    ->set_output(json_encode(array('name' => $product_id)));
+            }
+            return $this->output->set_status_header(200)
+                ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+        }else{
+            $check_rating_temp = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $member_id);
+            
+            if ( $check_rating_temp ) {
+                $data = array(
+                    'rating' => json_encode($request),
+                    'total' => $total,
+                    'is_submit' => 0
+                );
+                $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
+                if($update){
+                    return $this->output->set_status_header(200)
+                        ->set_output(json_encode(array('name' => $update)));
+                }
+                return $this->output->set_status_header(200)
+                    ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+            }else{
+                $data = array(
+                    'member_id' => $member_id,
+                    'product_id' => $product_id,
+                    'rating' => json_encode($request),
+                    'total' => $total,
+                    'is_submit' => 0
+                );
+                $insert = $this->new_rating_model->insert('new_rating', $data);
+                if($insert){
+                    return $this->output->set_status_header(200)
+                        ->set_output(json_encode(array('name' => $insert)));
+                }
+                return $this->output->set_status_header(200)
+                    ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+            }
+            
         }
 	    
     }

@@ -473,6 +473,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                 <div class="right">
                     <?php
                     if(!$rating || ($rating && $is_submit == 0)){
+                        echo '<button type="button" class="btn btn-info temporarily-saved" style="width:40%;">Lưu tạm</button>';
                         echo form_submit('submit', 'Gửi điểm', 'class="btn btn-primary pull-right" style="width:40%;"');
                     }
                     echo form_close();
@@ -552,5 +553,25 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
         // $('rating1Form').unbind('submit').submit();
         e.preventDefault();
     });
+
+    $('.temporarily-saved').click(function(e){
+        url = '<?php echo base_url('member/new_rating/rating_temp') ?>';
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: $('#rating1Form').serialize(), // serializes the form's elements.
+            success: function(result){
+                let data = JSON.parse(result);
+                if(data.name != undefined){
+                    alert('Lưu tạm điểm thành công');
+                    window.location.reload();
+                }else{
+                    alert(data.message)
+                }
+            }
+        });
+        // $('rating1Form').unbind('submit').submit();
+        e.preventDefault();
+    })
 </script>
 
