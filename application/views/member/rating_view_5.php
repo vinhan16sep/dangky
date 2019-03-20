@@ -511,19 +511,28 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
         $('input[name="total"]').val(Number((main1 + main2 + main3 + main4 + main5 + main6 + main7).toFixed(2)));
     });
 
-    // $('#rating1Form').validate();
-    // $('.sub').each(function() {
-    //     $(this).rules('add', {
-    //         required: true,
-    //         digits: true,
-    //         max: 10,
-    //         messages: {
-    //             required: 'Không được trống',
-    //             digits: 'Điểm chỉ chứa ký tự số',
-    //             max: 'Số phải nhỏ hơn hoặc bằng 10',
-    //         }
-    //     });
-    // });
+    $('#rating1Form').validate();
+    $('.sub').each(function() {
+        $(this).rules('add', {
+            required: true,
+            digits: true,
+            max: 10,
+            messages: {
+                required: 'Không được trống',
+                digits: 'Điểm chỉ chứa ký tự số',
+                max: 'Số phải nhỏ hơn hoặc bằng 10',
+            }
+        });
+    });
+    $('.sub').on('blur', function() {
+        if (!$('#rating1Form').valid()) {
+            $('input[type="submit"]').prop('disabled', true);
+            $('.temporarily-saved').prop('disabled', true);
+        }else{
+            $('input[type="submit"]').prop('disabled', false);
+            $('.temporarily-saved').prop('disabled', false);
+        }
+    });
 
     $('#rating1Form').submit(function(e){
         var form = $(this);
