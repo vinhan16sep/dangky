@@ -21,7 +21,7 @@ class Dashboard extends Member_Controller {
             }
         }
 
-    	if($user->member_role == 'member' || $user->member_role == 'leader'){
+    	if($user->member_role == 'member'){
             $this->data['team'] = $this->get_personal_products($user->id);
             $this->data['user_id'] = $user->id;
 
@@ -68,7 +68,7 @@ class Dashboard extends Member_Controller {
                         $products = $this->information_model->get_personal_products($product_ids);
                         if ($products) {
                             foreach ($products as $it => $item) {
-                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id']);
+                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);
                                 if ( $check_product_is_rating ) {
                                     $products[$it]['is_rating'] = 1;
                                 }else{
@@ -98,6 +98,16 @@ class Dashboard extends Member_Controller {
                     }
                     if($product_ids){
                         $products = $this->information_model->get_personal_products($product_ids);
+                        if ($products) {
+                            foreach ($products as $it => $item) {
+                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);
+                                if ( $check_product_is_rating ) {
+                                    $products[$it]['is_rating'] = 1;
+                                }else{
+                                    $products[$it]['is_rating'] = 0;
+                                }
+                            }
+                        }
                         $list_team[$key]['product_list'] = $products;
                     }
 
