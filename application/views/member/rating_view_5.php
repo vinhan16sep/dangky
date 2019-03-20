@@ -545,20 +545,22 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
             }
         }
 
-        $.ajax({
-            type: "GET",
-            url: url,
-            data: form.serialize(), // serializes the form's elements.
-            success: function(result){
-                let data = JSON.parse(result);
-                if(data.name != undefined){
-                    alert('Đã gửi điểm thành công');
-                    window.location.reload();
-                }else{
-                    alert(data.message)
+        if (confirm('Chăc chắn gửi điểm cho ban tổ chức?')) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(result){
+                    let data = JSON.parse(result);
+                    if(data.name != undefined){
+                        alert('Đã gửi điểm thành công');
+                        window.location.reload();
+                    }else{
+                        alert(data.message)
+                    }
                 }
-            }
-        });
+            });
+        }
         // $('rating1Form').unbind('submit').submit();
         e.preventDefault();
     });
