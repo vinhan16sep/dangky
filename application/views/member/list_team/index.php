@@ -32,11 +32,15 @@
                                         <td>
                                             <?php echo ($value['is_rating'] == 1) ? '<span class="label label-success">Đã đánh giá</span>' : '<span class="label label-warning">Chưa đánh giá</span>' ?>
                                         </td>
-                                        <td>
+                                        <td style="text-align: center;">
                                             <?php if ($value['is_rating'] == 1): ?>
-                                                <a href="<?php echo base_url('member/new_rating/rating_by_member?member_id=' . $value['id'] . '&product_id=' . $product_id . '&main_service=' . $main_service); ?>">
+                                                <a href="<?php echo base_url('member/new_rating/rating_by_member?member_id=' . $value['id'] . '&product_id=' . $product_id . '&main_service=' . $main_service); ?>" data-toggle="tooltip" data-placement="top" title="Xem điểm của thành viên đã chấm">
                                                     <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                                </a>    
+                                                </a>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a id="openRating" data-product="<?php echo $product_id; ?>" data-member="<?php echo $value['id']; ?>" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Mở chức năng sửa điểm">
+                                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                                </a>
                                             <?php endif ?>
                                         </td>
                                     </tr>
@@ -56,3 +60,25 @@
     </section>
 </div>
 
+<script>
+    $('#openRating').click(function(){
+
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url('member/new_rating/open_rating'); ?>",
+            data: {
+                product: $(this).data('product'),
+                member: $(this).data('member')
+            },
+            success: function(result){
+                let data = JSON.parse(result);
+                if(data.name != undefined){
+                    alert('Đã mở phần chấm điểm thành công');
+                    window.location.reload();
+                }else{
+                    alert(data.message)
+                }
+            }
+        });
+    });
+</script>

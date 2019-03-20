@@ -42,14 +42,14 @@ class New_rating extends Member_Controller{
         'Các lĩnh vực khác' => 'Các lĩnh vực khác'
     );
 
-	function __construct(){
-		parent::__construct();
-		$this->load->helper('form');
+    function __construct(){
+        parent::__construct();
+        $this->load->helper('form');
 
-		$this->load->model('information_model');
+        $this->load->model('information_model');
         $this->load->model('new_rating_model');
-		$this->load->model('team_model');
-	}
+        $this->load->model('team_model');
+    }
 
     public function index($product_id=''){
         $id = $this->input->get('id');
@@ -145,7 +145,7 @@ class New_rating extends Member_Controller{
         
     }
     public function rating_temp(){
-	    $request = $this->input->get();
+        $request = $this->input->get();
         $member_id = $request['member_id'];
         $product_id = $request['product_id'];
         $total = $request['total'];
@@ -199,7 +199,7 @@ class New_rating extends Member_Controller{
             }
             
         }
-	    
+        
     }
 
     public function update_rating($id){
@@ -248,7 +248,7 @@ class New_rating extends Member_Controller{
         $product_id = $request['product'];
         $member_id = $request['member'];
 
-        if ($this->ion_auth->user()->row()->member_role == 'manager') {
+        if ($this->ion_auth->user()->row()->member_role == 'manager' || $this->ion_auth->user()->row()->member_role == 'leader') {
             $data = array(
                 'is_submit' => 0
             );
