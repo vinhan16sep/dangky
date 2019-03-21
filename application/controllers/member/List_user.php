@@ -48,7 +48,12 @@ class List_user extends Member_Controller {
 
 
     	$team = $this->team_model->fetch_by_id('team', $team_id);
+
     	$list_team = array();
+        $members = array();
+        $team_rating_total = 0;
+        $rated_members = 0;
+
     	if ($team && $team['member_id']) {
     		$member_ids = explode(',', $team['member_id']);
             if ( is_array($member_ids) && !empty($member_ids) ) {
@@ -62,11 +67,15 @@ class List_user extends Member_Controller {
                     $members = $this->information_model->get_personal_members($member_ids);
                     if ($members) {
                     	foreach ($members as $key => $value) {
-                    		$is_rating = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $value['id']);
+                    		$is_rating = $this->new_rating_model->get_rating_exist_by_product_id('new_rating', $product_id, $value['id']);
                     		if ( $is_rating) {
                     			$members[$key]['is_rating'] = 1;
+                    			$members[$key]['total'] = $is_rating['total'];
+                                $team_rating_total += $is_rating['total'];
+                                $rated_members++;
                     		}else{
                     			$members[$key]['is_rating'] = 0;
+                    			$members[$key]['total'] = "Chưa chấm";
                     		}
                     	}
                     	$list_team = $members;
@@ -76,9 +85,12 @@ class List_user extends Member_Controller {
             }
     	}
     	$product = $this->information_model->fetch_by_id('product', $product_id);
-    	// echo '<pre>';
-    	// print_r($member_ids);die;
+        $company_name = $this->users_model->fetch_by_id($product['client_id']);
+
         $this->data['team'] = $team;
+        $this->data['team_rating_total'] = $team_rating_total / $rated_members;
+        $this->data['company_name'] = $company_name;
+        $this->data['product'] = $product;
     	$this->data['list_team'] = $list_team;
     	$this->data['product_id'] = $product_id;
     	$this->data['main_service'] = $product ? $product['main_service'] : '';

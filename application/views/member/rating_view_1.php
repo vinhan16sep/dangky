@@ -546,8 +546,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                 return false;
             }
         }
-
-        if (confirm('Chăc chắn gửi điểm cho ban tổ chức?')) {
+        if(confirm("Chắc chắn gửi điểm?")){
             $.ajax({
                 type: "GET",
                 url: url,

@@ -42,9 +42,9 @@ class New_rating_model extends CI_Model {
     }
 
     public function fetch_by_product_id($type, $id){
-        $query = $this->db->select('rating.*, users.*')
+        $query = $this->db->select('new_rating.*, users.*')
             ->from($type)
-            ->join('users', 'users.id = rating.member_id')
+            ->join('users', 'users.id = new_rating.member_id')
             ->where('product_id', $id)
             ->get();
 
@@ -52,8 +52,8 @@ class New_rating_model extends CI_Model {
     }
 
     public function fetch_by_product_id_and_logged_in_user($type, $id, $user_id){
-        $query = $this->db->select('rating.result')
-            ->from($type)
+        $query = $this->db->select('*')
+            ->from('new_rating')
             ->where('product_id', $id)
             ->where('member_id', $user_id)
             ->get();
@@ -110,6 +110,16 @@ class New_rating_model extends CI_Model {
             ->where('is_submit', 1)
             ->get();
         return $query->num_rows();
+    }
+
+    public function get_rating_exist_by_product_id($table, $product_id, $user_id){
+        $query = $this->db->select('*')
+            ->from($table)
+            ->where('product_id', $product_id)
+            ->where('member_id', $user_id)
+            ->where('is_submit', 1)
+            ->get();
+        return $query->row_array();
     }
 
    public function fetch_all(){

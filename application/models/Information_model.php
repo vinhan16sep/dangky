@@ -394,6 +394,13 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->row_array();
     }
 
+    public function fetch_company_by_client_id_2($id = null){
+        $this->db->select('*');
+        $this->db->from('company');
+        $this->db->where('client_id', $id);
+        return $result = $this->db->get()->row_array();
+    }
+
     public function count_company_search($search = '') {
         $query = $this->db->select('company.*, users.*')
             ->from('company')

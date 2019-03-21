@@ -8,10 +8,10 @@ class Dashboard extends Member_Controller {
         $this->load->model('team_model');
         $this->load->model('new_rating_model');
         $this->load->model('status_model');
+        $this->load->model('users_model');
     }
 
     public function index(){
-    	$this->load->model('users_model');
     	$user = $this->ion_auth->user()->row();
         $team = $this->team_model->get_by_user_id('team', $user->user_id);
         $product_ids = array();
@@ -22,18 +22,59 @@ class Dashboard extends Member_Controller {
         }
 
     	if($user->member_role == 'member'){
-            $this->data['team'] = $this->get_personal_products($user->id);
+            $team = $this->get_personal_products($user->id);
+            foreach($team as $team_key => $team_value){
+                if(isset($team_value['product_list'])){
+                    foreach((array) $team_value['product_list'] as $product_key => $product_value){
+                        $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
+                        $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
+
+                        (array) $team[$team_key]['product_list'][$product_key]['company_name'] = $company_name['company'];
+                        (array) $team[$team_key]['product_list'][$product_key]['company_id'] = $company_info['id'];
+
+                        $new_rating = $this->new_rating_model->fetch_by_product_id_and_logged_in_user('new_rating', $product_value['id'], $user->user_id);
+                        if(isset($new_rating['total'])){
+                            (array) $team[$team_key]['product_list'][$product_key]['new_rating'] = $new_rating['total'];
+                        }else{
+                            (array) $team[$team_key]['product_list'][$product_key]['new_rating'] = 'Chưa chấm';
+                        }
+                    }
+                }
+            }
+
+            $this->data['team'] = $team;
             $this->data['user_id'] = $user->id;
 
             $this->render('member/dashboard_view');
         }elseif($user->member_role == 'leader'){
-            $this->data['team'] = $this->get_personal_products_by_leader($user->id);
+            $team = $this->get_personal_products_by_leader($user->id);
+            foreach((array) $team as $team_key => $team_value){
+                if(isset($team_value['product_list'])){
+                    foreach((array) $team_value['product_list'] as $product_key => $product_value){
+                        $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
+                        $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
+
+                        (array) $team[$team_key]['product_list'][$product_key]['company_name'] = $company_name['company'];
+                        (array) $team[$team_key]['product_list'][$product_key]['company_id'] = $company_info['id'];
+
+                        $new_rating = $this->new_rating_model->fetch_by_product_id_and_logged_in_user('new_rating', $product_value['id'], $user->user_id);
+                        if(isset($new_rating['total'])){
+                            (array) $team[$team_key]['product_list'][$product_key]['new_rating'] = $new_rating['total'];
+                        }else{
+                            (array) $team[$team_key]['product_list'][$product_key]['new_rating'] = 'Chưa chấm';
+                        }
+                    }
+                }
+            }
+
+            $this->data['team'] = $team;
             $this->data['user_id'] = $user->id;
 
             $this->render('member/dashboard_view');
         }else{
             $this->data['team'] = array();
             $this->data['user_id'] = array();
+
             $this->render('member/dashboard_view');
         }
     	

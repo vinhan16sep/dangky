@@ -93,8 +93,12 @@ class Company extends Member_Controller{
     }
 
 	public function detail($id){
-		$company = $this->information_model->fetch_company_by_id($id);
-		$this->data['company'] = $company;
+        $this->load->model('users_model');
+        $company = $this->information_model->fetch_company_by_id($id);
+        $member_id = json_decode($company['member_id']);
+        $members = $this->users_model->fetch_all_member_with_where($member_id);
+        $this->data['members'] = $members;
+        $this->data['company'] = $company;
 		$this->render('member/company/detail_company_view');
 	}
 
