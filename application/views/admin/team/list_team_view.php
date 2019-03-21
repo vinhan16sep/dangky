@@ -391,7 +391,7 @@
             success: function(result){
                 let data = JSON.parse(result);
                 html = '';
-                if (data.products.length > 0) {
+                if (JSON.stringify(data.products).length > 0) {
                     $("#selectProducts").prop('disabled', false);
                     html += '<option value="">-- Chọn sản phẩm --</option>';
                     $.each(data.products, function(index, item){
