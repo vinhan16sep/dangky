@@ -99,7 +99,7 @@ class New_rating extends Member_Controller{
             }
             
 
-            $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $detail['id'], $this->ion_auth->user()->row()->id);
+            $this->data['rating'] = $this->new_rating_model->check_rating_exist_for_list('new_rating', $detail['id'], $this->ion_auth->user()->row()->id);
         }
 
         $this->render('member/rating_view_' . $main_service);

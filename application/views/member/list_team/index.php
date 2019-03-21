@@ -70,7 +70,7 @@
                                                     <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                                                 </a>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a id="openRating" data-product="<?php echo $product_id; ?>" data-member="<?php echo $value['id']; ?>" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Mở chức năng sửa điểm">
+                                                <a id="openRating" class="openRating" data-product="<?php echo $product_id; ?>" data-member="<?php echo $value['id']; ?>" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Mở chức năng sửa điểm">
                                                     <i class="fa fa-undo" aria-hidden="true"></i>
                                                 </a>
                                             <?php endif ?>
@@ -93,7 +93,7 @@
 </div>
 
 <script>
-    $('#openRating').click(function(){
+    $('.openRating').click(function(){
 
         $.ajax({
             type: "GET",

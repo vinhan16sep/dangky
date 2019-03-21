@@ -562,7 +562,6 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                 }
             });
         }
-
         // $('rating1Form').unbind('submit').submit();
         e.preventDefault();
     });

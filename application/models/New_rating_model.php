@@ -82,6 +82,7 @@ class New_rating_model extends CI_Model {
             ->from($table)
             ->where('product_id', $product_id)
             ->where('member_id', $member_id)
+            ->where('is_submit', 1)
             ->get();
         if($query->num_rows() > 0){
             return $query->row_array();
@@ -89,7 +90,19 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
-    public function check_rating_exist_by_product_id($table, $product_id, $user_id){
+    public function check_rating_exist_for_list($table, $product_id, $member_id){
+        $query = $this->db->select('*')
+            ->from($table)
+            ->where('product_id', $product_id)
+            ->where('member_id', $member_id)
+            ->get();
+        if($query->num_rows() > 0){
+            return $query->row_array();
+        }
+        return false;
+    }
+
+    public function check_rating_exist_by_product_id($table, $product_id, $user_id = null){
         $query = $this->db->select('*')
             ->from($table)
             ->where('product_id', $product_id)
