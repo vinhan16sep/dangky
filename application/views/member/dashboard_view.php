@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
-                        
+
                         <?php foreach ($team as $key => $value): ?>
                             <?php $team_id = $value['id'] ?>
                             <div class="panel panel-info">
@@ -32,8 +32,10 @@
                                                             <tr>
                                                                 <td class="col-sm-1" style="font-weight:bold;color: #31708f;">STT</td>
                                                                 <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
+                                                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Doanh nghiệp</td>
                                                                 <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
                                                                 <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Trạng thái</td>
+                                                                <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Điểm</td>
                                                                 <td class="col-sm-2" style="text-align: center;font-weight:bold;color: #31708f;">Thao Tác</td>
                                                             </tr>
                                                             <?php foreach ($value['product_list'] as $key => $value): ?>
@@ -49,11 +51,16 @@
                                                                 <tr>
                                                                     <td><?php echo $key + 1 ?></td>
                                                                     <td><?php echo $value['name']; ?></td>
+                                                                    <td><?php echo $value['company_name']; ?></td>
                                                                     <td><?php echo (!empty($value['main_service'])) ? $main_services[$value['main_service']] : '<span style="color: red;">(chưa có)</span>'; ?></td>
                                                                     <td><?php echo $value['is_rating'] == 1 ? '<i class="fa fa-check" aria-hidden="true" style="color:#5cb85c" data-toggle="tooltip" data-placement="right" title="Đã chấm điểm"></i>' : '<i class="fa fa-times" aria-hidden="true"style="color:#ac2925" data-toggle="tooltip" data-placement="right" title="Chưa chấm điểm"></i>' ?></td>
+                                                                    <td style="font-weight: bold;"><?php echo $value['new_rating']; ?></td>
                                                                     <td style="text-align: center;">
                                                                         <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin sản phẩm">
                                                                             <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                        </a>
+                                                                        <a href="<?php echo base_url('member/company/detail/' . $value['company_id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin doanh nghiệp">
+                                                                            <i class="fa fa-building" aria-hidden="true"></i>
                                                                         </a>
                                                                         <a href="<?php echo base_url('member/new_rating/index/?id=' . $value['id'] . '&main_service=' . $value['main_service']); ?>" data-toggle="tooltip" data-placement="top" title="Chấm điểm">
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
@@ -63,11 +70,11 @@
                                                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                                                             </a>
                                                                         <?php endif ?>
-                                                                        
+
                                                                     </td>
                                                                 </tr>
                                                             <?php endforeach ?>
-                                                            
+
                                                         </table>
                                                     </div>
                                                     <?php else: ?>
@@ -82,7 +89,7 @@
                                 </div>
                             </div>
                         <?php endforeach ?>
-                        
+
                     </div>
                     <!-- /.tab-content -->
                 </div>
