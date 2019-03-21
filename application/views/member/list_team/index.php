@@ -24,14 +24,14 @@
                 );
                 ?>
                 <td><h4>Nhóm sản phẩm </h4></td>
-                <td><h4><?php echo $main_services[$main_service]; ?></h4></td>
+                <td><h4><?php echo ($main_service) ? $main_services[$main_service] : "Chưa chọn"; ?></h4></td>
             </tr>
             <tr>
                 <td  style="width: 20%"><h4>Nhóm: </h4></td>
                 <td><h4><?php echo $team['name']; ?></h4></td>
             </tr>
             <tr>
-                <td  style="width: 20%"><h3>Tổng điểm: </h3></td>
+                <td  style="width: 20%"><h3>Điểm trung bình: </h3></td>
                 <td><h3 style="color: red;"><?php echo round($team_rating_total, 2); ?></h3></td>
             </tr>
         </table>

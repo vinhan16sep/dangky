@@ -88,7 +88,7 @@ class List_user extends Member_Controller {
         $company_name = $this->users_model->fetch_by_id($product['client_id']);
 
         $this->data['team'] = $team;
-        $this->data['team_rating_total'] = $team_rating_total / $rated_members;
+        $this->data['team_rating_total'] = ($rated_members > 0) ? $team_rating_total / $rated_members : 0;
         $this->data['company_name'] = $company_name;
         $this->data['product'] = $product;
     	$this->data['list_team'] = $list_team;

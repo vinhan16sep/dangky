@@ -66,7 +66,7 @@
                                                                             <i class="fa fa-paint-brush" aria-hidden="true"></i>
                                                                         </a>
                                                                         <?php if ($this->ion_auth->user()->row()->member_role == 'leader'): ?>
-                                                                            <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Danh sách member">
+                                                                            <a href="<?php echo base_url('member/list_user/index/' . $team_id . '/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin chấm điểm của cả nhóm hội đồng">
                                                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                                                             </a>
                                                                         <?php endif ?>
