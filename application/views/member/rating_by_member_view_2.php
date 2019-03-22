@@ -82,11 +82,11 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                             <tr>
                                 <td rowspan="2">1</td>
                                 <td rowspan="2">Tính độc đáo</td>
-                                <td rowspan="2">15</td>
+                                <td rowspan="2">20</td>
                                 <td rowspan="2">
                                     <?php echo $arrRate['1'] ?>
                                 </td>
-                                <td>Công nghệ sáng tạo</td>
+                                <td>Công nghệ sáng tạo/độc đáo</td>
                                 <td>60</td>
                                 <td>
                                     <?php echo ($arrRate['1_1'] != 0) ? ltrim($arrRate['1_1'], '0') : 0 ?>
@@ -188,7 +188,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                             <tr>
                                 <td rowspan="3">5</td>
                                 <td rowspan="3">Công nghệ,  chất lượng sản phẩm</td>
-                                <td rowspan="3">15</td>
+                                <td rowspan="3">20</td>
                                 <td rowspan="3">
                                     <?php echo $arrRate['5'] ?>
                                 </td>
@@ -218,7 +218,7 @@ $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['
                             <tr>
                                 <td rowspan="3">6</td>
                                 <td rowspan="3">Tài chính/doanh thu/ tác động kinh tế, xã hội/số lượng người sử dụng</td>
-                                <td rowspan="3">20</td>
+                                <td rowspan="3">10</td>
                                 <td rowspan="3">
                                     <?php echo $arrRate['6'] ?>
                                 </td>
