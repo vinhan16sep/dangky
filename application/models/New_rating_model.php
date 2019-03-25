@@ -51,6 +51,16 @@ class New_rating_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function fetch_by_product_id_submited($type, $id){
+        $query = $this->db->select('*')
+            ->from('new_rating')
+            ->where('product_id', $id)
+            ->where('is_submit', 1)
+            ->get();
+
+        return $query->result_array();
+    }
+
     public function fetch_by_product_id_and_logged_in_user($type, $id, $user_id){
         $query = $this->db->select('*')
             ->from('new_rating')

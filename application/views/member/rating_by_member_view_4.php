@@ -48,8 +48,8 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     $main_services = array(
                                         1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
                                         2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                                        3 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                                        4 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                        3 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                        4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                                         5 => 'Các dịch vụ CNTT'
                                     );
                                     ?>

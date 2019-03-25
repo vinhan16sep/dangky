@@ -29,6 +29,8 @@ class Dashboard extends Member_Controller {
                         $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
                         $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
 
+                        (array) $team[$team_key]['product_list'][$product_key]['members_rating_total'] = 'Dành cho trưởng nhóm';
+
                         (array) $team[$team_key]['product_list'][$product_key]['company_name'] = $company_name['company'];
                         (array) $team[$team_key]['product_list'][$product_key]['company_id'] = $company_info['id'];
 
@@ -51,6 +53,18 @@ class Dashboard extends Member_Controller {
             foreach((array) $team as $team_key => $team_value){
                 if(isset($team_value['product_list'])){
                     foreach((array) $team_value['product_list'] as $product_key => $product_value){
+                        $rated = $this->new_rating_model->fetch_by_product_id_submited('new_arting', $product_value['id']);
+                        $total = 0;
+                        $rated_member = 0;
+                        if($rated){
+                            foreach($rated as $k => $v){
+                                $total += $v['total'];
+                                $rated_member++;
+                            }
+                        }
+                        (array) $team[$team_key]['product_list'][$product_key]['members_rating_total'] = ($rated_member > 0) ? round($total / $rated_member, 2) : "Chưa có";
+                        // echo '<pre>';
+                        // print_r($rated);
                         $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
                         $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
 
