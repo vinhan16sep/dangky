@@ -282,4 +282,45 @@ class New_rating extends Member_Controller{
         $this->data['rating'] = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $member_id);
         $this->render('member/rating_by_member_view_' . $main_service);
     }
+
+    public function reset_rating($member_id, $product_id, $main_service){
+        if ($this->ion_auth->user()->row()->username != 'chutich') {
+            redirect('member/');
+        }
+        $detail = $this->information_model->fetch_by_id('product', $product_id);
+        $company = $this->information_model->fetch_by_id('users', $detail['client_id']);
+        $rating = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $member_id);
+        
+        $this->data['detail'] = $detail;
+        $this->data['company'] = $company;
+        $this->data['rating'] = $rating;
+        $this->data['main_service'] = $main_service;
+        $this->render('member/reset/view_' . $main_service);
+    }
+
+    public function update_reset_rating($id){
+        if ($this->ion_auth->user()->row()->username != 'chutich') {
+            redirect('member/');
+        }
+        $request = $this->input->get();
+        $member_id = $request['member_id'];
+        $product_id = $request['product_id'];
+        $total = $request['total'];
+        unset($request['member_id']);
+        unset($request['product_id']);
+        unset($request['csrf_sitecom_token']);
+        unset($request['total']);
+        
+        $data = array(
+            'rating' => json_encode($request),
+            'total' => $total
+        );
+        $update = $this->new_rating_model->update_by_member_id_and_product_id_for_reset($member_id, $product_id, $data);
+        if($update){
+            return $this->output->set_status_header(200)
+                ->set_output(json_encode(array('name' => $product_id)));
+        }
+        return $this->output->set_status_header(200)
+            ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
+    }
 }
