@@ -8,8 +8,8 @@
             $main_service = array(
                 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
                 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                 'Các sản phẩm, giải pháp phần mềm mới',
+                'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                 'Các dịch vụ CNTT'
             );
         ?>

@@ -21,7 +21,8 @@ $arrRate = [];
     foreach($rate as $key => $val){
         $arrRate[$key] = $val;
     }
-$total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] + $arrRate['8'] : 0;
+$total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
+$total = isset($arrRate['8']) ? $total + $arrRate['8'] : $total;
 
 $is_readonly = ($rating['is_submit'] == 1) ? "readonly" : "";
 $is_submit = ($rating['is_submit'] == 1) ? 1 : 0;
@@ -462,7 +463,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     <?php
                                     echo form_error('8', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('8', set_value('8', $arrRate['8']), 'class="form-control main" readonly id="8"');
+                                        echo form_input('8', set_value('8', isset($arrRate['8']) ? $arrRate['8'] : 0), 'class="form-control main" readonly id="8"');
                                     }else{
                                         echo form_input('8', set_value('8', 0), 'class="form-control main" readonly id="8"');
                                     }
@@ -474,7 +475,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     <?php
                                     echo form_error('8_1', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('8_1', set_value('8_1', ($arrRate['8_1'] != 0) ? ltrim($arrRate['8_1'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="8_1"');
+                                        echo form_input('8_1', set_value('8_1', isset($arrRate['8_1']) && ($arrRate['8_1'] != 0) ? ltrim($arrRate['8_1'], '0') : 0), 'class="form-control sub" id="8_1"');
                                     }else{
                                         echo form_input('8_1', set_value('8_1', 0), 'class="form-control sub" id="8_1"');
                                     }
@@ -489,7 +490,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     <?php
                                     echo form_error('8_2', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('8_2', set_value('8_2', ($arrRate['8_2'] != 0) ? ltrim($arrRate['8_2'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="8_2"');
+                                        echo form_input('8_2', set_value('8_2', isset($arrRate['8_2']) && ($arrRate['8_2'] != 0) ? ltrim($arrRate['8_2'], '0') : 0), 'class="form-control sub" id="8_2"');
                                     }else{
                                         echo form_input('8_2', set_value('8_2', 0), 'class="form-control sub" id="8_2"');
                                     }
@@ -503,7 +504,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     <?php
                                     echo form_error('8_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('8_3', set_value('8_3', ($arrRate['8_3'] != 0) ? ltrim($arrRate['8_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="8_3"');
+                                        echo form_input('8_3', set_value('8_3', isset($arrRate['8_3']) && ($arrRate['8_3'] != 0) ? ltrim($arrRate['8_3'], '0') : 0), 'class="form-control sub" id="8_3"');
                                     }else{
                                         echo form_input('8_3', set_value('8_3', 0), 'class="form-control sub" id="8_3"');
                                     }
