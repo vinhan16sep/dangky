@@ -283,7 +283,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     <?php
                                     echo form_error('4_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_3', set_value('4_3', ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_3"');
+                                        echo form_input('4_3', set_value('4_3', isset($arrRate['4_3']) && ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_3"');
                                     }else{
                                         echo form_input('4_3', set_value('4_3', 0), 'class="form-control sub" id="4_3"');
                                     }
