@@ -36,6 +36,7 @@
                                                                 <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
                                                                 <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Trạng thái</td>
                                                                 <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Điểm</td>
+                                                                <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Điểm TB</td>
                                                                 <td class="col-sm-2" style="text-align: center;font-weight:bold;color: #31708f;">Thao Tác</td>
                                                             </tr>
                                                             <?php foreach ($value['product_list'] as $key => $value): ?>
@@ -43,8 +44,8 @@
                                                                     $main_services = array(
                                                                         1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
                                                                         2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                                                                        3 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                                                                        4 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                                                        3 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                                                        4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                                                                         5 => 'Các dịch vụ CNTT'
                                                                     );
                                                                 ?>
@@ -55,6 +56,11 @@
                                                                     <td><?php echo (!empty($value['main_service'])) ? $main_services[$value['main_service']] : '<span style="color: red;">(chưa có)</span>'; ?></td>
                                                                     <td><?php echo $value['is_rating'] == 1 ? '<i class="fa fa-check" aria-hidden="true" style="color:#5cb85c" data-toggle="tooltip" data-placement="right" title="Đã chấm điểm"></i>' : '<i class="fa fa-times" aria-hidden="true"style="color:#ac2925" data-toggle="tooltip" data-placement="right" title="Chưa chấm điểm"></i>' ?></td>
                                                                     <td style="font-weight: bold;"><?php echo $value['new_rating']; ?></td>
+                                                                    <?php if($value['members_rating_total'] && $value['members_rating_total'] != ''){ ?>
+                                                                        <td class="col-sm-2" style="font-weight:bold;color: #31708f;"><?php echo $value['members_rating_total']; ?></td>
+                                                                    <?php }else{ ?>
+                                                                        <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Dành cho trưởng nhóm</td>
+                                                                    <?php } ?>
                                                                     <td style="text-align: center;">
                                                                         <a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>" data-toggle="tooltip" data-placement="top" title="Thông tin sản phẩm">
                                                                             <i class="fa fa-eye" aria-hidden="true"></i>

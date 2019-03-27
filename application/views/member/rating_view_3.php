@@ -48,13 +48,13 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     $main_services = array(
                                         1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
                                         2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                                        3 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
-                                        4 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                        3 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                        4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                                         5 => 'Các dịch vụ CNTT'
                                     );
                                     ?>
                                     <td><h4>Nhóm sản phẩm </h4></td>
-                                    <td><h4><?php echo $main_services[$main_service]; ?></h4></td>
+                                    <td><h4><?php echo $main_service . ': ' . $main_services[$main_service]; ?></h4></td>
                                 </tr>
                             </table>
                         </div>
@@ -283,7 +283,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     <?php
                                     echo form_error('4_3', '<div class="error">', '</div>');
                                     if($rating){
-                                        echo form_input('4_3', set_value('4_3', ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_3"');
+                                        echo form_input('4_3', set_value('4_3', isset($arrRate['4_3']) && ($arrRate['4_3'] != 0) ? ltrim($arrRate['4_3'], '0') : 0), 'class="form-control sub" ' . $is_readonly . ' id="4_3"');
                                     }else{
                                         echo form_input('4_3', set_value('4_3', 0), 'class="form-control sub" id="4_3"');
                                     }

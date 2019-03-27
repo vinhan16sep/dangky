@@ -24,8 +24,8 @@
                         <?php if ($team): ?>
                             <option value="1" <?php echo $main_service_search == 1 ? 'selected' : '' ?> >Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
                             <option value="2" <?php echo $main_service_search == 2 ? 'selected' : '' ?> >Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
-                            <option value="3" <?php echo $main_service_search == 3 ? 'selected' : '' ?> >Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
-                            <option value="4" <?php echo $main_service_search == 4 ? 'selected' : '' ?> >Các sản phẩm, giải pháp phần mềm mới</option>
+                            <option value="3" <?php echo $main_service_search == 3 ? 'selected' : '' ?> >Các sản phẩm, giải pháp phần mềm mới</option>
+                            <option value="4" <?php echo $main_service_search == 4 ? 'selected' : '' ?> >Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
                             <option value="5" <?php echo $main_service_search == 5 ? 'selected' : '' ?> >Các dịch vụ CNTT</option>
                         <?php endif ?>
                     </select>

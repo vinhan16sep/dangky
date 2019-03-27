@@ -8,8 +8,8 @@
             $main_service = array(
                 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
                 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
-                'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                 'Các sản phẩm, giải pháp phần mềm mới',
+                'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
                 'Các dịch vụ CNTT'
             );
         ?>
@@ -49,8 +49,8 @@
                                                     <option value="">-- Lĩnh vực chính --</option>
                                                     <option value="1" <?php echo ($value['main_service'] == 1) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành</option>
                                                     <option value="2" <?php echo ($value['main_service'] == 2) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp ứng dụng công nghệ 4.0</option>
-                                                    <option value="3" <?php echo ($value['main_service'] == 3) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
-                                                    <option value="4" <?php echo ($value['main_service'] == 4) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm mới</option>
+                                                    <option value="3" <?php echo ($value['main_service'] == 3) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp phần mềm mới</option>
+                                                    <option value="4" <?php echo ($value['main_service'] == 4) ? 'selected' : ''; ?>>Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp</option>
                                                     <option value="5" <?php echo ($value['main_service'] == 5) ? 'selected' : ''; ?>>Các dịch vụ CNTT</option>
                                                 </select>
                                             </td>
