@@ -41,6 +41,19 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
+    public function update_by_member_id_and_product_id_for_reset($member_id='', $product_id = '', $data){
+        $this->db->set($data);
+        $this->db->where('member_id', $member_id);
+        $this->db->where('product_id', $product_id);
+        $this->db->update('new_rating');
+
+        if($this->db->affected_rows() == 1){
+            return true;
+        }
+
+        return false;
+    }
+
     public function fetch_by_product_id($type, $id){
         $query = $this->db->select('new_rating.*, users.*')
             ->from($type)
