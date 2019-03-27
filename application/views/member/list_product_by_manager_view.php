@@ -46,8 +46,8 @@
                                     <th>STT</th>
                                     <th>Tên sản phẩm / dịch vụ</th>
                                     <th>Nhóm chấm giải</th>
-                                    <th>Điểm trung bình</th>
                                     <th>Trạng thái</th>
+                                    <th>Điểm trung bình</th>
                                     <th style="text-align: center;">Thao Tác</th>
                                     <?php foreach ($result as $key => $value): ?>
                                     <tr>
@@ -56,11 +56,11 @@
                                         <td>
                                            <?php echo $value['team'] ?> 
                                         </td>
-                                        <td>
-                                            <?php echo $value['rating_medium'] ?>
-                                        </td>
                                         <td >
                                             <?php echo (in_array($value['id'], $list_products_rating) ? '<p class="label label-success">Đã có điểm</p>' : '<p class="label label-warning">Chưa chấm điểm</p>') ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value['rating_medium'] ?>
                                         </td>
                                         <td style="text-align: center;">
                                             <a href="<?php echo base_url('member/product/detail_rating/' .$value['team_id'] . '/' . $value['id']) ?>" class="btn btn-info">Điểm chi tiết</a>

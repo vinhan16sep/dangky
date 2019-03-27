@@ -628,12 +628,15 @@ class Information_model extends CI_Model {
         return $query->get()->result_array();
     }
 
-    public function fetch_product_by_client_ids_with_search_pagination($client_ids = array(), $limit = NULL, $start = NUL, $search = '', $main_service = '') {
+    public function fetch_product_by_client_ids_with_search_pagination($client_ids = array(), $limit = NULL, $start = NULL, $search = '', $main_service = '') {
         $this->db->select('id, client_id, name, main_service');
         $this->db->from('product');
         $this->db->where('is_deleted', 0);
         $this->db->where_in('client_id', $client_ids);
-        $this->db->limit($limit, $start);
+        if ($limit != NULL || $start != NULL) {
+            $this->db->limit($limit, $start);
+        }
+        
         if ( $main_service != '') {
             $this->db->where('main_service', $main_service);
         }
