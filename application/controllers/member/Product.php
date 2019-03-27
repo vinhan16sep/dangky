@@ -104,6 +104,20 @@ class Product extends Member_Controller{
                     $result[$key]['team'] = 'Chưa có';
                     $result[$key]['team_id'] = 0;
                 }
+                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id']);
+                $total_rating = 0;
+                if ($new_rating_array) {
+                    foreach ($new_rating_array as $index => $item) {
+                        $total_rating += $item['total'];
+                    }
+                    $rating_medium = round($total_rating / count($new_rating_array), 2);
+                }
+                if ($total_rating != 0) {
+                    $result[$key]['rating_medium'] = $rating_medium;
+                }else{
+                    $result[$key]['rating_medium'] = 0;   
+                }
+                
             }
 
             $new_result = array();
@@ -138,6 +152,7 @@ class Product extends Member_Controller{
             $this->data['list_products_rating'] = $list_products_rating;
             $this->data['team'] = $team;
             $this->data['result'] = $result;
+
 
             $this->render('member/list_product_by_manager_view');
         }

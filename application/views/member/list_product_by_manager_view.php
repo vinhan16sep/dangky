@@ -46,6 +46,7 @@
                                     <th>STT</th>
                                     <th>Tên sản phẩm / dịch vụ</th>
                                     <th>Nhóm chấm giải</th>
+                                    <th>Điểm trung bình</th>
                                     <th>Trạng thái</th>
                                     <th style="text-align: center;">Thao Tác</th>
                                     <?php foreach ($result as $key => $value): ?>
@@ -54,6 +55,9 @@
                                         <td style="width: 40%;"><a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>"><?php echo $value['name'] ?></a></td>
                                         <td>
                                            <?php echo $value['team'] ?> 
+                                        </td>
+                                        <td>
+                                            <?php echo $value['rating_medium'] ?>
                                         </td>
                                         <td >
                                             <?php echo (in_array($value['id'], $list_products_rating) ? '<p class="label label-success">Đã có điểm</p>' : '<p class="label label-warning">Chưa chấm điểm</p>') ?>
