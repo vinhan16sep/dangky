@@ -16,12 +16,46 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
+                        <div class="post">
+                            <table class="table table-bordered" style="width: 100%">
+                                <tr>
+                                    <td  style="width: 20%"><h3>Sản phẩm: </h3></td>
+                                    <td><h3><?php echo $product['name']; ?></h3></td>
+                                </tr>
+                                <tr>
+                                    <td><h4>Doanh nghiệp: </h4></td>
+                                    <td><h4><?php echo $company['company']; ?></h4></td>
+                                </tr>
+                                <tr>
+                                    <?php
+                                        $main_services = array(
+                                            1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
+                                            2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
+                                            3 => 'Các sản phẩm, giải pháp phần mềm mới',
+                                            4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
+                                            5 => 'Các dịch vụ CNTT'
+                                        );
+                                    ?>
+                                    <td><h4>Nhóm sản phẩm </h4></td>
+                                    <td><h4><?php echo $main_service . ': ' . $main_services[$main_service]; ?></h4></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <div class="tab-content">
                         
                         <table class="table table-striped table-bordered table-condensed">
                             <tr>
                                 <td class="col-sm-1" style="font-weight:bold;color: #31708f;">STT</td>
-                                <td class="col-sm-5" style="font-weight:bold;color: #31708f;">Tên tài khoản</td>
-                                <td class="col-sm-5" style="font-weight:bold;color: #31708f;">Trạng thái</td>
+                                <td class="col-sm-4" style="font-weight:bold;color: #31708f;">Tên tài khoản</td>
+                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Trạng thái</td>
+                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Điểm chi tiết</td>
                                 <td class="col-sm-1" style="text-align: center;font-weight:bold;color: #31708f;">Thao Tác</td>
                             </tr>
                             <?php if ($list_team): ?>
@@ -41,6 +75,9 @@
                                                 }
                                             ?>
                                             <?php echo $rating_status; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value['total'] ?>
                                         </td>
                                         <td align="center">
                                             <?php if ($value['is_rating'] == 1): ?>

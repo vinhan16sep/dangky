@@ -203,6 +203,7 @@ class Product extends Member_Controller{
                     if ($members) {
                         foreach ($members as $key => $value) {
                             $check_rating = $this->new_rating_model->check_rating_exist('new_rating', $product_id, $value['id']);
+                            $rating_detail = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $value['id']);
                             if ( $check_rating && $check_rating['is_submit'] == 1) {
                                 $members[$key]['is_rating'] = 1;
                             }elseif( $check_rating && $check_rating['is_submit'] == 0){
@@ -210,6 +211,7 @@ class Product extends Member_Controller{
                             }else{
                                 $members[$key]['is_rating'] = 0;
                             }
+                            $members[$key]['total'] = $rating_detail['total'] ? $rating_detail['total'] : 0;
                         }
                         $list_team = $members;
                     }
@@ -218,8 +220,11 @@ class Product extends Member_Controller{
             }
         }
         $product = $this->information_model->fetch_by_id('product', $product_id);
+        $company = $this->information_model->fetch_by_id('users', $product['client_id']);
 
         $this->data['team'] = $team;
+        $this->data['company'] = $company;
+        $this->data['product'] = $product;
         $this->data['list_team'] = $list_team;
         $this->data['product_id'] = $product_id;
         $this->data['main_service'] = $product ? $product['main_service'] : '';
