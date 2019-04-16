@@ -8,6 +8,13 @@
 
         <div class="row">
             <form action="<?php echo base_url('member/product') ?>" class="form-horizontal col-md-12 col-sm-12 col-xs-12" method="get" style="margin-bottom: 30px;">
+                <div class="col-lg-2">
+                    <select class="form-control" name="rating_search">
+                        <option value="1" <?php echo ($rating_search == 1)? 'selected' : '' ?>>Không thực hiện</option>
+                        <option value="2" <?php echo ($rating_search == 2)? 'selected' : '' ?>>Điểm giảm dần</option>
+                        <option value="3" <?php echo ($rating_search == 3)? 'selected' : '' ?>>Điểm tăng dần</option>
+                    </select>
+                </div>
                 <div class="col-lg-3">
                     <select class="form-control" name="team_search">
                         <option value="">Chọn nhóm chấm...</option>
@@ -18,7 +25,7 @@
                         <?php endif ?>
                     </select>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-3">
                     <select class="form-control" name="main_service_search">
                         <option value="">Chọn nhóm dịch vụ chính...</option>
                         <?php if ($team): ?>

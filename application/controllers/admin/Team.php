@@ -23,7 +23,17 @@ class Team extends Admin_Controller{
 	    $this->data['leaders'] = $this->users_model->fetch_all_leaders();
         $this->data['members'] = $this->users_model->fetch_all_members();
         $this->data['companys'] = $this->information_model->fetch_all_company_pagination();
-	    $this->data['products'] = $this->information_model->get_product();
+	    $products = $this->information_model->get_product();
+        
+        if ($products) {
+            foreach ($products as $key => $value) {
+                $user = $this->users_model->fetch_by_id($value['client_id']);
+                $products[$key]['company'] = $user['company'];
+            }
+        }
+        $this->data['products'] = $products;
+        // echo '<pre>';
+        // print_r($products);die;
         $this->data['teams'] = $teams;
         $this->render('admin/team/list_team_view');
 	}

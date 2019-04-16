@@ -60,6 +60,10 @@ class User extends MY_Controller {
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]', array(
                 'required' => '%s không được trống.',
             ));
+        $this->form_validation->set_rules('phone','Số điện thoại','trim|required|numeric', array(
+                'required' => '%s không được trống.',
+                'numeric' => '%s phải là số.',
+            ));
         $this->form_validation->set_rules('register_password','Mật khẩu','required', array(
                 'required' => '%s không được trống.',
             ));
@@ -80,6 +84,7 @@ class User extends MY_Controller {
 
             $additional_data = array(
                 'company' => $this->input->post('companyname'),
+                'phone' => $this->input->post('phone'),
             );
             $result = $this->ion_auth->register($username, $password, $email, $additional_data, $group_ids);
             if($result){

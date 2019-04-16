@@ -9,6 +9,16 @@
             </div>
         </div>
 
+        <?php
+            $main_services = array(
+                1 => 'Các sản phẩm, giải pháp phần mềm tiêu biểu, được bình xét theo 24 lĩnh vực ứng dụng chuyên ngành',
+                2 => 'Các sản phẩm, giải pháp ứng dụng công nghệ 4.0',
+                3 => 'Các sản phẩm, giải pháp phần mềm mới',
+                4 => 'Các sản phẩm, giải pháp của doanh nghiệp khởi nghiệp',
+                5 => 'Các dịch vụ CNTT'
+            );
+        ?>
+
         <div class="container col-md-12">
             <div>
                 <span><?php echo $this->session->flashdata('message'); ?></span>
@@ -20,9 +30,9 @@
                             <tr>
                                 <td style="width: 5%"><b><a href="#">STT</a></b></td>
                                 <td style="width: 10%; text-align: center;"><b><a href="#">Tên nhóm</a></b></td>
-                                <td style="width: 20%; text-align: center;"><b><a href="#">Trưởng nhóm</a></b></td>
-                                <td style="width: 20%; text-align: center;"><b><a href="#">Thành viên</a></b></td>
-                                <td style="text-align: center;"><b><a href="#">Sản phẩm</a></b></td>
+                                <td style="width: 10%; text-align: center;"><b><a href="#">Trưởng nhóm</a></b></td>
+                                <td style="width: 15%; text-align: center;"><b><a href="#">Thành viên</a></b></td>
+                                <td style="text-align: center;"><b><a href="#">Sản phẩm / Doanh nghiệp / Nhóm lĩnh vực chính</a></b></td>
                                 <td style="width: 10%; text-align: center;"><b>Thao tác</b></td>
                             </tr>
 
@@ -55,16 +65,47 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <ul>
+                                        <table class="table table-bordered">
                                             <?php
-                                            $array_product_id = explode(',', $team['product_id']);
-                                            foreach($products as $key => $product){
-                                                if(in_array($product['id'], $array_product_id)){
-                                                    echo '<li>' . $product['name']  . '  ' . '<a href="javascript:void(0);" onclick="removeProduct(' . $team['id'] . ',' . $product['id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>';
-                                                }
-                                            }
+                                                $array_product_id = explode(',', $team['product_id']);
+                                                $stt = 1;
+                                                $newProducts = [];
                                             ?>
-                                        </ul>
+                                            <?php if ($products): ?>
+                                                <?php foreach ($products as $key => $product){
+                                                    $newProducts[$product['id']] = $product;
+                                                } ?>
+                                            <?php endif ?>
+                                            <?php if ($array_product_id): ?>
+                                                <?php foreach ($array_product_id as $key => $value): ?>
+                                                    <?php if (!empty($value)): ?>
+                                                        <?php $stt++ ?>
+                                                        <tr style="<?php echo ($stt % 2 == 0) ? 'background-color: #b7d7f3' : '' ; ?> ">
+                                                            <td style="width: 27%"><strong>Sản phẩm</strong></td>
+                                                            <td><?php echo $newProducts[$value]['name'] ?></td>
+                                                            <td rowspan="3" style="vertical-align : middle;text-align:center;">
+                                                                <?php echo '<a href="javascript:void(0);" onclick="removeProduct(' . $team['id'] . ',' . $newProducts[$value]['id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>' ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="<?php echo ($stt % 2 == 0) ? 'background-color: #b7d7f3' : '' ; ?> ">
+                                                            <td><strong>Doanh nghiệp</strong></td>
+                                                            <td><?php echo $newProducts[$value]['company'] ?></td>
+                                                        </tr>
+                                                        <tr style="<?php echo ($stt % 2 == 0) ? 'background-color: #b7d7f3' : '' ; ?> ">
+                                                            <td><strong>Nhóm lĩnh vực chính</strong></td>
+                                                            <td>
+                                                                <?php
+                                                                    if (array_key_exists($newProducts[$value]['main_service'], $main_services)) {
+                                                                        echo $main_services[$newProducts[$value]['main_service']];
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endif ?>
+                                                <?php endforeach ?>
+                                            <?php endif ?>
+                                            
+                                        </table>
                                     </td>
                                     <td>
                                         <div>

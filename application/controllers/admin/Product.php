@@ -47,6 +47,17 @@ class Product extends Admin_Controller{
 		$this->render('admin/product/list_product_view');
 	}
 
+    public function remove_product($client_id, $id = null){
+        $deleted = $this->information_model->delete('product', $id);
+        if ($deleted) {
+            $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+            redirect('admin/product/index/' . $client_id, 'refresh');
+        }else{
+            $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
+            redirect('admin/product/index/' . $client_id, 'refresh');
+        }
+    }
+
     public function set_main_service(){
         $id = $this->input->get('id');
         $main_service = $this->input->get('main_service');

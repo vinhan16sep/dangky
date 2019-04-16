@@ -144,7 +144,7 @@
                                 'id' => 'functional',
                                 'value' => set_value('functional', $product['functional']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -165,7 +165,7 @@
                                 'id' => 'process',
                                 'value' => set_value('process', $product['process']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -186,7 +186,7 @@
                                 'id' => 'security',
                                 'value' => set_value('security', $product['security']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -228,7 +228,7 @@
                                 'id' => 'compare',
                                 'value' => set_value('compare', $product['compare']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -244,7 +244,13 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('income_2016', '<div class="error">', '</div>');
-                            echo form_input('income_2016', set_value('income_2016', $product['income_2016']), 'class="form-control"');
+                            echo form_textarea(array(
+                                'name' => 'income_2016',
+                                'id' => 'income_2016',
+                                'value' => set_value('income_2016', $product['income_2016']),
+                                'rows' => '3',
+                                'class' => "form-control"
+                            ));
                             ?>
                         </div>
                     </div>
@@ -259,7 +265,13 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('income_2017', '<div class="error">', '</div>');
-                            echo form_input('income_2017', set_value('income_2017', $product['income_2017']), 'class="form-control"');
+                            echo form_textarea(array(
+                                'name' => 'income_2017',
+                                'id' => 'income_2017',
+                                'value' => set_value('income_2017', $product['income_2017']),
+                                'rows' => '3',
+                                'class' => "form-control"
+                            ));
                             ?>
                         </div>
                     </div>
@@ -279,7 +291,7 @@
                                 'id' => 'area',
                                 'value' => set_value('area', $product['area']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -310,7 +322,13 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('price', '<div class="error">', '</div>');
-                            echo form_input('price', set_value('price', $product['price']), 'class="form-control"');
+                            echo form_textarea(array(
+                                'name' => 'price',
+                                'id' => 'price',
+                                'value' => set_value('price', $product['price']),
+                                'rows' => '5',
+                                'class' => "form-control"
+                            ));
                             ?>
                         </div>
                     </div>
@@ -330,7 +348,7 @@
                                 'id' => 'customer',
                                 'value' => set_value('customer', $product['customer']),
                                 'rows' => '5',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -351,7 +369,7 @@
                                 'id' => 'after_sale',
                                 'value' => set_value('after_sale', $product['after_sale']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -372,7 +390,7 @@
                                 'id' => 'team',
                                 'value' => set_value('team', $product['team']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -393,7 +411,7 @@
                                 'id' => 'award',
                                 'value' => set_value('award', $product['award']),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>

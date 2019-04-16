@@ -63,8 +63,7 @@ class Dashboard extends Member_Controller {
                             }
                         }
                         (array) $team[$team_key]['product_list'][$product_key]['members_rating_total'] = ($rated_member > 0) ? round($total / $rated_member, 2) : "Chưa có";
-                        // echo '<pre>';
-                        // print_r($rated);
+                        
                         $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
                         $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
 
@@ -82,6 +81,7 @@ class Dashboard extends Member_Controller {
             }
 
             $this->data['team'] = $team;
+            
             $this->data['user_id'] = $user->id;
 
             $this->render('member/dashboard_view');
@@ -152,7 +152,13 @@ class Dashboard extends Member_Controller {
                         }
                     }
                     if($product_ids){
-                        $products = $this->information_model->get_personal_products($product_ids);
+                        $products = array();
+                        foreach ($product_ids as $k => $val) {
+                            $product_by_id = $this->information_model->fetch_by_id('product', $val);
+                            $products[$k] = $product_by_id;
+                        }
+                        
+                        // $products = $this->information_model->get_personal_products($product_ids);
                         if ($products) {
                             foreach ($products as $it => $item) {
                                 $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);

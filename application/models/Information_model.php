@@ -634,7 +634,7 @@ class Information_model extends CI_Model {
         $this->db->where('is_deleted', 0);
         $this->db->where_in('client_id', $client_ids);
         $this->db->limit($limit, $start);
-        if ( $main_service != '') {
+        if ( $main_service != '' && $main_service != null) {
             $this->db->where('main_service', $main_service);
         }
         if ( $search != '') {

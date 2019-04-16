@@ -987,6 +987,17 @@ class Information extends Client_Controller {
         $this->render('client/information/detail_product_view');
     }
 
+    public function remove_product($id = null){
+        $deleted = $this->information_model->delete('product', $id);
+        if ($deleted) {
+            $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+            redirect('client/information/products', 'refresh');
+        }else{
+            $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
+            redirect('client/information/products', 'refresh');
+        }
+    }
+
     public function create_product(){
         $this->load->helper('form');
         $this->load->library('form_validation');

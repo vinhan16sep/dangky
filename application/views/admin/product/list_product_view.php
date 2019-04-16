@@ -66,6 +66,7 @@
                                                     <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/detail/' . $value['id']) ?>" class="btn btn-danger">Không đồng ý</a></td>
                                                 <?php endif; ?>
                                             <?php endif; ?>
+                                            <td style="text-align: center;"><a style="width:132px;" href="<?php echo base_url('admin/product/remove_product/' . $value['client_id'] . '/' . $value['id']) ?>" class="btn btn-danger" onclick="return confirm('Chắc chắn xóa sản phẩm?')">Xóa sản phẩm</a></td>
 
                                         <?php else: ?>
                                             <td>

@@ -21,10 +21,14 @@ class Product extends Member_Controller{
         $user = $this->ion_auth->user()->row();
         if ($user->member_role == 'manager') {
             $keywords = '';
+            $rating_search = '';
             $team_search = null;
             $main_service_search = null;
             if($this->input->get('search')){
                 $keywords = $this->input->get('search');
+            }
+            if($this->input->get('rating_search')){
+                $rating_search = $this->input->get('rating_search');
             }
             if($this->input->get('team_search')){
                 $team_search = $this->input->get('team_search');
@@ -34,6 +38,7 @@ class Product extends Member_Controller{
             }
 
             $this->data['keywords'] = $keywords;
+            $this->data['rating_search'] = $rating_search;
             $this->data['team_search'] = $team_search;
             $this->data['main_service_search'] = $main_service_search;
 
@@ -44,13 +49,16 @@ class Product extends Member_Controller{
                     $client_ids[] = $value['client_id'];
                 }
             }
+            
 
             $total_rows  = 0;
-            $per_page = 50;
+            
+
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) - 1 : 0;
 
             if ($team_search != null) {
-                $product_by_client = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, $per_page, $per_page*$this->data['page'], $keywords, $main_service_search);
+                $product_by_client = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, null, null, $keywords, $main_service_search);
+
                 if ($product_by_client) {
                     foreach ($product_by_client as $key => $value) {
                         $team = $this->team_model->get_by_product_id($value['id']);
@@ -78,14 +86,12 @@ class Product extends Member_Controller{
             }else{
                 $total_rows  = $this->information_model->count_product_by_client_ids_with_search($client_ids, $keywords, $main_service_search);
             }
-
-            
+            $per_page = 50;
             $this->load->library('pagination');
             $config = array();
             $base_url = base_url('member/product/index');
             
             $uri_segment = 4;
-
             foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
                 $config[$key] = $value;
             }
@@ -93,7 +99,12 @@ class Product extends Member_Controller{
 
             $this->data['page_links'] = $this->pagination->create_links();
             $result =  array();
-            $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, $per_page, $per_page*$this->data['page'], $keywords, $main_service_search);
+            if ($team_search == null && $team_search == '') {
+                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, $per_page, $per_page*$this->data['page'], $keywords, $main_service_search);
+            }else{
+                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, null, null, $keywords, $main_service_search);
+            }
+            
             
             foreach ($result as $key => $value) {
                 $team = $this->team_model->get_by_product_id($value['id']);
@@ -104,7 +115,8 @@ class Product extends Member_Controller{
                     $result[$key]['team'] = 'Chưa có';
                     $result[$key]['team_id'] = 0;
                 }
-                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id']);
+                $new_rating_array = $this->new_rating_model->fetch_by_product_id_submited('new_rating', $value['id'], $rating_search);
+                $new_rating_medium = array();
                 $total_rating = 0;
                 if ($new_rating_array) {
                     foreach ($new_rating_array as $index => $item) {
@@ -116,10 +128,23 @@ class Product extends Member_Controller{
                     $result[$key]['rating_medium'] = $rating_medium;
                 }else{
                     $result[$key]['rating_medium'] = 0;   
+                    
                 }
                 
             }
-
+            if ($result) {
+                foreach ($result as $key => $value) {
+                    $new_rating_medium[$key] = $value['rating_medium'];
+                }
+            }
+            if ($rating_search != '' && $rating_search != 1) {
+                if ($rating_search == 2) {
+                    array_multisort($new_rating_medium, SORT_DESC, $result);
+                }
+                if ($rating_search == 3) {
+                    array_multisort($new_rating_medium, SORT_ASC, $result);
+                }
+            }
             $new_result = array();
             foreach ($result as $key => $value) {
                 if ( $team_search != null ) {

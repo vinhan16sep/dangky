@@ -91,6 +91,11 @@
                             <?php echo form_input('email', set_value('email'), 'class="form-control" style="border: orange 1px solid;"'); ?>
                         </div>
                         <div class="form-group">
+                            <?php echo form_label('Số điện thoại: ', 'phone'); ?>
+                            <?php echo form_error('phone', '<div class="error">', '</div>'); ?>
+                            <?php echo form_input('phone', set_value('phone'), 'class="form-control" style="border: orange 1px solid;"'); ?>
+                        </div>
+                        <div class="form-group">
                             <?php echo form_label('Mật khẩu: ', 'register_password'); ?>
                             <?php echo form_error('register_password', '<div class="error">', '</div>'); ?>
                             <?php echo form_password('register_password', '', 'class="form-control" style="border: orange 1px solid;"'); ?>
@@ -132,6 +137,11 @@
                 required: true,
                 email: true
             },
+            phone: {
+                required: true,
+                number: true,
+                minlength: 9,
+            },
             register_password: {
                 required: true,
                 minlength: 8,
@@ -153,6 +163,11 @@
             email: {
                 required : 'Không được để trống',
                 email: 'Sai định dạng email'
+            },
+            phone: {
+                required : 'Không được để trống',
+                number: 'Phải là số',
+                minlength: 'Phải lớn hơn 9 ký tự',
             },
             register_password: {
                 required: 'Không được để trống',

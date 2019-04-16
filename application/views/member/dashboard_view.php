@@ -15,7 +15,6 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <div class="tab-content">
-
                         <?php foreach ($team as $key => $value): ?>
                             <?php $team_id = $value['id'] ?>
                             <div class="panel panel-info">
@@ -30,14 +29,14 @@
                                                     <div class="post box-body">
                                                         <table class="table table-striped table-bordered table-condensed">
                                                             <tr>
-                                                                <td class="col-sm-1" style="font-weight:bold;color: #31708f;">STT</td>
-                                                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
-                                                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Doanh nghiệp</td>
-                                                                <td class="col-sm-3" style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
-                                                                <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Trạng thái</td>
-                                                                <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Điểm</td>
-                                                                <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Điểm TB</td>
-                                                                <td class="col-sm-2" style="text-align: center;font-weight:bold;color: #31708f;">Thao Tác</td>
+                                                                <td style="font-weight:bold;color: #31708f;; width: 5%">STT</td>
+                                                                <td style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
+                                                                <td style="font-weight:bold;color: #31708f;">Doanh nghiệp</td>
+                                                                <td style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
+                                                                <td style="font-weight:bold;color: #31708f; width: 7%">Trạng thái</td>
+                                                                <td style="font-weight:bold;color: #31708f; width: 7%">Điểm</td>
+                                                                <td style="font-weight:bold;color: #31708f; width: 7%">Điểm TB</td>
+                                                                <td style="text-align: center;font-weight:bold;color: #31708f; width: 8%">Thao Tác</td>
                                                             </tr>
                                                             <?php foreach ($value['product_list'] as $key => $value): ?>
                                                                 <?php
@@ -57,7 +56,7 @@
                                                                     <td><?php echo $value['is_rating'] == 1 ? '<i class="fa fa-check" aria-hidden="true" style="color:#5cb85c" data-toggle="tooltip" data-placement="right" title="Đã chấm điểm"></i>' : '<i class="fa fa-times" aria-hidden="true"style="color:#ac2925" data-toggle="tooltip" data-placement="right" title="Chưa chấm điểm"></i>' ?></td>
                                                                     <td style="font-weight: bold;"><?php echo $value['new_rating']; ?></td>
                                                                     <?php if($value['members_rating_total'] && $value['members_rating_total'] != ''){ ?>
-                                                                        <td class="col-sm-2" style="font-weight:bold;color: #31708f;"><?php echo $value['members_rating_total']; ?></td>
+                                                                        <td style="font-weight:bold;color: #31708f;"><?php echo $value['members_rating_total']; ?></td>
                                                                     <?php }else{ ?>
                                                                         <td class="col-sm-2" style="font-weight:bold;color: #31708f;">Dành cho trưởng nhóm</td>
                                                                     <?php } ?>
