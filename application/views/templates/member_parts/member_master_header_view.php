@@ -139,7 +139,7 @@
             <ul class="dropdown-menu">
               <!-- user image -->
               <li class="user-header">
-                <img src="<?php echo site_url('assets/admin/'); ?>dist/img/user2-160x160.jpg" class="img-circle" alt="user image">
+                <img src="<?php echo site_url('assets/public/img/logo.png'); ?>" class="img-circle" alt="user image">
 
                 <p>
                   Thời Gian Hiện Tại

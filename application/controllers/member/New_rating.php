@@ -110,6 +110,8 @@ class New_rating extends Member_Controller{
         $member_id = $request['member_id'];
         $product_id = $request['product_id'];
         $total = $request['total'];
+        $comment = $request['comment'];
+        unset($request['comment']);
         unset($request['member_id']);
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
@@ -117,7 +119,8 @@ class New_rating extends Member_Controller{
 
         if ($this->ion_auth->user()->row()->member_role == 'manager') {
             $data = array(
-                'rating' => json_encode($request)
+                'rating' => json_encode($request),
+                'comment' => $comment,
             );
             $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
             if($update){
@@ -130,6 +133,7 @@ class New_rating extends Member_Controller{
             $data = array(
                 'member_id' => $member_id,
                 'product_id' => $product_id,
+                'comment' => $comment,
                 'rating' => json_encode($request),
                 'total' => $total,
                 'is_submit' => 1
@@ -149,6 +153,8 @@ class New_rating extends Member_Controller{
         $member_id = $request['member_id'];
         $product_id = $request['product_id'];
         $total = $request['total'];
+        $comment = $request['comment'];
+        unset($request['comment']);
         unset($request['member_id']);
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
@@ -172,6 +178,7 @@ class New_rating extends Member_Controller{
                 $data = array(
                     'rating' => json_encode($request),
                     'total' => $total,
+                    'comment' => $comment,
                     'is_submit' => 0
                 );
                 $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
@@ -185,6 +192,7 @@ class New_rating extends Member_Controller{
                 $data = array(
                     'member_id' => $member_id,
                     'product_id' => $product_id,
+                    'comment' => $comment,
                     'rating' => json_encode($request),
                     'total' => $total,
                     'is_submit' => 0
@@ -207,6 +215,8 @@ class New_rating extends Member_Controller{
         $member_id = $request['member_id'];
         $product_id = $request['product_id'];
         $total = $request['total'];
+        $comment = $request['comment'];
+        unset($request['comment']);
         unset($request['member_id']);
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
@@ -214,7 +224,8 @@ class New_rating extends Member_Controller{
 
         if ($this->ion_auth->user()->row()->member_role == 'manager') {
             $data = array(
-                'rating' => json_encode($request)
+                'rating' => json_encode($request),
+                'comment' => $comment,
             );
             $update = $this->new_rating_model->update_by_member_id_and_product_id($member_id, $product_id, $data);
             if($update){
@@ -227,6 +238,7 @@ class New_rating extends Member_Controller{
             $data = array(
                 'member_id' => $member_id,
                 'product_id' => $product_id,
+                'comment' => $comment,
                 'rating' => json_encode($request),
                 'total' => $total,
                 'is_submit' => 1

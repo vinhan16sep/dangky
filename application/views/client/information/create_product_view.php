@@ -132,7 +132,7 @@
                                 'id' => 'functional',
                                 'value' => set_value('functional'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -153,7 +153,7 @@
                                 'id' => 'process',
                                 'value' => set_value('process'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -174,7 +174,7 @@
                                 'id' => 'security',
                                 'value' => set_value('security'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -195,7 +195,7 @@
                                 'id' => 'positive',
                                 'value' => set_value('positive'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -216,7 +216,7 @@
                                 'id' => 'compare',
                                 'value' => set_value('compare'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -267,7 +267,7 @@
                                 'id' => 'area',
                                 'value' => set_value('area'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -318,7 +318,7 @@
                                 'id' => 'customer',
                                 'value' => set_value('customer'),
                                 'rows' => '5',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -339,7 +339,7 @@
                                 'id' => 'after_sale',
                                 'value' => set_value('after_sale'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -360,7 +360,7 @@
                                 'id' => 'team',
                                 'value' => set_value('team'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>
@@ -381,7 +381,7 @@
                                 'id' => 'award',
                                 'value' => set_value('award'),
                                 'rows' => '3',
-                                'class' => "form-control"
+                                'class' => "form-control tinymce-area"
                             ));
                             ?>
                         </div>

@@ -74,6 +74,24 @@ class New_rating_model extends CI_Model {
         return $query->result_array();
     }
 
+    // public function fetch_by_product_id_submited_and_sort($type, $id, $sort = ''){
+    //     $this->db->select('*');
+    //     $this->db->from('new_rating');
+    //     $this->db->where('product_id', $id);
+    //     $this->db->where('is_submit', 1);
+    //     if ($sort != '') {
+    //         if ($sort == 1) {
+    //             $this->db->order_by('total', 'asc');
+    //         }
+    //         if ($sort == -1) {
+    //             $this->db->order_by('total', 'desc');
+    //         }
+            
+    //     }
+
+    //     return $this->db->get()->result_array();
+    // }
+
     public function fetch_by_product_id_and_logged_in_user($type, $id, $user_id){
         $query = $this->db->select('*')
             ->from('new_rating')

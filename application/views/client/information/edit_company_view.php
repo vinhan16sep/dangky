@@ -289,7 +289,7 @@
                             <div class="row">
                                 <?php
                                 echo form_error('description', '<div class="error">', '</div>');
-                                echo form_textarea('description', set_value('description', $company['description']), 'class="form-control"');
+                                echo form_textarea('description', set_value('description', $company['description']), 'class="form-control tinymce-area"');
                                 ?>
                             </div>
                         </div>

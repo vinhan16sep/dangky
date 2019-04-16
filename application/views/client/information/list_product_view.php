@@ -60,6 +60,7 @@
                                                 <?php if($reg_status['is_final'] == 0): ?>
                                                     <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/edit_product/' . $product['id']) ?>" class="btn btn-primary">Chỉnh sửa</a></td>
                                                 <?php endif; ?>
+                                                <td style="text-align: center;width:110px;"><a style="width:132px;" href="<?php echo base_url('client/information/remove_product/' . $product['id']) ?>" class="btn btn-danger" onclick="return confirm('Chắc chắn xóa sản phẩm?')">Xóa sản phẩm</a></td>
                                         <?php
                                                 echo '</tr>';
                                             endforeach;

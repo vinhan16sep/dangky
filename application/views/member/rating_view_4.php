@@ -511,6 +511,20 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                                     ?>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Bình luận</td>
+                                <td colspan="6">
+                                    <?php 
+                                        echo form_textarea(array(
+                                            'name' => 'comment',
+                                            'id' => 'comment',
+                                            'value' => $rating['comment'],
+                                            'rows' => '3',
+                                            'class' => "form-control"
+                                        ));
+                                    ?>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
