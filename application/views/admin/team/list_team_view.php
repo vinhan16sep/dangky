@@ -69,7 +69,7 @@
                                             <?php
                                                 $array_product_id = explode(',', $team['product_id']);
                                                 $stt = 1;
-                                                $newProducts = [];
+                                                $newProducts = array();
                                             ?>
                                             <?php if ($products): ?>
                                                 <?php foreach ($products as $key => $product){
@@ -81,7 +81,7 @@
                                                     <?php if (!empty($value)): ?>
                                                         <?php $stt++ ?>
                                                         <tr style="<?php echo ($stt % 2 == 0) ? 'background-color: #b7d7f3' : '' ; ?> ">
-                                                            <td style="width: 27%"><strong>Sản phẩm</strong></td>
+                                                            <td style="width: 27%"><strong>Sản phẩm <?= $stt - 1 ?></strong></td>
                                                             <td><?php echo $newProducts[$value]['name'] ?></td>
                                                             <td rowspan="3" style="vertical-align : middle;text-align:center;">
                                                                 <?php echo '<a href="javascript:void(0);" onclick="removeProduct(' . $team['id'] . ',' . $newProducts[$value]['id'] . ');"><i style="color:red;" class="fa fa-remove" aria-hidden="true"></i></a>' ?>
@@ -104,7 +104,7 @@
                                                     <?php endif ?>
                                                 <?php endforeach ?>
                                             <?php endif ?>
-                                            
+
                                         </table>
                                     </td>
                                     <td>

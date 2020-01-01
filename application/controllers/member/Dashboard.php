@@ -22,6 +22,7 @@ class Dashboard extends Member_Controller {
         }
 
     	if($user->member_role == 'member'){
+    	    $allTeam = $teams = $this->team_model->fetch_all_team();
             $team = $this->get_personal_products($user->id);
             foreach($team as $team_key => $team_value){
                 if(isset($team_value['product_list'])){
@@ -110,6 +111,7 @@ class Dashboard extends Member_Controller {
 
     public function get_personal_products($user_id){
         $list_team = $this->team_model->get_current_user_team($user_id);
+        $output = array();
         if ( !empty($list_team) ) {
             foreach($list_team as $key => $value){
                 $product_ids = explode(',', $value['product_id']);
@@ -120,18 +122,33 @@ class Dashboard extends Member_Controller {
                         }
                     }
                     if($product_ids){
+
+
+
                         $products = $this->information_model->get_personal_products($product_ids);
                         if ($products) {
-                            foreach ($products as $it => $item) {
-                                $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);
-                                if ( $check_product_is_rating ) {
-                                    $products[$it]['is_rating'] = 1;
-                                }else{
-                                    $products[$it]['is_rating'] = 0;
+
+
+
+                            foreach($product_ids as $k => $val){
+                                foreach ($products as $it => $item) {
+                                    if($val == $item['id']){
+                                        $check_product_is_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $item['id'], $user_id);
+                                        if ( $check_product_is_rating ) {
+                                            $products[$it]['is_rating'] = 1;
+                                        }else{
+                                            $products[$it]['is_rating'] = 0;
+                                        }
+                                        array_push($output, $products[$it]);
+                                    }
+
+
                                 }
                             }
                         }
-                        $list_team[$key]['product_list'] = $products;
+
+
+                        $list_team[$key]['product_list'] = $output;
                     }
 
                 }

@@ -10,6 +10,7 @@ class Product extends Admin_Controller{
 		$this->load->model('information_model');
         $this->load->model('rating_model');
 		$this->load->model('new_rating_model');
+        $this->load->model('team_model');
 
         $this->excel = new PHPExcel();
 	}
@@ -48,13 +49,20 @@ class Product extends Admin_Controller{
 	}
 
     public function remove_product($client_id, $id = null){
-        $deleted = $this->information_model->delete('product', $id);
-        if ($deleted) {
-            $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+        // Check if product has registered in table [team]
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id);
+        if ( $check_product_in_team > 0 ) {
+            $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('admin/product/index/' . $client_id, 'refresh');
         }else{
-            $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
-            redirect('admin/product/index/' . $client_id, 'refresh');
+            $deleted = $this->information_model->delete('product', $id);
+            if ($deleted) {
+                $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+                redirect('admin/product/index/' . $client_id, 'refresh');
+            }else{
+                $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
+                redirect('admin/product/index/' . $client_id, 'refresh');
+            }
         }
     }
 

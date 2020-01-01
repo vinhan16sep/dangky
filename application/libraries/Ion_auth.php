@@ -71,7 +71,7 @@ class Ion_auth
 		$this->load->model('ion_auth_model');
 
 		$this->_cache_user_in_group =& $this->ion_auth_model->_cache_user_in_group;
-	
+
 		$email_config = $this->config->item('email_config', 'ion_auth');
 
 		if ($this->config->item('use_ci_email', 'ion_auth') && isset($email_config) && is_array($email_config))
@@ -163,7 +163,7 @@ class Ion_auth
 					}else{
 						$message = $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE);
 					}
-					
+
 					$this->email->clear();
 					$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
 					$this->email->to($user->email);
@@ -318,6 +318,11 @@ class Ion_auth
 
 		$id = $this->ion_auth_model->register($identity, $password, $email, $additional_data, $group_ids);
 
+
+		// TODO:
+//		return $id;
+		// END TODO
+
 		if (!$email_activation)
 		{
 			if ($id !== FALSE)
@@ -346,7 +351,7 @@ class Ion_auth
 			}else{
 				$deactivate = $this->ion_auth_model->deactivate($id, false);
 			}
-			
+
 
 			// the deactivate method call adds a message, here we need to clear that
 			$this->ion_auth_model->clear_messages();
@@ -382,7 +387,7 @@ class Ion_auth
 				}else{
 					$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
 				}
-				
+
 				if ( !in_array(2, $group_ids) ) {
 					$this->email->clear();
 					$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));

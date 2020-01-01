@@ -32,8 +32,6 @@ class Team extends Admin_Controller{
             }
         }
         $this->data['products'] = $products;
-        // echo '<pre>';
-        // print_r($products);die;
         $this->data['teams'] = $teams;
         $this->render('admin/team/list_team_view');
 	}

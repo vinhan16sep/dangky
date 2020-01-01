@@ -12,7 +12,7 @@ class User extends MY_Controller {
     }
 
     public function index() {
-        
+
     }
 
     public function login() {
@@ -100,7 +100,7 @@ class User extends MY_Controller {
             }
             $detail = $this->users_model->fetch_by_id($result);
             if($result){
-                $this->session->set_flashdata('register_success', 'Cảm ơn Qúy Công ty đã đăng ký tham gia Chương trình Danh hiệu Sao Khuê 2019.
+                $this->session->set_flashdata('register_success', 'Cảm ơn Qúy Công ty đã đăng ký tham gia Chương trình Danh hiệu Sao Khuê ' . $this->data['eventYear'] .'.
                                                 Vui lòng truy cập email để kích hoạt tài khoản và khai hồ sơ.');
                 redirect('client/user/login', 'refresh');
                 $this->ion_auth->login($username, $password, false);
@@ -163,7 +163,7 @@ class User extends MY_Controller {
                     redirect('client/user/change_password', 'refresh');
                 }
             }
-        }  
+        }
     }
 
     public function forgot_password(){
@@ -224,7 +224,7 @@ class User extends MY_Controller {
                 }
             }
         }
-        
+
     }
     public function reset_password($code){
 
@@ -269,7 +269,7 @@ class User extends MY_Controller {
                             }else{
                                 redirect('client/user/reset_password/' . $code, 'refresh');
                             }
-                            
+
                         }
                         else { //if the reset didnt work then send them back to the forgot password page
                             $this->session->set_flashdata('auth_message', $this->ion_auth->errors());

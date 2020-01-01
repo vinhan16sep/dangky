@@ -2,10 +2,10 @@
 
 <div class="content-wrapper" style="min-height: 916px;">
     <section class="content row">
-        
+
         <div class="row" style="padding: 10px;">
             <div class="col-md-6">
-                <a type="button" href="<?php echo site_url('admin/users/create/' . $group); ?>" class="btn btn-primary">THÊM MỚI</a>
+                <!-- <a type="button" href="<?php echo site_url('admin/users/create/' . $group); ?>" class="btn btn-primary">THÊM MỚI</a> -->
             </div>
             <div class="col-md-6">
                 <form action="<?php echo base_url('admin/users/index/' . $group_id) ?>" method="get">
@@ -31,6 +31,7 @@
                                 <td style="width: 3%"><b><a href="#">STT</a></b></td>
                                 <td><b><a href="#">Mã số thuế</a></b></td>
                                 <td><b><a href="#">Doanh nghiệp</a></b></td>
+                                <td><b><a href="#">ĐT Đăng ký</a></b></td>
                                 <td><b><a href="#">E-Mail</a></b></td>
                                 <td style="width: 10%;"><b><a href="#">Thời gian tạo</a></b></td>
                                 <?php if ($this->uri->segment(4) == 3): ?>
@@ -53,6 +54,7 @@
                                     <td><?php echo $number--; ?></td>
                                     <td><?php echo $user['username']; ?></td>
                                     <td><?php echo $user['company']; ?></td>
+                                    <td><?php echo $user['phone']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s',$user['created_on']); ?></td>
                                     <?php if ($this->uri->segment(4) == 3): ?>

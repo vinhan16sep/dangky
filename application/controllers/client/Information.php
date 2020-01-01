@@ -16,6 +16,7 @@ class Information extends Client_Controller {
         $this->load->model('information_model');
         $this->load->model('status_model');
         $this->load->model('users_model');
+        $this->load->model('team_model');
         $this->load->library('session');
 
         $this->data['user'] = $this->ion_auth->user()->row();
@@ -988,13 +989,20 @@ class Information extends Client_Controller {
     }
 
     public function remove_product($id = null){
-        $deleted = $this->information_model->delete('product', $id);
-        if ($deleted) {
-            $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+        // Check if product has registered in table [team]
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id);
+        if ( $check_product_in_team > 0 ) {
+            $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('client/information/products', 'refresh');
         }else{
-            $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
-            redirect('client/information/products', 'refresh');
+            $deleted = $this->information_model->delete('product', $id);
+            if ($deleted) {
+                $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+                redirect('client/information/products', 'refresh');
+            }else{
+                $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
+                redirect('client/information/products', 'refresh');
+            }
         }
     }
 
@@ -1372,7 +1380,7 @@ class Information extends Client_Controller {
 
     function check_file_selected(){
 
-        
+
         if (empty($_FILES['file']['name'])) {
             $this->form_validation->set_message(__FUNCTION__, 'Data không được trống');
             return false;

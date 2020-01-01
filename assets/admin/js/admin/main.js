@@ -14,7 +14,7 @@
   });
 
   $(window).on('load', function(){
-    
+
     if($('textarea').hasClass('txt_hide')){
       $('.mce-toolbar').hide();
       tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
@@ -112,7 +112,7 @@ $('.btn-remove').click(function(e){
         data: {id : client_id, image_id : image_id}
     })
   }
-  
+
   return false;
 });
 
@@ -427,7 +427,7 @@ $('.btn-delete').click(function(event){
             }
         });
     }
-    
+
 });
 
 //delete all
@@ -452,7 +452,7 @@ $('.btn-delete-all').click(function(){
                     $.each(ids, function(index, id){
                         $( '.remove-' + id ).fadeOut();
                     })
-                    
+
                 }
             },
             error: function(jqXHR, exception){

@@ -3,6 +3,12 @@
     <div class="box-body pad table-responsive">
         <h3>Danh sách sản phẩm <span style="color:red;"><?php echo $client->company; ?></span></h3><a type="button" href="<?php echo site_url('admin/product/export/' . $client->id); ?>" class="btn btn-success">EXPORT DATA</a>
     </div>
+    <?php if ($this->session->flashdata('message_error')): ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Thông báo!</strong> <?php echo $this->session->flashdata('message_error'); ?>
+        </div>
+    <?php endif ?>
     <section class="content">
         <?php 
             $main_service = array(

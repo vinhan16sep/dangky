@@ -59,6 +59,8 @@ class Users extends Admin_Controller
         $this->data['group_id'] = $group_id;
         $this->data['group'] = $group_id;
         $this->data['users'] = $users;
+        // echo '<pre>';
+        // print_r($users);die;
         $this->render('admin/users/list_users_view');
     }
 
@@ -313,7 +315,7 @@ class Users extends Admin_Controller
         $this->data['users'] = $this->users_model->fetch_all_client($id);
         $this->render('admin/users/list_client_of_member_view');
     }
-    
+
     public function open_final($client_id){
         $information = array(
             'is_information' => 0,

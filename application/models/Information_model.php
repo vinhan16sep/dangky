@@ -52,6 +52,14 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_personal_products($ids){
+        $query = $this->db->select('*')
+            ->from('product')
+            ->where_in('id', $ids)
+            ->order_by("id", "desc");
+        return $query->get()->result_array();
+    }
+
     public function get_product() {
         $this->db->select('*');
         $this->db->from('product');
@@ -430,7 +438,7 @@ class Information_model extends CI_Model {
         $this->db->where('is_submit', 1);
         return $result = $this->db->get()->row_array();
     }
-      
+
     public function get_all_for_export($type, $client_id = null){
         $this->db->select('*');
         $this->db->from($type);
@@ -483,7 +491,7 @@ class Information_model extends CI_Model {
 
         return $query->num_rows();
     }
-    
+
     public function fetch_product_by_user_id($type, $client_id, $id){
         $query = $this->db->select('*')
             ->from($type)
@@ -612,13 +620,6 @@ class Information_model extends CI_Model {
         $this->db->where('company.id', $id);
         // $this->db->where('company.is_submit', 1);
         return $result = $this->db->get()->row_array();
-    }
-
-    public function get_personal_products($ids){
-        $query = $this->db->select('*')
-            ->from('product')
-            ->where_in('id', $ids);
-        return $query->get()->result_array();
     }
 
     public function get_personal_members($ids){
