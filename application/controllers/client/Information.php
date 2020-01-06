@@ -967,7 +967,7 @@ class Information extends Client_Controller {
         $this->load->library('pagination');
         $config = array();
         $base_url = base_url() . 'client/information/products';
-        $total_rows = $this->information_model->count_product($this->data['user']->id);
+        $total_rows = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
         $per_page = 10;
         $uri_segment = 4;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
@@ -977,7 +977,7 @@ class Information extends Client_Controller {
 
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $this->data['products'] = $this->information_model->get_all_product($this->data['user']->id, $per_page, $this->data['page']);
+        $this->data['products'] = $this->information_model->get_all_product($this->data['user']->id, $per_page, $this->data['page'], $this->data['eventYear']);
 
         $this->render('client/information/list_product_view');
     }
@@ -990,7 +990,7 @@ class Information extends Client_Controller {
 
     public function remove_product($id = null){
         // Check if product has registered in table [team]
-        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id);
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear']);
         if ( $check_product_in_team > 0 ) {
             $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('client/information/products', 'refresh');
@@ -1105,7 +1105,7 @@ class Information extends Client_Controller {
                         'certificate' => $this->input->post('certificate'),
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
-                        // 'certificate' => $image,
+                         'year' => $this->data['eventYear'],
                         // 'is_submit' => 1,
                         'created_at' => $this->author_info['created_at'],
                         'created_by' => $this->author_info['created_by'],
@@ -1175,7 +1175,7 @@ class Information extends Client_Controller {
                         'certificate' => $this->input->post('certificate'),
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
-                        // 'certificate' => $image,
+                        'year' => $this->data['eventYear'],
                         // 'is_submit' => 1,
                         'created_at' => $this->author_info['created_at'],
                         'created_by' => $this->author_info['created_by'],

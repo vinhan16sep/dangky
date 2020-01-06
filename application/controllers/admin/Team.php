@@ -131,7 +131,7 @@ class Team extends Admin_Controller{
         $client_id = $this->input->get('client_id');
         $products = $this->information_model->get_all_product($client_id);
         foreach ($products as $key => $value) {
-            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id']);
+            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id'], $this->data['eventYear']);
             if ( $check_product_in_team > 0 ) {
                 unset($products[$key]);
             }

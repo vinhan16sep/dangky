@@ -29,10 +29,11 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_all_product($id, $limit = NULL, $start = NULL) {
+    public function get_all_product($id, $limit = NULL, $start = NULL, $year) {
         $this->db->select('*');
         $this->db->from('product');
         $this->db->where('client_id', $id);
+        $this->db->where('year', $year);
         $this->db->where('is_deleted', 0);
         $this->db->limit($limit, $start);
         $this->db->order_by("id", "desc");
@@ -131,10 +132,12 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function count_product($id) {
+    public function count_product($id, $year) {
         $query = $this->db->select('*')
             ->from('product')
             ->where('client_id', $id)
+            ->where('year', $year)
+            ->where('is_deleted', 0)
             ->get();
 
         return $query->num_rows();

@@ -21,7 +21,7 @@ class Product extends Admin_Controller{
 		$base_url = base_url('admin/product/index');
 		$per_page = 10;
 		$uri_segment = 4;
-		$total_rows  = $this->information_model->count_product($client_id);
+		$total_rows  = $this->information_model->count_product($client_id, $this->data['eventYear']);
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
         }
@@ -50,7 +50,7 @@ class Product extends Admin_Controller{
 
     public function remove_product($client_id, $id = null){
         // Check if product has registered in table [team]
-        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id);
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear']);
         if ( $check_product_in_team > 0 ) {
             $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('admin/product/index/' . $client_id, 'refresh');
