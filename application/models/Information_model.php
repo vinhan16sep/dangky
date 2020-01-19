@@ -41,6 +41,17 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_all_product_for_client($id, $limit = NULL, $start = NULL) {
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('client_id', $id);
+        $this->db->where('is_deleted', 0);
+        $this->db->limit($limit, $start);
+        $this->db->order_by("id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function get_all_product_and_status($id, $limit = NULL, $start = NULL) {
         $this->db->select('product.*, status.is_final');
         $this->db->from('product');
@@ -662,5 +673,13 @@ class Information_model extends CI_Model {
         }
 
         return $this->db->get()->num_rows();
+    }
+
+    function getAllProductYears(){
+        $query = $this->db->select('year')
+            ->from('product')
+            ->where('is_deleted', 0)
+            ->group_by('year');
+        return $query->get()->result_array();
     }
 }

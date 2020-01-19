@@ -20,7 +20,7 @@ class Information extends Client_Controller {
         $this->load->library('session');
 
         $this->data['user'] = $this->ion_auth->user()->row();
-        $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id);
+        $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id, $this->data['eventYear']);
 
     }
 
@@ -977,7 +977,8 @@ class Information extends Client_Controller {
 
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $this->data['products'] = $this->information_model->get_all_product($this->data['user']->id, $per_page, $this->data['page'], $this->data['eventYear']);
+        $this->data['allYear'] = $this->information_model->getAllProductYears();
+        $this->data['products'] = $this->information_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page']);
 
         $this->render('client/information/list_product_view');
     }

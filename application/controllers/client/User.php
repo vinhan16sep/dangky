@@ -75,7 +75,6 @@ class User extends MY_Controller {
         if($this->form_validation->run()===FALSE) {
             $this->load->helper('form');
             $this->load->view('client/login_view');
-            // $this->render('client/login_view', 'client_master');
         } else {
             $username = $this->input->post('username');
             $email = $this->input->post('email');
@@ -88,17 +87,33 @@ class User extends MY_Controller {
             );
             $result = $this->ion_auth->register($username, $password, $email, $additional_data, $group_ids);
             if($result){
+                $detail = $this->users_model->fetch_by_id($result);
+                $identity = $detail['username'];
+                $this->load->model('information_model');
                 $this->load->model('status_model');
-                $status = array(
-                    'client_id' => $result,
-                    'is_information' => 0,
-                    'is_company' => 0,
-                    'is_product' => 0,
-                    'is_final' => 0
-                );
+
+                $informationExist = $this->information_model->check_exist_information($identity);
+                if($informationExist){
+                    $status = array(
+                        'client_id' => $result,
+                        'is_information' => 1,
+                        'is_company' => 0,
+                        'is_product' => 0,
+                        'is_final' => 0,
+                        'year' => $this->data['eventYear'],
+                    );
+                }else{
+                    $status = array(
+                        'client_id' => $result,
+                        'is_information' => 0,
+                        'is_company' => 0,
+                        'is_product' => 0,
+                        'is_final' => 0,
+                        'year' => $this->data['eventYear'],
+                    );
+                }
                 $this->status_model->insert('status', $status);
             }
-            $detail = $this->users_model->fetch_by_id($result);
             if($result){
                 $this->session->set_flashdata('register_success', 'Cảm ơn Qúy Công ty đã đăng ký tham gia Chương trình Danh hiệu Sao Khuê ' . $this->data['eventYear'] .'.
                                                 Vui lòng truy cập email để kích hoạt tài khoản và khai hồ sơ.');

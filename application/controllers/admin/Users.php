@@ -44,7 +44,7 @@ class Users extends Admin_Controller
             foreach ($users as $key => $value) {
                 $company = $this->information_model->fetch_client_id($value['id']);
                 $users[$key]['member_id'] = $company['member_id'];
-                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id']);
+                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id'], $this->data['eventYear']);
             }
         }
         if($this->data['page'] == 0){
@@ -59,8 +59,6 @@ class Users extends Admin_Controller
         $this->data['group_id'] = $group_id;
         $this->data['group'] = $group_id;
         $this->data['users'] = $users;
-        // echo '<pre>';
-        // print_r($users);die;
         $this->render('admin/users/list_users_view');
     }
 
@@ -92,7 +90,7 @@ class Users extends Admin_Controller
             foreach ($users as $key => $value) {
                 $company = $this->information_model->fetch_client_id($value['id']);
                 $users[$key]['member_id'] = $company['member_id'];
-                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id']);
+                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id'], $this->data['eventYear']);
             }
         }
         if($this->data['page'] == 0){

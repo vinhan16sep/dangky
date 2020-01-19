@@ -36,7 +36,6 @@ class Company extends Admin_Controller{
 		$base_url = base_url('admin/company/index');
 		$per_page = 50;
 		$uri_segment = 4;
-        // echo $total_rows;die;
 
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
@@ -56,6 +55,10 @@ class Company extends Admin_Controller{
                     $member = $this->users_model->fetch_by_id($val);
                     $result[$key]['member_name'][$val] = $member['first_name'].''.$member['last_name'].' ('.$member['username'].')';
                 }
+            }
+            $info = $this->information_model->fetch_company_by_id($value["id"]);
+            if($info){
+                $result[$key]['avatar'] = $info["avatar"];
             }
         }
         if($this->data['page'] == 0){

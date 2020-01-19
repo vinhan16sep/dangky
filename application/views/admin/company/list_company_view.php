@@ -14,19 +14,27 @@
             </form>
             <!-- /.col -->
             <div class="col-md-12">
-                    <div class="tab-content" style="margin-bottom: 40px;">
-                        <?php if ($companies): ?>
+                <div class="tab-content" style="margin-bottom: 40px;">
+                    <?php if ($companies): ?>
                         <div class="post box-body">
                             <table class="table table-striped table-bordered table-condensed">
                                 <th>STT</th>
                                 <th>Tên Doanh Nghiệp</th>
+                                <th>Logo</th>
                                 <th>Người quản lý</th>
                                 <th>Trạng thái</th>
                                 <th style="text-align: center;">Thao Tác</th>
                                 <?php foreach ($companies as $key => $value): ?>
                                     <tr>
                                         <td><?php echo $number-- ?></td>
-                                        <td style="width: 40%;"><?php echo $value['company'] ?></td>
+                                        <td style="width: 20%;"><?php echo $value['company'] ?></td>
+                                        <td style="width: 20%;">
+                                            <?php if ( $value['avatar'] && file_exists('assets/upload/avatar/' . $value['avatar']) ): ?>
+                                                <img style="width: 45% !important;" width="200" height="200" class="profile-user-img img-responsive" src="<?php echo base_url('assets/upload/avatar/') . $value['avatar']; ?>" alt="User profile picture">
+                                            <?php else: ?>
+                                                <img style="width: 45% !important;" width="200" height="200" class="profile-user-img img-responsive" src="<?php echo site_url('assets/public/img/logo.png'); ?>" alt="User profile picture">
+                                            <?php endif ?>
+                                        </td>
                                         <td data-client="<?php echo $value['client_id'] ?>" data-company="<?php echo $value['id'] ?>">
                                             <ul class="select2-selection__rendered ">
                                                 <?php if (!empty($value['member_name'])): ?>
@@ -35,14 +43,14 @@
                                                                 <span class="change-member" data-memberid="<?php echo $k ?>">
                                                                     <i style="color:red;" class="fa fa-close" aria-hidden="true"></i> 
                                                                 </span>
-                                                                <?php echo $val ?>
+                                                            <?php echo $val ?>
                                                         </li>
                                                     <?php endforeach ?>
                                                 <?php endif ?>
                                                 <?php if (empty($value['member_name'])): ?>
                                                     <li style="list-style: none;">Chưa có quản lý</li>
                                                 <?php endif ?>
-                                                
+
                                             </ul>
                                         </td>
                                         <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
@@ -58,11 +66,11 @@
                                 <?php endforeach ?>
                             </table>
                         </div>
-                        <?php else: ?>
-                            <div class="post">Chưa có doanh nghiệp đăng ký!</div>
-                        <?php endif ?>
-                    </div>
-                    <!-- /.tab-content -->
+                    <?php else: ?>
+                        <div class="post">Chưa có doanh nghiệp đăng ký!</div>
+                    <?php endif ?>
+                </div>
+                <!-- /.tab-content -->
                 <div class="col-md-6 col-md-offset-5 page">
                     <?php echo $page_links ?>
                 </div>
