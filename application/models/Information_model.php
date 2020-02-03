@@ -29,7 +29,7 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_all_product($id, $limit = NULL, $start = NULL, $year) {
+    public function get_all_product($id, $limit = NULL, $start = NULL, $year = null) {
         $this->db->select('*');
         $this->db->from('product');
         $this->db->where('client_id', $id);
@@ -52,12 +52,15 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_all_product_and_status($id, $limit = NULL, $start = NULL) {
+    public function get_all_product_and_status($id, $limit = NULL, $start = NULL, $year = null) {
         $this->db->select('product.*, status.is_final');
         $this->db->from('product');
         $this->db->join('status', 'product.client_id = status.client_id');
         $this->db->where('product.client_id', $id);
         $this->db->where('product.is_deleted', 0);
+        if($year != null){
+            $this->db->where('product.year', $year);
+        }
         $this->db->limit($limit, $start);
         $this->db->order_by("product.id", "desc");
 
@@ -72,9 +75,12 @@ class Information_model extends CI_Model {
         return $query->get()->result_array();
     }
 
-    public function get_product() {
+    public function get_product($year = null) {
         $this->db->select('*');
         $this->db->from('product');
+        if($year != null){
+            $this->db->where('year', $year);
+        }
         $this->db->order_by("id", "desc");
 
         return $result = $this->db->get()->result_array();
@@ -126,10 +132,11 @@ class Information_model extends CI_Model {
         return $query->num_rows();
     }
 
-    public function count_companys() {
+    public function count_companys($year = null) {
         $query = $this->db->select('*')
             ->join('users', 'users.id = company.client_id')
             ->from('company')
+            ->where('year', $year)
             ->get();
 
         return $query->num_rows();
@@ -385,11 +392,14 @@ class Information_model extends CI_Model {
         return false;
     }
 
-    public function fetch_all_company_pagination($limit = NULL, $start = NULL) {
+    public function fetch_all_company_pagination($limit = NULL, $start = NULL, $year = null) {
         $this->db->select('company.*, users.company as company, status.is_final as final');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
         $this->db->join('status', 'status.client_id = company.client_id');
+        if($year != null){
+            $this->db->where('company.year', $year);
+        }
         $this->db->limit($limit, $start);
         $this->db->order_by("company.id", "desc");
 
@@ -423,23 +433,27 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->row_array();
     }
 
-    public function count_company_search($search = '') {
+    public function count_company_search($search = '', $year = null) {
         $query = $this->db->select('company.*, users.*')
             ->from('company')
             ->join('users', 'users.id = company.client_id')
             ->like('users.company', $search)
+            ->where('year', $year)
             ->get();
 
         return $query->num_rows();
     }
 
-    public function fetch_all_company_pagination_search($limit = NULL, $start = NULL, $search = '') {
+    public function fetch_all_company_pagination_search($limit = NULL, $start = NULL, $search = '', $year = null) {
         $this->db->select('company.*, users.company as company, status.is_final as final');
         $this->db->from('company');
         $this->db->join('users', 'users.id = company.client_id');
         $this->db->join('status', 'status.client_id = company.client_id');
         $this->db->limit($limit, $start);
         $this->db->like('users.company', $search);
+        if($year != null){
+            $this->db->like('company.year', $year);
+        }
         $this->db->order_by("company.created_at", "desc");
 
         return $result = $this->db->get()->result_array();

@@ -8,7 +8,7 @@
     <section class="content">
 
         <div class="row">
-            <form action="<?php echo base_url('admin/company/index/') ?>" class="form-horizontal col-md-12 col-sm-12 col-xs-12" method="get" style="margin-bottom: 30px;">
+            <form action="<?php echo base_url('admin/company/index/' . $requestYear) ?>" class="form-horizontal col-md-12 col-sm-12 col-xs-12" method="get" style="margin-bottom: 30px;">
                 <input type="text" name="search" value="<?php echo ($keywords != '')? $keywords : '' ?>" placeholder="Tìm Kiếm Doanh Nghiệp..." class="form-control" style=" width: 40%; float: left;margin-right: 5px;">
                 <input type="submit" name="btn-search" value="Tìm Kiếm" class="btn btn-primary" style="float: left">
             </form>
@@ -28,11 +28,11 @@
                                     <tr>
                                         <td><?php echo $number-- ?></td>
                                         <td style="width: 20%;"><?php echo $value['company'] ?></td>
-                                        <td style="width: 20%;">
-                                            <?php if ( $value['avatar'] && file_exists('assets/upload/avatar/' . $value['avatar']) ): ?>
-                                                <img style="width: 45% !important;" width="200" height="200" class="profile-user-img img-responsive" src="<?php echo base_url('assets/upload/avatar/') . $value['avatar']; ?>" alt="User profile picture">
+                                        <td style="width: 10%;">
+                                            <?php if ( isset($value['avatar']) && file_exists('assets/upload/avatar/' . $value['avatar']) ): ?>
+                                                <img style="width: 50% !important;" width="100" height="100" class="profile-user-img img-responsive" src="<?php echo base_url('assets/upload/avatar/') . $value['avatar']; ?>" alt="User profile picture">
                                             <?php else: ?>
-                                                <img style="width: 45% !important;" width="200" height="200" class="profile-user-img img-responsive" src="<?php echo site_url('assets/public/img/logo.png'); ?>" alt="User profile picture">
+                                                <img style="width: 50% !important;" width="100" height="100" class="profile-user-img img-responsive" src="<?php echo site_url('assets/public/img/logo.png'); ?>" alt="User profile picture">
                                             <?php endif ?>
                                         </td>
                                         <td data-client="<?php echo $value['client_id'] ?>" data-company="<?php echo $value['id'] ?>">
@@ -60,7 +60,7 @@
                                         <?php } ?>
                                         <td style="text-align: center;">
                                             <a href="<?php echo base_url('admin/company/detail/' . $value['id']) ?>" class="btn btn-info">Thông tin DN</a>
-                                            <a href="<?php echo base_url('admin/product/index/' . $value['client_id']) ?>" class="btn btn-info">Thông tin SP/DV</a>
+                                            <a href="<?php echo base_url('admin/product/index/' . $value['client_id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin SP/DV</a>
                                         </td>
                                     </tr>
                                 <?php endforeach ?>

@@ -289,7 +289,8 @@
                             <div class="row">
                                 <?php
                                 echo form_error('description', '<div class="error">', '</div>');
-                                echo form_textarea('description', set_value('description', $company['description']), 'class="form-control tinymce-area"');
+//                                echo form_textarea('description', set_value('description', html_entity_decode($company['description'])), 'class="form-control tinymce-area"');
+                                echo form_textarea('description', $company['description'], 'class="form-control tinymce-area" id="description"');
                                 ?>
                             </div>
                         </div>
@@ -531,9 +532,9 @@
                         <div>
                             <a style="display: inline;" href="<?php echo base_url('client/information/company'); ?>" class="btn btn-default pull-left"><b>Quay lại</b></a>
                             <?php
-                                if($status['is_company'] == 0){
-                                    echo form_submit('submit', 'Lưu tạm', 'id="tmpSubmit" class="btn btn-normal pull-right" style="width:30%;display:inline;margin-right:10px !important;"');
-                                }
+                            if($status['is_company'] == 0){
+                                echo form_submit('submit', 'Lưu tạm', 'id="tmpSubmit" class="btn btn-normal pull-right" style="width:30%;display:inline;margin-right:10px !important;"');
+                            }
                             ?>
                             <?php echo form_submit('submit', 'Hoàn thành', 'id="submit" class="btn btn-primary pull-right" style="width:30%;display: inline;"'); ?>
                         </div>

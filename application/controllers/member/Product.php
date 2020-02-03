@@ -171,7 +171,7 @@ class Product extends Member_Controller{
                 $list_products_rating[] = $value['product_id'];
             }
 
-            $team = $this->team_model->fetch_all_team();
+            $team = $this->team_model->fetch_all_team($this->data['eventYear']);
 
             $this->data['number'] = $number;
             $this->data['list_products_rating'] = $list_products_rating;

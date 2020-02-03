@@ -15,13 +15,13 @@ class Product extends Admin_Controller{
         $this->excel = new PHPExcel();
 	}
 
-	public function index($client_id){
+	public function index($client_id, $requestYear){
 		$this->load->library('pagination');
 		$config = array();
 		$base_url = base_url('admin/product/index');
 		$per_page = 10;
-		$uri_segment = 4;
-		$total_rows  = $this->information_model->count_product($client_id, $this->data['eventYear']);
+		$uri_segment = 5;
+		$total_rows  = $this->information_model->count_product($client_id, $requestYear);
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
         }
@@ -29,19 +29,17 @@ class Product extends Admin_Controller{
 
 		$this->data['client'] = $this->ion_auth->user((int) $client_id)->row();
         $this->data['page_links'] = $this->pagination->create_links();
-        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+        $this->data['page'] = ($this->uri->segment(6)) ? $this->uri->segment(6) : 0;
         // Kiem tra neu cong ty da chinh thuc gui thong tin len ban to chuc, admin moi duoc chon linh vuc chinh cho san pham
-        $result = $this->information_model->get_all_product_and_status($client_id, $per_page, $this->data['page']);
+        $result = $this->information_model->get_all_product_and_status($client_id, $per_page, $this->data['page'], $requestYear);
         foreach ($result as $key => $value) {
-            $new_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $value['id']);
+            $new_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $value['id'], null, $requestYear);
             if ($new_rating > 0) {
                 $result[$key]['is_rating'] = 1;
             }else{
                 $result[$key]['is_rating'] = 0;
             }
         }
-        // echo '<pre>';
-        // print_r($result);die;
 
         $this->data['products'] = $result;
 

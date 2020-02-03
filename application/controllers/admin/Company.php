@@ -15,7 +15,7 @@ class Company extends Admin_Controller{
         $this->excel = new PHPExcel();
 	}
 
-	public function index(){
+	public function index($year = null){
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -27,15 +27,15 @@ class Company extends Admin_Controller{
             $keywords = $this->input->get('search');
         }
         $this->data['keywords'] = $keywords;
-        $total_rows  = $this->information_model->count_companys();
+        $total_rows  = $this->information_model->count_companys($year);
         if($keywords != ''){
-            $total_rows  = $this->information_model->count_company_search($keywords);
+            $total_rows  = $this->information_model->count_company_search($keywords, $year);
         }
 		$this->load->library('pagination');
 		$config = array();
-		$base_url = base_url('admin/company/index');
+		$base_url = base_url('admin/company/index/' . $year);
 		$per_page = 50;
-		$uri_segment = 4;
+		$uri_segment = 5;
 
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
@@ -43,10 +43,10 @@ class Company extends Admin_Controller{
         $this->pagination->initialize($config);
 
         $this->data['page_links'] = $this->pagination->create_links();
-        $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) - 1 : 0;
-        $result = $this->information_model->fetch_all_company_pagination($per_page, $per_page*$this->data['page']);
+        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) - 1 : 0;
+        $result = $this->information_model->fetch_all_company_pagination($per_page, $per_page*$this->data['page'], $year);
         if($keywords != ''){
-            $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords);
+            $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year);
         }
         foreach ($result as $key => $value) {
             $member_id = json_decode($value['member_id']);
@@ -71,6 +71,7 @@ class Company extends Admin_Controller{
 
          $this->data['number'] = $number;
         $this->data['companies'] = $result;
+        $this->data['requestYear'] = $year;
 		$this->render('admin/company/list_company_view');
 	}
 

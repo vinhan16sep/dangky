@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo base_url('admin/team/index'); ?>">
+                            <a href="<?php echo base_url('admin/team/index/2020'); ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                 Nhóm hội đồng
                             </a>
@@ -66,9 +66,9 @@
                         </li>
                         <?php } ?>
                         <li class="active">
-                            <a href="<?php echo base_url('admin/company'); ?>">
+                            <a href="<?php echo base_url('admin/company/index/' . $eventYear); ?>">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
-                                Thông tin
+                                Thông tin <?= $eventYear; ?>
                             </a>
                         </li>
                     </ul>

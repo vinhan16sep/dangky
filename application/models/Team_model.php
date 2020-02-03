@@ -6,9 +6,10 @@ class Team_model extends CI_Model {
         parent::__construct();
     }
 
-    public function fetch_all_team(){
+    public function fetch_all_team($year = null){
         $this->db->select('*')
             ->from('team')
+            ->where('year', $year)
             ->where('is_deleted', 0);
 
         return $this->db->get()->result_array();
