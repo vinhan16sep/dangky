@@ -74,6 +74,7 @@
                                 'Nội dung số' => 'Nội dung số',
                                 'Điện toán đám mây và Big Data' => 'Điện toán đám mây và Big Data',
                                 'An toàn thông tin' => 'An toàn thông tin',
+                                'Chuyển đổi Số' => 'Chuyển đổi Số',
                                 'Các lĩnh vực khác' => 'Các lĩnh vực khác'
                             );
                             echo '<label id="service[]-error" class="error" for="service[]"></label><br />';

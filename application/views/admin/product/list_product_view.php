@@ -90,7 +90,7 @@
                             </table>
                         </div>
                         <?php else: ?>
-                            <div class="post">Chưa có doanh nghiệp đăng ký!</div>
+                            <div class="post">Doanh nghiệp chưa đăng ký sản phẩm nào!</div>
                         <?php endif ?>
                     </div>
                     <!-- /.tab-content -->

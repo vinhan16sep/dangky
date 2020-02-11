@@ -235,6 +235,7 @@ class Information extends Client_Controller {
 
     public function company(){
         if($this->input->get('year')){
+            $this->data['selectedYear'] = $this->input->get('year');
             $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
             $this->render('client/information/detail_company_view');
         }else{
@@ -248,7 +249,6 @@ class Information extends Client_Controller {
                 $config[$key] = $value;
             }
             $this->pagination->initialize($config);
-
             $this->data['page_links'] = $this->pagination->create_links();
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
             $this->data['companies'] =  $this->information_model->fetch_list_company_by_identity($this->data['user']->username);

@@ -61,7 +61,9 @@ class Information_model extends CI_Model {
         if($year != null){
             $this->db->where('product.year', $year);
         }
+        $this->db->where('status.is_final', 1);
         $this->db->limit($limit, $start);
+        $this->db->group_by('product.id');
         $this->db->order_by("product.id", "desc");
 
         return $result = $this->db->get()->result_array();
@@ -145,6 +147,15 @@ class Information_model extends CI_Model {
     public function count_all_product() {
         $query = $this->db->select('*')
             ->from('product')
+            ->get();
+
+        return $query->num_rows();
+    }
+
+    public function count_all_current_year_product($year) {
+        $query = $this->db->select('*')
+            ->from('product')
+            ->where('year', $year)
             ->get();
 
         return $query->num_rows();
@@ -399,6 +410,7 @@ class Information_model extends CI_Model {
         $this->db->join('status', 'status.client_id = company.client_id');
         if($year != null){
             $this->db->where('company.year', $year);
+            $this->db->where('status.year', $year);
         }
         $this->db->limit($limit, $start);
         $this->db->order_by("company.id", "desc");

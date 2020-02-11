@@ -72,6 +72,7 @@
                                 'Nội dung số' => 'Nội dung số',
                                 'Điện toán đám mây và Big Data' => 'Điện toán đám mây và Big Data',
                                 'An toàn thông tin' => 'An toàn thông tin',
+                                'Chuyển đổi Số' => 'Chuyển đổi Số',
                                 'Các lĩnh vực khác' => 'Các lĩnh vực khác'
                             );
                             echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
@@ -298,7 +299,14 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('price', '<div class="error">', '</div>');
-                            echo form_input('price', set_value('price'), 'class="form-control"');
+//                            echo form_input('price', set_value('price'), 'class="form-control"');
+                            echo form_textarea(array(
+                                'name' => 'price',
+                                'id' => 'price',
+                                'value' => set_value('price'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
                             ?>
                         </div>
                     </div>
