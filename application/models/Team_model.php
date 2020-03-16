@@ -25,7 +25,7 @@ class Team_model extends CI_Model {
 
         return false;
     }
-    
+
     public function update($table, $id, $information){
         $this->db->set($information)
             ->where('id', $id)
@@ -37,7 +37,7 @@ class Team_model extends CI_Model {
 
         return false;
     }
-    
+
     public function fetch_by_id($table, $id = null){
         $this->db->select('*');
         $this->db->from($table);
@@ -49,20 +49,20 @@ class Team_model extends CI_Model {
     public function get_current_user_team($user_id){
         $query = $this->db->select('*')
             ->from('team')
+            ->where('is_deleted', 0)
             ->like('member_id', ',' . $user_id . ',')
-            ->or_where('leader_id', $user_id)
-            ->where('is_deleted', 0);
+            ->or_where('leader_id', $user_id);
         return $query->get()->result_array();
     }
 
     public function get_current_leader($user_id){
         $query = $this->db->select('*')
             ->from('team')
-            ->where('leader_id', $user_id)
-            ->where('is_deleted', 0);
+            ->where('is_deleted', 0)
+            ->where('leader_id', $user_id);
         return $query->get()->result_array();
     }
-  
+
     public function check_exist_product_id($table, $product_id='', $year){
         $this->db->select('*');
         $this->db->from($table);

@@ -63,7 +63,7 @@ class New_rating extends Member_Controller{
         $this->data['detail'] = $detail;
         $this->data['company'] = $company;
         $this->data['main_service'] = $main_service;
-        
+
         $this->load->model('users_model');
         $user = $this->ion_auth->user()->row();
         if ($user->member_role == 'manager') {
@@ -71,7 +71,7 @@ class New_rating extends Member_Controller{
         }else{
             $this->load->model('users_model');
             $user_id = $user->id;
-            
+
             //check member
             if ($user->member_role == 'member') {
                 $team = $this->team_model->get_by_user_id('team', $user_id);
@@ -97,7 +97,7 @@ class New_rating extends Member_Controller{
                 $this->session->set_flashdata('main_service_message', 'Sản phẩm không tồn tại hoặc không thuộc nhóm của bạn');
                 redirect('member','refresh');
             }
-            
+
 
             $this->data['rating'] = $this->new_rating_model->check_rating_exist_for_list('new_rating', $detail['id'], $this->ion_auth->user()->row()->id);
         }
@@ -136,6 +136,7 @@ class New_rating extends Member_Controller{
                 'comment' => $comment,
                 'rating' => json_encode($request),
                 'total' => $total,
+                'year' => date('Y'),
                 'is_submit' => 1
             );
             $insert = $this->new_rating_model->insert('new_rating', $data);
@@ -146,7 +147,7 @@ class New_rating extends Member_Controller{
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
         }
-        
+
     }
     public function rating_temp(){
         $request = $this->input->get();
@@ -173,7 +174,7 @@ class New_rating extends Member_Controller{
                 ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
         }else{
             $check_rating_temp = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $member_id);
-            
+
             if ( $check_rating_temp ) {
                 $data = array(
                     'rating' => json_encode($request),
@@ -195,6 +196,7 @@ class New_rating extends Member_Controller{
                     'comment' => $comment,
                     'rating' => json_encode($request),
                     'total' => $total,
+                    'year' => date('Y'),
                     'is_submit' => 0
                 );
                 $insert = $this->new_rating_model->insert('new_rating', $data);
@@ -205,9 +207,9 @@ class New_rating extends Member_Controller{
                 return $this->output->set_status_header(200)
                     ->set_output(json_encode(array('message' => 'Có lỗi khi lưu điểm')));
             }
-            
+
         }
-        
+
     }
 
     public function update_rating($id){
@@ -302,7 +304,7 @@ class New_rating extends Member_Controller{
         $detail = $this->information_model->fetch_by_id('product', $product_id);
         $company = $this->information_model->fetch_by_id('users', $detail['client_id']);
         $rating = $this->new_rating_model->fetch_by_product_id_and_member_id($product_id, $member_id);
-        
+
         $this->data['detail'] = $detail;
         $this->data['company'] = $company;
         $this->data['rating'] = $rating;
@@ -322,7 +324,7 @@ class New_rating extends Member_Controller{
         unset($request['product_id']);
         unset($request['csrf_sitecom_token']);
         unset($request['total']);
-        
+
         $data = array(
             'rating' => json_encode($request),
             'total' => $total

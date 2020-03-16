@@ -1454,6 +1454,8 @@ class Information extends Client_Controller {
 
         }
         $str = str_replace(' ','_',$str);
+        $str = str_replace('.','-',$str);
+        $str = str_replace(':','-',$str);
 
         return $str;
 

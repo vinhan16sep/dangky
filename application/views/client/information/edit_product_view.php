@@ -215,7 +215,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2017 (triệu đồng)', 'income_2016');
+                            echo form_label('Doanh thu của SP/GP/DV năm ' . (intval($eventYear) - 2) . ' (triệu đồng)', 'income_2016');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -233,7 +233,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2018 (triệu đồng)', 'income_2017');
+                            echo form_label('Doanh thu của SP/GP/DV năm ' . (intval($eventYear) - 1) . ' (triệu đồng', 'income_2017');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">

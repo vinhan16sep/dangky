@@ -12,6 +12,7 @@ class Team extends Admin_Controller{
 		$this->load->model('information_model');
         $this->load->model('users_model');
         $this->load->model('team_model');
+        $this->load->model('status_model');
         $this->load->model('new_rating_model');
 
         $this->excel = new PHPExcel();
@@ -25,7 +26,7 @@ class Team extends Admin_Controller{
 
 	    $this->data['leaders'] = $this->users_model->fetch_all_leaders();
         $this->data['members'] = $this->users_model->fetch_all_members();
-        $this->data['companys'] = $this->information_model->fetch_all_company_pagination(null, null, $this->data['eventYear']);
+        $this->data['companys'] = $this->information_model->fetch_all_company_for_team(null, null, $this->data['eventYear']);
 	    $products = $this->information_model->get_product($this->data['eventYear']);
         
         if ($products) {
@@ -135,7 +136,8 @@ class Team extends Admin_Controller{
         $products = $this->information_model->get_all_product($client_id, null, null, $this->data['eventYear']);
         foreach ($products as $key => $value) {
             $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id'], $this->data['eventYear']);
-            if ( $check_product_in_team > 0 ) {
+            $is_company_submitted = $this->status_model->check_company_submitted($client_id, $this->data['eventYear']);
+            if ( $check_product_in_team > 0 || !$is_company_submitted ) {
                 unset($products[$key]);
             }
         }

@@ -418,6 +418,22 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function fetch_all_company_for_team($limit = NULL, $start = NULL, $year = null) {
+        $this->db->select('company.*, users.company as company, status.is_final as final');
+        $this->db->from('company');
+        $this->db->join('users', 'users.id = company.client_id');
+        $this->db->join('status', 'status.client_id = company.client_id');
+        if($year != null){
+            $this->db->where('company.year', $year);
+            $this->db->where('status.year', $year);
+            $this->db->where('status.is_final', 1);
+        }
+        $this->db->limit($limit, $start);
+        $this->db->order_by("company.id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function fetch_company_by_id($id = null){
         $this->db->select('company.*, users.*, information.*, company.id as company_id');
         $this->db->from('company');
@@ -479,22 +495,23 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->row_array();
     }
 
-    public function get_all_for_export($type, $client_id = null){
+    public function get_all_for_export($type, $client_id = null, $requestYear){
         $this->db->select('*');
         $this->db->from($type);
         if($client_id != null){
             $this->db->where('client_id', $client_id);
         }
-        // $this->db->where('is_submit', 1);
+        $this->db->where('year', $requestYear);
         $this->db->order_by("id", "asc");
 
         return $result = $this->db->get()->result_array();
     }
 
-    public function get_all_product_for_export($type, $client_id = null){
+    public function get_all_product_for_export($type, $client_id = null, $year){
         $this->db->select('users.company, product.*');
         $this->db->from($type);
         $this->db->join('users', 'users.id = product.client_id');
+        $this->db->where('product.year', $year);
         $this->db->order_by("product.client_id", "asc");
 
         return $result = $this->db->get()->result_array();
@@ -669,9 +686,10 @@ class Information_model extends CI_Model {
         return $query->get()->result_array();
     }
 
-    public function fetch_product_by_client_ids_with_search_pagination($client_ids = array(), $limit = NULL, $start = NULL, $search = '', $main_service = '') {
-        $this->db->select('id, client_id, name, main_service');
+    public function fetch_product_by_client_ids_with_search_pagination($year, $client_ids = array(), $limit = NULL, $start = NULL, $search = '', $main_service = '') {
+        $this->db->select('id, client_id, name, main_service, year');
         $this->db->from('product');
+        $this->db->where('year', $year);
         $this->db->where('is_deleted', 0);
         $this->db->where_in('client_id', $client_ids);
         $this->db->limit($limit, $start);
@@ -686,9 +704,10 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
-    public function count_product_by_client_ids_with_search($client_ids = array(), $search = '', $main_service = '') {
+    public function count_product_by_client_ids_with_search($year, $client_ids = array(), $search = '', $main_service = '') {
         $this->db->select('*');
         $this->db->from('product');
+        $this->db->where('year', $year);
         $this->db->where('is_deleted', 0);
         $this->db->where_in('client_id', $client_ids);
         if ( $main_service != '') {

@@ -6,23 +6,24 @@ require_once APPPATH."/third_party/PHPExcel.php";
 class Company extends Admin_Controller{
 
     private $excel = null;
-	
-	function __construct(){
-		parent::__construct();
-		$this->load->model('information_model');
+
+    function __construct(){
+        parent::__construct();
+        $this->load->model('information_model');
         $this->load->model('users_model');
+        $this->load->model('status_model');
 
         $this->excel = new PHPExcel();
-	}
+    }
 
-	public function index($year = null){
+    public function index($year = null){
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-		$this->load->model('users_model');
-		$members = $this->users_model->fetch_all_member();
-		$this->data['members'] = $members;
-		$keywords = '';
+        $this->load->model('users_model');
+        $members = $this->users_model->fetch_all_member();
+        $this->data['members'] = $members;
+        $keywords = '';
         if($this->input->get('search')){
             $keywords = $this->input->get('search');
         }
@@ -31,13 +32,13 @@ class Company extends Admin_Controller{
         if($keywords != ''){
             $total_rows  = $this->information_model->count_company_search($keywords, $year);
         }
-		$this->load->library('pagination');
-		$config = array();
-		$base_url = base_url('admin/company/index/' . $year);
-		$per_page = 50;
-		$uri_segment = 5;
+        $this->load->library('pagination');
+        $config = array();
+        $base_url = base_url('admin/company/index/' . $year);
+        $per_page = 50;
+        $uri_segment = 5;
 
-		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
+        foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
         }
         $this->pagination->initialize($config);
@@ -62,28 +63,29 @@ class Company extends Admin_Controller{
             }
         }
         if($this->data['page'] == 0){
-             $number = $total_rows;
-         }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
-             $number = $total_rows - ($this->data['page'] * $per_page);
-         }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
-             $number = $total_rows - ($this->data['page'] * $per_page);
-         };
+            $number = $total_rows;
+        }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+            $number = $total_rows - ($this->data['page'] * $per_page);
+        };
 
-         $this->data['number'] = $number;
+        $this->data['number'] = $number;
         $this->data['companies'] = $result;
         $this->data['requestYear'] = $year;
-		$this->render('admin/company/list_company_view');
-	}
+        $this->render('admin/company/list_company_view');
+    }
 
-	public function detail($id){
+    public function detail($id, $requestYear){
         $this->load->model('users_model');
         $company = $this->information_model->fetch_company_by_id($id);
         $member_id = json_decode($company['member_id']);
         $members = $this->users_model->fetch_all_member_with_where($member_id);
         $this->data['members'] = $members;
-		$this->data['company'] = $company;
-		$this->render('admin/company/detail_company_view');
-	}
+        $this->data['company'] = $company;
+        $this->data['requestYear'] = $requestYear;
+        $this->render('admin/company/detail_company_view');
+    }
 
     public function detail_by_client($client_id){
         $company = $this->information_model->fetch_company_by_client_id($client_id);
@@ -92,8 +94,8 @@ class Company extends Admin_Controller{
     }
 
     public function change_member(){
-    	$member_id = $this->input->get('member_id');
-    	$client_id = $this->input->get('client_id');
+        $member_id = $this->input->get('member_id');
+        $client_id = $this->input->get('client_id');
         $company_id = $this->input->get('company_id');
 
         $member = $this->users_model->fetch_by_id($member_id);
@@ -117,12 +119,12 @@ class Company extends Admin_Controller{
             $newUpload[] = $value;
         }
         $member_id_json = json_encode($newUpload);
-    	$where = array('member_id' => $member_id_json);
+        $where = array('member_id' => $member_id_json);
         $success = false;
         if($this->information_model->update('company', $client_id, $where) == true && $this->users_model->update_company($member_id, $user_data)){
             $success = true;
         }
-    	$this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
+        $this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
     }
 
     public function add_member()
@@ -150,7 +152,7 @@ class Company extends Admin_Controller{
         }else{
             $upload[] = $member_id;
         }
-        
+
         $upload = json_encode($upload);
         $where = array('member_id' => $upload);
         $success = false;
@@ -159,8 +161,8 @@ class Company extends Admin_Controller{
         }
         $this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
     }
-  
-    public function export(){
+
+    public function export($requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
@@ -170,7 +172,12 @@ class Company extends Admin_Controller{
         $this->load->database();
 
         // get all users in array formate
-        $data = $this->information_model->get_all_for_export('company');
+        $data = $this->information_model->get_all_for_export('company', null, $requestYear);
+        foreach($data as $key => $val){
+            if(!$this->status_model->check_company_submitted($val['client_id'], $requestYear)){
+                unset($data[$key]);
+            }
+        }
         $data_export = array(
             '0' => array(
                 'company' => 'Doanh nghiệp',
@@ -186,33 +193,33 @@ class Company extends Admin_Controller{
                 'c_email' => 'Email',
                 'c_phone' => 'Di động',
                 'link' => 'Link download PĐK của DN',
-                'equity_2015' => 'Vốn điều lệ năm 2015 (triệu VND)',
-                'equity_2016' => 'Vốn điều lệ năm 2016 (triệu VND)',
-                'equity_2017' => 'Vốn điều lệ năm 2017 (triệu VND)',
-                'owner_equity_2015' => 'Vốn chủ sở hữu (triệu VND) 2015',
-                'owner_equity_2016' => 'Vốn chủ sở hữu (triệu VND) 2016',
-                'owner_equity_2017' => 'Vốn chủ sở hữu (triệu VND) 2017',
-                'total_income_2015' => 'Tổng doanh thu DN 2015',
-                'total_income_2016' => 'Tổng doanh thu DN 2016',
-                'total_income_2017' => 'Tổng doanh thu DN 2017',
-                'software_income_2015' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) 2015',
-                'software_income_2016' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) 2016',
-                'software_income_2017' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) 2017',
-                'it_income_2015' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) 2015',
-                'it_income_2016' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) 2016',
-                'it_income_2017' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) 2017',
-                'export_income_2015' => 'Tổng DT xuất khẩu (USD) 2015',
-                'export_income_2016' => 'Tổng DT xuất khẩu (USD) 2016',
-                'export_income_2017' => 'Tổng DT xuất khẩu (USD) 2017',
-                'total_labor_2015' => 'Tổng số lao động của DN 2015',
-                'total_labor_2016' => 'Tổng số lao động của DN 2016',
-                'total_labor_2017' => 'Tổng số lao động của DN 2017',
-                'total_ltv_2015' => 'Tổng số LTV 2015',
-                'total_ltv_2016' => 'Tổng số LTV 2016',
-                'total_ltv_2017' => 'Tổng số LTV 2017',
-                'description' => 'Giới thiệu chung',
+                'equity_2015' => 'Vốn điều lệ năm ' . ($requestYear - 3) . ' (triệu VND)',
+                'equity_2016' => 'Vốn điều lệ năm ' . ($requestYear - 2) . ' (triệu VND)',
+                'equity_2017' => 'Vốn điều lệ năm ' . ($requestYear - 1) . ' (triệu VND)',
+                'owner_equity_2015' => 'Vốn chủ sở hữu (triệu VND) ' . ($requestYear - 3),
+                'owner_equity_2016' => 'Vốn chủ sở hữu (triệu VND) ' . ($requestYear - 2),
+                'owner_equity_2017' => 'Vốn chủ sở hữu (triệu VND) ' . ($requestYear - 1),
+                'total_income_2015' => 'Tổng doanh thu DN ' . ($requestYear - 3),
+                'total_income_2016' => 'Tổng doanh thu DN ' . ($requestYear - 2),
+                'total_income_2017' => 'Tổng doanh thu DN ' . ($requestYear - 1),
+                'software_income_2015' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) ' . ($requestYear - 3),
+                'software_income_2016' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) ' . ($requestYear - 2),
+                'software_income_2017' => 'Tổng DT lĩnh vực sx phần mềm (Triệu VND) ' . ($requestYear - 1),
+                'it_income_2015' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) ' . ($requestYear - 3),
+                'it_income_2016' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) ' . ($requestYear - 2),
+                'it_income_2017' => 'Tổng doanh thu dịch vụ CNTT (triệu VND) ' . ($requestYear - 1),
+                'export_income_2015' => 'Tổng DT xuất khẩu (USD) ' . ($requestYear - 3),
+                'export_income_2016' => 'Tổng DT xuất khẩu (USD) ' . ($requestYear - 2),
+                'export_income_2017' => 'Tổng DT xuất khẩu (USD) ' . ($requestYear - 1),
+                'total_labor_2015' => 'Tổng số lao động của DN ' . ($requestYear - 3),
+                'total_labor_2016' => 'Tổng số lao động của DN ' . ($requestYear - 2),
+                'total_labor_2017' => 'Tổng số lao động của DN ' . ($requestYear - 1),
+                'total_ltv_2015' => 'Tổng số LTV ' . ($requestYear - 3),
+                'total_ltv_2016' => 'Tổng số LTV ' . ($requestYear - 2),
+                'total_ltv_2017' => 'Tổng số LTV ' . ($requestYear - 1),
                 'main_service' => 'SP dịch vụ chính của DN',
-                'main_market' => 'Thị trường chính'
+                'main_market' => 'Thị trường chính',
+                'description' => 'Giới thiệu chung',
             )
         );
 
@@ -256,9 +263,9 @@ class Company extends Admin_Controller{
                 'total_ltv_2015' => $company['total_ltv_1'],
                 'total_ltv_2016' => $company['total_ltv_2'],
                 'total_ltv_2017' => $company['total_ltv_3'],
-                'description' => $company['description'],
                 'main_service' => implode(", ", (array)json_decode($company['main_service'])),
-                'main_market' => implode(", ", (array)json_decode($company['main_market']))
+                'main_market' => implode(", ", (array)json_decode($company['main_market'])),
+                'description' => html_entity_decode(strip_tags($company['description'])),
             );
         }
 
@@ -281,8 +288,8 @@ class Company extends Admin_Controller{
         //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-    
-    public function export_product(){
+
+    public function export_product($requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
@@ -292,7 +299,12 @@ class Company extends Admin_Controller{
         $this->load->database();
 
         // get all users in array formate
-        $data = $this->information_model->get_all_product_for_export('product');
+        $data = $this->information_model->get_all_product_for_export('product', null, $requestYear);
+        foreach($data as $key => $val){
+            if(!$this->status_model->check_company_submitted($val['client_id'], $requestYear)){
+                unset($data[$key]);
+            }
+        }
         $data_export = array(
             '0' => array(
                 'company' => 'Doanh nghiệp',
@@ -303,8 +315,8 @@ class Company extends Admin_Controller{
                 'security' => 'Bảo mật của sản phẩm',
                 'positive' => 'Các ưu điểm nổi trội của SP/GP/DV',
                 'compare' => 'So sánh với các SP/GP/DV khác',
-                'income_2016' => 'Doanh thu của SP/GP/DV năm 2016',
-                'income_2017' => 'Doanh thu của SP/GP/DV năm 2017',
+                'income_2016' => 'Doanh thu của SP/GP/DV năm ' . ($requestYear - 2),
+                'income_2017' => 'Doanh thu của SP/GP/DV năm ' . ($requestYear - 1),
                 'area' => 'Thị phần của SP/giải pháp/DV',
                 'open_date' => 'Ngày thương mại hoá/ra mắt dịch vụ',
                 'price' => 'Giá SP/GP/DV',
@@ -320,20 +332,20 @@ class Company extends Admin_Controller{
                 'company' => $extra_info['company'],
                 'name' => $extra_info['name'],
                 'service' => (is_array(json_decode($extra_info['service']))) ? implode(", ", (array)json_decode($extra_info['service'])) : '',
-                'functional' => $extra_info['functional'],
-                'process' => $extra_info['process'],
-                'security' => $extra_info['security'],
-                'positive' => $extra_info['positive'],
-                'compare' => $extra_info['compare'],
+                'functional' => html_entity_decode(strip_tags($extra_info['functional'])),
+                'process' => html_entity_decode(strip_tags($extra_info['process'])),
+                'security' => html_entity_decode(strip_tags($extra_info['security'])),
+                'positive' => html_entity_decode(strip_tags($extra_info['positive'])),
+                'compare' => html_entity_decode(strip_tags($extra_info['compare'])),
                 'income_2016' => $extra_info['income_2016'],
                 'income_2017' => $extra_info['income_2017'],
-                'area' => $extra_info['area'],
+                'area' => html_entity_decode(strip_tags($extra_info['area'])),
                 'open_date' => $extra_info['open_date'],
-                'price' => $extra_info['price'],
-                'customer' => $extra_info['customer'],
-                'after_sale' => $extra_info['after_sale'],
-                'team' => $extra_info['team'],
-                'award' => $extra_info['award']
+                'price' => html_entity_decode(strip_tags($extra_info['price'])),
+                'customer' => html_entity_decode(strip_tags($extra_info['customer'])),
+                'after_sale' => html_entity_decode(strip_tags($extra_info['after_sale'])),
+                'team' => html_entity_decode(strip_tags($extra_info['team'])),
+                'award' => html_entity_decode(strip_tags($extra_info['award'])),
             );
         }
 
@@ -358,7 +370,7 @@ class Company extends Admin_Controller{
     }
     public function export_company_detail($id){
         //activate worksheet number 1
-        
+
 
         // $sheet_basic = $this->excel->createSheet(0);
         // $sheet_basic->setTitle('Thong Tin Co Ban');
@@ -375,12 +387,12 @@ class Company extends Admin_Controller{
         // get all users in array formate
         $select_basic = 'website, legal_representative, lp_position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
         $data_basic = $this->information_model->get_detail_information_with_select_by_id($id);
-        
+
         $data = $this->information_model->fetch_company_by_id($id);
 
         // Get user info
         $target_user = $this->users_model->fetch_by_id($data['client_id']);
-        
+
         $data_basic_export = array(
             '0' => array(
                 'website' => 'Website',
@@ -436,6 +448,7 @@ class Company extends Admin_Controller{
                 'total_ltv_3' => 'Tổng số LTV '. $this->data['rule3Year'][2],
                 'main_service' => 'SP dịch vụ chính của DN',
                 'main_market' => 'Thị trường chính',
+                'description' => 'Giới thiệu chung',
             )
         );
         $str_main_service = '';
@@ -454,7 +467,7 @@ class Company extends Admin_Controller{
             }
         }
 
-        
+
         $data_export[] = array(
             'equity_1' => $data['equity_1'],
             'equity_2' => $data['equity_2'],
@@ -482,6 +495,7 @@ class Company extends Admin_Controller{
             'total_ltv_3' => $data['total_ltv_3'],
             'main_service' => $str_main_service,
             'main_market' => $str_main_market,
+            'description' => html_entity_decode(strip_tags($data['description'])),
         );
         $sheet->fromArray($data_export);
 

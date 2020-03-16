@@ -23,33 +23,33 @@
 
                 <li class="header">MENU</li>
                 <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
-                <li class="active">
-                    <a href="<?php echo base_url('admin/dashboard'); ?>">
-                        <i class="fa fa-tachometer" aria-hidden="true"></i>
-                        <span>Tổng quan</span>
-                        <span class="pull-right-container"></span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href=""><i class="fa fa-list" aria-hidden="true"></i> Hội đồng
-                        <span class="pull-right-container">
+                    <li class="active">
+                        <a href="<?php echo base_url('admin/dashboard'); ?>">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span>Tổng quan</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href=""><i class="fa fa-list" aria-hidden="true"></i> Hội đồng
+                            <span class="pull-right-container">
                         </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active">
-                            <a href="<?php echo base_url('admin/users/index_member/2') ?>">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                Tài khoản
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="<?php echo base_url('admin/team/index/2020'); ?>">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                Nhóm hội đồng
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index_member/2') ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Tài khoản
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/team/index/2020'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Nhóm hội đồng
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 <?php } ?>
                 <li class="active">
                     <a href=""> Doanh nghiệp
@@ -58,35 +58,37 @@
                     </a>
                     <ul class="treeview-menu">
                         <?php if($this->ion_auth->user()->row()->email == 'admin@admin.com'){ ?>
-                        <li class="active">
-                            <a href="<?php echo base_url('admin/users/index/3'); ?>">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                Tài khoản
-                            </a>
-                        </li>
+                            <li class="active">
+                                <a href="<?php echo base_url('admin/users/index/3'); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Tài khoản
+                                </a>
+                            </li>
                         <?php } ?>
                         <li class="active">
-                            <a href="<?php echo base_url('admin/company/index/' . $eventYear); ?>">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                Thông tin <?= $eventYear; ?>
-                            </a>
+                            <?php for($i = $eventYear; $i >= ($eventYear - 2); $i--){ ?>
+                                <a href="<?php echo base_url('admin/company/index/' . $i); ?>">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                    Thông tin <?= $i; ?>
+                                </a>
+                            <?php } ?>
                         </li>
                     </ul>
                 </li>
-<!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
-<!--                    <a href="--><?php //echo base_url('client/information/company'); ?><!--">-->
-<!--                        <i class="fa fa-bars" aria-hidden="true"></i>-->
-<!--                        <span>TT doanh nghiệp</span>-->
-<!--                        <span class="pull-right-container"></span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
-<!--                    <a href="--><?php //echo base_url('client/information/products'); ?><!--">-->
-<!--                        <i class="fa fa-bars" aria-hidden="true"></i>-->
-<!--                        <span>TT sản phẩm</span>-->
-<!--                        <span class="pull-right-container"></span>-->
-<!--                    </a>-->
-<!--                </li>-->
+                <!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
+                <!--                    <a href="--><?php //echo base_url('client/information/company'); ?><!--">-->
+                <!--                        <i class="fa fa-bars" aria-hidden="true"></i>-->
+                <!--                        <span>TT doanh nghiệp</span>-->
+                <!--                        <span class="pull-right-container"></span>-->
+                <!--                    </a>-->
+                <!--                </li>-->
+                <!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->
+                <!--                    <a href="--><?php //echo base_url('client/information/products'); ?><!--">-->
+                <!--                        <i class="fa fa-bars" aria-hidden="true"></i>-->
+                <!--                        <span>TT sản phẩm</span>-->
+                <!--                        <span class="pull-right-container"></span>-->
+                <!--                    </a>-->
+                <!--                </li>-->
                 <!---->
                 <!--                <li class="--><?php //echo ($active == 'subcribe')? 'active' : '' ?><!--">-->
                 <!--                    <a href="--><?php //echo base_url('admin/subcribe'); ?><!--">-->

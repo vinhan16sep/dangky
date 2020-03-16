@@ -1,8 +1,8 @@
 <!--main content start-->
 <div class="content-wrapper" style="min-height: 916px;">
     <div class="box-body pad table-responsive">
-        <h3>Danh sách doanh nghiệp</h3><a type="button" href="<?php echo site_url('admin/company/export'); ?>" class="btn btn-success">EXPORT DATA DOANH NGHIỆP</a>
-        <a type="button" href="<?php echo site_url('admin/company/export_product'); ?>" class="btn btn-success">EXPORT DATA SẢN PHẨM</a>
+        <h3>Danh sách doanh nghiệp</h3><a type="button" href="<?php echo site_url('admin/company/export/' . $requestYear); ?>" class="btn btn-success">EXPORT DATA DOANH NGHIỆP</a>
+        <a type="button" href="<?php echo site_url('admin/company/export_product/' . $requestYear); ?>" class="btn btn-success">EXPORT DATA SẢN PHẨM</a>
     </div>
 
     <section class="content">
@@ -59,7 +59,7 @@
                                             <td><?php echo ($value['final'] == 0) ? '<i style="color:red;" class="fa fa-times-circle" aria-hidden="true"></i>' : '<i style="color:green;" class="fa fa-check-circle" aria-hidden="true"></i>'; ?></td>
                                         <?php } ?>
                                         <td style="text-align: center;">
-                                            <a href="<?php echo base_url('admin/company/detail/' . $value['id']) ?>" class="btn btn-info">Thông tin DN</a>
+                                            <a href="<?php echo base_url('admin/company/detail/' . $value['id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin DN</a>
                                             <a href="<?php echo base_url('admin/product/index/' . $value['client_id'] . '/' . $requestYear) ?>" class="btn btn-info">Thông tin SP/DV</a>
                                         </td>
                                     </tr>

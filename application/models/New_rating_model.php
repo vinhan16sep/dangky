@@ -125,15 +125,16 @@ class New_rating_model extends CI_Model {
         return false;
     }
 
-    public function check_rating_exist_by_product_id($table, $product_id, $user_id = null, $year){
-        $query = $this->db->select('*')
-            ->from($table)
-            ->where('product_id', $product_id)
-            ->where('member_id', $user_id)
-            ->where('is_submit', 1)
-            ->where('year', $year)
-            ->get();
-        return $query->num_rows();
+    public function check_rating_exist_by_product_id($table, $product_id, $user_id = null, $year = null){
+        $this->db->select('*');
+            $this->db->from($table);
+            $this->db->where('product_id', $product_id);
+            $this->db->where('member_id', $user_id);
+            $this->db->where('is_submit', 1);
+            if($year != null){
+                $this->db->where('year', $year);
+            }
+        return $this->db->get()->num_rows();
     }
 
     public function get_rating_exist_by_product_id($table, $product_id, $user_id){

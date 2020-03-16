@@ -12,7 +12,7 @@
                     <h1 style="text-align:center;">THÔNG TIN SẢN PHẨM</h1>
                 </div>
                 <?php
-                echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'product-form'));
+                echo form_open_multipart('client/information/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
                 <div class="form-group">
                     <div class="row">
@@ -634,5 +634,11 @@
     //     });
     //     $('#product-form').submit();
     // });
+
+    $('#product-form').submit(function(e){
+        //disable the submit button
+        $("#submit").attr("disabled", true);
+        $("#tmpSubmit").attr("disabled", true);
+    });
 
 </script>

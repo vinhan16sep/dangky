@@ -37,7 +37,11 @@
                                         );
                                     ?>
                                     <td><h4>Nhóm sản phẩm </h4></td>
-                                    <td><h4><?php echo $main_service . ': ' . $main_services[$main_service]; ?></h4></td>
+                                    <?php if($main_service): ?>
+                                        <td><h4><?php echo $main_service . ': ' . $main_services[$main_service]; ?></h4></td>
+                                    <?php else: ?>
+                                        <td><h4>Chưa có lĩnh vực chính</h4></td>
+                                    <?php endif; ?>
                                 </tr>
                             </table>
                         </div>

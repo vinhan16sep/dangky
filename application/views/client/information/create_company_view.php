@@ -927,5 +927,10 @@
         var anonymous = $(this).val();
         $('#anonymous-service').attr('value', anonymous);
     })
+    $('#company-form').submit(function(e){
+        //disable the submit button
+        $("#submit").attr("disabled", true);
+        $("#tmpSubmit").attr("disabled", true);
+    });
 
 </script>
