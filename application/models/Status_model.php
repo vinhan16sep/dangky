@@ -16,7 +16,7 @@ class Status_model extends CI_Model {
 
         return false;
     }
-
+    
     public function update($type, $id, $information){
         $this->db->set($information)
             ->where('client_id', $id)
@@ -28,7 +28,7 @@ class Status_model extends CI_Model {
 
         return false;
     }
-
+    
     public function fetch_by_client_id($id = null, $eventYear = null){
         $this->db->select('*');
         $this->db->from('status');

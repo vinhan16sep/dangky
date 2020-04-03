@@ -6,17 +6,77 @@ require_once APPPATH."/third_party/PHPExcel.php";
 class Company extends Admin_Controller{
 
     private $excel = null;
-
-    function __construct(){
-        parent::__construct();
-        $this->load->model('information_model');
+	
+	function __construct(){
+		parent::__construct();
+		$this->load->model('information_model');
         $this->load->model('users_model');
         $this->load->model('status_model');
 
         $this->excel = new PHPExcel();
-    }
+	}
 
-    public function index($year = null){
+	public function index($year = null){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+		$this->load->model('users_model');
+		$members = $this->users_model->fetch_all_member();
+		$this->data['members'] = $members;
+		$keywords = '';
+        if($this->input->get('search')){
+            $keywords = $this->input->get('search');
+        }
+        $this->data['keywords'] = $keywords;
+        $total_rows  = $this->information_model->count_companys($year);
+        if($keywords != ''){
+            $total_rows  = $this->information_model->count_company_search($keywords, $year);
+        }
+		$this->load->library('pagination');
+		$config = array();
+		$base_url = base_url('admin/company/index/' . $year);
+		$per_page = 50;
+		$uri_segment = 5;
+
+		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
+            $config[$key] = $value;
+        }
+        $this->pagination->initialize($config);
+
+        $this->data['page_links'] = $this->pagination->create_links();
+        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) - 1 : 0;
+        $result = $this->information_model->fetch_all_company_pagination($per_page, $per_page*$this->data['page'], $year);
+        if($keywords != ''){
+            $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year);
+        }
+        foreach ($result as $key => $value) {
+            $member_id = json_decode($value['member_id']);
+            if($member_id){
+                foreach ($member_id as $k => $val) {
+                    $member = $this->users_model->fetch_by_id($val);
+                    $result[$key]['member_name'][$val] = $member['first_name'].''.$member['last_name'].' ('.$member['username'].')';
+                }
+            }
+            $info = $this->information_model->fetch_company_by_id($value["id"]);
+            if($info){
+                $result[$key]['avatar'] = $info["avatar"];
+            }
+        }
+        if($this->data['page'] == 0){
+             $number = $total_rows;
+         }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
+             $number = $total_rows - ($this->data['page'] * $per_page);
+         }elseif($this->data['page'] > 0 && $total_rows > ($this->data['page'] + 1) * $per_page){
+             $number = $total_rows - ($this->data['page'] * $per_page);
+         };
+
+         $this->data['number'] = $number;
+        $this->data['companies'] = $result;
+        $this->data['requestYear'] = $year;
+		$this->render('admin/company/list_company_view');
+	}
+	
+	public function income($year = null){
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -34,7 +94,7 @@ class Company extends Admin_Controller{
         }
         $this->load->library('pagination');
         $config = array();
-        $base_url = base_url('admin/company/index/' . $year);
+        $base_url = base_url('admin/company/income/' . $year);
         $per_page = 50;
         $uri_segment = 5;
 
@@ -73,19 +133,19 @@ class Company extends Admin_Controller{
         $this->data['number'] = $number;
         $this->data['companies'] = $result;
         $this->data['requestYear'] = $year;
-        $this->render('admin/company/list_company_view');
+        $this->render('admin/company/income_company_view');
     }
 
-    public function detail($id, $requestYear){
+	public function detail($id, $requestYear){
         $this->load->model('users_model');
         $company = $this->information_model->fetch_company_by_id($id);
         $member_id = json_decode($company['member_id']);
         $members = $this->users_model->fetch_all_member_with_where($member_id);
         $this->data['members'] = $members;
-        $this->data['company'] = $company;
+		$this->data['company'] = $company;
         $this->data['requestYear'] = $requestYear;
-        $this->render('admin/company/detail_company_view');
-    }
+		$this->render('admin/company/detail_company_view');
+	}
 
     public function detail_by_client($client_id){
         $company = $this->information_model->fetch_company_by_client_id($client_id);
@@ -94,8 +154,8 @@ class Company extends Admin_Controller{
     }
 
     public function change_member(){
-        $member_id = $this->input->get('member_id');
-        $client_id = $this->input->get('client_id');
+    	$member_id = $this->input->get('member_id');
+    	$client_id = $this->input->get('client_id');
         $company_id = $this->input->get('company_id');
 
         $member = $this->users_model->fetch_by_id($member_id);
@@ -119,12 +179,12 @@ class Company extends Admin_Controller{
             $newUpload[] = $value;
         }
         $member_id_json = json_encode($newUpload);
-        $where = array('member_id' => $member_id_json);
+    	$where = array('member_id' => $member_id_json);
         $success = false;
         if($this->information_model->update('company', $client_id, $where) == true && $this->users_model->update_company($member_id, $user_data)){
             $success = true;
         }
-        $this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
+    	$this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
     }
 
     public function add_member()
@@ -152,7 +212,7 @@ class Company extends Admin_Controller{
         }else{
             $upload[] = $member_id;
         }
-
+        
         $upload = json_encode($upload);
         $where = array('member_id' => $upload);
         $success = false;
@@ -161,7 +221,7 @@ class Company extends Admin_Controller{
         }
         $this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
     }
-
+  
     public function export($requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
@@ -196,9 +256,9 @@ class Company extends Admin_Controller{
                 'equity_2015' => 'Vốn điều lệ năm ' . ($requestYear - 3) . ' (triệu VND)',
                 'equity_2016' => 'Vốn điều lệ năm ' . ($requestYear - 2) . ' (triệu VND)',
                 'equity_2017' => 'Vốn điều lệ năm ' . ($requestYear - 1) . ' (triệu VND)',
-                'owner_equity_2015' => 'Vốn chủ sở hữu (triệu VND) ' . ($requestYear - 3),
-                'owner_equity_2016' => 'Vốn chủ sở hữu (triệu VND) ' . ($requestYear - 2),
-                'owner_equity_2017' => 'Vốn chủ sở hữu (triệu VND) ' . ($requestYear - 1),
+                'owner_equity_2015' => 'Tổng tài sản (triệu VND) ' . ($requestYear - 3),
+                'owner_equity_2016' => 'Tổng tài sản (triệu VND) ' . ($requestYear - 2),
+                'owner_equity_2017' => 'Tổng tài sản (triệu VND) ' . ($requestYear - 1),
                 'total_income_2015' => 'Tổng doanh thu DN ' . ($requestYear - 3),
                 'total_income_2016' => 'Tổng doanh thu DN ' . ($requestYear - 2),
                 'total_income_2017' => 'Tổng doanh thu DN ' . ($requestYear - 1),
@@ -288,7 +348,7 @@ class Company extends Admin_Controller{
         //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-
+    
     public function export_product($requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
@@ -370,7 +430,7 @@ class Company extends Admin_Controller{
     }
     public function export_company_detail($id){
         //activate worksheet number 1
-
+        
 
         // $sheet_basic = $this->excel->createSheet(0);
         // $sheet_basic->setTitle('Thong Tin Co Ban');
@@ -387,12 +447,12 @@ class Company extends Admin_Controller{
         // get all users in array formate
         $select_basic = 'website, legal_representative, lp_position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
         $data_basic = $this->information_model->get_detail_information_with_select_by_id($id);
-
+        
         $data = $this->information_model->fetch_company_by_id($id);
 
         // Get user info
         $target_user = $this->users_model->fetch_by_id($data['client_id']);
-
+        
         $data_basic_export = array(
             '0' => array(
                 'website' => 'Website',
@@ -425,9 +485,9 @@ class Company extends Admin_Controller{
                 'equity_1' => 'Vốn điều lệ năm '. $this->data['rule3Year'][0] .' (triệu VND)',
                 'equity_2' => 'Vốn điều lệ năm '. $this->data['rule3Year'][1] .' (triệu VND)',
                 'equity_3' => 'Vốn điều lệ năm '. $this->data['rule3Year'][2] .' (triệu VND)',
-                'owner_equity_1' => 'Vốn chủ sở hữu '. $this->data['rule3Year'][0] .' (triệu VND)',
-                'owner_equity_2' => 'Vốn chủ sở hữu '. $this->data['rule3Year'][1] .' (triệu VND)',
-                'owner_equity_3' => 'Vốn chủ sở hữu '. $this->data['rule3Year'][2] .' (triệu VND)',
+                'owner_equity_1' => 'Tổng tài sản '. $this->data['rule3Year'][0] .' (triệu VND)',
+                'owner_equity_2' => 'Tổng tài sản '. $this->data['rule3Year'][1] .' (triệu VND)',
+                'owner_equity_3' => 'Tổng tài sản '. $this->data['rule3Year'][2] .' (triệu VND)',
                 'total_income_1' => 'Tổng doanh thu DN '. $this->data['rule3Year'][0],
                 'total_income_2' => 'Tổng doanh thu DN '. $this->data['rule3Year'][1],
                 'total_income_3' => 'Tổng doanh thu DN '. $this->data['rule3Year'][2],
@@ -467,7 +527,7 @@ class Company extends Admin_Controller{
             }
         }
 
-
+        
         $data_export[] = array(
             'equity_1' => $data['equity_1'],
             'equity_2' => $data['equity_2'],

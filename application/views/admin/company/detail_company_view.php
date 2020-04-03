@@ -77,13 +77,13 @@
                                     <a><i class="fa fa-money margin-r-5"></i> Vốn điều lệ năm <?php echo $requestYear - 1 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['equity_3'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu <?php echo $requestYear - 3 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['owner_equity_1'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng tài sản <?php echo $requestYear - 3 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['owner_equity_1'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu <?php echo $requestYear - 2 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['owner_equity_2'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng tài sản <?php echo $requestYear - 2 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['owner_equity_2'] ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Vốn chủ sở hữu <?php echo $requestYear - 1 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['owner_equity_3'] ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Tổng tài sản <?php echo $requestYear - 1 ?> (triệu VND)</a> <p class="pull-right"><?php echo $company['owner_equity_3'] ?></p>
                                 </li>
 
                                 <li class="list-group-item">

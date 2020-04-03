@@ -926,7 +926,7 @@
     $('.input-anonymous-service').change(function(){
         var anonymous = $(this).val();
         $('#anonymous-service').attr('value', anonymous);
-    })
+    });
     $('#company-form').submit(function(e){
         //disable the submit button
         $("#submit").attr("disabled", true);

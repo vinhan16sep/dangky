@@ -634,7 +634,6 @@
     //     });
     //     $('#product-form').submit();
     // });
-
     $('#product-form').submit(function(e){
         //disable the submit button
         $("#submit").attr("disabled", true);

@@ -4,19 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH."/third_party/PHPExcel.php";
 
 class Product extends Member_Controller{
-
-    function __construct(){
-        parent::__construct();
-        $this->load->model('information_model');
-        $this->load->model('team_model');
+	
+	function __construct(){
+		parent::__construct();
+		$this->load->model('information_model');
+		$this->load->model('team_model');
         $this->load->library('ion_auth');
         $this->load->model('status_model');
         $this->load->model('new_rating_model');
 
         $this->excel = new PHPExcel();
-    }
+	}
 
-    public function index(){
+	public function index(){
         $this->load->model('users_model');
         $user = $this->ion_auth->user()->row();
         if ($user->member_role == 'manager') {
@@ -49,10 +49,10 @@ class Product extends Member_Controller{
                     $client_ids[] = $value['client_id'];
                 }
             }
-
+            
 
             $total_rows  = 0;
-
+            
 
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) - 1 : 0;
             if ($team_search != null) {
@@ -83,14 +83,14 @@ class Product extends Member_Controller{
                 }
             }else{
                 $total_rows  = $this->information_model->count_product_by_client_ids_with_search($this->data['eventYear'], $client_ids, $keywords, $main_service_search);
-
-
+            
+                
             }
             $per_page = 50;
             $this->load->library('pagination');
             $config = array();
             $base_url = base_url('member/product/index');
-
+            
             $uri_segment = 4;
             foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
                 $config[$key] = $value;
@@ -104,7 +104,7 @@ class Product extends Member_Controller{
             }else{
                 $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, null, null, $keywords, $main_service_search);
             }
-
+            
             foreach ($result as $key => $value) {
                 $team = $this->team_model->get_by_product_id($value['id']);
                 if ($team) {
@@ -126,8 +126,8 @@ class Product extends Member_Controller{
                 if ($total_rating != 0) {
                     $result[$key]['rating_medium'] = $rating_medium;
                 }else{
-                    $result[$key]['rating_medium'] = 0;
-
+                    $result[$key]['rating_medium'] = 0;   
+                    
                 }
                 $result[$key]['year'] = $value['year'];
             }
@@ -179,7 +179,7 @@ class Product extends Member_Controller{
 
             $this->render('member/list_product_by_manager_view');
         }
-    }
+	}
 
     public function detail_rating($team_id='', $product_id=''){
         if ($this->ion_auth->user()->row()->member_role != 'manager') {

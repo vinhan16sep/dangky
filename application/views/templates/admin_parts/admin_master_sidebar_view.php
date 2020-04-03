@@ -73,6 +73,12 @@
                                 </a>
                             <?php } ?>
                         </li>
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/company/income/2020'); ?>">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                Doanh thu 2020
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!--                <li class="--><?php //echo ($active == 'menu')? 'active' : '' ?><!--">-->

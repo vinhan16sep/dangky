@@ -454,10 +454,11 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->row_array();
     }
 
-    public function fetch_company_by_client_id_2($id = null){
+    public function fetch_company_by_client_id_2($id = null, $eventYear){
         $this->db->select('*');
         $this->db->from('company');
         $this->db->where('client_id', $id);
+        $this->db->where('year', $eventYear);
         return $result = $this->db->get()->row_array();
     }
 

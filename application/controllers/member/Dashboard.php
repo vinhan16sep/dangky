@@ -28,7 +28,7 @@ class Dashboard extends Member_Controller {
                 if(isset($team_value['product_list'])){
                     foreach((array) $team_value['product_list'] as $product_key => $product_value){
                         $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
-                        $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
+                        $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id'], $this->data['eventYear']);
 
                         (array) $team[$team_key]['product_list'][$product_key]['members_rating_total'] = 'Dành cho trưởng nhóm';
 
@@ -44,6 +44,9 @@ class Dashboard extends Member_Controller {
                     }
                 }
             }
+            
+                        // echo '<pre>';
+                        // print_r($team);die;
             $this->data['team'] = $team;
             $this->data['user_id'] = $user->id;
 
@@ -65,7 +68,7 @@ class Dashboard extends Member_Controller {
                         (array) $team[$team_key]['product_list'][$product_key]['members_rating_total'] = ($rated_member > 0) ? round($total / $rated_member, 2) : "Chưa có";
 
                         $company_name = $this->users_model->fetch_by_id($product_value['client_id']);
-                        $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id']);
+                        $company_info = $this->information_model->fetch_company_by_client_id_2($product_value['client_id'], $this->data['eventYear']);
 
                         (array) $team[$team_key]['product_list'][$product_key]['company_name'] = $company_name['company'];
                         (array) $team[$team_key]['product_list'][$product_key]['company_id'] = $company_info['id'];
@@ -109,6 +112,8 @@ class Dashboard extends Member_Controller {
 
     public function get_personal_products($user_id){
         $list_team = $this->team_model->get_current_user_team($user_id);
+        // echo '<pre>';
+        // print_r($list_team);die;
         if ( !empty($list_team) ) {
             foreach($list_team as $key => $value){
                 $output = array();
@@ -121,6 +126,8 @@ class Dashboard extends Member_Controller {
                     }
                     if($product_ids){
                         $products = $this->information_model->get_personal_products($product_ids);
+                        // echo '<pre>';
+                        // print_r($products);die;
                         if ($products) {
                             foreach($product_ids as $k => $val){
                                 foreach ($products as $it => $item) {

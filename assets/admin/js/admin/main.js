@@ -14,7 +14,7 @@
   });
 
   $(window).on('load', function(){
-
+    
     if($('textarea').hasClass('txt_hide')){
       $('.mce-toolbar').hide();
       tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
@@ -112,7 +112,7 @@ $('.btn-remove').click(function(e){
         data: {id : client_id, image_id : image_id}
     })
   }
-
+  
   return false;
 });
 
@@ -370,6 +370,9 @@ $(document).ready(function(){
         theme: "modern",
         block_formats: 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
         height: 300,
+        // entity_encoding : "raw",
+        // element_format :"html",
+        // encoding: "xml"
         // relative_urls: false,
         // remove_script_host: false,
         // forced_root_block : false,
@@ -427,7 +430,7 @@ $('.btn-delete').click(function(event){
             }
         });
     }
-
+    
 });
 
 //delete all
@@ -452,7 +455,7 @@ $('.btn-delete-all').click(function(){
                     $.each(ids, function(index, id){
                         $( '.remove-' + id ).fadeOut();
                     })
-
+                    
                 }
             },
             error: function(jqXHR, exception){
