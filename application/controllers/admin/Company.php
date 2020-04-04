@@ -110,8 +110,6 @@ class Company extends Admin_Controller{
         if($keywords != ''){
             $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year);
         }
-        // echo '<pre>';
-        // print_r($result);die;
         foreach ($result as $key => $value) {
             $member_id = json_decode($value['member_id']);
             if($member_id){
