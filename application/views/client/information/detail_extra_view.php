@@ -49,18 +49,27 @@
                                 </div>
                             </div>
                             <ul class="list-group list-group-unbordered">
+                                
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Tên đơn vị</a> <p class="pull-right"><?php echo $user->company; ?></p>
                                 </li>
+
                                 <li class="list-group-item">
                                     <a><i class="fa fa-user margin-r-5"></i> Tên người đại diện pháp luật</a> <p class="pull-right"><?php echo $submitted['legal_representative']; ?></p>
                                 </li>
+
                                 <li class="list-group-item">
                                     <a><i class="fa fa-star margin-r-5"></i> Chức danh</a> <p class="pull-right"><?php echo $submitted['lp_position']; ?></p>
                                 </li>
+
                                 <li class="list-group-item">
                                     <a><i class="fa fa-envelope margin-r-5"></i> Email</a> <p class="pull-right"><?php echo $submitted['lp_email']; ?></p>
                                 </li>
+
+                                <li class="list-group-item">
+                                    <a><i class="fa fa-envelope margin-r-5"></i> Address</a> <p class="pull-right"><?php echo $submitted['address']; ?></p>
+                                </li>
+
                                 <li class="list-group-item">
                                     <a><i class="fa fa-mobile margin-r-5"></i> Di động</a> <p class="pull-right"><?php echo $submitted['lp_phone']; ?></p>
                                 </li>

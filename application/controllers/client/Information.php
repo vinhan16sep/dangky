@@ -74,6 +74,9 @@ class Information extends Client_Controller {
             'min_length' => '%s tối thiểu %s ký tự.',
             'max_length' => '%s tối đa %s ký tự.',
         ));
+        $this->form_validation->set_rules('address', 'Địa chỉ', 'trim|required', array(
+            'required' => '%s không được trống.',
+        ));
 //        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -103,6 +106,7 @@ class Information extends Client_Controller {
                     'c_email' => $this->input->post('c_email'),
                     'c_phone' => $this->input->post('c_phone'),
                     'website' => $this->input->post('website'),
+                    'address' => $this->input->post('address'),
 //                    'link' => $this->input->post('link'),
                     'identity' => $this->data['user']->username,
 //                    'is_submit' => 1,
@@ -174,6 +178,9 @@ class Information extends Client_Controller {
             'min_length' => '%s tối thiểu %s ký tự.',
             'max_length' => '%s tối đa %s ký tự.',
         ));
+        $this->form_validation->set_rules('address', 'Địa chỉ', 'trim|required', array(
+            'required' => '%s không được trống.',
+        ));
 //        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
@@ -207,6 +214,7 @@ class Information extends Client_Controller {
                     'c_email' => $this->input->post('c_email'),
                     'c_phone' => $this->input->post('c_phone'),
                     'website' => $this->input->post('website'),
+                    'address' => $this->input->post('address'),
 //                    'link' => $this->input->post('link'),
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
