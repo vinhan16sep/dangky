@@ -44,7 +44,7 @@ class Users extends Admin_Controller
             foreach ($users as $key => $value) {
                 $company = $this->information_model->fetch_client_id($value['id']);
                 $users[$key]['member_id'] = $company['member_id'];
-                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id']);
+                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id'], $this->data['eventYear']);
             }
         }
         if($this->data['page'] == 0){
@@ -90,7 +90,7 @@ class Users extends Admin_Controller
             foreach ($users as $key => $value) {
                 $company = $this->information_model->fetch_client_id($value['id']);
                 $users[$key]['member_id'] = $company['member_id'];
-                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id']);
+                $users[$key]['status'] = $this->status_model->fetch_by_client_id($value['user_id'], $this->data['eventYear']);
             }
         }
         if($this->data['page'] == 0){
@@ -313,7 +313,7 @@ class Users extends Admin_Controller
         $this->data['users'] = $this->users_model->fetch_all_client($id);
         $this->render('admin/users/list_client_of_member_view');
     }
-    
+
     public function open_final($client_id){
         $information = array(
             'is_information' => 0,

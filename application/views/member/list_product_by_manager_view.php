@@ -51,6 +51,7 @@
                             <div class="post box-body">
                                 <table class="table table-striped table-bordered table-condensed">
                                     <th>STT</th>
+                                    <th>Năm</th>
                                     <th>Tên sản phẩm / dịch vụ</th>
                                     <th>Nhóm chấm giải</th>
                                     <th>Trạng thái</th>
@@ -59,6 +60,9 @@
                                     <?php foreach ($result as $key => $value): ?>
                                     <tr>
                                         <td><?php echo $number-- ?></td>
+                                        <td>
+                                            <?php echo $value['year'] ?>
+                                        </td>
                                         <td style="width: 40%;"><a href="<?php echo base_url('member/product/detail/' . $value['id']) ?>"><?php echo $value['name'] ?></a></td>
                                         <td>
                                            <?php echo $value['team'] ?> 

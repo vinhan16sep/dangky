@@ -19,6 +19,8 @@ class MY_Controller extends CI_Controller {
         $this->data['active'] = $this->uri->segment(2);
         $this->data['sub_active'] = $this->uri->segment(3);
         $this->data['icon_active'] = $this->uri->segment(4);
+
+        $this->data['eventYear'] = date('Y');
     }
 
     protected function render($the_view = NULL, $template = 'master') {
@@ -164,7 +166,7 @@ class Admin_Controller extends MY_Controller {
             'modified_by' => $this->ion_auth->user()->row()->email
         );
 
-        $this->data['eventYear'] = (date('m') == 12) ? (date('Y') + 1) : date('Y');
+        $this->data['eventYear'] = date('Y');
         $this->data['rule3Year'] = array(
             $this->data['eventYear'] - 3,
             $this->data['eventYear'] - 2,
@@ -289,7 +291,7 @@ class Member_Controller extends MY_Controller {
             'modified_by' => $this->ion_auth->user()->row()->email
         );
 
-        $this->data['eventYear'] = (date('m') == 12) ? (date('Y') + 1) : date('Y');
+        $this->data['eventYear'] = date('Y');
         $this->data['rule3Year'] = array(
             $this->data['eventYear'] - 3,
             $this->data['eventYear'] - 2,
@@ -402,7 +404,7 @@ class Client_Controller extends MY_Controller {
         $this->data['user_email'] = $this->ion_auth->user()->row()->email;
         $this->data['identity'] = $this->ion_auth->user()->row()->username;
         $this->data['page_title'] = 'Administrator area';
-        $this->data['eventYear'] = (date('m') == 12) ? (date('Y') + 1) : date('Y');
+        $this->data['eventYear'] = date('Y');
         $this->data['rule3Year'] = array(
             $this->data['eventYear'] - 3,
             $this->data['eventYear'] - 2,
@@ -410,7 +412,7 @@ class Client_Controller extends MY_Controller {
         );
 
         $this->load->model('status_model');
-        $this->data['status'] = $this->status_model->fetch_by_client_id($this->ion_auth->user()->row()->id);
+        $this->data['status'] = $this->status_model->fetch_by_client_id($this->ion_auth->user()->row()->id, $this->data['eventYear']);
 
         $this->load->model('information_model');
         $this->data['company_submitted'] = $this->information_model->fetch_by_identity('company', $this->data['identity']);
@@ -428,7 +430,7 @@ class Client_Controller extends MY_Controller {
             'modified_by' => $this->ion_auth->user()->row()->email
         );
 
-        $this->data['eventYear'] = (date('m') == 12) ? (date('Y') + 1) : date('Y');
+        $this->data['eventYear'] = date('Y');
         $this->data['rule3Year'] = array(
             $this->data['eventYear'] - 3,
             $this->data['eventYear'] - 2,

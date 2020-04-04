@@ -177,6 +177,27 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <div class="col-sm-3 col-md-3 col-sx-12">
+                            <?php
+                            echo form_label('Address', 'address');
+                            ?>
+                        </div>
+                        <div class="col-sm-9 col-md-9 col-sx-12">
+                            <?php
+                                echo form_error('address', '<div class="error">', '</div>');
+                                echo form_textarea(array(
+                                    'name' => 'address',
+                                    'id' => 'address',
+                                    'value' => set_value('address'),
+                                    'rows' => '3',
+                                    'class' => "form-control"
+                                ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-sm-6 col-md-6 col-sx-12"><strong>Lưu ý:</strong> <span style="color: red">(*)</span> là các trường cần nhập thông tin</div>
                     </div>
                 </div>

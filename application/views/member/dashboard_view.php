@@ -29,10 +29,10 @@
                                                     <div class="post box-body">
                                                         <table class="table table-striped table-bordered table-condensed">
                                                             <tr>
-                                                                <td style="font-weight:bold;color: #31708f;; width: 5%">STT</td>
+                                                                <td style="font-weight:bold;color: #31708f; width: 5%">STT</td>
                                                                 <td style="font-weight:bold;color: #31708f;">Tên sản phẩm</td>
                                                                 <td style="font-weight:bold;color: #31708f;">Doanh nghiệp</td>
-                                                                <td style="font-weight:bold;color: #31708f;">Nhóm lĩnh vực chính</td>
+                                                                <td style="font-weight:bold;color: #31708f; width: 23%">Nhóm lĩnh vực chính</td>
                                                                 <td style="font-weight:bold;color: #31708f; width: 7%">Trạng thái</td>
                                                                 <td style="font-weight:bold;color: #31708f; width: 7%">Điểm</td>
                                                                 <td style="font-weight:bold;color: #31708f; width: 7%">Điểm TB</td>
@@ -106,4 +106,3 @@
 
     </section>
 </div>
-

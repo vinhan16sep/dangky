@@ -355,7 +355,7 @@ function deleteItem(id, url){
 
 
 switch(window.location.origin){
-    case 'http://dangky.danhhieusaokhue.vn/':
+    case 'http://dangky.danhhieusaokhue.vn':
         var HOSTNAME = 'http://dangky.danhhieusaokhue.vn/';
         break;
     default:
@@ -370,9 +370,12 @@ $(document).ready(function(){
         theme: "modern",
         block_formats: 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
         height: 300,
-        relative_urls: false,
-        remove_script_host: false,
-        forced_root_block : false,
+        // entity_encoding : "raw",
+        // element_format :"html",
+        // encoding: "xml"
+        // relative_urls: false,
+        // remove_script_host: false,
+        // forced_root_block : false,
         plugins: [
             "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",

@@ -12,7 +12,7 @@
                     <h1 style="text-align:center;">THÔNG TIN SẢN PHẨM</h1>
                 </div>
                 <?php
-                echo form_open_multipart('', array('class' => 'form-horizontal', 'id' => 'product-form'));
+                echo form_open_multipart('client/information/create_product', array('class' => 'form-horizontal', 'id' => 'product-form'));
                 ?>
                 <div class="form-group">
                     <div class="row">
@@ -72,6 +72,7 @@
                                 'Nội dung số' => 'Nội dung số',
                                 'Điện toán đám mây và Big Data' => 'Điện toán đám mây và Big Data',
                                 'An toàn thông tin' => 'An toàn thông tin',
+                                'Chuyển đổi Số' => 'Chuyển đổi Số',
                                 'Các lĩnh vực khác' => 'Các lĩnh vực khác'
                             );
                             echo '<label id="service[]-error" class="error" for="service[]"></label><br />';
@@ -226,7 +227,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2017 (triệu đồng)', 'income_2016');
+                            echo form_label('Doanh thu của SP/GP/DV năm ' . (intval($eventYear) - 2) . ' (triệu đồng)', 'income_2016');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -241,7 +242,7 @@
                     <div class="row">
                         <div class="col-sm-3 col-md-3 col-sx-12">
                             <?php
-                            echo form_label('Doanh thu của SP/GP/DV năm 2018 (triệu đồng', 'income_2017');
+                            echo form_label('Doanh thu của SP/GP/DV năm ' . (intval($eventYear) - 1) . ' (triệu đồng', 'income_2017');
                             ?>
                         </div>
                         <div class="col-sm-9 col-md-9 col-sx-12">
@@ -298,7 +299,14 @@
                         <div class="col-sm-9 col-md-9 col-sx-12">
                             <?php
                             echo form_error('price', '<div class="error">', '</div>');
-                            echo form_input('price', set_value('price'), 'class="form-control"');
+//                            echo form_input('price', set_value('price'), 'class="form-control"');
+                            echo form_textarea(array(
+                                'name' => 'price',
+                                'id' => 'price',
+                                'value' => set_value('price'),
+                                'rows' => '3',
+                                'class' => "form-control tinymce-area"
+                            ));
                             ?>
                         </div>
                     </div>
@@ -445,7 +453,7 @@
         }else{
             $('.group-1').slideUp();
         }
-        
+
     });
     $('.btn-group-4').click(function(){
         if($(this).prop("checked") == true){
@@ -453,7 +461,7 @@
         }else{
             $('.group-4').slideUp();
         }
-        
+
     });
     // function make_sure(){
     //     if($('input[name="is_submit"]').is(':checked') === true){
@@ -626,5 +634,10 @@
     //     });
     //     $('#product-form').submit();
     // });
+    $('#product-form').submit(function(e){
+        //disable the submit button
+        $("#submit").attr("disabled", true);
+        $("#tmpSubmit").attr("disabled", true);
+    });
 
 </script>

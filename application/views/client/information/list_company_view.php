@@ -45,7 +45,7 @@
                                             foreach ($companies as $key => $value):
                                                 echo '<tr>';
                                                 echo '<td>' . ($key + 1) . '</td>';
-                                                echo '<td><a href="javascript:void(0);">' . $value['year'] . '</a></td>';
+                                                echo '<td><a href="' . base_url('client/information/company?year=' . $value['year']) . '">' . $value['year'] . '</a></td>';
                                                 if($eventYear == $value['year']){ ?>
                                                     <td style="text-align: center;width:110px;">
                                                         <a style="width:132px;" href="<?php echo base_url('client/information/company?year=' . $value['year']); ?>" class="btn btn-primary btn-block">Xem thông tin</a>

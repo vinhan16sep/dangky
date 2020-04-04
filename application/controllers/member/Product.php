@@ -42,7 +42,7 @@ class Product extends Member_Controller{
             $this->data['team_search'] = $team_search;
             $this->data['main_service_search'] = $main_service_search;
 
-            $status = $this->status_model->fetch_by_is_final(1);
+            $status = $this->status_model->fetch_by_is_final(1, $this->data['eventYear']);
             $client_ids = [];
             if ($status) {
                 foreach ($status as $key => $value) {
@@ -55,10 +55,8 @@ class Product extends Member_Controller{
             
 
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) - 1 : 0;
-
             if ($team_search != null) {
-                $product_by_client = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, null, null, $keywords, $main_service_search);
-
+                $product_by_client = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, null, null, $keywords, $main_service_search);
                 if ($product_by_client) {
                     foreach ($product_by_client as $key => $value) {
                         $team = $this->team_model->get_by_product_id($value['id']);
@@ -84,7 +82,9 @@ class Product extends Member_Controller{
                     $total_rows  = 0;
                 }
             }else{
-                $total_rows  = $this->information_model->count_product_by_client_ids_with_search($client_ids, $keywords, $main_service_search);
+                $total_rows  = $this->information_model->count_product_by_client_ids_with_search($this->data['eventYear'], $client_ids, $keywords, $main_service_search);
+            
+                
             }
             $per_page = 50;
             $this->load->library('pagination');
@@ -100,11 +100,10 @@ class Product extends Member_Controller{
             $this->data['page_links'] = $this->pagination->create_links();
             $result =  array();
             if ($team_search == null && $team_search == '') {
-                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, $per_page, $per_page*$this->data['page'], $keywords, $main_service_search);
+                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, $per_page, $per_page*$this->data['page'], $keywords, $main_service_search);
             }else{
-                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($client_ids, null, null, $keywords, $main_service_search);
+                $result = $this->information_model->fetch_product_by_client_ids_with_search_pagination($this->data['eventYear'], $client_ids, null, null, $keywords, $main_service_search);
             }
-            
             
             foreach ($result as $key => $value) {
                 $team = $this->team_model->get_by_product_id($value['id']);
@@ -130,7 +129,7 @@ class Product extends Member_Controller{
                     $result[$key]['rating_medium'] = 0;   
                     
                 }
-                
+                $result[$key]['year'] = $value['year'];
             }
             if ($result) {
                 foreach ($result as $key => $value) {
@@ -171,13 +170,12 @@ class Product extends Member_Controller{
                 $list_products_rating[] = $value['product_id'];
             }
 
-            $team = $this->team_model->fetch_all_team();
+            $team = $this->team_model->fetch_all_team($this->data['eventYear']);
 
             $this->data['number'] = $number;
             $this->data['list_products_rating'] = $list_products_rating;
             $this->data['team'] = $team;
             $this->data['result'] = $result;
-
 
             $this->render('member/list_product_by_manager_view');
         }

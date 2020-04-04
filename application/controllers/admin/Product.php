@@ -10,17 +10,19 @@ class Product extends Admin_Controller{
 		$this->load->model('information_model');
         $this->load->model('rating_model');
 		$this->load->model('new_rating_model');
+        $this->load->model('team_model');
+        $this->load->model('status_model');
 
         $this->excel = new PHPExcel();
 	}
 
-	public function index($client_id){
+	public function index($client_id, $requestYear){
 		$this->load->library('pagination');
 		$config = array();
 		$base_url = base_url('admin/product/index');
 		$per_page = 10;
-		$uri_segment = 4;
-		$total_rows  = $this->information_model->count_product($client_id);
+		$uri_segment = 5;
+		$total_rows  = $this->information_model->count_product($client_id, $requestYear);
 		foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
         }
@@ -28,33 +30,39 @@ class Product extends Admin_Controller{
 
 		$this->data['client'] = $this->ion_auth->user((int) $client_id)->row();
         $this->data['page_links'] = $this->pagination->create_links();
-        $this->data['page'] = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+        $this->data['page'] = ($this->uri->segment(6)) ? $this->uri->segment(6) : 0;
         // Kiem tra neu cong ty da chinh thuc gui thong tin len ban to chuc, admin moi duoc chon linh vuc chinh cho san pham
-        $result = $this->information_model->get_all_product_and_status($client_id, $per_page, $this->data['page']);
+        $result = $this->information_model->get_all_product_and_status($client_id, $per_page, $this->data['page'], $requestYear);
         foreach ($result as $key => $value) {
-            $new_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $value['id']);
+            $new_rating = $this->new_rating_model->check_rating_exist_by_product_id('new_rating', $value['id'], null, $requestYear);
             if ($new_rating > 0) {
                 $result[$key]['is_rating'] = 1;
             }else{
                 $result[$key]['is_rating'] = 0;
             }
         }
-        // echo '<pre>';
-        // print_r($result);die;
 
         $this->data['products'] = $result;
+        $this->data['requestYear'] = $requestYear;
 
 		$this->render('admin/product/list_product_view');
 	}
 
     public function remove_product($client_id, $id = null){
-        $deleted = $this->information_model->delete('product', $id);
-        if ($deleted) {
-            $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+        // Check if product has registered in table [team]
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear']);
+        if ( $check_product_in_team > 0 ) {
+            $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('admin/product/index/' . $client_id, 'refresh');
         }else{
-            $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
-            redirect('admin/product/index/' . $client_id, 'refresh');
+            $deleted = $this->information_model->delete('product', $id);
+            if ($deleted) {
+                $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+                redirect('admin/product/index/' . $client_id, 'refresh');
+            }else{
+                $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
+                redirect('admin/product/index/' . $client_id, 'refresh');
+            }
         }
     }
 
@@ -87,7 +95,7 @@ class Product extends Admin_Controller{
 		$this->render('admin/product/detail_product_view');
 	}
 
-    public function export($client_id){
+    public function export($client_id, $requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
         //name the worksheet
@@ -99,7 +107,12 @@ class Product extends Admin_Controller{
         $extra_info = $this->information_model->fetch_user_by_id($client_id);
 
         // get all users in array formate
-        $data = $this->information_model->get_all_for_export('product', $client_id);
+        $data = $this->information_model->get_all_for_export('product', $client_id, $requestYear);
+        foreach($data as $key => $val){
+            if(!$this->status_model->check_company_submitted($client_id, $requestYear)){
+                unset($data[$key]);
+            }
+        }
 
         $data_export = array(
             '0' => array(
@@ -111,8 +124,8 @@ class Product extends Admin_Controller{
                 'security' => 'Bảo mật của sản phẩm',
                 'positive' => 'Các ưu điểm nổi trội của SP/GP/DV',
                 'compare' => 'So sánh với các SP/GP/DV khác',
-                'income_2016' => 'Doanh thu của SP/GP/DV năm 2016',
-                'income_2017' => 'Doanh thu của SP/GP/DV năm 2017',
+                'income_2016' => 'Doanh thu của SP/GP/DV năm ' . ($requestYear - 2),
+                'income_2017' => 'Doanh thu của SP/GP/DV năm ' . ($requestYear - 1),
                 'area' => 'Thị phần của SP/giải pháp/DV',
                 'open_date' => 'Ngày thương mại hoá/ra mắt dịch vụ',
                 'price' => 'Giá SP/GP/DV',
@@ -129,20 +142,20 @@ class Product extends Admin_Controller{
                 'company' => $extra_info['company'],
                 'name' => $product['name'],
                 'service' => implode(", ", json_decode($product['service'])),
-                'functional' => $product['functional'],
-                'process' => $product['process'],
-                'security' => $product['security'],
-                'positive' => $product['positive'],
-                'compare' => $product['compare'],
+                'functional' => html_entity_decode(strip_tags($product['functional'])),
+                'process' => html_entity_decode(strip_tags($product['process'])),
+                'security' => html_entity_decode(strip_tags($product['security'])),
+                'positive' => html_entity_decode(strip_tags($product['positive'])),
+                'compare' => html_entity_decode(strip_tags($product['compare'])),
                 'income_2016' => $product['income_2016'],
                 'income_2017' => $product['income_2017'],
-                'area' => $product['area'],
+                'area' => html_entity_decode(strip_tags($product['area'])),
                 'open_date' => $product['open_date'],
-                'price' => $product['price'],
-                'customer' => $product['customer'],
-                'after_sale' => $product['after_sale'],
-                'team' => $product['team'],
-                'award' => $product['award']
+                'price' => html_entity_decode(strip_tags($product['price'])),
+                'customer' => html_entity_decode(strip_tags($product['customer'])),
+                'after_sale' => html_entity_decode(strip_tags($product['after_sale'])),
+                'team' => html_entity_decode(strip_tags($product['team'])),
+                'award' => html_entity_decode(strip_tags($product['award'])),
             );
         }
 

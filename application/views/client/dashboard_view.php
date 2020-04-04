@@ -2,10 +2,10 @@
 <div class="content-wrapper" style="min-height: 916px;">
     <div class="box-body pad table-responsive" style="box-shadow: 2px 2px 1px grey;">
         <strong style="color: #2d76b8; font-size: 18px">Quý doanh nghiệp vui lòng khai đầy đủ thông tin theo các bước sau:</strong>
-        <a target="_blank" href="http://danhhieusaokhue.vn/"><img style="width: 100% !important;" src="<?php echo site_url('assets/public/img/flow3.png'); ?>" /></a>
-        <i style="color: #2d76b8; font-size: 15px">Thời hạn nộp hồ sơ: 05/03/2019</i><br>
-        <i style="color: #2d76b8; font-size: 15px"><ins>Cán bộ hỗ trợ:</ins> Ms. Cao Ánh Hằng, mobile: 0974 29 87 86, email: hangca@vinasa.org.vn</i>
-<!--        <h3>Trang thông tin: <span style="color:red;">--><?php //echo $user->company; ?><!--</span></h3>-->
+        <a target="_blank" href="http://danhhieusaokhue.vn/"><img style="width: 100% !important;" src="<?php echo site_url('assets/public/img/huongdansk.jpg'); ?>" /></a>
+        <!--<i style="color: #2d76b8; font-size: 15px">Thời hạn nộp hồ sơ: 05/03/2019</i><br>-->
+        <!--<i style="color: #2d76b8; font-size: 15px"><ins>Cán bộ hỗ trợ:</ins> Ms. Cao Ánh Hằng, mobile: 0974 29 87 86, email: hangca@vinasa.org.vn</i>-->
+        <!--        <h3>Trang thông tin: <span style="color:red;">--><?php //echo $user->company; ?><!--</span></h3>-->
     </div>
     <section class="content">
 
@@ -55,7 +55,7 @@
 
                         <p class="text-muted">
                             <?php
-                                echo date("d-m-Y H:i", $user->created_on);
+                            echo date("d-m-Y H:i", $user->created_on);
                             ?>
                         </p>
 
@@ -89,12 +89,12 @@
                                         <a href="<?php echo base_url('client/information/create_extra') ?>" class="btn btn-warning btn-block" onclick=""><b>Nhập thông tin</b></a>
                                     </span>
                                 <?php else: ?>
-                                        <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-primary btn-block"><b>Xem thông tin</b></a>
-                                        <a href="<?php echo base_url('client/information/edit_extra'); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
-    <!--                                <p style="color:green;">Doanh nghiệp đã gửi thông tin đăng ký</p>-->
-    <!--                                <span>-->
-    <!--                                    <a href="--><?php //echo base_url('client/information/extra') ?><!--" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>-->
-    <!--                                </span>-->
+                                    <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-primary btn-block"><b>Xem thông tin</b></a>
+                                    <a href="<?php echo base_url('client/information/edit_extra'); ?>" class="btn btn-primary btn-block"><b>Sửa thông tin</b></a>
+                                    <!--                                <p style="color:green;">Doanh nghiệp đã gửi thông tin đăng ký</p>-->
+                                    <!--                                <span>-->
+                                    <!--                                    <a href="--><?php //echo base_url('client/information/extra') ?><!--" class="btn btn-success btn-block"><b>Xem thông tin đã đăng ký</b></a>-->
+                                    <!--                                </span>-->
                                 <?php endif; ?>
                             <?php else: ?>
                                 <a href="<?php echo base_url('client/information/extra') ?>" class="btn btn-primary btn-block"><b>Xem thông tin</b></a>
@@ -110,9 +110,9 @@
                                             <a href="<?php echo base_url('client/information/create_company?year=' . $eventYear); ?>" style="width:100%" class="btn btn-warning btn-block"><b>Nhập thông tin chi tiết năm sự kiện hiện tại<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>
                                         </span>
                                     <?php else: ?>
-<!--                                        <span>-->
-<!--                                            <a href="--><?php //echo base_url('client/information/company'); ?><!--" style="width:100%" class="btn btn-success btn-block"><b>Xem danh sách qua các năm đã đăng ký<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>-->
-<!--                                        </span>-->
+                                        <!--                                        <span>-->
+                                        <!--                                            <a href="--><?php //echo base_url('client/information/company'); ?><!--" style="width:100%" class="btn btn-success btn-block"><b>Xem danh sách qua các năm đã đăng ký<i style="margin-left: 5px" class="fa fa-arrow-circle-right" aria-hidden="true"></i></b></a>-->
+                                        <!--                                        </span>-->
                                         <br>
                                         <?php foreach ($company_submitted as $value){ ?>
                                             <div>
@@ -123,7 +123,7 @@
                                                     <?php } ?>
                                                 <?php } ?>
                                             </div>
-<!--                                            <hr style="width: 70%;">-->
+                                            <!--                                            <hr style="width: 70%;">-->
                                         <?php } ?>
                                     <?php endif; ?>
                                 <?php else: ?>
@@ -163,28 +163,28 @@
                 <?php if($complete == 1 && $noMoreTemporaryData == 1): ?>
                     <?php if($identity != ''){ ?>
                         <?php if($reg_status['is_final'] == 0): ?>
-                        <br>
-                        <br>
-                        <div style="text-align: center;">
-                            <a onclick="return confirmation();" href="#" class="btn btn-warning btn-block" style="width: 50% !important; margin: 0 auto;"><b>Gửi Ban tổ chức</b></a>
-                            <h4 style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</h4>
-                        </div>
+                            <br>
+                            <br>
+                            <div style="text-align: center;">
+                                <a onclick="return confirmation();" href="#" class="btn btn-warning btn-block" style="width: 50% !important; margin: 0 auto;"><b>Gửi Ban tổ chức</b></a>
+                                <h4 style="color:red">Chú ý xác nhận lại thông tin, sau khi gửi đăng ký sẽ không thể chỉnh sửa</h4>
+                            </div>
                         <?php else: ?>
-                        <h4 style="color:red">Thông tin đã được gửi</h4>
+                            <h4 style="color:red">Thông tin đã được gửi</h4>
                         <?php endif; ?>
                     <?php } ?>
                 <?php else: ?>
-<!--                    --><?php //if($identity != ''){ ?>
-<!--                        --><?php //if($reg_status['is_final'] == 0): ?>
-<!--                            <br>-->
-<!--                            <br>-->
-<!--                            <a disabled="disabled" class="btn btn-warning btn-block"><b>Cần nhập đủ thông tin Đăng ký / Doanh nghiệp / Sản phẩm</b></a>-->
-<!--                        --><?php //else: ?>
-<!--                            <h4 style="color:red">Thông tin đã được gửi</h4>-->
-<!--                        --><?php //endif; ?>
-<!--                    --><?php //} ?>
+                    <!--                    --><?php //if($identity != ''){ ?>
+                    <!--                        --><?php //if($reg_status['is_final'] == 0): ?>
+                    <!--                            <br>-->
+                    <!--                            <br>-->
+                    <!--                            <a disabled="disabled" class="btn btn-warning btn-block"><b>Cần nhập đủ thông tin Đăng ký / Doanh nghiệp / Sản phẩm</b></a>-->
+                    <!--                        --><?php //else: ?>
+                    <!--                            <h4 style="color:red">Thông tin đã được gửi</h4>-->
+                    <!--                        --><?php //endif; ?>
+                    <!--                    --><?php //} ?>
                 <?php endif; ?>
-                
+
                 <!-- /.nav-tabs-custom -->
             </div>
             <!-- /.col -->
@@ -199,7 +199,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header" style="background-color: #3c8dbc">
-<!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
                 <h4 style="color:white;">Cảm ơn quý đơn vị đã đăng ký tham gia chương trình Danh hiệu Sao Khuê <?php echo $eventYear; ?>.</h4>
             </div>
             <div class="modal-body">
@@ -263,5 +263,5 @@
     function reloadPage(){
         location.reload();
     }
-//</script>
+    //</script>
 

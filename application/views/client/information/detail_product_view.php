@@ -33,7 +33,7 @@
                                     <a><i class="fa fa-calendar margin-r-5"></i> Ngày thương mại hoá ra thị trường</a> <p class="pull-right"><?php echo $product['open_date']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <?php if ( filesize('assets/upload/file/' . $product['file']) ): ?>
+                                    <?php if ( $product['file'] != "" && filesize('assets/upload/file/' . $product['file']) ): ?>
                                         <a href="<?php echo base_url('assets/upload/file/' . $product['file']) ?>" download><i class="fa fa-file-excel-o margin-r-5" aria-hidden="true"></i> File mô tả chi tiết sản phẩm<p class="pull-right">Click để tải file</p></a>
                                     <?php else: ?>
                                         <p>Chưa có File mô tả chi tiết sản phẩm</p>
@@ -67,10 +67,10 @@
                                     <a><i class="fa fa-star margin-r-5"></i> So sánh với các SP/GP/DV khác</a> <br><p class="" style="padding-left:20px;"><?php echo $product['compare']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2017 (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm <?= (intval($eventYear) - 2) ?> (triệu đồng)'</a> <p class="pull-right"><?php echo $product['income_2016']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2018 (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm <?= (intval($eventYear) - 1) ?> (triệu đồng)</a> <p class="pull-right"><?php echo $product['income_2017']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/GP/DV</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>

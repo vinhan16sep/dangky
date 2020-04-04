@@ -12,18 +12,22 @@ class Team extends Admin_Controller{
 		$this->load->model('information_model');
         $this->load->model('users_model');
         $this->load->model('team_model');
+        $this->load->model('status_model');
         $this->load->model('new_rating_model');
 
         $this->excel = new PHPExcel();
 	}
 
-	public function index(){
-	    $teams = $this->team_model->fetch_all_team();
+    public function index($year = null){
+        if($year == null){
+            redirect('admin/dashboard', 'refresh');
+        }
+	    $teams = $this->team_model->fetch_all_team($year);
 
 	    $this->data['leaders'] = $this->users_model->fetch_all_leaders();
         $this->data['members'] = $this->users_model->fetch_all_members();
-        $this->data['companys'] = $this->information_model->fetch_all_company_pagination();
-	    $products = $this->information_model->get_product();
+        $this->data['companys'] = $this->information_model->fetch_all_company_for_team(null, null, $this->data['eventYear']);
+	    $products = $this->information_model->get_product($this->data['eventYear']);
         
         if ($products) {
             foreach ($products as $key => $value) {
@@ -32,8 +36,6 @@ class Team extends Admin_Controller{
             }
         }
         $this->data['products'] = $products;
-        // echo '<pre>';
-        // print_r($products);die;
         $this->data['teams'] = $teams;
         $this->render('admin/team/list_team_view');
 	}
@@ -41,7 +43,7 @@ class Team extends Admin_Controller{
 	public function create(){
 	    $name = $this->input->get('name');
 
-        $insert = $this->team_model->insert('team', array('name' => $name));
+        $insert = $this->team_model->insert('team', array('name' => $name, 'year' => $this->data['eventYear']));
         if($insert){
             return $this->output->set_status_header(200)
                 ->set_output(json_encode(array('name' => $name)));
@@ -131,10 +133,11 @@ class Team extends Admin_Controller{
 
     public function get_products(){
         $client_id = $this->input->get('client_id');
-        $products = $this->information_model->get_all_product($client_id);
+        $products = $this->information_model->get_all_product($client_id, null, null, $this->data['eventYear']);
         foreach ($products as $key => $value) {
-            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id']);
-            if ( $check_product_in_team > 0 ) {
+            $check_product_in_team = $this->team_model->check_exist_product_id('team', $value['id'], $this->data['eventYear']);
+            $is_company_submitted = $this->status_model->check_company_submitted($client_id, $this->data['eventYear']);
+            if ( $check_product_in_team > 0 || !$is_company_submitted ) {
                 unset($products[$key]);
             }
         }

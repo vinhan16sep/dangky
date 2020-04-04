@@ -21,8 +21,8 @@ $arrRate = [];
     foreach($rate as $key => $val){
         $arrRate[$key] = $val;
     }
-$total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
-$total = isset($arrRate['8']) ? $total + $arrRate['8'] : $total;
+// $total = ($arrRate) ? $arrRate['1'] + $arrRate['2'] + $arrRate['3'] + $arrRate['4'] + $arrRate['5'] + $arrRate['6'] + $arrRate['7'] : 0;
+// $total = isset($arrRate['8']) ? $total + $arrRate['8'] : $total;
 
 $is_readonly = ($rating['is_submit'] == 1) ? "readonly" : "";
 $is_submit = ($rating['is_submit'] == 1) ? 1 : 0;
@@ -72,9 +72,9 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                         echo form_hidden('member_id', $this->ion_auth->user()->row()->id);
                         echo form_hidden('product_id', $detail['id']);
 
-                        echo form_hidden('total', set_value('total', $total), 'id="inputTotal" class="form-control" readonly');
+                        echo form_hidden('total', set_value('total', $rating['total']), 'id="inputTotal" class="form-control" readonly');
                         ?>
-                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $total : 0; ?></span></h3>
+                        <h3>TỔNG ĐIỂM: <span id="totalRating" style="color: red;"><?php echo ($rating) ? $rating['total'] : 0; ?></span></h3>
                         <table class="table table-bordered rating-table" style="border: 1px solid black;">
                             <thead>
                             <tr>
@@ -239,7 +239,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             <tr>
                                 <td rowspan="2">4</td>
                                 <td rowspan="2">Tiềm năng thị trường</td>
-                                <td rowspan="2">15</td> 
+                                <td rowspan="2">15</td>
                                 <td rowspan="2">
                                     <?php
                                     echo form_error('4', '<div class="error">', '</div>');
@@ -514,7 +514,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                             <tr>
                                 <td>Bình luận</td>
                                 <td colspan="6">
-                                    <?php 
+                                    <?php
                                         echo form_textarea(array(
                                             'name' => 'comment',
                                             'id' => 'comment',
@@ -624,7 +624,7 @@ $form_action = ($rating && $is_submit == 0) ? 'member/new_rating/update_rating/'
                 }
             });
         }
-        
+
         // $('rating1Form').unbind('submit').submit();
         e.preventDefault();
     });

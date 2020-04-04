@@ -10,7 +10,18 @@ class Dashboard extends Client_Controller {
         }
         $this->load->model('status_model');
         $this->data['user'] = $this->ion_auth->user()->row();
-        $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id);
+        $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id, $this->data['eventYear']);
+        if(empty($this->data['reg_status'])){
+            $status = array(
+                'client_id' => $this->data['user']->id,
+                'is_information' => 1,
+                'is_company' => 0,
+                'is_product' => 0,
+                'is_final' => 0,
+                'year' => $this->data['eventYear'],
+            );
+            $this->status_model->insert('status', $status);
+        }
     }
 
     public function index(){
@@ -19,7 +30,7 @@ class Dashboard extends Client_Controller {
         $this->load->model('information_model');
         $this->data['information_submitted'] = $this->information_model->fetch_extra_by_identity('information', $this->data['user']->username);
         $this->data['company_submitted'] = $this->information_model->fetch_list_company_by_identity_and_year($this->data['user']->username, $this->data['eventYear']);
-        $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id);
+        $this->data['count_product'] = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
 
         $checkInformation = $this->information_model->checkExist('information', $this->data['user']->username);
         $checkCompany = $this->information_model->checkExist('company', $this->data['user']->username);

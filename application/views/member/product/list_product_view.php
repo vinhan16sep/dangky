@@ -22,13 +22,14 @@
                                 <?php foreach ($products as $key => $value): ?>
                                     <tr>
                                         <td><?php echo $stt++ ?></td>
+                                        <td><?php echo $value['year'] ?></td>
                                         <td><?php echo $value['name'] ?></td>
                                         <td>
                                             <?php $service = json_decode($value['service']); ?>
                                             <?php foreach ($service as $k => $v): ?>
                                                 <p class="" style="padding-left:20px;"><?php echo $v; ?></p>
                                             <?php endforeach ?>
-                                        
+
                                         </td>
                                         <?php if(!$value['rating_result']): ?>
                                             <td style="text-align: center;"><a href="<?php echo base_url('member/product/create/' . $value['id']) ?>" class="btn btn-default">Chưa đánh giá</a></td>

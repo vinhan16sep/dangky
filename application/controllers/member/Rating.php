@@ -142,7 +142,7 @@ class Information extends Client_Controller {
         $this->load->library('pagination');
         $config = array();
         $base_url = base_url() . 'client/information/products';
-        $total_rows = $this->information_model->count_product($this->data['user']->id);
+        $total_rows = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
         $per_page = 10;
         $uri_segment = 4;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {

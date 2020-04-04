@@ -16,10 +16,11 @@ class Information extends Client_Controller {
         $this->load->model('information_model');
         $this->load->model('status_model');
         $this->load->model('users_model');
+        $this->load->model('team_model');
         $this->load->library('session');
 
         $this->data['user'] = $this->ion_auth->user()->row();
-        $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id);
+        $this->data['reg_status'] = $this->status_model->fetch_by_client_id($this->data['user']->id, $this->data['eventYear']);
 
     }
 
@@ -73,6 +74,9 @@ class Information extends Client_Controller {
             'min_length' => '%s tối thiểu %s ký tự.',
             'max_length' => '%s tối đa %s ký tự.',
         ));
+        $this->form_validation->set_rules('address', 'Địa chỉ', 'trim|required', array(
+            'required' => '%s không được trống.',
+        ));
 //        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -102,6 +106,7 @@ class Information extends Client_Controller {
                     'c_email' => $this->input->post('c_email'),
                     'c_phone' => $this->input->post('c_phone'),
                     'website' => $this->input->post('website'),
+                    'address' => $this->input->post('address'),
 //                    'link' => $this->input->post('link'),
                     'identity' => $this->data['user']->username,
 //                    'is_submit' => 1,
@@ -173,6 +178,9 @@ class Information extends Client_Controller {
             'min_length' => '%s tối thiểu %s ký tự.',
             'max_length' => '%s tối đa %s ký tự.',
         ));
+        $this->form_validation->set_rules('address', 'Địa chỉ', 'trim|required', array(
+            'required' => '%s không được trống.',
+        ));
 //        $this->form_validation->set_rules('link', 'Link download PĐK của DN', 'trim|required');
 
         $id = isset($request_id) ? (int) $request_id : (int) $this->input->post('id');
@@ -206,6 +214,7 @@ class Information extends Client_Controller {
                     'c_email' => $this->input->post('c_email'),
                     'c_phone' => $this->input->post('c_phone'),
                     'website' => $this->input->post('website'),
+                    'address' => $this->input->post('address'),
 //                    'link' => $this->input->post('link'),
                     'modified_at' => $this->author_info['modified_at'],
                     'modified_by' => $this->author_info['modified_by']
@@ -234,6 +243,7 @@ class Information extends Client_Controller {
 
     public function company(){
         if($this->input->get('year')){
+            $this->data['selectedYear'] = $this->input->get('year');
             $this->data['company'] = $this->information_model->fetch_company_by_identity_and_year('company', $this->data['user']->username, $this->input->get('year'));
             $this->render('client/information/detail_company_view');
         }else{
@@ -247,7 +257,6 @@ class Information extends Client_Controller {
                 $config[$key] = $value;
             }
             $this->pagination->initialize($config);
-
             $this->data['page_links'] = $this->pagination->create_links();
             $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
             $this->data['companies'] =  $this->information_model->fetch_list_company_by_identity($this->data['user']->username);
@@ -966,7 +975,7 @@ class Information extends Client_Controller {
         $this->load->library('pagination');
         $config = array();
         $base_url = base_url() . 'client/information/products';
-        $total_rows = $this->information_model->count_product($this->data['user']->id);
+        $total_rows = $this->information_model->count_product($this->data['user']->id, $this->data['eventYear']);
         $per_page = 10;
         $uri_segment = 4;
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
@@ -976,7 +985,8 @@ class Information extends Client_Controller {
 
         $this->data['page_links'] = $this->pagination->create_links();
         $this->data['page'] = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $this->data['products'] = $this->information_model->get_all_product($this->data['user']->id, $per_page, $this->data['page']);
+        $this->data['allYear'] = $this->information_model->getAllProductYears();
+        $this->data['products'] = $this->information_model->get_all_product_for_client($this->data['user']->id, $per_page, $this->data['page']);
 
         $this->render('client/information/list_product_view');
     }
@@ -988,13 +998,20 @@ class Information extends Client_Controller {
     }
 
     public function remove_product($id = null){
-        $deleted = $this->information_model->delete('product', $id);
-        if ($deleted) {
-            $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+        // Check if product has registered in table [team]
+        $check_product_in_team = $this->team_model->check_exist_product_id('team', $id, $this->data['eventYear']);
+        if ( $check_product_in_team > 0 ) {
+            $this->session->set_flashdata('message_error', 'Sản phẩm đã được đăng ký vào danh sách ứng cử');
             redirect('client/information/products', 'refresh');
         }else{
-            $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
-            redirect('client/information/products', 'refresh');
+            $deleted = $this->information_model->delete('product', $id);
+            if ($deleted) {
+                $this->session->set_flashdata('message', 'Xóa sản phẩm thành công');
+                redirect('client/information/products', 'refresh');
+            }else{
+                $this->session->set_flashdata('message_error', 'Có lỗi trong quá trình xóa sản phẩm');
+                redirect('client/information/products', 'refresh');
+            }
         }
     }
 
@@ -1097,7 +1114,7 @@ class Information extends Client_Controller {
                         'certificate' => $this->input->post('certificate'),
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
-                        // 'certificate' => $image,
+                         'year' => $this->data['eventYear'],
                         // 'is_submit' => 1,
                         'created_at' => $this->author_info['created_at'],
                         'created_by' => $this->author_info['created_by'],
@@ -1167,7 +1184,7 @@ class Information extends Client_Controller {
                         'certificate' => $this->input->post('certificate'),
                         'information_id' => $this->data['user']->information_id,
                         'identity' => $this->data['user']->username,
-                        // 'certificate' => $image,
+                        'year' => $this->data['eventYear'],
                         // 'is_submit' => 1,
                         'created_at' => $this->author_info['created_at'],
                         'created_by' => $this->author_info['created_by'],
@@ -1372,7 +1389,7 @@ class Information extends Client_Controller {
 
     function check_file_selected(){
 
-        
+
         if (empty($_FILES['file']['name'])) {
             $this->form_validation->set_message(__FUNCTION__, 'Data không được trống');
             return false;
@@ -1445,6 +1462,8 @@ class Information extends Client_Controller {
 
         }
         $str = str_replace(' ','_',$str);
+        $str = str_replace('.','-',$str);
+        $str = str_replace(':','-',$str);
 
         return $str;
 

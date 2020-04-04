@@ -57,7 +57,7 @@
                                     <a><i class="fa fa-star margin-r-5"></i> So sánh với các SP/GP/DV khác</a> <br><p class="" style="padding-left:20px;"><?php echo $product['compare']; ?></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm 2016, 2017</a> <p class="pull-right"><?php echo $product['income_2016'] .' - '. $product['income_2017']; ?></p>
+                                    <a><i class="fa fa-money margin-r-5"></i> Doanh thu của SP/GP/DV năm <?= $eventYear - 2; ?>, <?= $eventYear - 1; ?></a> <p class="pull-right"><?php echo $product['income_2016'] .' - '. $product['income_2017']; ?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <a><i class="fa fa-globe margin-r-5"></i> Thị phần của SP/giải pháp/DV</a> <br><p class="" style="padding-left:20px;"><?php echo $product['area']; ?></p>
