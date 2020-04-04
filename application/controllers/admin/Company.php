@@ -6,7 +6,7 @@ require_once APPPATH."/third_party/PHPExcel.php";
 class Company extends Admin_Controller{
 
     private $excel = null;
-	
+
 	function __construct(){
 		parent::__construct();
 		$this->load->model('information_model');
@@ -75,7 +75,7 @@ class Company extends Admin_Controller{
         $this->data['requestYear'] = $year;
 		$this->render('admin/company/list_company_view');
 	}
-	
+
 	public function income($year = null){
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -87,16 +87,17 @@ class Company extends Admin_Controller{
         if($this->input->get('search')){
             $keywords = $this->input->get('search');
         }
-        $this->data['keywords'] = $keywords;
-        $total_rows  = $this->information_model->count_companys($year);
-        if($keywords != ''){
-            $total_rows  = $this->information_model->count_company_search($keywords, $year);
-        }
         $this->load->library('pagination');
         $config = array();
         $base_url = base_url('admin/company/income/' . $year);
-        $per_page = 50;
+        $per_page = 20;
         $uri_segment = 5;
+
+        $this->data['keywords'] = $keywords;
+        $total_rows  = $this->information_model->count_all_company_pagination($year);
+        if($keywords != ''){
+            $total_rows  = $this->information_model->count_company_pagination_search($keywords, $year);
+        }
 
         foreach ($this->pagination_con($base_url, $total_rows, $per_page, $uri_segment) as $key => $value) {
             $config[$key] = $value;
@@ -109,6 +110,8 @@ class Company extends Admin_Controller{
         if($keywords != ''){
             $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year);
         }
+        // echo '<pre>';
+        // print_r($result);die;
         foreach ($result as $key => $value) {
             $member_id = json_decode($value['member_id']);
             if($member_id){
@@ -212,7 +215,7 @@ class Company extends Admin_Controller{
         }else{
             $upload[] = $member_id;
         }
-        
+
         $upload = json_encode($upload);
         $where = array('member_id' => $upload);
         $success = false;
@@ -221,7 +224,7 @@ class Company extends Admin_Controller{
         }
         $this->output->set_status_header(200)->set_output(json_encode(array('isExitsts' => $success)));
     }
-  
+
     public function export($requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
@@ -348,7 +351,7 @@ class Company extends Admin_Controller{
         //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-    
+
     public function export_product($requestYear){
         //activate worksheet number 1
         $this->excel->setActiveSheetIndex(0);
@@ -430,7 +433,7 @@ class Company extends Admin_Controller{
     }
     public function export_company_detail($id){
         //activate worksheet number 1
-        
+
 
         // $sheet_basic = $this->excel->createSheet(0);
         // $sheet_basic->setTitle('Thong Tin Co Ban');
@@ -447,12 +450,12 @@ class Company extends Admin_Controller{
         // get all users in array formate
         $select_basic = 'website, legal_representative, lp_position, lp_email, lp_phone, connector, c_position, c_email, c_phone';
         $data_basic = $this->information_model->get_detail_information_with_select_by_id($id);
-        
+
         $data = $this->information_model->fetch_company_by_id($id);
 
         // Get user info
         $target_user = $this->users_model->fetch_by_id($data['client_id']);
-        
+
         $data_basic_export = array(
             '0' => array(
                 'website' => 'Website',
@@ -527,7 +530,7 @@ class Company extends Admin_Controller{
             }
         }
 
-        
+
         $data_export[] = array(
             'equity_1' => $data['equity_1'],
             'equity_2' => $data['equity_2'],
