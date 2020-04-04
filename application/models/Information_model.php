@@ -411,11 +411,26 @@ class Information_model extends CI_Model {
         if($year != null){
             $this->db->where('company.year', $year);
             $this->db->where('status.year', $year);
+            $this->db->where('status.is_final', 1);
         }
         $this->db->limit($limit, $start);
         $this->db->order_by("company.id", "desc");
 
         return $result = $this->db->get()->result_array();
+    }
+
+    public function count_all_company_pagination($year = null) {
+        $this->db->select('company.*, users.company as company, status.is_final as final');
+        $this->db->from('company');
+        $this->db->join('users', 'users.id = company.client_id');
+        $this->db->join('status', 'status.client_id = company.client_id');
+        if($year != null){
+            $this->db->where('company.year', $year);
+            $this->db->where('status.year', $year);
+            $this->db->where('status.is_final', 1);
+        }
+
+        return $this->db->get()->num_rows();
     }
 
     public function fetch_all_company_for_team($limit = NULL, $start = NULL, $year = null) {
@@ -482,10 +497,27 @@ class Information_model extends CI_Model {
         $this->db->like('users.company', $search);
         if($year != null){
             $this->db->like('company.year', $year);
+            $this->db->where('status.year', $year);
+            $this->db->where('status.is_final', 1);
         }
-        $this->db->order_by("company.created_at", "desc");
+        $this->db->order_by("company.id", "desc");
 
         return $result = $this->db->get()->result_array();
+    }
+
+    public function count_company_pagination_search($search = '', $year = null) {
+        $this->db->select('company.*, users.company as company, status.is_final as final');
+        $this->db->from('company');
+        $this->db->join('users', 'users.id = company.client_id');
+        $this->db->join('status', 'status.client_id = company.client_id');
+        $this->db->like('users.company', $search);
+        if($year != null){
+            $this->db->like('company.year', $year);
+            $this->db->where('status.year', $year);
+            $this->db->where('status.is_final', 1);
+        }
+
+        return $result = $this->db->get()->num_rows();
     }
 
     public function fetch_client_id($id = null){
