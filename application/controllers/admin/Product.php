@@ -12,11 +12,15 @@ class Product extends Admin_Controller{
 		$this->load->model('new_rating_model');
         $this->load->model('team_model');
         $this->load->model('status_model');
+        $this->load->model('users_model');
 
         $this->excel = new PHPExcel();
 	}
 
-	public function index($client_id, $requestYear){
+	public function index($client_id = null, $requestYear = null){
+        if($client_id == null || $requestYear == null){
+            redirect('admin', 'refresh');
+        }
 		$this->load->library('pagination');
 		$config = array();
 		$base_url = base_url('admin/product/index');
@@ -46,7 +50,29 @@ class Product extends Admin_Controller{
         $this->data['requestYear'] = $requestYear;
 
 		$this->render('admin/product/list_product_view');
-	}
+    }
+    
+    public function products_overview($year){
+        if(!$year){
+            redirect('admin', 'refresh');
+        }
+        $main_service = null;
+        if($this->input->get('btn-search')){
+            $main_service = $this->input->get('main_service');
+        }
+        $output = [];
+        $products = $this->information_model->fetch_all_submitted_products_by_type_and_year($year, $main_service);
+        foreach($products as $key => $product){
+            $client = $this->users_model->fetch_by_id($product['client_id']);
+            $product['company_name'] = $client['company'];
+            $output[$key] = $product;
+        }
+        $this->data['products'] = $output;
+        $this->data['main_service'] = $main_service;
+        $this->data['requestYear'] = $year;
+
+		$this->render('admin/product/list_product_overview_view');
+    }
 
     public function remove_product($client_id, $id = null){
         // Check if product has registered in table [team]

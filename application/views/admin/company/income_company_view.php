@@ -7,8 +7,8 @@
         background-image: initial!important;
     }
 </style>
-    <script src="<?php echo site_url('assets/admin/js/admin/jquery.tablesorter.js'); ?>"></script>
-    <link rel="stylesheet" href="<?php echo site_url('assets/admin/css/tablesorter.css'); ?>">
+<script src="<?php echo site_url('assets/admin/js/admin/jquery.tablesorter.js'); ?>"></script>
+<link rel="stylesheet" href="<?php echo site_url('assets/admin/css/tablesorter.css'); ?>">
 <!--main content start-->
 <div class="content-wrapper" style="min-height: 916px;">
     <div class="box-body pad table-responsive">
@@ -144,4 +144,4 @@
             cssNoSort    : 'Tableorter-noSort',
         });
     });
-    </script>
+</script>

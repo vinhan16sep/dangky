@@ -85,7 +85,7 @@ class Information_model extends CI_Model {
         }
         $this->db->order_by("id", "desc");
 
-        return $result = $this->db->get()->result_array();
+        return $this->db->get()->result_array();
     }
 
     public function fetch_all_by_type($type){
@@ -100,6 +100,18 @@ class Information_model extends CI_Model {
         }
 
         return false;
+    }
+
+    public function fetch_all_submitted_products_by_type_and_year($year, $type = null){
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('year', $year);
+        $this->db->where('is_submit', 1);
+        if($type != null){
+            $this->db->where('main_service', $type);
+        }
+
+        return $this->db->get()->result_array();
     }
 
     public function fetch_latest_informations($quantity){
@@ -314,7 +326,7 @@ class Information_model extends CI_Model {
     public function fetch_product_by_ids($type, $ids){
         $query = $this->db->select('*')
             ->from($type)
-            ->where_in('id', $id)
+            ->where_in('id', $ids)
             ->limit()
             ->get()->result_array();
 
