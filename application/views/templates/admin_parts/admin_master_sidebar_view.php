@@ -95,6 +95,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="active">
+                    <a href=""> Tổng doanh thu
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active">
+                            <a href="<?php echo base_url('admin/analyze/index/' . $eventYear); ?>">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                2020
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

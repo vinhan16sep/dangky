@@ -41,6 +41,16 @@ class Information_model extends CI_Model {
         return $result = $this->db->get()->result_array();
     }
 
+    public function get_all_product_by_year($year = null) {
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('year', $year);
+        $this->db->where('is_deleted', 0);
+        $this->db->order_by("id", "desc");
+
+        return $result = $this->db->get()->result_array();
+    }
+
     public function get_all_product_for_client($id, $limit = NULL, $start = NULL) {
         $this->db->select('*');
         $this->db->from('product');
