@@ -110,6 +110,7 @@ class Company extends Admin_Controller{
         if($keywords != ''){
             $result = $this->information_model->fetch_all_company_pagination_search($per_page, $per_page*$this->data['page'], $keywords, $year);
         }
+        $total_income = 0;
         foreach ($result as $key => $value) {
             $member_id = json_decode($value['member_id']);
             if($member_id){
@@ -122,7 +123,9 @@ class Company extends Admin_Controller{
             if($info){
                 $result[$key]['avatar'] = $info["avatar"];
             }
+            $total_income += $value['total_income_3'];
         }
+        $this->data['total_income'] = $total_income;
         if($this->data['page'] == 0){
             $number = $total_rows;
         }elseif($total_rows < ($this->data['page'] + 1) * $per_page){
