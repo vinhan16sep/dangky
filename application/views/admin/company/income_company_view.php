@@ -26,6 +26,7 @@
             </form>
             <!-- /.col -->
             <div class="col-md-12">
+                <h3 style="color: #3c8dbc;">Tổng doanh thu: <?= $total_income ?></h3>
                 <div class="tab-content" style="margin-bottom: 40px;">
                     <?php if ($companies): ?>
                         <div class="post box-body">
